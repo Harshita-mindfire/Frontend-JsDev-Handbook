@@ -95,7 +95,7 @@ publishing:
     writeStubs: false
     siteRootDir: docs
     seo:
-        title: Dendron
+        title: Postcards By Harshita
         description: Personal Knowledge Space
     github:
         enableEditLink: true
