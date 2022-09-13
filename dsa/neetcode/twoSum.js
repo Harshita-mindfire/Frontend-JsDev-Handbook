@@ -4,6 +4,7 @@
     reading an element from hashmap: O(1) constant
     Notes: 
     [[Two pointer - Leetcode 121|learning.dsa.leetcode#two-pointer---leetcode-121]]
+    https://Harshita-mindfire.github.io/Harshita-notes/notes/yyyjeii77vfw4lvvc9qwvdj#two-pointer---leetcode-121
 */
 
 function twoSum(nums, target) {
