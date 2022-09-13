@@ -90,6 +90,8 @@ publishing:
     copyAssets: true
     siteHierarchies:
         - root
+    siteUrl: https://Harshita-mindfire.github.io
+    assetsPrefix: /Harshita-notes
     writeStubs: false
     siteRootDir: docs
     seo:
