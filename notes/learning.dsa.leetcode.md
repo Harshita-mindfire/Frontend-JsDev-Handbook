@@ -2,7 +2,7 @@
 id: yyyjeii77vfw4lvvc9qwvdj
 title: Leetcode
 desc: ''
-updated: 1662914887537
+updated: 1663060350319
 created: 1662914267037
 ---
 
@@ -10,7 +10,7 @@ created: 1662914267037
 
 - find the (sum-num) in hashmap
 - if not present, store number and its index in hashmap
-- [[source code | dsa\neetcode\twoSum.js]]
+- [[source code | dsa\neetcode\twoSum.js]] : 
 * Parses entire array in single pass: O(n)
 * adding an element to hashmap: O(1) constant time
 * reading an element from hashmap: O(1) constant

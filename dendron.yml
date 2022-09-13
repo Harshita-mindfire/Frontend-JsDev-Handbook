@@ -26,6 +26,7 @@ workspace:
             fsPath: .
             selfContained: true
             name: Harshita-notes
+            sync: sync
     journal:
         dailyDomain: daily
         name: journal
@@ -95,7 +96,7 @@ publishing:
     writeStubs: false
     siteRootDir: docs
     seo:
-        title: Postcards By Harshita
+        title: Digital Garden
         description: Personal Knowledge Space
     github:
         enableEditLink: true
