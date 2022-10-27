@@ -5,3 +5,4 @@ desc: ''
 updated: 1662228344406
 created: 1662228344406
 ---
+- Author: George Orwell
