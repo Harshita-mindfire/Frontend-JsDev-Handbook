@@ -46,7 +46,6 @@ undefined == undefined  // true
 null == undefined       // true
 ```
 
-2.
 3. NaN does not equal to anything even itself:
 
 ```
