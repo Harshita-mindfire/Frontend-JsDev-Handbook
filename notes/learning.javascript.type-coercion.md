@@ -22,6 +22,7 @@ Number("-12.34")               // -12.34
 Number("\n")                   // 0
 Number(" 12s ")                // NaN
 Number(123)                    // 123
+Number({})                      //NaN
 ```
 
 - null and undefined are handled differently: null becomes 0, whereas undefined becomes NaN.
@@ -105,3 +106,50 @@ In general the algorithm is as follows:
 3. Call input.valueOf(), if the result is primitive, return it.
 
 4. If neither input.toString() nor input.valueOf() yields primitive, throw TypeError.
+
+## Example
+
+```js
+console.log(1 + 2);
+console.log(1 + +2);
+console.log(1 + +(+2));
+console.log(1 + "2");
+console.log(1 + +"2");
+console.log("1" + 2);
+console.log("1" + +2);
+console.log(1 + true);
+console.log(1 + +true);
+console.log("1" + true);
+console.log("1" + +true);
+console.log(1 + null);
+console.log(1 + +null);
+console.log("1" + null);
+console.log("1" + +null);
+console.log(1 + undefined);
+console.log(1 + +undefined);
+console.log("1" + undefined);
+console.log("1" + +undefined);
+console.log("1" + +(+undefined));
+```
+
+Ans:
+3
+3
+3
+'12'
+3
+'12'
+'12'
+2
+2
+'1true'
+'11'
+1
+1
+'1null'
+'10'
+NaN
+NaN
+'1undefined'
+'1NaN'
+'1NaN'

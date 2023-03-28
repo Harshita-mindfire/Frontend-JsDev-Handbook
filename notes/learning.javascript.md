@@ -228,6 +228,25 @@ Here’s the same example as above, but with defer:
 
 ### reduce
 
+- This method has the following syntax — reduce(callbackFn, initialValue) where initialValue is an optional initial value used. If this parameter is skipped, it's assumed to be the first value of the array.
+- if we are not returning anything from the callback functions here, the function returns undefined implicitly.
+- if the initial value is not supplied it defaults to the first item of the array
+
+```js
+[1, 2, 3].reduce((a, b) => {
+  console.log(a, b);
+});
+// 1, 2
+// undefined, 3
+
+[1, 2, 3].reduce((a, b) => {
+  console.log(a, b);
+}, 0);
+// 0,1
+// undefined, 2
+// undefined, 3
+```
+
 ```JS
 const arr = [{
 	firstname: "john", lastName: "Doe", age: 12
