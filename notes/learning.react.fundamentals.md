@@ -29,6 +29,27 @@ ReactDOM.render function: takes 2 i/p
 - App
 - document.getElementById("root")
 
+## JSX
+
+you can use the conditional ? operator. it works inside JSX:
+
+```js
+<div>{isLoggedIn ? <AdminPanel /> : <LoginForm />}</div>
+```
+
+When you don’t need the else branch, you can also use a shorter logical && syntax:
+
+```js
+<div>{isLoggedIn && <AdminPanel />}</div>
+```
+
+## Pure components
+
+Some JavaScript functions are pure. A pure function:
+
+- Minds its own business. It does not change any objects or variables that existed before it was called.
+- Same inputs, same output. Given the same inputs, a pure function should always return the same result.
+
 ## React State vs Props
 
 - State of a component is an object that holds some information that may change over the lifetime of the component.
