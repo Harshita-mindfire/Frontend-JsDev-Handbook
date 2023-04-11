@@ -6,6 +6,12 @@ updated: 1662226133532
 created: 1648190780500
 ---
 
+## Github questions
+
+- https://github.com/sudheerj/javascript-interview-questions
+
+# JS
+
 JS is a synchronous, single threaded language.
 Single treaded means runs one command at a time and in a specific order.
 JS is loosely typed language. This means any variable is not strictly bind to a data type.
@@ -186,13 +192,36 @@ happens in 3 phases
 </body>
 ```
 
-## Async vs defer
+## Scripts: async, defer
+
+### Problem
+
+When the browser loads HTML and comes across a <script>...</script> tag, it can’t continue building the DOM. It must execute the script right now. The same happens for external scripts <script src="..."></script>: the browser must wait for the script to download, execute the downloaded script, and only then can it process the rest of the page.
+
+That leads to two important issues:
+
+- Scripts can’t see DOM elements below them, so they can’t add handlers etc.
+- If there’s a bulky script at the top of the page, it “blocks the page”. Users can’t see the page content till it downloads and runs:
+
+```html
+<p>...content before script...</p>
+
+<script src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
+
+<!-- This isn't visible until the script loads -->
+<p>...content after script...</p>
+```
+
+![](/assets/images/2023-04-11-11-43-22.png)
 
 ### Defer
 
-The defer attribute tells the browser not to wait for the script. Instead, the browser will continue to process the HTML, build DOM. The script loads “in the background”, which makes it non-blocking and then runs when the DOM is fully built.
+- The defer attribute tells the browser not to wait for the script. Instead, the browser will continue to process the HTML, build DOM. The script loads “in the background”, which makes it non-blocking and then runs when the DOM is fully built.
+- Scripts with defer always execute when the DOM is ready (but before DOMContentLoaded event). .DOMContentLoaded event handler waits for the deferred script. It only triggers when the script is downloaded and executed.
 
-Here’s the same example as above, but with defer:
+- Deferred scripts keep their relative order, just like regular scripts.
+- The defer attribute is only for external scripts.
+  The defer attribute is ignored if the <script> tag has no src.
 
 ```html
 <p>...content before script...</p>
@@ -206,10 +235,13 @@ Here’s the same example as above, but with defer:
 <p>...content after script...</p>
 ```
 
-- DOMContentLoadedEvent
-  Both solves two problems
-  Scripts can’t see DOM elements below them, so they can’t add handlers etc.
-  If there’s a bulky script at the top of the page, it “blocks the page”. Users can’t see the page content till it downloads and runs:
+### Async
+
+- The async attribute is only for external scripts
+  Just like defer, the async attribute is ignored if the <script> tag has no src.
+- The browser doesn’t block on async scripts (like defer).
+- Other scripts don’t wait for async scripts, and async scripts don’t wait for them, hence does not maintain order of scripts like defer
+- DOMContentLoaded and async scripts don’t wait for each other:
 
 ## Folder structure
 
@@ -309,8 +341,8 @@ async function x(val) {
 
 For Promise.prototype.then():
 
-if function is passed as callback, the return value of the function is used as the fulfillment value
-for non-function values, previous fulfillment value is used.
+- if function is passed as callback, the return value of the function is used as the fulfillment value
+- for non-function values, previous fulfillment value is used.
 
 ![[Promises Exercise|learning.javascript.promises-exercise]]
 
