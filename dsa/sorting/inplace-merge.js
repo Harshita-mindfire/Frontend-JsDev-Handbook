@@ -14,5 +14,4 @@ function mergeSort(arr) {
   }
   console.log(arr);
 }
-
 mergeSort([5, 4, 1, 2, 8]);
