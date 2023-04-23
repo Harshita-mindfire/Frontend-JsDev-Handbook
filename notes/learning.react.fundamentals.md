@@ -59,7 +59,7 @@ Both props and state are plain JavaScript objects. While both of them hold infor
 
 ## controlled and uncontrolled components
 
-In Controlled components the form data s handled by react and with un-c comp. form data is handled by DOM itself.
+In Controlled components the form data is handled by react(eg: state) and with un-c comp. form data is handled by DOM itself.
 
 ### Controlled Compoenets
 
