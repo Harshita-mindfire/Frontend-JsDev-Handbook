@@ -1,6 +1,6 @@
 ---
 id: ljq5qx2vmfn6m626ioucbd5
-title: Chrome Ext
+title: Chrome Extension 
 desc: ''
 updated: 1673347279053
 created: 1673347279053
