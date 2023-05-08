@@ -26,3 +26,11 @@ A VM is an abstraction of a machine(physical hardware). We use hypervisor to cre
 
 - each VM needs a full blown OS
 - resource intensive, takes a portion of the physical hardware resources. For eg: if you have 8GB memory, it is divided among the VM
+
+## volumes
+
+Volumes in Docker are used to persist data generated or used by containers.
+
+- When a container is destroyed or recreated, any data stored within the container's filesystem is lost.
+
+- Volumes provide a way to store and share data between containers or between the host machine and containers, ensuring data persistence even when containers are removed or replaced.

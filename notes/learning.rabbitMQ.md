@@ -6,6 +6,8 @@ updated: 1683264572377
 created: 1683264572378
 ---
 
+RabbitMQ enables asynchronous processing, meaning that it allows you to put a message in a queue without processing it immediately. 
+
 - implementation of AMQP 0.9.1(advance message queuing protocol) message model
 - In this message model, the producer(service that produces message), instead of directly producing to a message queue, it is going to produce to an exchange.
 - An exchange can be connected to many queues.
