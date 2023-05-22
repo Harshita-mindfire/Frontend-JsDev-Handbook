@@ -48,3 +48,25 @@ Volumes in Docker are used to persist data generated or used by containers.
 
 rabbitmq (172.24.0.3:5672) open
 ```
+
+
+## Ref
+```bash
+#!/bin/bash
+
+# Start the app
+npm start &
+
+# Wait for the app to establish a connection
+until nc -vz mongo-db 27017; do
+  echo "Waiting for MongoDB to become available..."
+  sleep 1
+done
+
+# Run the seed script
+npm run seed
+
+# Keep the container running
+tail -f /dev/null
+
+```
