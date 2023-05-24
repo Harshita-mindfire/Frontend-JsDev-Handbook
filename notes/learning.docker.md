@@ -34,3 +34,39 @@ Volumes in Docker are used to persist data generated or used by containers.
 - When a container is destroyed or recreated, any data stored within the container's filesystem is lost.
 
 - Volumes provide a way to store and share data between containers or between the host machine and containers, ensuring data persistence even when containers are removed or replaced.
+
+
+
+## Commands
+
+- docker network ls
+- docker network inspect <network-name>
+
+```bash
+# run inside constainer terminal to check if able to connect.
+/app  nc -vz rabbitmq 5672
+
+rabbitmq (172.24.0.3:5672) open
+```
+
+
+## Ref
+```bash
+#!/bin/bash
+
+# Start the app
+npm start &
+
+# Wait for the app to establish a connection
+until nc -vz mongo-db 27017; do
+  echo "Waiting for MongoDB to become available..."
+  sleep 1
+done
+
+# Run the seed script
+npm run seed
+
+# Keep the container running
+tail -f /dev/null
+
+```
