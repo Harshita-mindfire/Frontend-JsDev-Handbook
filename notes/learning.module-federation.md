@@ -16,7 +16,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 plugins: [
   new ModuleFederationPlugin({
     name: "counter",
-    filename: "remoteEntry.js",
+    filename: "remoteEntry.js", // this file is the manifest of all the modules shared by this app
     remotes: {}, // the other application will use this property to access the exposed component
     exposes: {
       "./Counter": "./src/components/Counter", // component that is exposed by one application
