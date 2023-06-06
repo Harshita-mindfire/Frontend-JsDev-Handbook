@@ -5,6 +5,11 @@ desc: ''
 updated: 1686048497052
 created: 1686048497052
 ---
+# News For You
+
+## Videos
+- [Assignment Demo](https://drive.google.com/file/d/1sHWL5ur1YIMlNcLmncTfMm-j5yz1Lb73/view?usp=sharing)
+- [Design Walkthrough](https://drive.google.com/file/d/1E2NNqHKUh_4TeYhrU3QKh2uGL8jIgVEf/view?usp=sharing)
 ## Project Doc
 - [News For You](https://docs.google.com/document/d/1HNSSAEbEhAirxumQWYoejOL7d1QTT5Kzq3U239eUHOY/edit#)
 ## References
