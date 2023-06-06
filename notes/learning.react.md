@@ -11,6 +11,7 @@ created: 1648190205452
 - [React](https://sapient.udemy.com/course/complete-react-developer-zero-to-mastery/)
 - https://kentcdodds.com/blog
 - https://overreacted.io/
+- [React Examples](https://reactjsexample.com/)
 
 ## Core fundamentals
 - x jsx, x rerendering, x virtual dom, state, props, components, parent, child, lifecycle, hooks 
