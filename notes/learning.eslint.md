@@ -21,6 +21,12 @@ created: 1684917500902
 
 - npm run lint
 
+- to ignore any folder from checking lints add the folder/file in ` "ignorePatterns"` in .eslintrc.
+eg: 
+```json
+ "ignorePatterns": ["dist/"] //ignores entire files inside dist folder
+```
+
 ## Trouble shooting:
 
-- for react prop types error, either add rule : "react/prop-types": "off" in eslintrc
+- for react prop types error, add rule : "react/prop-types": "off" in eslintrc
