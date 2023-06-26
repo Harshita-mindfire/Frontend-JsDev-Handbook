@@ -17,7 +17,7 @@ created: 1648190205452
 - x jsx, x rerendering, x virtual dom, state, props, components, parent, child, lifecycle, hooks 
 ## to make framework
 - [x] routing
-- [ ] error handling
+- [x] error handling
 - [ ] state management(prop drilling) context api, redux-toolkit
 - [ ] data fetching: react query, axios
 
