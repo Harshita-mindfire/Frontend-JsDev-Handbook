@@ -138,6 +138,43 @@ For example, authenticated users, locale preferences, UI themes need to be acces
 const { Provider, Consumer } = React.createContext(defaultValue);
 ```
 
+## flushSync
+Call flushSync to force React to flush any pending work and update the DOM synchronously.
+```js
+import { flushSync } from 'react-dom';
+
+flushSync(() => {
+  setSomething(123);
+});
+```
+Example
+
+```js
+function App() {
+  const [state, setState] = useState(0)
+  const onClick = () => {
+    console.log('handler')
+    flushSync(() => {
+      setState(state => state + 1)
+    })
+    console.log('handler ' + state)
+  }
+  console.log('render ' + state)
+  return <div>
+    <button onClick={onClick}>click me</button>
+  </div>
+}
+
+userEvent.click(screen.getByText('click me'))
+
+/**
+ * Output
+ * "render 0"
+ * "handler"
+ * "render 1"
+ * "handler 0"
+ * **/
+```
 ## TODO
 
 - React.StrictMode #learn

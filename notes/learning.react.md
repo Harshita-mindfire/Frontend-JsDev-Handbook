@@ -18,7 +18,7 @@ created: 1648190205452
 ## to make framework
 - [x] routing
 - [ ] error handling
-- [ ] state management(prop drilling) context api, redux
+- [ ] state management(prop drilling) context api, redux-toolkit
 - [ ] data fetching: react query, axios
 
 ## Adavenced
