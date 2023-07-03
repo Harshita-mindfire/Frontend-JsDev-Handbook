@@ -16,3 +16,6 @@ created: 1687755199201
 - After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.
 
 - [Difference between useeffect and useLayoutEffect with examples](https://blog.logrocket.com/useeffect-vs-uselayouteffect-examples/)
+
+## useState
+- https://jser.dev/2023-06-19-how-does-usestate-work/
