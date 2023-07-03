@@ -51,3 +51,5 @@ const OtherComponent = React.lazy(() => import('./OtherComponent'));
   <Suspense fallback={<div>Loading...</div>}></Suspense>
 
 ```
+- Suspense component will be rendered when a child ran into async render and all children in Suspense will be re-rendered after async resolve.
+eg: https://bigfrontend.dev/react-quiz/suspense-3
