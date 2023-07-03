@@ -6,6 +6,9 @@ updated: 1683533919973
 created: 1683533919973
 ---
 
+## React with Typescript Cheatsheet
+- https://react-typescript-cheatsheet.netlify.app/docs/basic/setup
+
 ## Creating nodejs application with typescript config
 
 1. npm init -y
