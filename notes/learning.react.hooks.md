@@ -8,6 +8,13 @@ created: 1687755199201
 
 ## Cheatsheet
 - https://react-hooks-cheatsheet.com/
+
+## useRef
+- returns an object {current: <initialValuePassedToUseRef>}
+- You can store information between re-renders (unlike regular variables, which reset on every render).
+- mutating ref.current does not re-render component since it is a plain js object.
+
+
 ## useLayoutEffect
 
 - useLayoutEffect is a version of useEffect that fires before the browser repaints the screen.
