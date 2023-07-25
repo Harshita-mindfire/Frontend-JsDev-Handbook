@@ -6,6 +6,15 @@ updated: 1671014275336
 created: 1671014275336
 ---
 
+## kill a port
+
+```bash
+
+netstat -ano | findstr : 3000
+
+taskkill /PID <PID> /F
+```
+
 ## npm connection refused error
 
 ```
