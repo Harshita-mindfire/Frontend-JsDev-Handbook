@@ -42,7 +42,7 @@ Now if you want to use useState in one of your component, write "use client" as 
 
 ## Data Fetching in v-13
 
-```j
+```js
 // This request should be cached until manually invalidated.
 // Similar to `getStaticProps`.
 // `force-cache` is the default and can be omitted.
