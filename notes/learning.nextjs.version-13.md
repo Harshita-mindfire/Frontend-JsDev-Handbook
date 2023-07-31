@@ -39,3 +39,20 @@ eg: you can move data fetching to the server, closer to your database, and keep 
 ### Client components
 
 Now if you want to use useState in one of your component, write "use client" as the first line of your code, and nextjs will regard it as a client component.
+
+## Data Fetching in v-13
+
+```j
+// This request should be cached until manually invalidated.
+// Similar to `getStaticProps`.
+// `force-cache` is the default and can be omitted.
+fetch(URL, { cache: 'force-cache' });
+ 
+// This request should be refetched on every request.
+// Similar to `getServerSideProps`.
+fetch(URL, { cache: 'no-store' });
+ 
+// This request should be cached with a lifetime of 10 seconds.
+// Similar to `getStaticProps` with the `revalidate` option.
+fetch(URL, { next: { revalidate: 10 } });
+```
