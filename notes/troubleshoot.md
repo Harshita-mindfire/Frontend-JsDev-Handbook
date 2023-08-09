@@ -10,7 +10,7 @@ created: 1671014275336
 
 ```bash
 
-netstat -ano | findstr : 3000
+netstat -ano | findstr :3000
 
 taskkill /PID <PID> /F
 ```
