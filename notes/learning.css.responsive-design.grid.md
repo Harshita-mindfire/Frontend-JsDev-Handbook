@@ -8,8 +8,11 @@ created: 1692002341551
 
 # Cheatsheet
 - [Cheatsheet](https://grid.malven.co/)
+- [Grid Garden game](https://cssgridgarden.com/)
 
 ## Grid
+
+Grid also introduces a new unit, the fractional fr. Each fr unit allocates one share of the available space. For example, if two elements are set to 1fr and 3fr respectively, the space is divided into 4 equal shares; the first element occupies 1/4 and the second element 3/4 of any leftover space.
 
 ```css
 .container {
@@ -58,8 +61,38 @@ Let's break down the value:
 
 The combination of auto-fill and minmax(200px, 1fr) allows the grid to automatically adjust the number of columns based on the available space while ensuring that each column is at least 200px wide. If there's additional space available, the columns will expand equally to fill the remaining space.
 
+__NOTE__: **grid-template** is a shorthand property that combines grid-template-rows and grid-template-columns.
 
-- **grid-column**
+below eg. will create a grid with two rows that are 50% each, and one column that is 200 pixels wide.
+
+```css
+#garden {
+    grid-template: 50% 50% / 200px;
+ } 
+```
+
+## Grid Column Properties
+
+- **grid-column-start**
+```css
+.green {
+    /* start the green class item from grid 2 */
+    grid-column-start: 2
+}
+```
+
+- When **grid-column-start** is used alone, the grid item by default will span exactly one column. However, you can extend the item across multiple columns by adding the **grid-column-end** property.
+
+- **grid-column**: 
+grid-column is a shorthand property that can accept both values at once, separated by a slash.
+
+For example, 
+```css
+grid-column: 2 / 4;
+```
+ will set the grid item to start on the 2nd vertical grid line and end on the 4th grid line.
+
+
 ```css
 .green {
     /* span the column across 2 grids for ele with class green */
@@ -68,4 +101,14 @@ The combination of auto-fill and minmax(200px, 1fr) allows the grid to automatic
 ```
 
 
+- **grid-area**
+
+there's yet another shorthand for that. grid-area accepts four values separated by slashes: grid-row-start, grid-column-start, grid-row-end, followed by grid-column-end.
+
+One example of this would be 
+```css
+.green {
+    grid-area: 1 / 1 / 3 / 6;
+}
+```
 
