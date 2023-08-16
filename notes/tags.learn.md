@@ -2,7 +2,7 @@
 id: gnxywb70sldsrsabn47cn3z
 title: Learn
 desc: ''
-updated: 1692180099907
+updated: 1692191064422
 created: 1648903020821
 ---
 
@@ -14,7 +14,7 @@ performance
 3. threadpool, caching with redis
 4. event loop
 5. threads, benchmark server performance
-6. web worker and worker threads
+6. ~~web worker and worker threads~~
 7. forking children
 
 security
