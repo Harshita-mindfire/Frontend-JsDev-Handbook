@@ -1,8 +1,8 @@
 ---
 id: 8k7fj3knfjs2vz42yxldbzk
 title: JavaScript
-desc: ""
-updated: 1662226133532
+desc: ''
+updated: 1692109736041
 created: 1648190780500
 ---
 
@@ -49,6 +49,20 @@ As the JavaScript engine starts to read your code, it creates something called t
 Each environment context that is created has a link outside of its lexical environment
 called the scope chain. The scope chain gives us access to variables in the parent
 environment.
+
+## FOR in vs FOR of
+
+```js
+let list = [4, 5, 6];
+
+for (let i in list) {
+  console.log(i); // "0", "1", "2",
+}
+
+for (let i of list) {
+  console.log(i); // "4", "5", "6"
+}
+```
 
 ## Block
 
@@ -122,11 +136,11 @@ polyfill for bind:
 
 ```js
 const uname2 = {
-  fname: "Jo",
-  lname: "Joshi",
+  fname: 'Jo',
+  lname: 'Joshi',
 };
 function fullName(city, state) {
-  console.log(this.fname + " " + this.lname + " " + city + " " + state);
+  console.log(this.fname + ' ' + this.lname + ' ' + city + ' ' + state);
 }
 Function.prototype.myBind2 = function (...args) {
   const fun = this;
@@ -136,8 +150,8 @@ Function.prototype.myBind2 = function (...args) {
   };
 };
 
-const test = fullName.myBind2(uname2, "hld");
-test("UK");
+const test = fullName.myBind2(uname2, 'hld');
+test('UK');
 ```
 
 ## Currying
@@ -179,12 +193,45 @@ Free function invocations in javascript have `this` bound to the global scope.
 
 ## Event Propagation
 
+- [Bubbling and capturing](https://javascript.info/bubbling-and-capturing)
+
 happens in 3 phases
 
 - Capturing phase: event goes down from root element to the target element
 - target phase: event reaches the target elem
-- bubbling phase: When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.
-  To stop bubbling: event.stopPropagation()
+- bubbling phase: the event bubbles up from the element.
+
+```html
+<style>
+  body * {
+    margin: 10px;
+    border: 1px solid blue;
+  }
+</style>
+
+<form>
+  FORM
+  <div>
+    DIV
+    <p>P</p>
+  </div>
+</form>
+
+<script>
+  for (let elem of document.querySelectorAll('*')) {
+    elem.addEventListener(
+      'click',
+      (e) => alert(`Capturing: ${elem.tagName}`),
+      true
+    );
+    elem.addEventListener('click', (e) => alert(`Bubbling: ${elem.tagName}`));
+  }
+</script>
+```
+
+In bubbling, When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.
+
+- To stop bubbling: event.stopPropagation()
 
 ```html
 <body onclick="alert(`the bubbling doesn't reach here`)">
@@ -192,11 +239,16 @@ happens in 3 phases
 </body>
 ```
 
+NOTE: Almost all events bubble.
+The key word in this phrase is “almost”.
+
+For instance, a focus event does not bubble. There are other examples too, we’ll meet them. But still it’s an exception, rather than a rule, most events do bubble
+
 ## Scripts: async, defer
 
 ### Problem
 
-When the browser loads HTML and comes across a <script>...</script> tag, it can’t continue building the DOM. It must execute the script right now. The same happens for external scripts <script src="..."></script>: the browser must wait for the script to download, execute the downloaded script, and only then can it process the rest of the page.
+When the browser loads HTML and comes across a "script" tag, it can’t continue building the DOM. It must execute the script right now. The same happens for external scripts "script src='...': the browser must wait for the script to download, execute the downloaded script, and only then can it process the rest of the page.
 
 That leads to two important issues:
 
@@ -221,7 +273,7 @@ That leads to two important issues:
 
 - Deferred scripts keep their relative order, just like regular scripts.
 - The defer attribute is only for external scripts.
-  The defer attribute is ignored if the <script> tag has no src.
+  The defer attribute is ignored if the script tag has no src.
 
 ```html
 <p>...content before script...</p>
@@ -238,8 +290,14 @@ That leads to two important issues:
 ### Async
 
 - The async attribute is only for external scripts
-  Just like defer, the async attribute is ignored if the <script> tag has no src.
-- The browser doesn’t block on async scripts (like defer).
+  Just like defer, the async attribute is ignored if the
+  ```html
+  <script>
+    ...
+  </script>
+  ```
+  tag has no src.
+- The browser doesn’t block on async scripts (just like defer).
 - Other scripts don’t wait for async scripts, and async scripts don’t wait for them, hence does not maintain order of scripts like defer
 - DOMContentLoaded and async scripts don’t wait for each other:
 
@@ -320,7 +378,7 @@ Array.prototype.myArray = function (cb) {
 ```js
 const promise = new Promise((resolve, reject) => {
   setTimeout(() => {
-    resolve("done");
+    resolve('done');
   }, 3000);
 });
 
@@ -328,9 +386,9 @@ async function x(val) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (val % 2 === 0) {
-        resolve("even");
+        resolve('even');
       } else {
-        reject("odd");
+        reject('odd');
       }
     }, 1000);
   });
@@ -376,3 +434,6 @@ function add(...args) {
 ```
 
 ## Prototypical Ineritence
+
+-
+
