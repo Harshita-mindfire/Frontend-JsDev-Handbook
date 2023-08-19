@@ -27,12 +27,6 @@ div {
 ```
 - **Transition-property**(required): CSS property where the transition will be applied. You may apply a transition to an individual property (e.g., background-color or tranform) or to all properties in the rule-set (i.e., all).
 
-```css
-div {
-  transition-property: all;
-  transition-property: transform;
-}
-```
 - **Transition-duration**(required): specifies the time span of the transition
 
 ```css
@@ -131,6 +125,6 @@ div {
 }
 
 div:hover {
-  transform: skewX(-20px);
+  transform: skewX(-20deg);
 }
 ```

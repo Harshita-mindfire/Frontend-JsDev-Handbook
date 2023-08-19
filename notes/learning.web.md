@@ -12,10 +12,10 @@ created: 1658826095958
 
 ```mermaid
 graph TD;
-    DOM-->CSSDOM-->RenderTree--> Layout-->Paint;
+    DOM-->CSSOM-->RenderTree--> Layout-->Paint;
     DOM --> Javascript;
     Javascript --> DOM
-    Javascript --> CSSDOM
+    Javascript --> CSSOM
 ```
 ### DOM
 - browser captures all contents of the page in DOM
