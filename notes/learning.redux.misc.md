@@ -5,8 +5,9 @@ desc: ""
 updated: 1678456213894
 created: 1678456213894
 ---
+## Immer
 
-- a package that allows you to work with immutable state in a more convenient way.
+- Immer is a package that allows you to work with immutable state in a more convenient way.
 - The basic idea is that with Immer you will apply all your changes to a temporary draft, which is a proxy of the currentState. Once all your mutations are completed, Immer will produce the nextState based on the mutations to the draft state. This means that you can interact with your data by simply modifying it while keeping all the benefits of immutable data.
 - by default implemented in redux toolkit
 
