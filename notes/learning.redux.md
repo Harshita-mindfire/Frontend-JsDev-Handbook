@@ -1,104 +1,145 @@
 ---
-id: og4aiuuxxnjh56eqvh6tdvl
+id: k6wrzwjtyopzxbnj2m4is2z
 title: Redux
-desc: ""
-updated: 1678452458467
+desc: ''
+updated: 1692768810752
 created: 1678452458467
 ---
 
-## Links
+## Redux
 
-- https://www.youtube.com/watch?v=9boMnm5X9ak&list=PLC3y8-rFHvwheJHvseC3I0HuYI2f46oAK
-- https://github.com/gopinav/Redux-Toolkit-Tutorials/blob/master/redux-demo
-- library for state management.
+- predictable state container for js apps.
+- predictable because in redux, a pattern is enforced to ensure all transitions are explicit and can be tracked.
 
-## store
+![](/assets/images/2023-08-22-22-28-35.png)
 
-- state container that stores the application state.
+![](/assets/images/2023-08-22-22-29-07.png)
 
-### createStore
+## Three core concepts
 
-- method that takes 2 arguments
-  - reducer
-  - applyMiddleware method (optional)
+- store
+- action: js object that has a type and payload property. The type value is usually defined as constants.
+- redux
+
+![](/assets/images/2023-08-22-22-37-23.png)
+
+![](/assets/images/2023-08-22-22-44-19.png)
+
+## Principles
+
+1. ![](/assets/images/2023-08-22-22-39-33.png)
+
+2. ![](/assets/images/2023-08-22-22-41-03.png)
+
+   The state is read only and the only way to change the state is dispatch an action
+
+3. ![](/assets/images/2023-08-22-22-43-13.png)
+
+## Redux store
+
+![](/assets/images/2023-08-23-07-16-10.png)
+
+imp methods
+
+- createStore
+- bindActionCreators
+- combineReducers
+
+### Example
 
 ```js
-const store = createStore(reducer, applyMiddleware(thunkMiddleware));
-```
+const redux = require('redux');
+const createStore = redux.createStore;
 
-## reducer
+//action types
+const CAKE_ORDERED = 'CAKE_ORDERED';
+const CAKE_RESTOCK = 'CAKE_RESTOCK';
 
-pure function, takes 2 arguments
+//action  creators
+function orderCake() {
+  return {
+    type: CAKE_ORDERED,
+  };
+}
+function restockCake(qty = 1) {
+  return {
+    type: CAKE_RESTOCK,
+    payload: qty,
+  };
+}
 
-- initial state
-- action
-  returns new state
+// init state
+const initState = {
+  noOfCakes: 10,
+};
 
-```js
-const reducer = (state = initialState, action) => {
+//reducer
+const reducer = (state = initState, action) => {
   switch (action.type) {
-    case FETCH_USERS_REQUESTED:
+    case CAKE_ORDERED:
       return {
         ...state,
-        loading: true,
+        noOfCakes: state.noOfCakes - 1,
       };
-    case FETCH_USERS_SUCCEEDED:
+    case CAKE_RESTOCK: {
       return {
-        loading: false,
-        users: action.payload,
-        error: "",
+        ...state,
+        noOfCakes: state.noOfCakes + action.payload,
       };
+    }
+    default:
+      return state;
   }
 };
+
+//state
+const store = createStore(reducer);
+console.log('Initial State', store.getState());
+
+const unsubscribe = store.subscribe(() =>
+  console.log('Update State', store.getState())
+);
+
+store.dispatch(orderCake());
+store.dispatch(orderCake());
+store.dispatch(restockCake(2));
+
+unsubscribe();
 ```
 
-## action
+### bindActionCreators
 
-- object
-  - type (required)
-  - payload (optional)
+- `bindActionCreators` : a helper method that turns an object whose values are action creators, into an object with the same keys, but with every function wrapped into a dispatch call so they may be invoked directly.
 
 ```js
-const succeed = {
-  type: FETCH_USERS_SUCCEEDED,
-  payload: users,
-};
+const actions = redux.bindActionCreators(
+  { orderCake, restockCake },
+  store.dispatch
+);
+actions.orderCake();
+actions.restockCake(1);
 ```
 
-## Action creator
-
-Action creator: method that returns an action.
+### Combine Reducers
 
 ```js
-const fetchUsersSuccess = (users) => {
-  return {
-    type: FETCH_USERS_SUCCEEDED,
-    payload: users,
-  };
-};
+const rootReducer = redux.combineReducers({
+  cake: cakeReducer,
+  iceCream: iceCreamReducer,
+});
+
+const store = redux.createStore(rootReducer);
 ```
 
-## redux thunk
-
-middleware that allows you to write action creators which return a function instead of an object.
+### Apply Middleware
 
 ```js
-const fetchUsers = () => {
-  return function (dispatch) {
-    dispatch(fetchUsersRequest());
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        // response.data is the users
-        const users = response.data.map((user) => user.id);
-        dispatch(fetchUsersSuccess(users));
-      })
-      .catch((error) => {
-        // error.message is the error message
-        dispatch(fetchUsersFailure(error.message));
-      });
-  };
-};
-
-store.dispatch(fetchUsers());
+const reduxLogger = require('redux-logger');
+const logger = reduxLogger.createLogger();
+const store = redux.createStore(rootReducer, applyMiddleware(logger));
 ```
+
+### Redux Thunk
+
+[[learning.redux.thunk]]
+
