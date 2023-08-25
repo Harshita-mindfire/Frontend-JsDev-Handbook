@@ -39,3 +39,6 @@ const result = processName({ name: 'Buckethead' });
 console.log(result); // Output: 'BUCKET'
 
 ```
+
+## Functional programming
+the statement "Functional programming is declarative rather than imperative" highlights one of the key principles of functional programming, which is to focus on what you want to achieve (declarative) rather than explicitly specifying how to achieve it step by step (imperative).
