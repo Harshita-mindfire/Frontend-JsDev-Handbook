@@ -138,6 +138,11 @@ For example, authenticated users, locale preferences, UI themes need to be acces
 const { Provider, Consumer } = React.createContext(defaultValue);
 ```
 
+- To pass context:
+  - Create and export it with export const MyContext = createContext(defaultValue).
+  - Pass it to the useContext(MyContext) Hook to read it in any child component, no matter how deep.
+  - Wrap children into <MyContext.Provider value={...}> to provide it from a parent.
+
 ## flushSync
 Call flushSync to force React to flush any pending work and update the DOM synchronously.
 ```js
