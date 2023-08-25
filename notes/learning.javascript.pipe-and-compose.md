@@ -42,3 +42,11 @@ console.log(result); // Output: 'BUCKET'
 
 ## Functional programming
 the statement "Functional programming is declarative rather than imperative" highlights one of the key principles of functional programming, which is to focus on what you want to achieve (declarative) rather than explicitly specifying how to achieve it step by step (imperative).
+
+
+### Pure Function
+
+A pure function is a function which:
+
+- Given the same inputs, always returns the same output, and
+- Has no side-effects
