@@ -34,7 +34,7 @@ Rule:
 
 - re- Rendering (high to low): main thread -> useInsertionEffect cleanup, then immediately executed -> useLayoutEffect clean up then immediately executed. -> useEffect ALL cleanup -> useEffect executed one by one by order
 
-- a child's useEffect is ran first then its parent's
+- a child's useEffect is ran first then its parent's: https://bigfrontend.dev/react-quiz/useeffect-iii
 
 ```js
 // This is a React Quiz from BFE.dev 
