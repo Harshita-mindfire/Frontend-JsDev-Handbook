@@ -91,7 +91,7 @@ publishing:
     siteHierarchies:
         - root
     siteUrl: https://Harshita-mindfire.github.io
-    assetsPrefix: /Harshita-notes
+    assetsPrefix: /Frontend-JsDev-Handbook
     writeStubs: false
     siteRootDir: docs
     seo:
