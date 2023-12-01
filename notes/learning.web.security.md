@@ -58,9 +58,11 @@ Multi level checkpoints like MFA, Captcha etc.
  - uniqueness (no two email are same etc)
 
 ### Sanitizing data
-Most languages have
+Most languages have special characters that have a definite meaning to them. If these special characters are in the data and are not sanitized, they may use their special meaning and cause problems. 
+
+- The right action would be to replace powerful characters with harmless equivalents like in  HTML: "<" with "&It;" and ">" with "&gt;"
+
 - typecasting data: Sql sanitization, JS sanitization etc
-- 
 
 
 ## Data Security
