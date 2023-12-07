@@ -21,7 +21,7 @@ a fuction that returns markup
 ## Functional components over Class
 
 - use functional comp over class, after 16.8 hooks can be used as lifecycle events.
-- use class component when you want a react functionality that is not availabke for functions yet, eg: error boundries
+- use class component when you want a react functionality that is not available for functions yet, eg: error boundries
 - Only class components can be error boundaries. To make class component an error boundary we define a new lifecycle method called componentDidCatch(error, info).
 
 ReactDOM.render function: takes 2 i/p
@@ -59,9 +59,9 @@ Both props and state are plain JavaScript objects. While both of them hold infor
 
 ## controlled and uncontrolled components
 
-In Controlled components the form data is handled by react(eg: state) and with un-c comp. form data is handled by DOM itself.
+In Controlled components the form data is handled by react(eg: state) and with uncontrolled comp. form data is handled by DOM itself.
 
-### Controlled Compoenets
+### Controlled Components
 
 In React, controlled and uncontrolled components are two different approaches to managing the state of a form component.
 
