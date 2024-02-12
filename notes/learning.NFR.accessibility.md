@@ -13,16 +13,18 @@ created: 1707729120404
 
 
 ### aria
-- aria-label: used if we have an image inside hyperlink and no text.
-- aria-expanded: for menus.
-- aria-labelledby: for images with captions. DRY with writing alt and caption. Add aria-labelledby="id-of-element-where-caption-is-wriiten"
-- use roles for elements that are not being used as there usual self.
+- **aria-label**: used if we have an image inside hyperlink and no text. It gives elements a programmatic accessible name so that screen readers can let the user know what the element will do once interacted with.
+- **aria-expanded**: When a screen reader lands on an element with the attribute "aria-expanded", it announced the status as either "expanded" or "collapsed". eg: for menus.
+- **aria-labelledby**: for images with captions. DRY with writing alt and caption. Add aria-labelledby="id-of-element-where-caption-is-wriiten"
+- **aria-hidden**: aria-hidden="true" hides the element from assistive technologies.
+- **role**: use roles for elements that are not being used as there usual self.
 
 ### images
 - use alt="" for background images.
 - always add alt tag for images added with `<img>` tag. Skipping it would result in screen reader to announce the file name. Yikes!
 
-
+### bypass blocks
+adding bypass blocks allows us to skip blocks while navigating site through tab.
 
 ## Screen readers
 
