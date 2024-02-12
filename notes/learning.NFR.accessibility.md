@@ -19,6 +19,13 @@ created: 1707729120404
 - **aria-hidden**: aria-hidden="true" hides the element from assistive technologies.
 - **role**: use roles for elements that are not being used as there usual self.
 
+```html
+Q: What would screen readers announce when they encounter this button:
+<button aria-label="Shop now">Shop</button>
+
+A: only aria-label: Shop now
+```
+
 ### images
 - use alt="" for background images.
 - always add alt tag for images added with `<img>` tag. Skipping it would result in screen reader to announce the file name. Yikes!
