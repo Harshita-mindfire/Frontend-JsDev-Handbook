@@ -15,5 +15,5 @@ created: 1707729120404
 
 - If you're on a Windows machine and would like to get started with screen readers, NVDA is a great option.
 - NVDA official site: nvaccess.org
->NVDA stands for Non visual desktop access
+    >NVDA stands for Non visual desktop access
 - https://webaim.org/articles/nvda/
