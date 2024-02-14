@@ -17,6 +17,7 @@ created: 1707729120404
 - **aria-expanded**: When a screen reader lands on an element with the attribute "aria-expanded", it announced the status as either "expanded" or "collapsed". eg: for menus.
 - **aria-labelledby**: for images with captions. DRY with writing alt and caption. Add aria-labelledby="id-of-element-where-caption-is-wriiten"
 - **aria-hidden**: aria-hidden="true" hides the element from assistive technologies.
+- **aria-required**: used in input field. In HTML5 this can be skipped and `required` is used.
 - **role**: use roles for elements that are not being used as there usual self.
 
 ```html
@@ -32,6 +33,24 @@ A: only aria-label: Shop now
 
 ### bypass blocks
 adding bypass blocks allows us to skip blocks while navigating site through tab.
+
+## navigation
+- use correct semantics: `<nav>`
+- use ol, li and links instead of divs or aria attributes like role etc.
+
+### google maps/iframes
+- whenever you have any iframe always add the title attribute.
+- when using maps, also add the address in textual format for screen readers. 
+- some sites also provide driving directions in separate link that allows screen readers to get index of location.
+
+### contact forms
+- have associated labels for inputs. Don't use placeholder text only for labels. good idea is to skip them completely. 
+- keep a heading above a form. Some users navigate site with headings(keyboard first, screenreaders), if the form has no heading associated with it, it min=ght get unnoticed.
+
+```html
+<h3> Sign in Form</h3>
+<form> ... </form>
+```
 
 ## Screen readers
 
