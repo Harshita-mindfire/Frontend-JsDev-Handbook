@@ -51,6 +51,9 @@ adding bypass blocks allows us to skip blocks while navigating site through tab.
 <h3> Sign in Form</h3>
 <form> ... </form>
 ```
+## icons
+- hide decorative icons for assistive technology by adding aria-hidden="true".
+- for icons that have links(instagram icon), the svg is wrapped inside the anchor tag. For such cases: hide svg with aria-hidden and add meaningful aria-label to anchor tag.
 
 ## Screen readers
 
