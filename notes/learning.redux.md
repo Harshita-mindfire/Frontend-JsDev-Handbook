@@ -19,7 +19,7 @@ created: 1678452458467
 
 - store
 - action: js object that has a type and payload property. The type value is usually defined as constants.
-- redux
+- reducer
 
 ![](/assets/images/2023-08-22-22-37-23.png)
 
