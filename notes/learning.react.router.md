@@ -115,11 +115,11 @@ The v6 has various backwards incomaptible changes: Here is the changelog of them
 
 ## Changes
 
-- <Switch> has been removed from v6.
-- You need to wrap all your Route under <Routes>
+- `<Switch>` has been removed from v6.
+- You need to wrap all your Route under `<Routes>`
 - no need to do _exact_ anymore.
-- <Redirect /> is repaced with <Navigate />
-- **component** property of <Route> is changed to **element**. It takes JSX as an argument.
+- `<Redirect />` is repaced with `<Navigate />`
+- **component** property of `<Route>` is changed to **element**. It takes JSX as an argument.
 
 Before:
 
