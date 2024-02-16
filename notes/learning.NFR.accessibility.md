@@ -45,15 +45,22 @@ adding bypass blocks allows us to skip blocks while navigating site through tab.
 
 ### contact forms
 - have associated labels for inputs. Don't use placeholder text only for labels. good idea is to skip them completely. 
-- keep a heading above a form. Some users navigate site with headings(keyboard first, screenreaders), if the form has no heading associated with it, it min=ght get unnoticed.
+- keep a heading above a form. Some users navigate site with headings(keyboard first, screenreaders), if the form has no heading associated with it, it might get unnoticed.
 
 ```html
 <h3> Sign in Form</h3>
 <form> ... </form>
 ```
-## icons
+### icons
 - hide decorative icons for assistive technology by adding aria-hidden="true".
 - for icons that have links(instagram icon), the svg is wrapped inside the anchor tag. For such cases: hide svg with aria-hidden and add meaningful aria-label to anchor tag.
+
+## Checklist
+After developing an accessible website:
+1. Run lighthouse report in Chrome to get status.
+2. Make sure every clickable is accessible through keyboard.
+3. Run through the site using screen readers.
+
 
 ## Screen readers
 
