@@ -55,6 +55,20 @@ adding bypass blocks allows us to skip blocks while navigating site through tab.
 - hide decorative icons for assistive technology by adding aria-hidden="true".
 - for icons that have links(instagram icon), the svg is wrapped inside the anchor tag. For such cases: hide svg with aria-hidden and add meaningful aria-label to anchor tag.
 
+### links
+- have descriptive links. If users use screen readers and only access clickables, the link text should make sense.
+eg:
+- **BAD**
+    ```html
+    To make an appointment, click <a href="xyz">here</a>
+    ```
+
+- **GOOD**
+
+    ```html
+    <a href="xyz">make an appointment</a> today!
+    ```
+
 ## Checklist
 After developing an accessible website:
 1. Run lighthouse report in Chrome to get status.
