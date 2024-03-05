@@ -6,8 +6,14 @@ updated: 1683533919973
 created: 1683533919973
 ---
 
+
 ## React with Typescript Cheatsheet
 - https://react-typescript-cheatsheet.netlify.app/docs/basic/setup
+
+## TS
+
+- superset of javascript.
+- can't be executed by JS environment (browsers, nodejs)
 
 ## Creating nodejs application with typescript config
 
