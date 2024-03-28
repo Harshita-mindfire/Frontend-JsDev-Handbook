@@ -1,0 +1,16 @@
+<h1 id="troubleshoot">Troubleshoot<a aria-hidden="true" class="anchor-heading icon-link" href="#troubleshoot"></a></h1>
+<h2 id="kill-a-port">kill a port<a aria-hidden="true" class="anchor-heading icon-link" href="#kill-a-port"></a></h2>
+<pre class="language-bash"><code class="language-bash">
+<span class="token function">netstat</span> -ano <span class="token operator">|</span> findstr :3000
+
+taskkill /PID <span class="token operator">&#x3C;</span>PID<span class="token operator">></span> /F
+</code></pre>
+<h2 id="npm-connection-refused-error">npm connection refused error<a aria-hidden="true" class="anchor-heading icon-link" href="#npm-connection-refused-error"></a></h2>
+<pre><code>npm config set proxy null
+npm config set https-proxy null
+npm config set registry http://registry.npmjs.org/
+</code></pre>
+<h2 id="prettier-not-working-on-save">prettier not working on save?<a aria-hidden="true" class="anchor-heading icon-link" href="#prettier-not-working-on-save"></a></h2>
+<ul>
+<li>go to settings: > cmd+shidt+P/Ctrl + Shift+P > Preferences: Open Settings (UI) > write on save in search bar, check Editor: Format on Save</li>
+</ul>

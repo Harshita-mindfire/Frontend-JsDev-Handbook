@@ -1,0 +1,4 @@
+- open source
+- microservice orchestration platform
+- for writing durable code
+- workflows as code

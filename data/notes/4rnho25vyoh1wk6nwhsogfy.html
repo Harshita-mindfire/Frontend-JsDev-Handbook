@@ -1,0 +1,41 @@
+<h1 id="react-basics">React Basics<a aria-hidden="true" class="anchor-heading icon-link" href="#react-basics"></a></h1>
+<h2 id="creating-and-nesting-components">Creating and nesting components<a aria-hidden="true" class="anchor-heading icon-link" href="#creating-and-nesting-components"></a></h2>
+<ul>
+<li>Create a simple React Component</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">MyButton</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&#x3C;</span>button<span class="token operator">></span><span class="token constant">I</span>'m a button<span class="token operator">&#x3C;</span><span class="token operator">/</span>button<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>Now that you’ve declared MyButton, you can nest it into another component:</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">MyApp</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&#x3C;</span>div<span class="token operator">></span>
+      <span class="token operator">&#x3C;</span>h1<span class="token operator">></span><span class="token maybe-class-name">Welcome</span> to my app<span class="token operator">&#x3C;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+      <span class="token operator">&#x3C;</span><span class="token maybe-class-name">MyButton</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&#x3C;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="jsx">JSX<a aria-hidden="true" class="anchor-heading icon-link" href="#jsx"></a></h3>
+<ul>
+<li>Your component also can’t return multiple JSX tags.</li>
+<li>JSX is stricter than HTML. You have to close tags like <br>. Your component also can’t return multiple JSX tags. You have to wrap them into a shared parent, like a <div>...</div> or an empty &#x3C;>...&#x3C;/> wrapper:</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">AboutPage</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&#x3C;</span><span class="token operator">></span>
+      <span class="token operator">&#x3C;</span>h1<span class="token operator">></span><span class="token maybe-class-name">About</span><span class="token operator">&#x3C;</span><span class="token operator">/</span>h1<span class="token operator">></span>
+      <span class="token operator">&#x3C;</span>p<span class="token operator">></span><span class="token maybe-class-name">Hello</span> there<span class="token punctuation">.</span><span class="token operator">&#x3C;</span>br <span class="token operator">/</span><span class="token operator">></span><span class="token maybe-class-name">How</span> <span class="token keyword control-flow">do</span> you <span class="token keyword control-flow">do</span><span class="token operator">?</span><span class="token operator">&#x3C;</span><span class="token operator">/</span>p<span class="token operator">></span>
+    <span class="token operator">&#x3C;</span><span class="token operator">/</span><span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="reference">Reference<a aria-hidden="true" class="anchor-heading icon-link" href="#reference"></a></h2>
+<ul>
+<li><a href="https://beta.reactjs.org/learn">https://beta.reactjs.org/learn</a></li>
+</ul>
