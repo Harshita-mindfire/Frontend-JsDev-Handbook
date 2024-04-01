@@ -12,3 +12,5 @@ The key difference b/w JS and TS type system is JS uses dynamic types(resolves d
 - number: All numbers, no differentiation b/w integers and floats.
 - string
 - boolean
+
+**Note**: The core primitive types in TypeScript are all lowercase!
