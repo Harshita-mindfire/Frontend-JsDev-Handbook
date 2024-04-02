@@ -89,4 +89,21 @@ function add(a: number, b: number) : string {
 }
 ```
 
-The function that does not return anything, returns void.
+The function that does not have a return statement is of return type void.
+```ts
+function add(a: number, b: number) // this is internally :void
+{
+    console.log(a+b); 
+}
+
+```
+
+The function that has a return statement but returns nothing, is of return type undefined
+```ts
+function add(a: number, b: number) // this is internally : undefined
+{
+    console.log(a+b); 
+    return;
+}
+
+```
