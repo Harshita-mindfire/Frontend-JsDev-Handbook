@@ -52,5 +52,8 @@ The key difference b/w JS and TS type system is JS uses dynamic types(resolves d
 
 - **literal types**: 
     ```ts
-    let result: 'value1' | 'value2';
+    let result: 'value1' | 'value2'; // now result cannot be assigned any value other than value1 or value 2. 
+    result = "ok"; // results in compile time error
     ```
+
+-
