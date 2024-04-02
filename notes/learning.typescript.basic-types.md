@@ -126,3 +126,18 @@ addAndHandle(10, 20, (result) => {
   console.log(result);
 });
 ```
+**NOTE: ** callback functions can return something, even if the argument on which they're passed does NOT expect a returned value.
+
+for example: the below code will compile just fine. even though the return type of cb is void and we are returning boolean.
+
+```ts
+function sendRequest(data: string, cb: (response: any) => void) {
+  // ... sending a request with "data"
+  return cb({data: 'Hi there!'});
+}
+ 
+sendRequest('Send this!', (response) => { 
+  console.log(response);
+  return true;
+ });
+```
