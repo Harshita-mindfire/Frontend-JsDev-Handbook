@@ -56,4 +56,27 @@ The key difference b/w JS and TS type system is JS uses dynamic types(resolves d
     result = "ok"; // results in compile time error
     ```
 
--
+
+## Type Aliases
+
+Type aliases can be used to "create" your own types. 
+
+```ts
+type NumStringType = number | string;
+type CustomLiteralType = "value1" | "value2";
+
+// now these can be used as below:
+
+let variable1: NumStringType;
+```
+
+You're not limited to storing union types though - you can also provide an alias to a (possibly complex) object type.
+
+For example:
+```ts
+type User = { name: string; age: number };
+const u1: User = { name: 'Max', age: 30 }; // this works!
+```
+This allows you to avoid unnecessary repetition and manage types centrally.
+
+
