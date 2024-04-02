@@ -28,6 +28,18 @@ The key difference b/w JS and TS type system is JS uses dynamic types(resolves d
     ```
     **Note** : `person.role.push("heeloo")` will not result in a compile time error. This is an exception. TS cannot catch this error.
 
+- enum: Automatically enumerated global constant identifiers. 
+    ```ts
+    enum Role {ADMIN, READ_ONLY, AUTHOR};
+    ```
+    by default here Role.ADMIN will have value 0, READ_ONLY: 1 and AUTHOR 2. We can change this by
+    ```ts
+    enum Role {
+        ADMIN = "ADMINISTRATOR", 
+        READ_ONLY =" Read only users", 
+        AUTHOR = "Author"};
+    ```
+
 
 
 **Note**: The core primitive types in TypeScript are all lowercase!
