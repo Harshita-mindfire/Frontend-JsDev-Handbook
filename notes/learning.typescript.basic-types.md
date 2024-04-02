@@ -100,7 +100,7 @@ function add(a: number, b: number) // this is internally :void
 
 The function that has a return statement but returns nothing, is of return type undefined
 ```ts
-function add(a: number, b: number) // this is internally : undefined
+function add(a: number, b: number) // this is internally : undefined . You can also use : void here if required. won't throw any error.
 {
     console.log(a+b); 
     return;
