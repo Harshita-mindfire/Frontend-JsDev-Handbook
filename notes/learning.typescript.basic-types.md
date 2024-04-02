@@ -79,7 +79,7 @@ const u1: User = { name: 'Max', age: 30 }; // this works!
 ```
 This allows you to avoid unnecessary repetition and manage types centrally.
 
-## Function return type
+## Function return types & void
 return type in func is specified after ":"
 
 ```ts
@@ -106,4 +106,23 @@ function add(a: number, b: number) // this is internally : undefined . You can a
     return;
 }
 
+```
+
+## Functions as type
+
+```ts
+let combinedResult : (a: number, b: number) => number;
+```
+
+## Function Type && Callbacks
+
+```ts
+function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
+  const result = n1 + n2;
+  cb(result);
+}
+
+addAndHandle(10, 20, (result) => {
+  console.log(result);
+});
 ```
