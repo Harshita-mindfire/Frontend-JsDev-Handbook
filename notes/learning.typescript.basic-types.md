@@ -56,6 +56,21 @@ The key difference b/w JS and TS type system is JS uses dynamic types(resolves d
     result = "ok"; // results in compile time error
     ```
 
+- **unknown**: we don't know yet what's the type. It is similar to any but more restrictive.
+
+- **never**: never returns anything. eg: error functions
+
+- **symbol**: 
+There is a primitive in JavaScript used to create a globally unique reference via the function Symbol():
+
+```ts
+    const firstName = Symbol("name");
+    const secondName = Symbol("name");
+    
+    if (firstName === secondName) { //This comparison appears to be unintentional because the types 'typeof firstName' and 'typeof secondName' have no overlap.
+    // Can't ever happen
+    }
+```
 
 ## Type Aliases
 
@@ -141,3 +156,4 @@ sendRequest('Send this!', (response) => {
   return true;
  });
 ```
+
