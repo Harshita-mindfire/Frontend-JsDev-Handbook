@@ -79,4 +79,14 @@ const u1: User = { name: 'Max', age: 30 }; // this works!
 ```
 This allows you to avoid unnecessary repetition and manage types centrally.
 
+## Function return type
+return type in func is specified after ":"
 
+```ts
+function add(a: number, b: number) : string {
+    const sum = a+b;
+    return `Result is ${sum}`;
+}
+```
+
+The function that does not return anything, returns void.
