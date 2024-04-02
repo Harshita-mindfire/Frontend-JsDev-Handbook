@@ -157,3 +157,5 @@ sendRequest('Send this!', (response) => {
  });
 ```
 
+## Further references
+- https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
