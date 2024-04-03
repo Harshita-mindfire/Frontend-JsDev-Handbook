@@ -43,7 +43,14 @@ The tsconfig.json has several options to configure how ts comoiler should behave
 
 - **sourceMap**: simplifies debugging. When set this option **true**, it creates .map files which are understood by modern browsers. This allows us to see .ts files in the browser's source tab. Now you can add breakpoints in ts files instead of compiled js in browser.
 
+- **outDir**: folder to store o/p files. Generally ./dist
+- **rootDir**: specify root directory of input files. 
+- **removeComments**: when set to true, won't emit comments to output files.
+- **noEmitOnError**: (default: false), when set to true, do not generate output file if input file has compilation error.
 
+## Reference
+- tsconfig Docs: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 
-## REference
-- https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+- Compiler Config Docs: https://www.typescriptlang.org/docs/handbook/compiler-options.html
+
+- VS Code TS Debugging: https://code.visualstudio.com/docs/typescript/typescript-debugging
