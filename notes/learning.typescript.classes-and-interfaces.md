@@ -105,4 +105,20 @@ console.log(IT.DeptId) // getting value
 IT.DeptId = '1234' // setting value
 ```
 
-## static Methods
+## Static Methods
+properties and methods that does not need an object to refernce it. They are accessible at class level.
+- often used for utility functions that you want to group into a class or for global constants.
+
+eg: `Math.pi`, `Math.pow()`
+
+```ts
+class Test {
+    static year = 2024;
+    static testFunc() {
+        return "xyz";
+    }
+}
+// above func can be used as: 
+const a = Test.testFunc();
+console.log(Test.year) //2024
+```
