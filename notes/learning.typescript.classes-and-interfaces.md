@@ -7,13 +7,14 @@ created: 1712134690726
 ---
 
 ## Access modifiers
-- **private**: accessible only within the class
+- **private**: accessible only within the class. They are not even inherited.
     ```ts
     class Department {
         private employees: string[] = [];
     }
     ```
-- **public**: default modifier. accessible outside the class
+- **public**: default modifier. accessible outside the class.
+- **protected**: accessible to class and its children(i.e can be inherited).
 - **readonly**:  Does not allow rewriting.
 
     ```ts
@@ -61,3 +62,21 @@ When we want to initialize the member variables in constructor, **instead of**
 
     }
     ```
+
+### overriding methods
+- TS allows to override methods of base class in child class.
+- It calls the child method when invoked from child reference.
+
+### super keyword
+- calls the constructor of the base class.
+- used inside child constructor
+```ts 
+class ITDept extends Dept {
+    constructor(id: string) {
+        super(id, 'IT') // should always be the first statement in constructor
+    }
+}
+```
+
+
+## Getters and Setters
