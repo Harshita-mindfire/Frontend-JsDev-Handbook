@@ -15,12 +15,24 @@ created: 1712134690726
     ```
 - **public**: default modifier. accessible outside the class.
 - **protected**: accessible to class and its children(i.e can be inherited).
-- **readonly**:  Does not allow rewriting.
+- **readonly**: This prevents assignments to the field outside of the constructor.
 
     ```ts
-    class xtz {
-        private readonly id: string = 'xyzz';
+    class Greeter {
+    readonly name: string = "world";
+    
+    constructor(otherName?: string) {
+        if (otherName !== undefined) {
+        this.name = otherName;
+        }
     }
+    
+    err() {
+        this.name = "not ok"; //Cannot assign to 'name' because it is a read-only property.
+    }
+    }
+    const g = new Greeter();
+    g.name = "also not ok"; //Cannot assign to 'name' because it is a read-only property.
     ```
 
 ## Shorthand notation
@@ -69,12 +81,19 @@ When we want to initialize the member variables in constructor, **instead of**
 
 ### super keyword
 - calls the constructor of the base class.
-- used inside child constructor
+- if you have a base class, you’ll need to call super(); in your child constructor body before using any `this.` members:
 ```ts 
-class ITDept extends Dept {
-    constructor(id: string) {
-        super(id, 'IT') // should always be the first statement in constructor
-    }
+class Base {
+  k = 4;
+}
+ 
+class Derived extends Base {
+  constructor() {
+    // Prints a wrong value in ES5; throws exception in ES6
+    console.log(this.k);
+'super' must be called before accessing 'this' in the constructor of a derived class.
+    super();
+  }
 }
 ```
 
@@ -106,8 +125,11 @@ IT.DeptId = '1234' // setting value
 ```
 
 ## Static Methods
-properties and methods that does not need an object to refernce it. They are accessible at class level.
+
+- Classes may have static members. These members aren’t associated with a particular instance of the class. They can be accessed through the class constructor object itself:
 - often used for utility functions that you want to group into a class or for global constants.
+- the static methods are decoupled from instances and **cannot** be referenced with `this`
+
 
 eg: `Math.pi`, `Math.pow()`
 
@@ -122,3 +144,10 @@ class Test {
 const a = Test.testFunc();
 console.log(Test.year) //2024
 ```
+
+## Abstract Classes
+- An abstract class typically includes one or more abstract methods or property declarations. 
+- The class which extends the abstract class must define all the abstract methods. 
+- We **cannot** create an instance of an abstract class.
+
+## Private Constructors and Singletons
