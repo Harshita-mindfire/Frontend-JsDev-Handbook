@@ -83,15 +83,26 @@ class ITDept extends Dept {
 
 ```ts
 class Dept {
-    private id:string = 1234;
+    private id:string;
     constructor(private name: string){}
     get DeptId() {
+        if(this.id)
         return this.id;
+    }
+
+    set DeptId(value: string) {
+        this.id = value;
     }
 }
 ```
 `DeptId` is a getter that is publicly accessible. Now we can get the value of dept by creating reference of Dept.
 
 ```ts
+// Note how getters/setters are accessed without ()
+
 const IT = new Dept('IT');
-console.log(IT.DeptId) // logs 1234. Note how getters are accessed without ()
+console.log(IT.DeptId) // getting value
+IT.DeptId = '1234' // setting value
+```
+
+## static Methods
