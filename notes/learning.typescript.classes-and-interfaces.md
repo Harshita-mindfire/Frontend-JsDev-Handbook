@@ -14,3 +14,26 @@ created: 1712134690726
     }
     ```
 - public: default modifier. accessible outside the class
+
+## Shorthand notation
+When we want to initialize the member variables in constructor, **instead of**
+```ts
+    class Department {
+        private name: string;
+        private id: string;
+
+        constructor(n: string, i: string) {
+            this.name = n;
+            this.id = i;
+        }
+
+    }
+```
+**we can do**
+
+```ts
+    class Department {
+        constructor(private name: string, private id: string) {
+        }
+    }
+```
