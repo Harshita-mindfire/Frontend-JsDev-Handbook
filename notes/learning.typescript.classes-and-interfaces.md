@@ -18,22 +18,36 @@ created: 1712134690726
 ## Shorthand notation
 When we want to initialize the member variables in constructor, **instead of**
 ```ts
-    class Department {
-        private name: string;
-        private id: string;
-
-        constructor(n: string, i: string) {
-            this.name = n;
-            this.id = i;
-        }
-
+   class Product {
+    title: string;
+    price: number;
+    private isListed: boolean;
+    
+    constructor(name: string, pr: number) {
+        this.title = name;
+        this.price = pr;
+        this.isListed = true;
     }
+}
 ```
 **we can do**
 
 ```ts
-    class Department {
-        constructor(private name: string, private id: string) {
+      class Product {
+        private isListed: boolean;
+        constructor(public title: string, public price: number) {
+            this.isListed = true;
         }
-    }
+}
+```
+
+## readonly
+
+- access modifier. Does not allow rewriting.
+
+```ts
+class xtz {
+    private readonly id: string = 'xyzz';
+}
+
 ```
