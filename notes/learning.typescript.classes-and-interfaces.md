@@ -7,13 +7,20 @@ created: 1712134690726
 ---
 
 ## Access modifiers
-- private: accessible only within the class
+- **private**: accessible only within the class
     ```ts
     class Department {
         private employees: string[] = [];
     }
     ```
-- public: default modifier. accessible outside the class
+- **public**: default modifier. accessible outside the class
+- **readonly**:  Does not allow rewriting.
+
+    ```ts
+    class xtz {
+        private readonly id: string = 'xyzz';
+    }
+    ```
 
 ## Shorthand notation
 When we want to initialize the member variables in constructor, **instead of**
@@ -41,13 +48,16 @@ When we want to initialize the member variables in constructor, **instead of**
 }
 ```
 
-## readonly
 
-- access modifier. Does not allow rewriting.
+## Inheritance
 
-```ts
-class xtz {
-    private readonly id: string = 'xyzz';
-}
+- utilizing base class methods and properties. They are automatically passed on to the child class via inheritance.
+- can inherit one class ata time.
+- use `extends` to inherit.
+- eg:
 
-```
+    ```ts
+    class ITDept extends Dept {
+
+    }
+    ```
