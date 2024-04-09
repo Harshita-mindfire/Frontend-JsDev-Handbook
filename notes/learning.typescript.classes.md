@@ -1,6 +1,6 @@
 ---
 id: 2b35ixagticlchpxb121vfm
-title: Classes and Interfaces
+title: Classes
 desc: ''
 updated: 1712134690726
 created: 1712134690726
@@ -147,13 +147,14 @@ console.log(Test.year) //2024
 ```
 
 ## Abstract Classes
+- A class that can't be instantiated but has to be extended.
 - An abstract class typically includes one or more abstract methods or property declarations. 
 - The class which extends the abstract class must define all the abstract methods. 
 - We **cannot** create an instance of an abstract class.
 
 ## Private Constructors and Singletons
 
-The singleton pattern is a creational pattern that allows you to make sure that only one instance of a class is created.
+The singleton pattern is a creational pattern that allows you to make sure that only one instance of a class is created. .
 
 
 ```ts
