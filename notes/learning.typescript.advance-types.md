@@ -22,8 +22,7 @@ type Universal = Combinable & Numeric; // intersection would be number
 ```
 
 ### Typeguards
-
-When we combine types, we might require typeguards. 
+With type guards you avoid runtime errors by checking types before you try to do something with the values.
 
 - instanceOf
 - typeOf
