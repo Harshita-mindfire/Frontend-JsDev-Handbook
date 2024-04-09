@@ -128,7 +128,8 @@ IT.DeptId = '1234' // setting value
 
 - Classes may have static members. These members aren’t associated with a particular instance of the class. They can be accessed through the class constructor object itself:
 - often used for utility functions that you want to group into a class or for global constants.
-- the static methods are decoupled from instances and **cannot** be referenced with `this`
+- the static methods are decoupled from instances and **cannot** be referenced with `this`.
+- Static members are also inherited.
 
 
 eg: `Math.pi`, `Math.pow()`
@@ -151,3 +152,30 @@ console.log(Test.year) //2024
 - We **cannot** create an instance of an abstract class.
 
 ## Private Constructors and Singletons
+
+The singleton pattern is a creational pattern that allows you to make sure that only one instance of a class is created.
+
+
+```ts
+    class Singleton {
+    private static instance: Singleton;
+    private constructor() {
+        // do something construct...
+    }
+    static getInstance() {
+        if (!Singleton.instance) {
+            Singleton.instance = new Singleton();
+            // ... any one time initialization goes here ...
+        }
+        return Singleton.instance;
+    }
+    someMethod() { }
+}
+
+let something = new Singleton() // Error: constructor of 'Singleton' is private.
+
+let instance = Singleton.getInstance() // do something with the instance...
+```
+
+- [Canvas editor singleton example](https://github.com/mindfiredigital/canvas-editor/commit/b09d98dea3a38caba041bab35736bfd2712c068c#diff-ce60497e4a1a947c474a38c5959a2d9499b9531666b1df509ac4305518a93095R11)
+
