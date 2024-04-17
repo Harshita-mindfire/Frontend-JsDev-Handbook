@@ -38,3 +38,29 @@ created: 1712662067151
     return [element, descriptionText];
     }
     ```
+
+## keyof
+
+```ts
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  return 'Value: ' + obj[key];
+}
+
+extractAndConvert({ name: 'Max' }, 'name');
+```
+
+## Generic classes
+
+
+## Builtin Utility types
+- Partial<>
+- Readonly<>
+
+- ## generic vs union
+
+generic type locks in a type
+
+`<T extends boolean | number | string>` v/s `boolean | number | string`
