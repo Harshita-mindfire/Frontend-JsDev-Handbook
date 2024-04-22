@@ -15,3 +15,7 @@ Here are some considerations for React developers who need to choose between Gra
 - **Data requirements**: If your application requires a lot of different data from different endpoints, GraphQL can be a good option because it allows you to specify exactly what you need. With REST, you might have to make multiple requests to different endpoints to get all the data you need.
 - **Caching**: REST APIs can be more easily cached, which can improve performance. GraphQL has its own caching mechanisms, but they can be more complex to implement.
 - **Learning curve**: GraphQL can have a steeper learning curve for developers who are not familiar with it. REST is a more straightforward technology that many developers are already comfortable with.
+
+
+### virtualization
+- https://www.patterns.dev/vanilla/virtual-lists
