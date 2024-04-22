@@ -18,4 +18,4 @@ Here are some considerations for React developers who need to choose between Gra
 
 
 ### virtualization
-- https://www.patterns.dev/vanilla/virtual-lists
+- 
