@@ -27,3 +27,27 @@ class Person {
 const pers = new Person()
 ```
 
+### Decortor factory function
+
+- decorator function that returns a func.
+ the above example will be modified as:
+
+```ts
+ /**  This is a decorator factory. target receives the constructor of class. */
+function Logger(arg1: string) {
+    return function(target: Function) {
+        console.log(arg1)
+    }
+}
+
+@Logger("Logging Person") // now we can pass args to decorator
+class Person {
+    name="Max";
+    constructor() {
+        console.log("creating person...")
+    }
+}
+
+const pers = new Person()
+```
+
