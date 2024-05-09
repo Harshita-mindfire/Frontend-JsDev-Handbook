@@ -6,7 +6,7 @@ updated: 1671014275336
 created: 1671014275336
 ---
 
-## kill a port
+## kill a port in windows
 
 ```bash
 
@@ -26,3 +26,10 @@ npm config set registry http://registry.npmjs.org/
 ## prettier not working on save?
 
 - go to settings: > cmd+shidt+P/Ctrl + Shift+P > Preferences: Open Settings (UI) > write on save in search bar, check Editor: Format on Save
+
+
+## kill a port in mac
+
+- Find: `sudo lsof -i :3000`
+
+- Kill: `kill -9 <PID>`
