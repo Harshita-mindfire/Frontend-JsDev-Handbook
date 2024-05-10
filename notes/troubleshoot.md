@@ -36,4 +36,8 @@ npm config set registry http://registry.npmjs.org/
 
 
 ### get ip add on mac
+**Internal IP**
 - ipconfig getifaddr en0 
+
+**Public IP**
+- type what is my ip address in google and get it.
