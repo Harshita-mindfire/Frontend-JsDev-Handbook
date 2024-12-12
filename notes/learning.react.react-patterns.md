@@ -2,14 +2,16 @@
 id: ug5b9frm3w0fz4400egy5wi
 title: React Patterns
 desc: ''
-updated: 1734004474638
+updated: 1734005270177
 created: 1733912458137
 ---
 
 ## Layout components
+
 - design pattern used to structure the layout of a React application
 - focus on organizing other components within a web page. like split screen, lists, modal
 -  promotes code reusability, separation of concerns, and a clean, organized codebase.
+
 
 ### key concepts
 the core components of our page should be unaffected by its placement.
