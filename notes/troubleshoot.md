@@ -2,7 +2,7 @@
 id: urj8q1uq98o3upmgbt2qxns
 title: Troubleshoot
 desc: ''
-updated: 1671014275336
+updated: 1736244285308
 created: 1671014275336
 ---
 
@@ -41,3 +41,7 @@ npm config set registry http://registry.npmjs.org/
 
 **Public IP**
 - type what is my ip address in google and get it.
+
+
+## install java in mac0s
+https://www.geeksforgeeks.org/how-to-install-java-on-macos/
