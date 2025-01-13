@@ -2,10 +2,11 @@
 id: umv1qlgcft10gzj348d0ou0
 title: Observer Pattern with events
 desc: ''
-updated: 1736778340163
+updated: 1736778548128
 created: 1736778101536
 ---
 
+Event emitters
 
 ## Example
 
