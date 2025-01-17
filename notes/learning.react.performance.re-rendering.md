@@ -2,7 +2,7 @@
 id: 3uby22vvqaqekxnnpmi3kiw
 title: Re Rendering
 desc: ''
-updated: 1737116476497
+updated: 1737119795688
 created: 1736830119518
 ---
 
@@ -88,4 +88,9 @@ export default function App() {
 }
 ```
 
-Here, update in state of Dynamic scroll will not re-render the 3 components paased as prop to `DynamicScroll`.
+Here, update in state of Dynamic scroll will not re-render the 3 components passed as prop to `DynamicScroll`.
+
+
+- ![](/assets/images/2025-01-17-18-46-03.png)
+
+- ![](/assets/images/2025-01-17-18-45-16.png)
