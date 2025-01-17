@@ -2,7 +2,7 @@
 id: 3uby22vvqaqekxnnpmi3kiw
 title: Re Rendering
 desc: ''
-updated: 1737119795688
+updated: 1737120605733
 created: 1736830119518
 ---
 
@@ -48,7 +48,8 @@ export default function App() {
 
 
 ### Passing components as props.
-The components which are passed as props to component A and are rendered in it won't re-render if the A re-renders.
+The components which are passed as props to component A and are rendered in it won't re-render if the A re-renders. 
+Below is an example of passing nodes as props. 
 
 ```jsx
 const DynamicScroll = ({ content }: { content: ReactNode }) => {
@@ -90,6 +91,38 @@ export default function App() {
 
 Here, update in state of Dynamic scroll will not re-render the 3 components passed as prop to `DynamicScroll`.
 
+- You can also use the children prop. It will also have the same effect.
+
+```jsx
+const DynamicScroll = ({ children }) => {
+ ...
+
+  return (
+    <ScrollableContainer onScroll={handleScroll}>
+      <DynamicBlock top={position === 113 ? 113 : position} color={blockColor}>
+        🛒
+      </DynamicBlock>
+      {content}
+    </ScrollableContainer>
+  );
+};
+
+...
+//App component
+
+export default function App() {
+  return (
+    <DynamicScroll>
+          <SlowComponent />
+          <BlaBla />
+          <AdditionalComplexThings />
+    </DynamicScroll>
+  );
+}
+```
+
+
+- Below is the explanation of why React treats children nodes differently and why they are not re-rendered on state update.
 
 - ![](/assets/images/2025-01-17-18-46-03.png)
 
