@@ -1,0 +1,44 @@
+<h1 id="performance">Performance<a aria-hidden="true" class="anchor-heading icon-link" href="#performance"></a></h1>
+<h1 id="performance-1">Performance<a aria-hidden="true" class="anchor-heading icon-link" href="#performance-1"></a></h1>
+<p>For every state update, React component re-renders. When the parent component re-renders, all its children are re-rendered. This causes a performance issue. To minimize re-rendering of Components which are unaffected by the state change, we use advance concepts like memoization.</p>
+<h2 id="memoisation">Memoisation<a aria-hidden="true" class="anchor-heading icon-link" href="#memoisation"></a></h2>
+<ul>
+<li>If the props of Child Component does not change, it will not rerender along with the Parent.</li>
+</ul>
+<h3 id="reactmemo">React.memo<a aria-hidden="true" class="anchor-heading icon-link" href="#reactmemo"></a></h3>
+<p>Memoizes a component.</p>
+<h4 id="functional-component">Functional Component<a aria-hidden="true" class="anchor-heading icon-link" href="#functional-component"></a></h4>
+<p>Wrap component in React.memo() while exporting for functional component.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">memo</span><span class="token punctuation">(</span><span class="token maybe-class-name">Card</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Card is name of component</span>
+</code></pre>
+<h4 id="class-component">Class Component<a aria-hidden="true" class="anchor-heading icon-link" href="#class-component"></a></h4>
+<p>Extend React.PureComponent instead of React.Component</p>
+<h3 id="usecallback-hook">useCallback hook<a aria-hidden="true" class="anchor-heading icon-link" href="#usecallback-hook"></a></h3>
+<p>It returns a memoized version of the callback that only changes if one of the dependencies has changed. This is necessary when App sends callback as a Prop to child.</p>
+<ul>
+<li>Rule of Thumb: always wrap <em>the function in useCallback</em> which is passed as a prop if the <strong>component is memoized</strong>.</li>
+</ul>
+<pre class="language-js"><code class="language-js">  <span class="token keyword">const</span> handleChange <span class="token operator">=</span> <span class="token function">useCallback</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">setSearchKey</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="usememo-hook">useMemo hook<a aria-hidden="true" class="anchor-heading icon-link" href="#usememo-hook"></a></h3>
+<p>useMemo will only recompute the memoized value when one of the dependencies has changed. This optimization helps to avoid expensive calculations on every render.</p>
+<h2 id="code-splitting">Code splitting<a aria-hidden="true" class="anchor-heading icon-link" href="#code-splitting"></a></h2>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">OtherComponent</span></span> <span class="token keyword module">from</span> <span class="token string">'./OtherComponent'</span><span class="token punctuation">;</span>
+<span class="token literal-property property">After</span><span class="token operator">:</span>
+<span class="token keyword">const</span> <span class="token maybe-class-name">OtherComponent</span> <span class="token operator">=</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">lazy</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token keyword module">import</span><span class="token punctuation">(</span><span class="token string">'./OtherComponent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="suspense">Suspense<a aria-hidden="true" class="anchor-heading icon-link" href="#suspense"></a></h2>
+<pre class="language-jsx"><code class="language-jsx">  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Suspense</span></span> <span class="token attr-name">fallback</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">Loading...</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Suspense</span></span><span class="token punctuation">></span></span>
+
+</code></pre>
+<ul>
+<li>Suspense component will be rendered when a child ran into async render and all children in Suspense will be re-rendered after async resolve.
+eg: <a href="https://bigfrontend.dev/react-quiz/suspense-3">https://bigfrontend.dev/react-quiz/suspense-3</a></li>
+</ul>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/3uby22vvqaqekxnnpmi3kiw">Re Rendering</a></li>
+</ol>

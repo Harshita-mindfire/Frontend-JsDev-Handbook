@@ -1,0 +1,30 @@
+<h1 id="interfaces">Interfaces<a aria-hidden="true" class="anchor-heading icon-link" href="#interfaces"></a></h1>
+<ul>
+<li>pure ts feature.</li>
+<li>describes the structure of an object. There are no concrete values.</li>
+<li>in TS it is almost equivalent to a custom type.</li>
+<li>can't be instantiated and are not compiled.</li>
+<li>Classes can implement an interface by <code>implements</code> keyword. More than one interfaces can be implemented by comman separated implements.</li>
+<li>interface <strong>does not have</strong> public, private, protected access modifiers, but <strong>can have</strong> readonly modifier.</li>
+<li>one interface can <code>extend</code> another interface using <code>extends</code> keyword.</li>
+</ul>
+<p>eg: </p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name"><span class="token maybe-class-name">Person</span></span> <span class="token punctuation">{</span>
+    name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    age<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+    <span class="token function">greet</span><span class="token punctuation">(</span>message<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="interface-and-type">interface and type<a aria-hidden="true" class="anchor-heading icon-link" href="#interface-and-type"></a></h3>
+<ul>
+<li>interface and type can often be use interchangebly.
+For example the type equivalent of Person interface above will be:</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Person</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+    name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    age<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+    <span class="token function">greet</span><span class="token punctuation">(</span>message<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span> 
+    lastname<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token comment">// optional property</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>we generally use <code>type</code> when we want to store a union type. <code>interfaces</code> are used when we want to define a structure of an object.</p>
