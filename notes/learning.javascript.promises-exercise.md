@@ -6,6 +6,9 @@ updated: 1679507725721
 created: 1679507725721
 ---
 
+- Promise methods are static methods: Promise.all, Promise.race, Promise.any
+- Promis.race is useful when you want the first async task to complete, but do not care about its eventual state (i.e., it can either succeed or fail).
+- Promise.all returns a single promise with either fulfilled values of all Promises or the rejected promise. It fails fast
 
 - 1
 
