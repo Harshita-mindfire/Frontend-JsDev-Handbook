@@ -1,0 +1,105 @@
+<h1 id="router">Router<a aria-hidden="true" class="anchor-heading icon-link" href="#router"></a></h1>
+<p>Updtaes are done in v6 of react-router-dom: See here: <a href="/Frontend-JsDev-Handbook/notes/uvb8ww8ir11egzwnqkvqiyx#react-router-v6">React Router v6</a></p>
+<h2 id="browser-router">Browser Router<a aria-hidden="true" class="anchor-heading icon-link" href="#browser-router"></a></h2>
+<pre class="language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">BrowserRouter</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+  // components you'd like to add routing capability
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">BrowserRouter</span></span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="router-1">Router<a aria-hidden="true" class="anchor-heading icon-link" href="#router-1"></a></h2>
+<p>Specify the path and component to render for that path.</p>
+<p>NOTE:</p>
+<ul>
+<li>The below code will render about home and about component for path <em>/about</em>.</li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx">    <span class="token operator">&#x3C;</span><span class="token maybe-class-name">Route</span> path<span class="token operator">=</span> <span class="token string">'/'</span> component<span class="token operator">=</span> <span class="token punctuation">{</span><span class="token maybe-class-name">Home</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&#x3C;</span><span class="token maybe-class-name">Route</span> path<span class="token operator">=</span> <span class="token string">'/about'</span> component<span class="token operator">=</span> <span class="token punctuation">{</span><span class="token maybe-class-name">About</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&#x3C;</span><span class="token maybe-class-name">Route</span> path<span class="token operator">=</span> <span class="token string">'/shop/:id'</span> component<span class="token operator">=</span> <span class="token punctuation">{</span><span class="token maybe-class-name">Shop</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span> <span class="token comment">// dynamic route</span>
+</code></pre>
+<h2 id="switch">Switch<a aria-hidden="true" class="anchor-heading icon-link" href="#switch"></a></h2>
+<p>Stop rendering after first match.
+NOTE:</p>
+<ul>
+<li>The below code will only render Home component for path <em>/about</em>. Since first match is<em>/</em></li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Switch</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Route</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/<span class="token punctuation">"</span></span> <span class="token attr-name">component</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token maybe-class-name">Home</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Route</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/about<span class="token punctuation">"</span></span> <span class="token attr-name">component</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token maybe-class-name">About</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Switch</span></span><span class="token punctuation">></span></span>
+</code></pre>
+<p>To overcome this, use the Route property: exact.</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Switch</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Route</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/<span class="token punctuation">"</span></span> <span class="token attr-name">exact</span> <span class="token attr-name">component</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token maybe-class-name">Home</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Route</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/about<span class="token punctuation">"</span></span> <span class="token attr-name">component</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token maybe-class-name">About</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Switch</span></span><span class="token punctuation">></span></span>
+</code></pre>
+<h2 id="link">Link<a aria-hidden="true" class="anchor-heading icon-link" href="#link"></a></h2>
+<p>Adding hyperlinks to your component. Thakes only one argument 'to'</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Link</span></span> <span class="token attr-name">to</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>/about<span class="token punctuation">'</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+ </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span><span class="token punctuation">></span></span><span class="token plain-text">About</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Link</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Link</span></span> <span class="token attr-name">to</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/shop/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>item<span class="token punctuation">.</span><span class="token property-access">id</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text"> </span><span class="token punctuation">{</span>item<span class="token punctuation">.</span><span class="token property-access">name</span><span class="token punctuation">}</span><span class="token plain-text"> </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Link</span></span><span class="token punctuation">></span></span>
+</code></pre>
+<p>The Link passes props to the component that gets rendered.</p>
+<h2 id="react-router-hooks">React Router Hooks<a aria-hidden="true" class="anchor-heading icon-link" href="#react-router-hooks"></a></h2>
+<h3 id="useparams">useParams<a aria-hidden="true" class="anchor-heading icon-link" href="#useparams"></a></h3>
+<p>useParams(): get props passed by Link to the component.</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token operator">&#x3C;</span><span class="token maybe-class-name">Link</span> to<span class="token operator">=</span> <span class="token punctuation">{</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/shop/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>item<span class="token punctuation">.</span><span class="token property-access">id</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">}</span><span class="token operator">></span><span class="token maybe-class-name">View</span> <span class="token maybe-class-name">Details</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Link</span></span><span class="token punctuation">></span></span>
+<span class="token spread operator">...</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Route</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>/shop/:id<span class="token punctuation">'</span></span> <span class="token attr-name">component</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token maybe-class-name">ItemDetails</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+...
+const params = useParams() //can now access the param id with params.id
+</span></code></pre>
+<h3 id="usenavigate">useNavigate<a aria-hidden="true" class="anchor-heading icon-link" href="#usenavigate"></a></h3>
+<ul>
+<li>Before v6, we had <redirect to="/"> to redirect from a component. Now <redirect> is replaced with <navigate>. We can also use new hook useNavigate to further redirect. This also replaces the <strong>goBack</strong> method of react-router-dom.</navigate></redirect></redirect></li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword">const</span> navigate <span class="token operator">=</span> <span class="token function">useNavigate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token spread operator">...</span>
+    <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token property-access">error</span> <span class="token operator">===</span> <span class="token string">'404'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">navigate</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>If you want to go back to the most recent page from history you can write</li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token function">navigate</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text"> Go Back </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+</code></pre>
+<h3 id="uselocation">useLocation<a aria-hidden="true" class="anchor-heading icon-link" href="#uselocation"></a></h3>
+<p>The new hook useLocation to get the location of route.</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword">const</span> <span class="token dom variable">location</span> <span class="token operator">=</span> <span class="token function">useLocation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> pathname <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token dom variable">location</span><span class="token punctuation">;</span> <span class="token comment">// path name is the route; /shop/231</span>
+</code></pre>
+<h2 id="react-router-v6">React Router v6<a aria-hidden="true" class="anchor-heading icon-link" href="#react-router-v6"></a></h2>
+<p>The v6 has various backwards incomaptible changes: Here is the changelog of them</p>
+<h2 id="changes">Changes<a aria-hidden="true" class="anchor-heading icon-link" href="#changes"></a></h2>
+<ul>
+<li><code>&#x3C;Switch></code> has been removed from v6.</li>
+<li>You need to wrap all your Route under <code>&#x3C;Routes></code></li>
+<li>no need to do <em>exact</em> anymore.</li>
+<li><code>&#x3C;Redirect /></code> is repaced with <code>&#x3C;Navigate /></code></li>
+<li><strong>component</strong> property of <code>&#x3C;Route></code> is changed to <strong>element</strong>. It takes JSX as an argument.</li>
+</ul>
+<p>Before:</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token operator">&#x3C;</span><span class="token maybe-class-name">Route</span> path<span class="token operator">=</span> <span class="token string">'/'</span> component<span class="token operator">=</span><span class="token punctuation">{</span><span class="token maybe-class-name">Home</span><span class="token punctuation">}</span><span class="token operator">></span>
+</code></pre>
+<p>New:</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Routes</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Route</span></span> <span class="token attr-name">path</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>/<span class="token punctuation">'</span></span> <span class="token attr-name">element</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">About</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Routes</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+</span></code></pre>
+<ul>
+<li>
+<p>can access the params passed to Component only with <a href="/Frontend-JsDev-Handbook/notes/uvb8ww8ir11egzwnqkvqiyx#useparams">useParams</a>. The ({match}) prop is no longer valid</p>
+</li>
+<li>
+<p><strong>goBack</strong> method is no longer valid</p>
+</li>
+</ul>
+<h2 id="useroutes">useRoutes<a aria-hidden="true" class="anchor-heading icon-link" href="#useroutes"></a></h2>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/Frontend-JsDev-Handbook/notes/uvb8ww8ir11egzwnqkvqiyx">Router</a></li>
+</ul>

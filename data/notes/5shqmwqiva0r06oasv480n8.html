@@ -1,0 +1,128 @@
+<h1 id="css">CSS<a aria-hidden="true" class="anchor-heading icon-link" href="#css"></a></h1>
+<h2 id="resources">Resources:<a aria-hidden="true" class="anchor-heading icon-link" href="#resources"></a></h2>
+<ul>
+<li><a href="https://www.freecodecamp.org/learn/responsive-web-design/basic-css/">Basic Css</a></li>
+<li><a href="https://thoughtbot.com/blog/transitions-and-transforms">Transform-Transition</a></li>
+</ul>
+<h2 id="transform-and-transition">Transform and Transition<a aria-hidden="true" class="anchor-heading icon-link" href="#transform-and-transition"></a></h2>
+<ul>
+<li><a href="https://thoughtbot.com/blog/transitions-and-transforms">https://thoughtbot.com/blog/transitions-and-transforms</a></li>
+<li><strong>transforms</strong> move or change the appearance of an element, while <strong>transitions</strong> make the element smoothly and gradually change.</li>
+<li>Without a transition, an element being transformed would change abruptly from one state to another.</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> [property] [duration] [timing-function] [delay]<span class="token punctuation">;</span>
+  <span class="token comment">/**
+  *  transition: all 3s; 
+  *  all: transition-property (required)
+  *  3s : transition-duration (required) rest are optional
+   **/</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>
+<p><strong>Transition-property</strong>(required): CSS property where the transition will be applied. You may apply a transition to an individual property (e.g., background-color or tranform) or to all properties in the rule-set (i.e., all).</p>
+</li>
+<li>
+<p><strong>Transition-duration</strong>(required): specifies the time span of the transition</p>
+</li>
+</ul>
+<pre class="language-css"><code class="language-css">  <span class="token selector">div</span> <span class="token punctuation">{</span>
+    <span class="token property">transition-duration</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token unit">s</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">/** shorthand **/</span>
+  <span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> all <span class="token number">3</span><span class="token unit">s</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><strong>Transition timing function</strong> (optional):
+options are => linear, ease, ease-in, ease-out, and ease-in-out</li>
+</ul>
+<pre class="language-css"><code class="language-css"> <span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">transition-timing-function</span><span class="token punctuation">:</span> ease-in-out<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/** shorthand **/</span>
+<span class="token selector">div</span> <span class="token punctuation">{</span>
+ <span class="token property">transition</span><span class="token punctuation">:</span> all <span class="token number">3</span><span class="token unit">s</span> ease-in<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><strong>Transition delay</strong> (optional):
+The transition-delay property allows you to specify when the transform will start. By default, the transition starts as soon as it is triggered (e.g., on mouse hover). However, if you want to transition to start after it is triggered you can use the transition delay property.</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token comment">/** shorthand **/</span>
+<span class="token selector">div</span> <span class="token punctuation">{</span>
+ <span class="token property">transition</span><span class="token punctuation">:</span> all <span class="token number">3</span><span class="token unit">s</span> ease-in <span class="token number">0.5</span><span class="token unit">s</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<h2 id="transform">Transform<a aria-hidden="true" class="anchor-heading icon-link" href="#transform"></a></h2>
+<ul>
+<li>make an element change from one state to another</li>
+<li>you can rotate, move, skew, and scale elements. </li>
+<li>triggered when an element changes states, such as on mouse-hover or mouse-click.</li>
+</ul>
+<h3 id="scale">scale<a aria-hidden="true" class="anchor-heading icon-link" href="#scale"></a></h3>
+<ul>
+<li>increase or decrease the size of an element.</li>
+<li>scale(2): makes the size twice, scale(0.5) makes the size half</li>
+</ul>
+<p><em>NOTE: Don’t forget to add a transition! Without applying transition, the element would abruptly change sizes. Add the transition to the parent selector (not the hover selector). To make the transition smooth on both hover-over/hover-off.</em></p>
+<pre class="language-css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> transform <span class="token number">1</span><span class="token unit">s</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">div<span class="token pseudo-class">:hover</span></span> <span class="token punctuation">{</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">scale</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="rotate">rotate<a aria-hidden="true" class="anchor-heading icon-link" href="#rotate"></a></h3>
+<ul>
+<li>rotate(90deg): clockwise 90</li>
+<li>rotate(-90deg): anticlockwise 90</li>
+<li>You can rotate more than a full rotation with numbers over than 360, such as 1080deg, for three full rotations.</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> transform <span class="token number">1</span><span class="token unit">s</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">div<span class="token pseudo-class">:hover</span></span> <span class="token punctuation">{</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">1080</span><span class="token unit">deg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="translate">translate<a aria-hidden="true" class="anchor-heading icon-link" href="#translate"></a></h3>
+<ul>
+<li>moves an element left/right and up/down.</li>
+<li>+x: right, -x: left</li>
+<li>+y: down, -y: up</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> transform <span class="token number">1</span><span class="token unit">s</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">div<span class="token pseudo-class">:hover</span></span> <span class="token punctuation">{</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translate</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="skew">skew<a aria-hidden="true" class="anchor-heading icon-link" href="#skew"></a></h3>
+<ul>
+<li>the element skews (or tilts) one direction or the other.</li>
+<li>+x: left, -x: right (oposite of translate)</li>
+<li>+y: down, -y: up</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">transition</span><span class="token punctuation">:</span> transform <span class="token number">1</span><span class="token unit">s</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">div<span class="token pseudo-class">:hover</span></span> <span class="token punctuation">{</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">skewX</span><span class="token punctuation">(</span><span class="token number">-20</span><span class="token unit">deg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/9hwfp65pm5gvegngk1hf68w">Position</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/i0qvfd0bsvswmnet8bx5z4y">Selectors</a></li>
+</ol>
