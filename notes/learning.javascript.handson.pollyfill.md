@@ -19,11 +19,32 @@ created: 1745217937082
 ## Bind
 
 ```js
+Function.prototype.myBind = function (thisArg, ...argArray) {
+  return (...args2) => this.apply(thisArg, argArray.concat(args2));
+};
+
 ```
 
 ## curry
 
 ```js
+function add(a, b, c) {
+  return a + b + c;
+}
+
+function curry(func) {
+  return function curried(...args) {
+    if (args.length >= func.length) {
+      return func.apply(this, args);
+    }
+    return curried.bind(this, ...args);
+  };
+}
+
+const curriedAdd = curry(add);
+console.log(curriedAdd(2)(3, 4));
+console.log(curriedAdd(2)(4)(4));
+console.log(curriedAdd(2,3,4));
 ```
 
 ## Promise.all
