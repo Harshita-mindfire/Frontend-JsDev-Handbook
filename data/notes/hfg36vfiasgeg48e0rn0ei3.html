@@ -1,0 +1,18 @@
+<h1 id="dotenv">Dotenv<a aria-hidden="true" class="anchor-heading icon-link" href="#dotenv"></a></h1>
+<h2 id="usage">Usage<a aria-hidden="true" class="anchor-heading icon-link" href="#usage"></a></h2>
+<ul>
+<li>env file</li>
+</ul>
+<pre class="language-env"><code class="language-env">PORT=3000
+</code></pre>
+<ul>
+<li>import dependency</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> dotenv <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'dotenv'</span><span class="token punctuation">)</span>
+dotenv<span class="token punctuation">.</span><span class="token method function property-access">config</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token literal-property property">path</span><span class="token operator">:</span> <span class="token string">'./conf/dummy.env'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>usage</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> port <span class="token operator">=</span> process<span class="token punctuation">.</span><span class="token property-access">env</span><span class="token punctuation">.</span><span class="token constant">PORT</span> <span class="token operator">||</span> <span class="token number">3000</span>
+</code></pre>
