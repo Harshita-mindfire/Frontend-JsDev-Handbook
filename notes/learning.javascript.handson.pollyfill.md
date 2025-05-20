@@ -113,6 +113,12 @@ console.log(curriedAdd(2, 7)(6, 8, 9)());
 
 ## Promise.all
 
+Can also be attempted with try catch. I have added in .then below so that I can remember that await is safer than .then when we try to resolve non promise values like 42. 
+- promise.then(...)  assumes that promise is already a proper Promise (or at least a thenable). If it’s not, you'll get an error. So if I had not wrapped promise with `Promise.resolve(promise).then` in below code, p1 would end up throwing error: ❌ TypeError: val.then is not a function.
+
+- await automatically wraps non-promises with Promise.resolve()
+
+
 ```js
 function promiseAll(iterable) {
   return new Promise((resolve, reject) => {
@@ -154,6 +160,18 @@ func();
 ## Promise.race
 
 ```js
+async function PromiseRace(promises) {
+  return new Promise((resolve, reject) => {
+    promises.forEach(async (promise, i) => {
+      try {
+        const res = await promise;
+        resolve(res);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  });
+}
 ```
 
 ## Promise.any
