@@ -114,28 +114,41 @@ console.log(curriedAdd(2, 7)(6, 8, 9)());
 ## Promise.all
 
 ```js
-const p1 = new Promise((resolve) => setTimeout(() => resolve(1), 1000));
-const p2 = new Promise((resolve) => setTimeout(() => resolve(12), 1000));
+function promiseAll(iterable) {
+  return new Promise((resolve, reject) => {
+    if (!iterable.length) return resolve([]);
+    const result = [];
+    let totalResolved = 0;
 
-Object.prototype.myAll = function (arr) {
-    const promiseValues = [];
-    return new Promise((resolve, reject) => {
-      let totalResolved = 0;
-      arr.forEach((promise, index) => {
-        return Promise.resolve(promise)
-          .then((val) => {
-            promiseValues[index] = val;
-            totalResolved++;
-            if (totalResolved === arr.length) {
-              resolve(promiseValues);
-            }
-          })
-          .catch((err) => reject(err));
-      });
+    iterable.forEach((promise, i) => {
+      Promise.resolve(promise)
+        .then((val) => {
+          result[i] = val;
+          totalResolved++;
+          if (totalResolved === iterable.length) resolve(result);
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
-  };
+  });
+}
+// Resolved example.
+const p0 = Promise.resolve(3);
+const p1 = 42;
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("foo");
+  }, 100);
+});
 
-  Promise.myAll([p1, p2, p3]).then(console.log).catch(console.log);
+const func = async () => {
+  const resp = await promiseAll([p0, p1, p2]);
+
+  console.log(resp);
+};
+
+func();
 ```
 
 ## Promise.race
