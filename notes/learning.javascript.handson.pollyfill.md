@@ -47,6 +47,28 @@ console.log(curriedAdd(2)(4)(4));
 console.log(curriedAdd(2,3,4));
 ```
 
+## curry with toPrimitive
+
+```js
+function curry(func) {
+  return function interim(...args) {
+    const fn = interim.bind(this, ...args);
+    fn[Symbol.toPrimitive] = () => func.apply(this, args);
+    return fn;
+  };
+}
+
+function multiply(...numbers) {
+  return numbers.reduce((a, b) => a * b, 1);
+}
+const curriedMultiply = curry(multiply);
+const multiplyByThree = curriedMultiply(3);
+const multiplyByFifteen = multiplyByThree(5);
+console.log(multiplyByFifteen);
+
+
+```
+
 ## Promise.all
 
 ```js
