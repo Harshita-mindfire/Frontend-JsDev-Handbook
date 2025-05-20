@@ -91,14 +91,97 @@ Object.prototype.myAll = function (arr) {
 ## Array.map
 
 ```js
+Array.prototype.myMap = function (cb, thisArg) {
+  const len = this.length;
+  const results = new Array(len);
+  for (let i = 0; i < len; i++) {
+    // Ignore index if value is not defined for index (e.g. in sparse arrays).
+    if (Object.hasOwn(this, i))
+      results[i] = cb.call(thisArg ?? this, this[i], i, this);
+  }
+  return results;
+};
+
+const res = [1, 2, 3, , 4].myMap((i) => i);
+console.log(res);
+
+
 ```
 
 ## Array.filter
 
 ```js
+Array.prototype.myFilter = function (cb, thisArg) {
+  const length = this.length;
+  if (!length) return [];
+  const results = [];
+  for (let i = 0; i < length; i++) {
+    if (Object.hasOwn(this, i) && cb.call(thisArg ?? this, this[i], i, this)) {
+      results.push(this[i]);
+    }
+  }
+  return results;
+};
+
+[1, 2, 3, 4].myFilter((value) => value % 2 == 0);
+const res = [1, 2, 3, 4].myFilter((value) => value < 3);
+console.log(res);
+
+
 ```
 
 ## Array.reduce
+- Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+
+In reduce the callback fn is called with these args
+- accumukator
+- current value
+- index
+- array
+
 
 ```js
+Array.prototype.myReduce = function (callbackFn, initialValue) {
+  const len = this.length;
+  const noInitialValue = initialValue === undefined;
+  if (len === 0 && noInitialValue)
+    return new TypeError("Reduce of empty array with no initial value");
+
+  let acc = noInitialValue ? this[0] : initialValue;
+  const startingIndex = noInitialValue ? 1 : 0;
+  for (let i = startingIndex; i < len; i++) {
+    if (Object.hasOwn(this, i)) {
+      acc = callbackFn(acc, this[i], i, this);
+    }
+  }
+  return acc;
+};
+
+[1, 2, 3].myReduce((prev, curr) => prev + curr, 0);
+const res = [1, 2, 3].myReduce((prev, curr) => prev + curr, 4);
+console.log(res);
+```
+
+## lodash get
+
+```js
+function get(objectParam, pathParam, defaultValue) {
+  const paths = Array.isArray(pathParam) ? pathParam : pathParam.split(".");
+  let result = { ...objectParam };
+  for (let i = 0; i < paths.length; i++) {
+    if (result === undefined) {
+      return defaultValue;
+    } else {
+      result =
+        typeof result === "object" &&
+        result !== null &&
+        result[paths[i]] !== undefined
+          ? result[paths[i]]
+          : defaultValue;
+    }
+  }
+  return result;
+}
+
+
 ```

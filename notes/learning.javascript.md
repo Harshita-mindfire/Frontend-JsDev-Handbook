@@ -318,6 +318,9 @@ That leads to two important issues:
 
 ### reduce
 
+[[Reduce pollyfill | learning.javascript.handson.pollyfill#array.reduce]]
+
+
 - This method has the following syntax — reduce(callbackFn, initialValue) where initialValue is an optional initial value used. If this parameter is skipped, it's assumed to be the first value of the array.
 - if we are not returning anything from the callback functions here, the function returns undefined implicitly.
 - if the initial value is not supplied it defaults to the first item of the array
@@ -335,6 +338,24 @@ That leads to two important issues:
 // 0,1
 // undefined, 2
 // undefined, 3
+```
+
+#### Edge cases
+```js
+const getMax = (a, b) => Math.max(a, b);
+
+// callback is invoked for each element in the array starting at index 0
+[1, 100].reduce(getMax, 50); // 100
+[50].reduce(getMax, 10); // 50
+
+// callback is invoked once for element at index 1
+[1, 100].reduce(getMax); // 100
+
+// callback is not invoked
+[50].reduce(getMax); // 50
+[].reduce(getMax, 1); // 1
+
+[].reduce(getMax); // TypeError
 ```
 
 ```JS
