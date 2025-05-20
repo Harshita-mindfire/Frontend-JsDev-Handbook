@@ -69,6 +69,48 @@ console.log(multiplyByFifteen);
 
 ```
 
+## curry 4
+```js
+//add(1)(2)(3)…(n)() or add(1,2....n)(3,4....n)()
+
+function add(...args) {
+  return function (...args2) {
+    if (args2.length === 0) {
+      return args.reduce((a, b) => a + b, 0);
+    }
+    return add.apply(this, args.concat(args2));
+  };
+}
+
+console.log(add(1)(2)(3)(4)());
+
+```
+
+- another variant
+
+```js
+//curry(add)
+
+
+function add(...num) {
+  return num.reduce((a, b) => a + b, 0);
+}
+
+function curry(func) {
+  return function curried(...args) {
+    return (...args2) => {
+      if (args2.length == 0) {
+        return func.apply(this, args);
+      }
+      return curried.apply(this, args.concat(args2));
+    };
+  };
+}
+
+const curriedAdd = curry(add);
+console.log(curriedAdd(2, 7)(6, 8, 9)());
+```
+
 ## Promise.all
 
 ```js
