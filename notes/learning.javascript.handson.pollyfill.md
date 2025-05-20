@@ -122,7 +122,7 @@ Object.prototype.myAll = function (arr) {
     return new Promise((resolve, reject) => {
       let totalResolved = 0;
       arr.forEach((promise, index) => {
-        return promise
+        return Promise.resolve(promise)
           .then((val) => {
             promiseValues[index] = val;
             totalResolved++;
