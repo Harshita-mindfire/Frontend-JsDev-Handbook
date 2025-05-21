@@ -183,7 +183,7 @@ function promiseAny(iterable) {
   return new Promise((resolve, reject) => {
     if (iterable.length === 0)
       return reject(new AggregateError([], "empty promises array passed"));
-    iterable.forEach((promise, i) => {
+    Array.from(iterable).forEach((promise, i) => {
       Promise.resolve(promise)
         .then((val) => {
           resolve(val);
@@ -202,6 +202,36 @@ function promiseAny(iterable) {
 
 ## Promise.allSettled
 ```js
+ function promiseAllSettled(iterable) {
+  const result = [];
+  let settledCount = 0;
+  return new Promise((resolve, reject) => {
+    if (iterable.length === 0) return resolve([]);
+    iterable.forEach((promise, i) => {
+      Promise.resolve(promise)
+        .then((value) => {
+          result[i] = {
+            status: "fulfilled",
+            value,
+          };
+          settledCount++;
+        })
+        .catch((reason) => {
+          result[i] = {
+            status: "rejected",
+            reason,
+          };
+          settledCount++;
+        })
+        .finally(() => {
+          if (settledCount === iterable.length) {
+            resolve(result);
+          }
+        });
+    });
+  });
+}
+
 ```
 
 ## Array.map
