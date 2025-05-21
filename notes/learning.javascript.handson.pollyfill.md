@@ -23,6 +23,16 @@ function debounce(func, wait = 0) {
 ## Throttle
 
 ```js
+function throttle(func, wait = 0) {
+  let flag = true;
+  return function (...args) {
+    if (flag) {
+      setTimeout(() => (flag = true), wait);
+      func.apply(this, args);
+      flag = false;
+    }
+  };
+}
 ```
 
 ## Bind
