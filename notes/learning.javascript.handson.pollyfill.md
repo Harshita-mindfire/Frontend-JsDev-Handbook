@@ -177,6 +177,27 @@ async function PromiseRace(promises) {
 ## Promise.any
 
 ```js
+function promiseAny(iterable) {
+  let totalRejected = 0;
+  const errors = [];
+  return new Promise((resolve, reject) => {
+    if (iterable.length === 0)
+      return reject(new AggregateError([], "empty promises array passed"));
+    iterable.forEach((promise, i) => {
+      Promise.resolve(promise)
+        .then((val) => {
+          resolve(val);
+        })
+        .catch((reason) => {
+          totalRejected++;
+          errors[i] = reason;
+          if (totalRejected === iterable.length) {
+            reject(new AggregateError(errors, "All promises rejected"));
+          }
+        });
+    });
+  });
+}
 ```
 
 ## Promise.allSettled
