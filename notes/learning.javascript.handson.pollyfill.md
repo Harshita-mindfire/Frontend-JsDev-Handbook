@@ -9,6 +9,15 @@ created: 1745217937082
 ## Debounce
 
 ```js
+function debounce(func, wait = 0) {
+  let timeoutId = null;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+}
 ```
 
 ## Throttle
