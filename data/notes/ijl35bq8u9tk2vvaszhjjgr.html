@@ -1,0 +1,29 @@
+<h1 id="global-state-management">Global State Management<a aria-hidden="true" class="anchor-heading icon-link" href="#global-state-management"></a></h1>
+<h2 id="context">Context<a aria-hidden="true" class="anchor-heading icon-link" href="#context"></a></h2>
+<p>Context lets a component provide some information to the entire tree below it.</p>
+<ul>
+<li>To pass context:
+<ul>
+<li>Create and export it with export const MyContext = createContext(defaultValue).</li>
+<li>Pass it to the useContext(MyContext) Hook to read it in any child component, no matter how deep.</li>
+<li>Wrap children into &#x3C;MyContext.Provider value={...}> to provide it from a parent.</li>
+</ul>
+</li>
+</ul>
+<p>Context.ts</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> createContext <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token maybe-class-name">ImageContext</span> <span class="token operator">=</span> <span class="token function">createContext</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>App.ts</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> <span class="token punctuation">[</span>isLarge<span class="token punctuation">,</span> setIsLarge<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> imageSize <span class="token operator">=</span> isLarge <span class="token operator">?</span> <span class="token number">150</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">;</span>
+
+<span class="token operator">&#x3C;</span><span class="token maybe-class-name">ImageContext</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">Provider</span></span> value<span class="token operator">=</span><span class="token punctuation">{</span>imageSize<span class="token punctuation">}</span><span class="token operator">></span>
+    <span class="token punctuation">{</span>props<span class="token punctuation">.</span><span class="token property-access">children</span><span class="token punctuation">}</span>
+<span class="token operator">&#x3C;</span><span class="token operator">/</span><span class="token maybe-class-name">ImageContext</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">Provider</span></span><span class="token operator">></span>
+</code></pre>
+<p>Someapp.ts (considering very low in the tree)</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> imageSize <span class="token operator">=</span> <span class="token function">useContext</span><span class="token punctuation">(</span><span class="token maybe-class-name">ImageContext</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&#x3C;</span>img width <span class="token operator">=</span> <span class="token punctuation">{</span>imageSize<span class="token punctuation">}</span> height <span class="token operator">=</span> <span class="token punctuation">{</span>imageSize<span class="token punctuation">}</span><span class="token operator">></span>
+</code></pre>
