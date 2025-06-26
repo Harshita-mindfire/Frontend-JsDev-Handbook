@@ -5,7 +5,8 @@ desc: ''
 updated: 1750932276890
 created: 1750932276890
 ---
-Routing
+
+Reference repo: https://github.com/Harshita-mindfire/next-js-learn
 
 - File system based routing.
 
