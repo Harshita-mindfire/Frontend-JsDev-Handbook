@@ -60,3 +60,6 @@ export default ProductDetails;
 ![](/assets/images/routes.png)
 
 ### Catch all segments
+
+- [...slug]
+    - page.tsx
