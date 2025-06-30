@@ -61,6 +61,61 @@ export default ProductDetails;
 ![](/assets/images/routes.png)
 
 ### Catch all segments
-
-- [...slug]
+```figma
+- docs
+  - [...slug]
     - page.tsx
+```
+
+The catch all route (...slug) matches any route that has docs in it.
+- /docs/f1/c1
+- docs/f2/c1
+- docs/f2/c1/exa1
+
+The route matches for all the above combinations. 
+To access different segments, gather params which is a Promise that returns and array of string.
+
+- To make the slugs optional, wrap the slug in double square brackets "[[]]"
+
+For example if you would try to access just the /docs, it would result in 404. To use the same page.tsx inside slug and also to make slugs optional, we can do the following:
+```figma
+- docs
+  - [[...slug]]
+    - page.tsx
+```
+
+## custom 404
+- not-found.tsx
+```tsx 
+export default function NotFound() {
+  return <h1> custom 404 page <>/h1>
+}
+```
+The file with this route gets called automatically on 404. We can also explicitally call this as a func as well.
+
+**NOTE**: **NotFound component does not accept any props**
+Use `usePathname` from `next/navigation` hook to access the url segments.
+
+```tsx
+const pathname = usePathname()
+
+```
+
+**NOTE** _To use usePathname() hook, the component must be a client component, hence add "use-client" directive at the top of the page._
+
+
+
+Let's say we want to call 404 page if the review id is > 100 (eg: /products/1/reviews/1000 )
+
+```tsx
+import {notFound } from "next/navigation;
+
+export default async function ProductReview({params} : {params: Promise<{productId: string; reviewId: string}>}) {
+  const { reviewId} = await params;
+  if(parseInt(reviewId) > 100) {
+    notFound()
+  }
+  return <h1> Review no {reviewId} of {productId} </h1>
+} 
+```
+
