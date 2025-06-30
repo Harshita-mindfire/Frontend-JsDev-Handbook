@@ -20,9 +20,9 @@ Reference repo: https://github.com/Harshita-mindfire/next-js-learn
 - Every page in app router receives route parameters through params prop. The type of params is a promise that resolves to an obj containing dynamic segments as key value pairs.
 
 
-When these conventions are followed, routethe file automatically becomes available as a route.
+When these conventions are followed, route file automatically becomes available as a route.
 
-- similarly for tested routes: 
+- similarly for nested routes: 
 
 ![](/assets/images/nested-routes.png)
 
