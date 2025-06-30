@@ -119,3 +119,28 @@ export default async function ProductReview({params} : {params: Promise<{product
 } 
 ```
 
+
+## Private folders
+
+- starts with underscore _
+- the folder and its sub folders are excluded from routing.
+
+### uses
+- separating UI logic from routing logic
+- consistent way to organize internal files.
+
+## Route groups
+- logically organize our routes and project files without impacting the URL structure.
+- only way to share layouts between routes without affecting the URL.
+
+_the folder wrapped in () tells nextjs to use this as an organizational tool only and exclude it from the url. Now the urls inside it are still accessed with http://localhost:3000/register and not /auth/register_
+
+```figma
+- (auth) 
+  - register
+    - page.tsx
+  - login
+    - page.tsx
+  - forgotpassword
+    - page.tsx
+```
