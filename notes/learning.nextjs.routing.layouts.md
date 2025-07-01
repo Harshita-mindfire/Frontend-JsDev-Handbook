@@ -53,3 +53,9 @@ export default function RootLayout({
 ```
 
 ## Nested Layout
+layout.tsx inside a route is specific for that route.
+
+
+## Multiple root layouts
+
+
