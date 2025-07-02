@@ -77,6 +77,8 @@ params is a promise that resolves to an ob j containing the dynamic route parame
 ## searchParams:
 - promise that resolves to an obj containing query params (like filters and sorting)
 
+Below is an example through server component.
+
 
 ```tsx
 import Link from "next/link";
@@ -105,5 +107,38 @@ const ArticleDetails = async ({
 
 export default ArticleDetails;
 
+```
 
+- await params and search params is only possible in server components. Next.js Client Components themselves cannot be defined as async functions, meaning you cannot directly use await at the top level of a Client Component's render function. This is a fundamental distinction between Server Components and Client Components in Next.js.
+However, this does not mean you cannot use async/await within Client Components at all. You can use async/await within. for example in useEffect/eventhandlers etc.
+
+```tsx
+"use client";
+
+import Link from "next/link";
+import React from "react";
+import { use } from "react";
+
+const ArticleDetails = ({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ articleId: string }>;
+  searchParams: Promise<{ lang: string }>;
+}) => {
+  const { articleId } = use(params);
+  const { lang } = use(searchParams);
+  return (
+    <div>
+      Title: {articleId} in language {lang}
+      <div>
+        <Link href={`/articles/${articleId}?lang=en`}>Read in english</Link>
+        <Link href={`/articles/${articleId}?lang=fr`}>Read in French</Link>
+        <Link href={`/articles/${articleId}?lang=es`}>Read in Spanish</Link>
+      </div>
+    </div>
+  );
+};
+
+export default ArticleDetails;
 ```
