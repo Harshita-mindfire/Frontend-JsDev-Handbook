@@ -68,5 +68,42 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
 export default AuthLayout;
 
+```
+
+## params
+
+params is a promise that resolves to an ob j containing the dynamic route parameters (like id)
+
+## searchParams:
+- promise that resolves to an obj containing query params (like filters and sorting)
+
+
+```tsx
+import Link from "next/link";
+import React from "react";
+
+const ArticleDetails = async ({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ articleId: string }>;
+  searchParams: Promise<{ lang: string }>;
+}) => {
+  const { articleId } = await params;
+  const { lang } = await searchParams;
+  return (
+    <div>
+      Title: {articleId} in language {lang}
+      <div>
+        <Link href={`/articles/${articleId}?lang=en`}>Read in english</Link>
+        <Link href={`/articles/${articleId}?lang=fr`}>Read in French</Link>
+        <Link href={`/articles/${articleId}?lang=es`}>Read in Spanish</Link>
+      </div>
+    </div>
+  );
+};
+
+export default ArticleDetails;
+
 
 ```
