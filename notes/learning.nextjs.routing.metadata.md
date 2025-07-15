@@ -8,7 +8,7 @@ created: 1751368289513
 # Routing metadata
 
 - metadata api is powerful feature that lets us define metadata for each page(good for SEO)
-- 2 wats to handle metadata in layout.tsx or page.tsx files.
+- 2 ways to handle metadata in layout.tsx or page.tsx files.
   - static metadata object
   - dynamic generateMetadata function
 
