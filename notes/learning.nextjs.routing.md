@@ -17,7 +17,7 @@ Reference repo: https://github.com/Harshita-mindfire/next-js-learn
 1. Routes files must be named either page.js or page.tsx
 1. 404 routes are handled by default.
 
-- Every page in app router receives route parameters through params prop. The type of params is a promise that resolves to an obj containing dynamic segments as key value pairs.
+- Every page in app router receives route parameters through [[params | learning.nextjs.routing.Link#params]] prop. The type of params is a promise that resolves to an obj containing dynamic segments as key value pairs.
 
 
 When these conventions are followed, route file automatically becomes available as a route.
@@ -61,25 +61,31 @@ export default ProductDetails;
 ![](/assets/images/routes.png)
 
 ### Catch all segments
+
+- Dynamic Segments can be extended to catch-all subsequent segments by adding an ellipsis inside the brackets [...segmentName].
+
 ```figma
-- docs
+- shop
   - [...slug]
     - page.tsx
 ```
 
-The catch all route (...slug) matches any route that has docs in it.
-- /docs/f1/c1
-- docs/f2/c1
-- docs/f2/c1/exa1
 
-The route matches for all the above combinations. 
-To access different segments, gather params which is a Promise that returns and array of string.
+
+For example, /shop/[...slug].js will match /shop/clothes, but also /shop/clothes/tops, /shop/clothes/tops/t-shirts, and so on.
+
+Route	Example URL	params
+/shop/[...slug].js	/shop/a	{ slug: ['a'] }
+/shop/[...slug].js	/shop/a/b	{ slug: ['a', 'b'] }
+/shop/[...slug].js	/shop/a/b/c	{ slug: ['a', 'b', 'c'] }
 
 - To make the slugs optional, wrap the slug in double square brackets "[[]]"
 
-For example if you would try to access just the /docs, it would result in 404. To use the same page.tsx inside slug and also to make slugs optional, we can do the following:
+/shop/[[...slug]].js	/shop	{ slug: undefined }
+
+For example if you would try to access just the /shop, it would result in 404. To use the same page.tsx inside slug and also to make slugs optional, we can do the following:
 ```figma
-- docs
+- shop
   - [[...slug]]
     - page.tsx
 ```

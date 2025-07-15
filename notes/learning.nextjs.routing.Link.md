@@ -6,7 +6,7 @@ updated: 1751453456962
 created: 1751453456962
 ---
 - Nextjs provide `<Link>` component for client side navigation.
-- inherits HTML's <a> tag.
+- inherits HTML's `<a>` tag.
 - imported from "next/link"
 
 ```tsx
@@ -23,11 +23,9 @@ const Home = () => {
 };
 
 export default Home;
-
-
 ```
 
-- **replace** attribute : replaces overrides the current history entry instead of adding a new one. <Link href="" replace>
+- **replace** attribute : replaces overrides the current history entry instead of adding a new one `<Link href="" replace>`.
 
 ## Styling Links
 
@@ -106,7 +104,6 @@ const ArticleDetails = async ({
 };
 
 export default ArticleDetails;
-
 ```
 
 - await params and search params is only possible in server components. Next.js Client Components themselves cannot be defined as async functions, meaning you cannot directly use await at the top level of a Client Component's render function. This is a fundamental distinction between Server Components and Client Components in Next.js.
