@@ -139,3 +139,40 @@ const ArticleDetails = ({
 
 export default ArticleDetails;
 ```
+
+
+## Navigating Programmatically
+
+- **useRouter**
+- **redirect**
+
+### useRouter
+
+```tsx
+"use client";
+import { useRouter, redirect } from "next/navigation";
+import React, { use } from "react";
+
+const OrderProduct = ({
+  searchParams,
+}: {
+  searchParams: Promise<{ country: string }>;
+}) => {
+  const router = useRouter();
+  const { country } = use(searchParams);
+  console.log("country", country);
+  const handleClick = () => {
+    router.push("/");
+  };
+  return (
+    <div>
+      <button onClick={handleClick}>Order Product</button>
+      {country === "in" ? redirect("/") : redirect("/about")}
+    </div>
+  );
+};
+
+export default OrderProduct;
+
+
+```
