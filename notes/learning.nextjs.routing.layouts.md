@@ -55,7 +55,32 @@ export default function RootLayout({
 ## Nested Layout
 layout.tsx inside a route is specific for that route.
 
+## Multiple root layout.
+If we want let say 2 of our route to have one layout and all the others to have another, we would require multiple root layouts,
+for this, we take help of router groups.
 
-## Multiple root layouts
+Eg: we need only footer for login and register route, for customers, we want both header and footer.
+
+```figma
+- app
+  - (auth)
+    - login
+      - page.tsx
+    - register
+      - page.tsx
+    layout.tsx //AuthRootLayout
+  - (marketing)
+    - customers
+      - page.tsx
+    - suppliers
+      - page.tsx
+    - page.tsx //global entry page
+    - layout.tsx //MarketingRootLayout
+```
+
+
+
+## Handling errors
+- ![][[learning.nextjs.routing.error-handling#handling-errors-in-layouts]]
 
 

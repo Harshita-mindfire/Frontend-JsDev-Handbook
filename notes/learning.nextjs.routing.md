@@ -138,6 +138,7 @@ export default async function ProductReview({params} : {params: Promise<{product
 ## Route groups
 - logically organize our routes and project files without impacting the URL structure.
 - only way to share layouts between routes without affecting the URL.
+- also helps us to apply routes selectively to specific parts of app(multiple root layout)
 
 _the folder wrapped in () tells nextjs to use this as an organizational tool only and exclude it from the url. Now the urls inside it are still accessed with http://localhost:3000/register and not /auth/register_
 
