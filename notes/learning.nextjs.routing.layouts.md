@@ -81,6 +81,6 @@ Eg: we need only footer for login and register route, for customers, we want bot
 
 
 ## Handling errors
-- ![][[learning.nextjs.routing.error-handling#handling-errors-in-layouts]]
+- ![[learning.nextjs.routing.error-handling#handling-errors-in-layouts]]
 
 
