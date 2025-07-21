@@ -6,7 +6,6 @@ updated: 1753097795738
 created: 1753097795738
 ---
 
-![intercepting routes](/assets/images/intercepting-routes.png)
 - advanced routing mechanism that allows you to load a route from another part of application within current layout.
 - particularly useful when you want to display new content while keeping ypur user in same context.
 - let you show alternate UI by preserving context but defaults to the standard UI on direct page loads.
@@ -54,3 +53,6 @@ eg:
 <Link href={"/f1/f2"}>F2 </Link>
 <Link href={"/f3"}>F3 </Link>
 ```
+
+example:
+![intercepting routes](/assets/images/intercepting-routes.png)
