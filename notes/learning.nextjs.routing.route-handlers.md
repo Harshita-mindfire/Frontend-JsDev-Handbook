@@ -35,7 +35,7 @@ created: 1753204420955
                         |______route.ts
 ```
 
-## Examples
+### Examples
 - **contents of /app/comments/route.ts:**
 
 ```ts
@@ -67,9 +67,11 @@ export async function POST(request: Request) {
 - **contents of /app/comments/[id]/route.ts**
 
 ```ts
+import { NextRequest } from "next/server";
+
 // dynamic route handle, get comment with a specific id
 export async function GET(
-  _request: Request,
+  _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
@@ -79,7 +81,7 @@ export async function GET(
 
 // patch
 export async function PATCH(
-  request: Request,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const body = await request.json();
@@ -91,7 +93,7 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  _request: Request,
+  _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
@@ -101,3 +103,47 @@ export async function DELETE(
   return Response.json(deletedData);
 }
 ```
+
+## URL Query Params
+
+Fetching the params after ?
+
+```ts
+import { NextRequest } from "next/server";
+import { comments } from "./data";
+
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const query = searchParams.get("query");
+  const filteredComments = query
+    ? comments.filter((comment) => comment.text.includes(query))
+    : comments;
+  return Response.json(filteredComments);
+}
+```
+
+## Headers
+- HTTP headers represents the metadata associated with req and response
+  - **Request Headers**: sent by client(like web browser) to server. Sends essential info about request to servers. eg: accept, user-agent, authorization etc.
+
+  - **Response Headers**: sent back from server to client. 
+      provide info about the server and the data being sent in response.
+      eg: "Content-Type",
+
+### Examples
+
+```ts
+export async function GET(request: NextRequest) {
+  const headerData = await headers();
+  const token = headerData.get("Authorization");
+  console.log("token", token);
+  const query = searchParams.get("query");
+  return new Response("<h1> Hi</h1>", {
+    headers: {
+      "Content-Type": "text/html",
+    },
+  });
+}
+```
+
+## Cookies
