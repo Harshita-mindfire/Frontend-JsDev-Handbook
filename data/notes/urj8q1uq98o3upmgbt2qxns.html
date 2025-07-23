@@ -1,0 +1,36 @@
+<h1 id="troubleshoot">Troubleshoot<a aria-hidden="true" class="anchor-heading icon-link" href="#troubleshoot"></a></h1>
+<h3 id="kill-a-port-in-windows">kill a port in windows<a aria-hidden="true" class="anchor-heading icon-link" href="#kill-a-port-in-windows"></a></h3>
+<pre class="language-bash"><code class="language-bash">
+<span class="token function">netstat</span> -ano <span class="token operator">|</span> findstr :3000
+
+taskkill /PID <span class="token operator">&#x3C;</span>PID<span class="token operator">></span> /F
+</code></pre>
+<h3 id="npm-connection-refused-error">npm connection refused error<a aria-hidden="true" class="anchor-heading icon-link" href="#npm-connection-refused-error"></a></h3>
+<pre><code>npm config set proxy null
+npm config set https-proxy null
+npm config set registry http://registry.npmjs.org/
+</code></pre>
+<h3 id="prettier-not-working-on-save">prettier not working on save?<a aria-hidden="true" class="anchor-heading icon-link" href="#prettier-not-working-on-save"></a></h3>
+<ul>
+<li>go to settings: > cmd+shidt+P/Ctrl + Shift+P > Preferences: Open Settings (UI) > write on save in search bar, check Editor: Format on Save</li>
+</ul>
+<h3 id="kill-a-port-in-mac">kill a port in mac<a aria-hidden="true" class="anchor-heading icon-link" href="#kill-a-port-in-mac"></a></h3>
+<ul>
+<li>
+<p>Find: <code>sudo lsof -i :3000</code></p>
+</li>
+<li>
+<p>Kill: <code>kill -9 &#x3C;PID></code></p>
+</li>
+</ul>
+<h3 id="get-ip-add-on-mac">get ip add on mac<a aria-hidden="true" class="anchor-heading icon-link" href="#get-ip-add-on-mac"></a></h3>
+<p><strong>Internal IP</strong></p>
+<ul>
+<li>ipconfig getifaddr en0 </li>
+</ul>
+<p><strong>Public IP</strong></p>
+<ul>
+<li>type what is my ip address in google and get it.</li>
+</ul>
+<h2 id="install-java-in-mac0s">install java in mac0s<a aria-hidden="true" class="anchor-heading icon-link" href="#install-java-in-mac0s"></a></h2>
+<p><a href="https://www.geeksforgeeks.org/how-to-install-java-on-macos/">https://www.geeksforgeeks.org/how-to-install-java-on-macos/</a></p>

@@ -1,0 +1,77 @@
+<h1 id="parallel-routes">Parallel Routes<a aria-hidden="true" class="anchor-heading icon-link" href="#parallel-routes"></a></h1>
+<ul>
+<li>Parallel routes allow you to <strong>render multiple pages in parallel under different named slots</strong> (routes) within a single layout</li>
+<li>They’re used when you want to render multiple views at once that are independent of each other but share layout structure.</li>
+<li>They’re defined in the app/ directory using the <a title="Private" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank" class="private">@slot (Private)</a> naming convention.</li>
+<li><strong>slots are received as props in the layout</strong>.</li>
+<li>the children prop is also a slot by default.</li>
+</ul>
+<pre class="language-graphql"><code class="language-graphql"><span class="token property">app</span>/
+├── <span class="token property">layout</span>.<span class="token property">js</span>
+├── <span class="token directive function">@analytics</span>/
+│   └── <span class="token property">page</span>.<span class="token property">js</span>
+├── <span class="token directive function">@main</span>/
+│   └── <span class="token property">page</span>.<span class="token property">js</span>
+
+</code></pre>
+<p>if you're building:</p>
+<ul>
+<li>Modal-based routing</li>
+<li>Split-view dashboards</li>
+<li>Multi-panel layouts with deep linking</li>
+<li>Nested or partially refreshing UIs</li>
+</ul>
+<p>then parallel routes are a cleaner, more powerful tool for structuring and scaling the app.</p>
+<div class="table-responsive">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Normal Component</th><th>Parallel Routes</th></tr></thead><tbody><tr><td>Rendering based on prop changes</td><td>✅</td><td>✅</td></tr><tr><td>Independent navigation</td><td>❌</td><td>✅</td></tr><tr><td>Layout preservation on route change</td><td>❌</td><td>✅</td></tr><tr><td>Native streaming support</td><td>❌</td><td>✅</td></tr><tr><td>Code-splitting per UI section</td><td>🟡 Manual</td><td>✅ Auto</td></tr><tr><td>Ideal for modals, tabs, sidebars</td><td>❌ Workaround</td><td>✅ Cleanly</td></tr></tbody></table></div>
+<h2 id="doubts-clarification">Doubts clarification<a aria-hidden="true" class="anchor-heading icon-link" href="#doubts-clarification"></a></h2>
+<p>🧩 1. Rendering Independence vs. Navigation Independence
+You're right:</p>
+<p>✅ Normal components won’t re-render if props/state don’t change.</p>
+<p>BUT:</p>
+<p>❌ Normal components live in the same route, so any route change will re-trigger the layout and all child components will re-render (or reload data, if they use useEffect, useRouter, or fetch() in getServerSideProps).</p>
+<p>✅ Parallel routes let you navigate just one slot (e.g., side panel or modal) without re-rendering or affecting the rest of the page.</p>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/ldoe4gpzz0t3vcch4lrn2bh">Intercepted Routes</a></li>
+</ol>
