@@ -133,6 +133,7 @@ export async function GET(request: NextRequest) {
 ### Examples
 
 ```ts
+import { headers } from "next/headers"
 export async function GET(request: NextRequest) {
   const headerData = await headers();
   const token = headerData.get("Authorization");
