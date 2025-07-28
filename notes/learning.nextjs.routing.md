@@ -75,9 +75,9 @@ export default ProductDetails;
 For example, /shop/[...slug].js will match /shop/clothes, but also /shop/clothes/tops, /shop/clothes/tops/t-shirts, and so on.
 
 Route	Example URL	params
-/shop/[...slug].js	/shop/a	{ slug: ['a'] }
-/shop/[...slug].js	/shop/a/b	{ slug: ['a', 'b'] }
-/shop/[...slug].js	/shop/a/b/c	{ slug: ['a', 'b', 'c'] }
+- /shop/[...slug].js	/shop/a	{ slug: ['a'] }
+- /shop/[...slug].js	/shop/a/b	{ slug: ['a', 'b'] }
+- /shop/[...slug].js	/shop/a/b/c	{ slug: ['a', 'b', 'c'] }
 
 - To make the slugs optional, wrap the slug in double square brackets "[[]]"
 

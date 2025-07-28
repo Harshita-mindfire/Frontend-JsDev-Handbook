@@ -20,7 +20,7 @@ created: 1753204420955
 - **the route.ts file in the same route segment level as page.tsx will result in a conflict and page.tsx will not be served. Instead the route handler handles the request**
 
 - the Handler functions takes 2 parameters
-    - request object => request: Request 
+    - request object => request: NextRequest 
     - context object containing route params => {params} : {params: Promise<{id: string}>}
 
 
