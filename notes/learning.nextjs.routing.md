@@ -81,7 +81,7 @@ Route	Example URL	params
 
 - To make the slugs optional, wrap the slug in double square brackets "[[]]"
 
-/shop/[[...slug]].js	/shop	{ slug: undefined }
+- `/shop/[[...slug]].js`	/shop	{ slug: undefined }
 
 For example if you would try to access just the /shop, it would result in 404. To use the same page.tsx inside slug and also to make slugs optional, we can do the following:
 ```figma

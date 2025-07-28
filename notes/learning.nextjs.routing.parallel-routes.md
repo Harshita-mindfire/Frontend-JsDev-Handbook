@@ -7,7 +7,7 @@ created: 1753090957802
 ---
 - Parallel routes allow you to **render multiple pages in parallel under different named slots** (routes) within a single layout
 - They’re used when you want to render multiple views at once that are independent of each other but share layout structure.
-- They’re defined in the app/ directory using the @slot naming convention.
+- They’re defined in the app/ directory using the `@slot` naming convention.
 - **slots are received as props in the layout**.
 - the children prop is also a slot by default.
 
@@ -26,6 +26,17 @@ if you're building:
 - Split-view dashboards
 - Multi-panel layouts with deep linking
 - Nested or partially refreshing UIs
+
+## Important features
+- **independent route handling**
+    - each slot can have its own loading, error states. This is useful in scenarios where different sections of the page load at varing speed and can have different errors
+
+    ![parallel routing](/assets/images/parallel-route.png) 
+
+- **subnavigation in routes**: Each slot can function as mini application, has its own navigation and state management.
+    - users can interact, sort, filter with a slot, navigating through pages without affecting others.
+
+    ![alt text](/assets/images/sub-navigation.png)
 
 then parallel routes are a cleaner, more powerful tool for structuring and scaling the app.
 
