@@ -148,3 +148,53 @@ export async function GET(request: NextRequest) {
 ```
 
 ## Cookies
+- small piece of data that server sends to user's web browser.
+- browser can store cookies and send it back to server with future request.
+
+3 main purpose
+- managing user session (like user login and shopping cart)
+- handling personalizations(such user preferences and themes)
+- tracking (like recording and analyzing user behaviour)
+
+### Example: Setting and retrieving via headers and request
+
+```tsx
+//setting a cookie
+return new Response(JSON.stringify(comment), {
+    headers: {
+      "Set-Cookie": "theme=dark",
+    },
+  });
+```
+
+```tsx
+//retrieving cookie
+export async function GET(
+  request: NextRequest,
+) {
+  const cookies = request.cookies.get("theme");
+  console.log(cookies); // { name: 'theme', value: 'dark' }
+```
+
+### Example: setting using cookies from next/headers
+
+```tsx
+import { cookies } from "next/headers";
+
+cookieStore.set("resultsPerPage", "20");
+console.log(cookieStore.get("resultsPerPage"));
+```
+
+## redirect in route handlers
+
+```ts
+import {redirect} from "next-navigation"
+export async function GET() {
+ redirect('/api/v2/users')
+}
+```
+
+## Caching
+
+route handlers are not cached by default but you can opt for caching when using **GET** method.
+- Caching **only** works with **GET** methods. Other HTTP methods are never cached.
