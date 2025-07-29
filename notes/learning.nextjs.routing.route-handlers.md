@@ -198,3 +198,12 @@ export async function GET() {
 
 route handlers are not cached by default but you can opt for caching when using **GET** method.
 - Caching **only** works with **GET** methods. Other HTTP methods are never cached.
+
+
+## middleware
+
+- intercepts the request response cycle.
+- enables redirects, rewrites.
+- can be used to manipulate both header and cookies
+- written in src folder
+
