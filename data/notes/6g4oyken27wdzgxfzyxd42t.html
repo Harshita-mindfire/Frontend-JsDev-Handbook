@@ -1,0 +1,31 @@
+<h1 id="clone-element">Clone Element<a aria-hidden="true" class="anchor-heading icon-link" href="#clone-element"></a></h1>
+<p>clone element</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> cloneElement <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ...</span>
+<span class="token keyword">const</span> clonedElement <span class="token operator">=</span> <span class="token function">cloneElement</span><span class="token punctuation">(</span>
+  <span class="token operator">&#x3C;</span><span class="token maybe-class-name">Row</span> title<span class="token operator">=</span><span class="token string">"Cabbage"</span><span class="token operator">></span>
+    <span class="token maybe-class-name">Hello</span>
+  <span class="token operator">&#x3C;</span><span class="token operator">/</span><span class="token maybe-class-name">Row</span><span class="token operator">></span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token literal-property property">isHighlighted</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">'Goodbye'</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>clonedElement<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</code></pre>
+<p>To override the props of some React element, pass it to cloneElement with the props you want to override:</p>
+<pre class="language-jsx"><code class="language-jsx">
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> cloneElement <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ...</span>
+<span class="token keyword">const</span> clonedElement <span class="token operator">=</span> <span class="token function">cloneElement</span><span class="token punctuation">(</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Row</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Cabbage<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> <span class="token literal-property property">isHighlighted</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token maybe-class-name">Here</span><span class="token punctuation">,</span> the resulting cloned element will be <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Row</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Cabbage<span class="token punctuation">"</span></span> <span class="token attr-name">isHighlighted</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token boolean">true</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">.</span>
+</code></pre>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/Frontend-JsDev-Handbook/notes/sojbzhwx1losfnysmamz42a">Render Prop</a></li>
+</ul>

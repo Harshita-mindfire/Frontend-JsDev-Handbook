@@ -1,0 +1,86 @@
+<h1 id="accessibility">accessibility<a aria-hidden="true" class="anchor-heading icon-link" href="#accessibility"></a></h1>
+<h2 id="top-picks">Top picks<a aria-hidden="true" class="anchor-heading icon-link" href="#top-picks"></a></h2>
+<ol>
+<li>use semantic HTML. It has a lot built in capabilities like responding to focus, tab and enter.</li>
+<li>Correct heading order, h1 first then h2 etc. Don't use headings for styling purpose(use <code>&#x3C;strong></code>, css or other approaches)</li>
+<li>don't use anchor tags for buttons(like in hamburger menus). a tags without href is almost next to nothing. screen reader will read it as a normal text. If absolutely necessary, use <code>role</code> and make tab-index=0 so that this elements gets added to the tab-tree and is accessible with tab. note that tabindex=0 does not make it the first element to be accessed by tab.</li>
+</ol>
+<h3 id="aria">aria<a aria-hidden="true" class="anchor-heading icon-link" href="#aria"></a></h3>
+<ul>
+<li><strong>aria-label</strong>: used if we have an image inside hyperlink and no text. It gives elements a programmatic accessible name so that screen readers can let the user know what the element will do once interacted with.</li>
+<li><strong>aria-expanded</strong>: When a screen reader lands on an element with the attribute "aria-expanded", it announced the status as either "expanded" or "collapsed". eg: for menus.</li>
+<li><strong>aria-labelledby</strong>: for images with captions. DRY with writing alt and caption. Add aria-labelledby="id-of-element-where-caption-is-wriiten"</li>
+<li><strong>aria-hidden</strong>: aria-hidden="true" hides the element from assistive technologies.</li>
+<li><strong>aria-required</strong>: used in input field. In HTML5 this can be skipped and <code>required</code> is used.</li>
+<li><strong>role</strong>: use roles for elements that are not being used as there usual self.</li>
+</ul>
+<pre class="language-html"><code class="language-html">Q: What would screen readers announce when they encounter this button:
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>button</span> <span class="token attr-name">aria-label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Shop now<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Shop<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>button</span><span class="token punctuation">></span></span>
+
+A: only aria-label: Shop now
+</code></pre>
+<h3 id="images">images<a aria-hidden="true" class="anchor-heading icon-link" href="#images"></a></h3>
+<ul>
+<li>use alt="" for background images.</li>
+<li>always add alt tag for images added with <code>&#x3C;img></code> tag. Skipping it would result in screen reader to announce the file name. Yikes!</li>
+</ul>
+<h3 id="bypass-blocks">bypass blocks<a aria-hidden="true" class="anchor-heading icon-link" href="#bypass-blocks"></a></h3>
+<p>adding bypass blocks allows us to skip blocks while navigating site through tab.</p>
+<h2 id="navigation">navigation<a aria-hidden="true" class="anchor-heading icon-link" href="#navigation"></a></h2>
+<ul>
+<li>use correct semantics: <code>&#x3C;nav></code></li>
+<li>use ol, li and links instead of divs or aria attributes like role etc.</li>
+</ul>
+<h3 id="google-mapsiframes">google maps/iframes<a aria-hidden="true" class="anchor-heading icon-link" href="#google-mapsiframes"></a></h3>
+<ul>
+<li>whenever you have any iframe always add the title attribute.</li>
+<li>when using maps, also add the address in textual format for screen readers. </li>
+<li>some sites also provide driving directions in separate link that allows screen readers to get index of location.</li>
+</ul>
+<h3 id="contact-forms">contact forms<a aria-hidden="true" class="anchor-heading icon-link" href="#contact-forms"></a></h3>
+<ul>
+<li>have associated labels for inputs. Don't use placeholder text only for labels. good idea is to skip them completely. </li>
+<li>keep a heading above a form. Some users navigate site with headings(keyboard first, screenreaders), if the form has no heading associated with it, it might get unnoticed.</li>
+</ul>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h3</span><span class="token punctuation">></span></span> Sign in Form<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h3</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>form</span><span class="token punctuation">></span></span> ... <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>form</span><span class="token punctuation">></span></span>
+</code></pre>
+<h3 id="icons">icons<a aria-hidden="true" class="anchor-heading icon-link" href="#icons"></a></h3>
+<ul>
+<li>hide decorative icons for assistive technology by adding aria-hidden="true".</li>
+<li>for icons that have links(instagram icon), the svg is wrapped inside the anchor tag. For such cases: hide svg with aria-hidden and add meaningful aria-label to anchor tag.</li>
+</ul>
+<h3 id="links">links<a aria-hidden="true" class="anchor-heading icon-link" href="#links"></a></h3>
+<ul>
+<li>
+<p>have descriptive links. If users use screen readers and only access clickables, the link text should make sense.
+eg:</p>
+</li>
+<li>
+<p><strong>BAD</strong></p>
+<pre class="language-html"><code class="language-html">To make an appointment, click <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xyz<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>here<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span>
+</code></pre>
+</li>
+<li>
+<p><strong>GOOD</strong></p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xyz<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>make an appointment<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>a</span><span class="token punctuation">></span></span> today!
+</code></pre>
+</li>
+</ul>
+<h2 id="checklist">Checklist<a aria-hidden="true" class="anchor-heading icon-link" href="#checklist"></a></h2>
+<p>After developing an accessible website:</p>
+<ol>
+<li>Run lighthouse report in Chrome to get status.</li>
+<li>Make sure every clickable is accessible through keyboard.</li>
+<li>Run through the site using screen readers.</li>
+</ol>
+<h2 id="screen-readers">Screen readers<a aria-hidden="true" class="anchor-heading icon-link" href="#screen-readers"></a></h2>
+<ul>
+<li>If you're on a Windows machine and would like to get started with screen readers, NVDA is a great option.</li>
+<li>NVDA official site: nvaccess.org
+<blockquote>
+<p>NVDA stands for Non visual desktop access</p>
+</blockquote>
+</li>
+<li><a href="https://webaim.org/articles/nvda/">https://webaim.org/articles/nvda/</a></li>
+</ul>
