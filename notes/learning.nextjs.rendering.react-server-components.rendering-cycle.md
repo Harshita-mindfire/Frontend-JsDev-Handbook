@@ -11,32 +11,9 @@ RSC have 3 key players
 - Next js(framework)
 - React (our library)
 
-## Server rendering strategies
-- Static rendering
-- dynamic rendering
-- streaming
+- rsc loading sequence
+![alt text](/assets/images/rsc-loading-sequence.png)
 
-### Static rendering
- 
-Static rendering is a server rendering strategy where we generate HTML pages when building our application
- 
-Think of it as preparing all your content in advance - before any user visits your site
- 
-Once built, these pages can be cached by CDNs and served instantly to users
- 
-With this approach, the same pre-rendered page can be shared among different users, giving your app a significant performance boost
+- update 
+![alt text](/assets/images/rsc-update-sequence.png)
 
-**Usage**: blog post, e-commerce product listings, documentation(like the one you are currently reading, it is statically rendered.) 
-
-### How to statically render
-- default strategy in app router. all routes are automatically prepared at build time without any additional help.
-
-### Summary
- 
-Static rendering is a server rendering strategy where we generate HTML pages when building our application
- 
-Think of it as preparing all your content in advance - before any user visits your site
- 
-Once built, these pages can be cached by CDNs and served instantly to users
- 
-With this approach, the same pre-rendered page can be shared among different users, giving your app a significant performance boost

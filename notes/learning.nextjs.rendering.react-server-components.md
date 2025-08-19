@@ -64,3 +64,4 @@ Server components handle data fetching and static rendering, client components t
 - fr server components it also includes the actual rendered result.
 - CC rsc payload is a bit different,it has placeholders showing where the CC should go + refernces to their JS files
 
+
