@@ -160,3 +160,10 @@ export async function generateStaticParams() {
 - **No generateStaticParams at all** → (by default is true)
 
 # Streaming
+- Streaming is a strategy that allows for progressive UI rendering from the server
+- Work is broken down into smaller chunks and streamed to the client as soon as they're ready
+ - This means users can see parts of the page right away, without waiting for everything to load
+ 
+- It's particularly powerful for improving initial page load times and handling Ul elements that depend on slower data fetches, which would normally hold up the entire route
+- built in with App router
+- use <Suspense> from react to achieve this
