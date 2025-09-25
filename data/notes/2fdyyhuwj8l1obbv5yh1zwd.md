@@ -1,0 +1,2 @@
+-[Open source emojis for designers, developers and everyone else!](https://openmoji.org/)
+- [vector icons and stickers](https://www.flaticon.com/)
