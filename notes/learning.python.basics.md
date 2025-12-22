@@ -52,4 +52,27 @@ So again:
 
 **If any operand is float → result is float**
 
+## input 
+```py
+age=int(input("What is the age"))
+print(age,type(age))
+```
+
+## common errors
+```py
+result="Hello" + 5
+ 
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+Cell In[12], line 3
+      1 ## common errors
+----> 3 result="Hello" + 5
+
+TypeError: can only concatenate str (not "int") to str
+
+```
+```py
+result="Hello" + str(5)
+print(result) #Hello5
+```
 
