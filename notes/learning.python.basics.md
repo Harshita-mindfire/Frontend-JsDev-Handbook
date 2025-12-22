@@ -90,18 +90,3 @@ sentence = "HI {} {}, I hope you are learning."
 print(sentence.format(name, lname)) #HI JO JO, I hope you are learning.
 ```
 
-## Lists
-```py
-int_list = [1,2,3,4]
-print(len(int_list)) #4
-print(int_list[2]) #3
-
-int_list.append(7) # append 7 to the last
-print(int_list) #[1, 2, 3, 4, 7]
-
-int_list.pop(3) #pop at index 3
-print(int_list) #[1, 2, 3, 7]
-
-int_list.remove(2) #removes the value 2
-print(int_list) #[1, 3, 7]
-```
