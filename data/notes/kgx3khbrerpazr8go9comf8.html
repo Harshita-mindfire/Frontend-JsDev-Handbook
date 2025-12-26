@@ -1,0 +1,158 @@
+<h1 id="rendering">Rendering<a aria-hidden="true" class="anchor-heading icon-link" href="#rendering"></a></h1>
+<ul>
+<li>CSR</li>
+<li>SSR</li>
+<li>SSG</li>
+<li>suspense SSR</li>
+<li>React server components</li>
+</ul>
+<h2 id="client-side-rendering">Client side rendering<a aria-hidden="true" class="anchor-heading icon-link" href="#client-side-rendering"></a></h2>
+<ul>
+<li>The approach where browser(client) transforms react components into what you see on screen.</li>
+</ul>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/CSR.png" alt="alt text"></p>
+<h3 id="drawbacks-of-csr">Drawbacks of CSR<a aria-hidden="true" class="anchor-heading icon-link" href="#drawbacks-of-csr"></a></h3>
+<ul>
+<li>
+<p><strong>SEO</strong>: When SEs crawl your site, they are looking for HTMl content to understand what the page is about. But with CSR, the page source is basically an empty div. Since content relies on JS to render on Client site, SE struggles to index it properly.</p>
+</li>
+<li>
+<p><strong>Performance and UX</strong>: users can suffer from slow load times, as their browser download, parse and execute JS before seeing any meaningful content.</p>
+</li>
+</ul>
+<h2 id="server-side-solutions">Server side solutions<a aria-hidden="true" class="anchor-heading icon-link" href="#server-side-solutions"></a></h2>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/SSR.png" alt="alt text"></p>
+<ol>
+<li>Static Site Generation (SSG)</li>
+<li>Server-Side Rendering (SSR)</li>
+</ol>
+<p>SSG happens during build time when you deploy your application to the server. This results in pages that are already rendered and ready to serve. It's perfect for content that stays relatively stable, like blog posts</p>
+<p>SSR, on the other hand, renders pages on-demand when users request them. It's ideal for personalized content like social media feeds where the HTML changes based on who's logged in.</p>
+<h3 id="hydration">Hydration<a aria-hidden="true" class="anchor-heading icon-link" href="#hydration"></a></h3>
+<p>(react adding interactivity to the server rendered HTML)</p>
+<p>During hydration, React takes control in the browser and reconstructs the component tree in memory, using the server-rendered HTML as a blueprint</p>
+<p>It carefully maps out where all the interactive elements should go, then hooks up the JavaScript logic</p>
+<p>This involves initializing application state, adding click and mouseover handlers, and setting up all the dynamic features needed for a full interactive user experience.</p>
+<h3 id="drawbacks-of-ssr">Drawbacks of SSR<a aria-hidden="true" class="anchor-heading icon-link" href="#drawbacks-of-ssr"></a></h3>
+<ul>
+<li><strong>You have to fetch everything before you can show anything</strong></li>
+</ul>
+<p>Components cannot start rendering and then pause or "wait" while data is still being loaded</p>
+<p>If a component needs to fetch data from a database or another source (like an API), this fetching must be completed before the server can begin rendering the page</p>
+<p>This can delay the server's response time to the browser, as the server must finish collecting all necessary data before any part of the page can be sent to the client</p>
+<ul>
+<li><strong>You have to load everything before you can hydrate anything</strong></li>
+</ul>
+<p>For successful hydration, where React adds interactivity to the server-rendered HTML, the component tree in the browser must exactly match the server-generated component tree</p>
+<p>This means that all the JavaScript for the components must be loaded on the client before you can start hydrating any of them.</p>
+<ul>
+<li><strong>You have to hydrate everything before you can interact with anything</strong></li>
+</ul>
+<p>React hydrates the component tree in a single pass, meaning once it starts hydrating, it won't stop until it's finished with the entire tree</p>
+<p>As a consequence, all components must be hydrated before you can interact with any of them.</p>
+<h3 id="suspense-ssr">Suspense SSR<a aria-hidden="true" class="anchor-heading icon-link" href="#suspense-ssr"></a></h3>
+<p>Use the <code>&#x3C;Suspense></code> componenet to unlock 2 major SSR features:</p>
+<ul>
+<li>HTML streaming on server</li>
+<li>Selective hydration on the client.</li>
+</ul>
+<p>This solves the 3 all or nothing concerns of SSR: </p>
+<ol>
+<li>having to load the data for the entire page. 
+<blockquote>
+<p>React 18+ can fix this via <code>&#x3C;Suspense></code></p>
+</blockquote>
+</li>
+<li>loading the JavaScript for the entire page
+<blockquote>
+<p>can be fixed with code splitting.</p>
+</blockquote>
+</li>
+<li>hydrating the entire page.
+<blockquote>
+<p>Suspense also allows React to let hydrate other parts of the page before the section wrapped within it is ready. This is what we call: <strong>selective hydration</strong>. In scenarios where multiple components are awaiting hydration, React prioritizes hydration based on user interactions</p>
+</blockquote>
+</li>
+</ol>
+<p>at once, create an "all or nothing" waterfall problem that spans from the server to the client, where each issue must be resolved before moving to the next one</p>
+<h3 id="drawbacks-of-suspense-ssr">Drawbacks of suspense ssr<a aria-hidden="true" class="anchor-heading icon-link" href="#drawbacks-of-suspense-ssr"></a></h3>
+<p>raises 3 question:</p>
+<ol>
+<li>do user still need to download so much data(loading entire webpage bit by bit)</li>
+<li>should all components be hydrated, even those that don't need interactivity(static content components)</li>
+<li>Shouldn't we be leverging our servers more(user's device do bulk of the JS work which can slow things down)</li>
+</ol>
+<h3 id="react-server-components">React Server components<a aria-hidden="true" class="anchor-heading icon-link" href="#react-server-components"></a></h3>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">React Server Components</span></div>
+<a href="/Frontend-JsDev-Handbook/notes/ubgj4b3onoq9pj080dri1nj" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p><strong>The app router in Nextjs is built entirely on RSC architecture. All these features are built into the latest version of Nextjs</strong></p>
+<h2 id="takeaways">Takeaways<a aria-hidden="true" class="anchor-heading icon-link" href="#takeaways"></a></h2>
+<ul>
+<li>React Server Components offer a new approach to building React apps by separating components into two: Server Components and Client Components</li>
+<li>Server Components run exclusively on the server - they fetch data and prepare content without sending code to the browser</li>
+<li>This makes your app faster because users download less code</li>
+</ul>
+<p>However, they can't handle any interactions</p>
+<ul>
+<li>Client Components, on the other hand, run in the browser and manage all the interactive parts like clicks and typing</li>
+<li>They can also get an initial server render for faster page loads</li>
+</ul>
+<h2 id="react-server-components-1">React Server components<a aria-hidden="true" class="anchor-heading icon-link" href="#react-server-components-1"></a></h2>
+<p>evolution of react CSR--> SSR ---> Suspense SSR---> RSC</p>
+<ul>
+<li>
+<p>represents a new architechture, which leverages the strengths of both server and client environments to optimize efficiency, load times and interactivity..</p>
+</li>
+<li>
+<p>Introduces dual models:</p>
+<ul>
+<li>client components</li>
+<li>server components</li>
+</ul>
+</li>
+</ul>
+<p>This distiction is based on the environment they would execute and the specific systems they are designed to interact with, for eg: browser apis, hooks, goes in client components.</p>
+<h3 id="client-components">Client components<a aria-hidden="true" class="anchor-heading icon-link" href="#client-components"></a></h3>
+<ul>
+<li>first rendered on the server then on the client.</li>
+<li>in nextjs, use "use client" to differentiate the components as a CC.</li>
+</ul>
+<h3 id="server-components">Server components<a aria-hidden="true" class="anchor-heading icon-link" href="#server-components"></a></h3>
+<ul>
+<li>Server Components represent a new type of React component specifically designed to operate exclusively on the server</li>
+<li>And unlike client components, their code stays on the server and is never downloaded to the client </li>
+<li>This design choice offers multiple benefits to React applications</li>
+</ul>
+<p><strong>Benefits</strong></p>
+<ul>
+<li><strong>Smaller bundle sizes</strong>: Since Server Components stay on the server, all their dependencies stay there too. This is fantastic for users with slower connections or less powerful devices since they don't need to download, parse, and execute that JavaScript.
+Plus, there's no hydration step, making your app load and become interactive faster</li>
+<li><strong>Direct access to server-side resources</strong>: Server Components <strong>can talk directly to databases and file systems</strong>, making data fetching super efficient without any client-side processing.
+They use the server's power and proximity to data sources to manage compute-intensive rendering tasks.</li>
+<li><strong>Enhanced security</strong>: Since SC only run on server, sensitive data like API keys never leave the server.</li>
+<li><strong>Improved data fetching</strong>: since SC are closer to data source, this can improve performance by reducing time it takes to fetch data needed for rendering.</li>
+<li><strong>Caching</strong>: can cache the results and reuse them for different users and requests</li>
+<li><strong>Faster initial load &#x26; FCP</strong>: By generating HTML on the server, users see your content immediately- no waiting for JS to download and execute.</li>
+<li><strong>Improved SEO</strong></li>
+<li><strong>Efficient Streaming</strong>: SC can split the rendering process into chunks that stream to client as they're ready. This means users start seeing content faster instead of waiting for entire page to render on the server.</li>
+</ul>
+<p>Server components handle data fetching and static rendering, client components take care of rendering the interactive elements.</p>
+<h3 id="rsc-payload">rsc payload<a aria-hidden="true" class="anchor-heading icon-link" href="#rsc-payload"></a></h3>
+<ul>
+<li>these files have a special JSOn format are generated by react for each route and represent your virtual DOM in a super compavct way using abbreviations and internal references.</li>
+<li>fr server components it also includes the actual rendered result.</li>
+<li>CC rsc payload is a bit different,it has placeholders showing where the CC should go + refernces to their JS files</li>
+</ul>
+</div></div><p></p><p></p>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/ubgj4b3onoq9pj080dri1nj">React Server Components</a></li>
+</ol>
