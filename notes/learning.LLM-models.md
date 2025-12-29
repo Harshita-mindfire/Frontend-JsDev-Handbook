@@ -12,7 +12,8 @@ created: 1766557136225
 ## What are LLMs
 - Large language models.
 - advanced AI models, trained on large datasets.
-- can understand, generate and process natural alnguage
+- can understand, generate and process natural language
+- stateless. each transaction is independent.
 
 ## HOW LLM works
 - Transformer architecture: core of LLM
