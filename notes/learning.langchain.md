@@ -270,3 +270,22 @@ Chosen Sub-Chain
     ↓
 Final Output
 ```
+
+## Common components of RAG(Retrieval Augmented Generation)
+
+```mermaid
+  graph TD;
+      Data-Source-->Data-Transformation;
+      Data-Transformation-->Text-embedding;
+      Text-embedding-->VectorStore-DB;
+```
+
+- Data-Source: (Load data into langchain/Data ingestion)
+
+- Data-Transformation : (breaking data into text chunks)
+
+- Text-embedding: converting text into vectors using embedding techniques. This is required for different algorithms to run(similarity serach). 
+- VectorStore-DB: saving vectors into a vector DB ex: chromaDB, FAISS, ASTRADB
+
+### Data Ingestion:
+Loading data from a specific source.
