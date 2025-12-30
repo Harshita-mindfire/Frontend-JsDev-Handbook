@@ -1,0 +1,265 @@
+<h1 id="langchain">Langchain<a aria-hidden="true" class="anchor-heading icon-link" href="#langchain"></a></h1>
+<ul>
+<li>open source development framework for LLM applications.</li>
+<li>two packages: python and JS(TS)</li>
+<li>key value adds:
+<ul>
+<li>modular components</li>
+<li>uses cases: common ways to combine components.</li>
+</ul>
+</li>
+</ul>
+<h2 id="common-components-of-langchain">Common components of Langchain<a aria-hidden="true" class="anchor-heading icon-link" href="#common-components-of-langchain"></a></h2>
+<ul>
+<li><strong>Models</strong></li>
+<li><strong>Prompts</strong>: how to get models to do the work</li>
+<li><strong>Indexes</strong>: ways of ingesting data so that you can combine it with model</li>
+<li><strong>Chains</strong>: end to end use cases.</li>
+<li><strong>Agents</strong>: a endtime use case which uses the model as reasoning engine.</li>
+</ul>
+<h2 id="memory-types">Memory types<a aria-hidden="true" class="anchor-heading icon-link" href="#memory-types"></a></h2>
+<p><strong>ConversationBufferMemory</strong></p>
+<p>This memory allows for storing of messages and then extracts the messages in a variable.</p>
+<p><strong>ConversationBufferWindowMemory</strong></p>
+<p>This memory keeps a list of the interactions of the conversation over time. It only uses the last K interactions.</p>
+<p><strong>ConversationTokenBufferMemory</strong></p>
+<p>This memory keeps a buffer of recent interactions in memory, and uses token length rather than number of interactions to determine when to flush interactions.</p>
+<p><strong>ConversationSummaryMemory</strong></p>
+<p>This memory creates a summary of the conversation over time.</p>
+<h3 id="additional-memory-types">Additional Memory Types<a aria-hidden="true" class="anchor-heading icon-link" href="#additional-memory-types"></a></h3>
+<p><strong>Vector data memory</strong> </p>
+<p>Stores text (from conversation or elsewhere) in a vector database and retrieves the most relevant blocks of text.</p>
+<p><strong>Entity memories</strong></p>
+<p>Using an LLM, it remembers details about specific entities.</p>
+<p>You can also use multiple memories at one time.</p>
+<p>E.g., Conversation memory + Entity memory to recall individuals.</p>
+<p>You can also store the conversation in a conventional database (such as key-value store or SQL)</p>
+<h2 id="chains">Chains<a aria-hidden="true" class="anchor-heading icon-link" href="#chains"></a></h2>
+<h3 id="llm-chain">LLM Chain<a aria-hidden="true" class="anchor-heading icon-link" href="#llm-chain"></a></h3>
+<p>An LLM Chain is:</p>
+<blockquote>
+<p>A repeatable, parameterized, composable workflow around LLM calls.</p>
+</blockquote>
+<p>Think of it like a function instead of a one-off script.</p>
+<p>Just like:
+You can write raw SQL everywhere
+But ORMs exist for large systems</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>chat_models <span class="token keyword">import</span> ChatOpenAI 
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> ChatPromptTemplate 
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>chains <span class="token keyword">import</span> 
+
+LLMChain llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>temperature<span class="token operator">=</span><span class="token number">0.9</span><span class="token punctuation">,</span> model<span class="token operator">=</span>llm_model<span class="token punctuation">)</span> 
+
+prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span> <span class="token string">"What is the best name to describe \ a company that makes {product}?"</span> <span class="token punctuation">)</span> 
+
+chain <span class="token operator">=</span> LLMChain<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">,</span> prompt<span class="token operator">=</span>prompt<span class="token punctuation">)</span> 
+product <span class="token operator">=</span> <span class="token string">"Queen Size Sheet Set"</span> 
+chain<span class="token punctuation">.</span>run<span class="token punctuation">(</span>product<span class="token punctuation">)</span> <span class="token comment">#Royal Beddings or anything the gpt responds with</span>
+</code></pre>
+<h4 id="key-benefits-of-using-an-llm-chain">Key benefits of using an LLM Chain<a aria-hidden="true" class="anchor-heading icon-link" href="#key-benefits-of-using-an-llm-chain"></a></h4>
+<p>🔹 <strong>1. Prompt templating &#x26; variable injection</strong>
+This becomes powerful when: Prompts are long, Variables are many, Prompts are reused across files.</p>
+<p><strong>🔹 2. Reusability &#x26; maintainability</strong>
+You define the prompt once, Instead of copy-pasting prompts everywhere.</p>
+<pre class="language-py"><code class="language-py">chain<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token string">"Queen Size Sheet Set"</span><span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token string">"Organic Soap"</span><span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token string">"AI SaaS Platform"</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>🔹 3. Easy model swapping &#x26; configuration</strong>
+Change model/temperature without touching your logic.</p>
+<pre class="language-py"><code class="language-py">llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4"</span><span class="token punctuation">,</span> temperature<span class="token operator">=</span><span class="token number">0.2</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>🔹 4. Multi-step workflows (the real power)</strong>
+Chains become useful when steps depend on each other:
+Example:</p>
+<p>Generate product description</p>
+<p>Extract keywords from description</p>
+<p>Generate brand name from keywords</p>
+<p>Validate brand name</p>
+<p>This cannot be done with one prompt cleanly.</p>
+<p><strong>🔹 5. Composition(chains calling chains) with tools, memory, retrievers</strong></p>
+<p>Chains can be stacked:</p>
+<pre class="language-py"><code class="language-py">User Input
+   ↓
+Summarization Chain
+   ↓
+Translation Chain
+   ↓
+Tone Adjustment Chain
+   ↓
+Final Output
+</code></pre>
+<p>Chains can integrate:</p>
+<p>🔍 Vector databases</p>
+<p>🧠 Conversation memory</p>
+<p>🛠️ Tools &#x26; function calling</p>
+<p>🔄 Retries &#x26; fallback models</p>
+<p>📊 Tracing &#x26; observability</p>
+<p>Example:</p>
+<pre class="language-py"><code class="language-py">
+User Question
+   ↓
+Retrieve relevant docs
+   ↓
+Insert into prompt
+   ↓
+LLM answers <span class="token keyword">with</span> citations
+</code></pre>
+<p>This is the backbone of RAG (Retrieval-Augmented Generation).</p>
+<h3 id="sequentialchain">SequentialChain<a aria-hidden="true" class="anchor-heading icon-link" href="#sequentialchain"></a></h3>
+<ul>
+<li>another type of chain that combine multiple chains where o/p of one chain is i/p of the next chain.
+2 types of sequential chains: </li>
+<li><strong>SimpleSequentialChain</strong>: single i/p and o/p</li>
+<li><strong>SequentialChain</strong>: any step of the chain can take multiple i/p and o/p</li>
+</ul>
+<p><strong>SimpleSequentialChain</strong></p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>chains <span class="token keyword">import</span> SimpleSequentialChain
+llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>temperature<span class="token operator">=</span><span class="token number">0.9</span><span class="token punctuation">,</span> model<span class="token operator">=</span>llm_model<span class="token punctuation">)</span>
+
+<span class="token comment"># prompt template 1</span>
+first_prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>
+    "What <span class="token keyword">is</span> the best name to describe \
+    a company that makes <span class="token punctuation">{</span>product<span class="token punctuation">}</span>?"
+<span class="token punctuation">)</span>
+
+<span class="token comment"># Chain 1</span>
+chain_one <span class="token operator">=</span> LLMChain<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">,</span> prompt<span class="token operator">=</span>first_prompt<span class="token punctuation">)</span>
+
+<span class="token comment"># prompt template 2</span>
+second_prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>
+    "Write a <span class="token number">20</span> words description <span class="token keyword">for</span> the following \
+    company<span class="token punctuation">:</span><span class="token punctuation">{</span>company_name<span class="token punctuation">}</span>"
+<span class="token punctuation">)</span>
+<span class="token comment"># chain 2</span>
+chain_two <span class="token operator">=</span> LLMChain<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">,</span> prompt<span class="token operator">=</span>second_prompt<span class="token punctuation">)</span>
+overall_simple_chain <span class="token operator">=</span> SimpleSequentialChain<span class="token punctuation">(</span>chains<span class="token operator">=</span><span class="token punctuation">[</span>chain_one<span class="token punctuation">,</span> chain_two<span class="token punctuation">]</span><span class="token punctuation">,</span>
+overall_simple_chain<span class="token punctuation">.</span>run<span class="token punctuation">(</span>product<span class="token punctuation">)</span>
+</code></pre>
+<p><strong>SequentialChain</strong></p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>chains <span class="token keyword">import</span> SequentialChain
+llm <span class="token operator">=</span> ChatOpenAI<span class="token punctuation">(</span>temperature<span class="token operator">=</span><span class="token number">0.9</span><span class="token punctuation">,</span> model<span class="token operator">=</span>llm_model<span class="token punctuation">)</span>
+
+<span class="token comment"># prompt template 1: translate to english</span>
+first_prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>
+    <span class="token string">"Translate the following review to english:"</span>
+    <span class="token string">"\n\n{Review}"</span>
+<span class="token punctuation">)</span>
+<span class="token comment"># chain 1: input= Review and output= English_Review</span>
+chain_one <span class="token operator">=</span> LLMChain<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">,</span> prompt<span class="token operator">=</span>first_prompt<span class="token punctuation">,</span> 
+                     output_key<span class="token operator">=</span><span class="token string">"English_Review"</span>
+                    <span class="token punctuation">)</span>
+second_prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>
+    <span class="token string">"Can you summarize the following review in 1 sentence:"</span>
+    <span class="token string">"\n\n{English_Review}"</span>
+<span class="token punctuation">)</span>
+<span class="token comment"># chain 2: input= English_Review and output= summary</span>
+chain_two <span class="token operator">=</span> LLMChain<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">,</span> prompt<span class="token operator">=</span>second_prompt<span class="token punctuation">,</span> 
+                     output_key<span class="token operator">=</span><span class="token string">"summary"</span>
+                    <span class="token punctuation">)</span>
+<span class="token comment"># prompt template 3: translate to english</span>
+third_prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>
+    <span class="token string">"What language is the following review:\n\n{Review}"</span>
+<span class="token punctuation">)</span>
+<span class="token comment"># chain 3: input= Review and output= language</span>
+chain_three <span class="token operator">=</span> LLMChain<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">,</span> prompt<span class="token operator">=</span>third_prompt<span class="token punctuation">,</span>
+                       output_key<span class="token operator">=</span><span class="token string">"language"</span>
+                      <span class="token punctuation">)</span>
+
+<span class="token comment"># prompt template 4: follow up message</span>
+fourth_prompt <span class="token operator">=</span> ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span>
+    <span class="token string">"Write a follow up response to the following "</span>
+    <span class="token string">"summary in the specified language:"</span>
+    <span class="token string">"\n\nSummary: {summary}\n\nLanguage: {language}"</span>
+<span class="token punctuation">)</span>
+<span class="token comment"># chain 4: input= summary, language and output= followup_message</span>
+chain_four <span class="token operator">=</span> LLMChain<span class="token punctuation">(</span>llm<span class="token operator">=</span>llm<span class="token punctuation">,</span> prompt<span class="token operator">=</span>fourth_prompt<span class="token punctuation">,</span>
+                      output_key<span class="token operator">=</span><span class="token string">"followup_message"</span>
+                     <span class="token punctuation">)</span>
+<span class="token comment"># overall_chain: input= Review </span>
+<span class="token comment"># and output= English_Review,summary, followup_message</span>
+overall_chain <span class="token operator">=</span> SequentialChain<span class="token punctuation">(</span>
+    chains<span class="token operator">=</span><span class="token punctuation">[</span>chain_one<span class="token punctuation">,</span> chain_two<span class="token punctuation">,</span> chain_three<span class="token punctuation">,</span> chain_four<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    input_variables<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"Review"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    output_variables<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"English_Review"</span><span class="token punctuation">,</span> <span class="token string">"summary"</span><span class="token punctuation">,</span><span class="token string">"followup_message"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    verbose<span class="token operator">=</span><span class="token boolean">True</span>
+<span class="token punctuation">)</span>
+
+review <span class="token operator">=</span> <span class="token string">"add some review here"</span>
+overall_chain<span class="token punctuation">(</span>review<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="router-chain">Router Chain<a aria-hidden="true" class="anchor-heading icon-link" href="#router-chain"></a></h3>
+<p>A Router Chain is a LangChain pattern used when you don’t want one single prompt or chain to handle every input, but instead want the system to decide which chain should run based on the input.</p>
+<p>Think of it as an LLM-powered if / else or switch statement.</p>
+<p>1️⃣ The core idea (plain English)</p>
+<p>Given an input, choose the most appropriate chain to handle it.</p>
+<p>Example:</p>
+<p>If input is a math question → use math chain</p>
+<p>If input is code-related → use coding chain</p>
+<p>If input is customer support → use support chain</p>
+<p>You route the request to the right specialist</p>
+<pre class="language-text"><code class="language-text">User Input
+    ↓
+Router Chain (decides destination)
+    ↓
+Chosen Sub-Chain
+    ↓
+Final Output
+</code></pre>
+<h2 id="common-components-of-ragretrieval-augmented-generation">Common components of RAG(Retrieval Augmented Generation)<a aria-hidden="true" class="anchor-heading icon-link" href="#common-components-of-ragretrieval-augmented-generation"></a></h2>
+<div class="mermaid">
+    graph TD;
+      Data-Source-->Data-Transformation;
+      Data-Transformation-->Text-embedding;
+      Text-embedding-->VectorStore-DB;
+</div>
+<ul>
+<li>
+<p>Data-Source: (Load data into langchain/Data ingestion)</p>
+</li>
+<li>
+<p>Data-Transformation : (breaking data into text chunks)</p>
+</li>
+<li>
+<p>Text-embedding: converting text into vectors using embedding techniques. This is required for different algorithms to run(similarity serach). </p>
+</li>
+<li>
+<p>VectorStore-DB: saving vectors into a vector DB ex: chromaDB, FAISS, ASTRADB</p>
+</li>
+</ul>
+<h3 id="data-ingestion">Data Ingestion:<a aria-hidden="true" class="anchor-heading icon-link" href="#data-ingestion"></a></h3>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Document Ingestion</span></div>
+<a href="/Frontend-JsDev-Handbook/notes/duydba1xzdaypg4p9egmt3g" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><p>Loading data from a specific source.</p>
+<h2 id="document-loaders">Document Loaders<a aria-hidden="true" class="anchor-heading icon-link" href="#document-loaders"></a></h2>
+<p><a href="https://docs.langchain.com/oss/python/integrations/document_loaders">Official docs</a></p>
+<ul>
+<li>
+<p>all document loaders are in this package: <strong><em>langchain_community.document_loaders</em></strong></p>
+</li>
+<li>
+<p>requirements: based on the document loader type(pdf, arxiv, text etc) the frequirements would change.</p>
+</li>
+</ul>
+<pre class="language-txt"><code class="language-txt">langchain
+ipykernel
+langchain_community
+</code></pre>
+<pre class="language-py"><code class="language-py"><span class="token comment">## Text loader</span>
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> TextLoader
+loader <span class="token operator">=</span> TextLoader<span class="token punctuation">(</span><span class="token string">'speech.txt'</span><span class="token punctuation">)</span>
+text_document<span class="token operator">=</span>loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+text_document
+</code></pre></div></div><p></p><p></p>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/duydba1xzdaypg4p9egmt3g">Document Ingestion</a></li>
+</ol>

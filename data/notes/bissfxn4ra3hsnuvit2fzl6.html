@@ -1,0 +1,89 @@
+<h1 id="layouts">Layouts<a aria-hidden="true" class="anchor-heading icon-link" href="#layouts"></a></h1>
+<ul>
+<li>Pages are route specific UI components</li>
+<li>Layouts is a UI that is shared between multiple pages in your app like header, footer etc.</li>
+</ul>
+<h2 id="creation">Creation<a aria-hidden="true" class="anchor-heading icon-link" href="#creation"></a></h2>
+<ul>
+<li>default export a react component from <code>layout.tsx</code> file.</li>
+<li>takes a children prop populated with page content.</li>
+</ul>
+<p>eg: root layout. any structure in here goes to all the pages.
+The children prop changes based on the route accessed.</p>
+<pre class="language-tsx"><code class="language-tsx">
+<span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">RootLayout</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  children<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  children<span class="token operator">:</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">ReactNode</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>body</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>header</span>
+          <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+            backgroundColor<span class="token operator">:</span> <span class="token string">"#f4f9f7"</span><span class="token punctuation">,</span>
+            textAlign<span class="token operator">:</span> <span class="token string">"center"</span><span class="token punctuation">,</span>
+            padding<span class="token operator">:</span> <span class="token string">"1rem"</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+        <span class="token punctuation">></span></span><span class="token plain-text">
+          Header
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>header</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">{</span>children<span class="token punctuation">}</span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>footer</span>
+          <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span>
+            backgroundColor<span class="token operator">:</span> <span class="token string">"ghostwhite"</span><span class="token punctuation">,</span>
+            textAlign<span class="token operator">:</span> <span class="token string">"center"</span><span class="token punctuation">,</span>
+            padding<span class="token operator">:</span> <span class="token string">"1rem"</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">}</span></span>
+        <span class="token punctuation">></span></span><span class="token plain-text">
+          Footer
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>footer</span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>body</span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>html</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+</code></pre>
+<h2 id="nested-layout">Nested Layout<a aria-hidden="true" class="anchor-heading icon-link" href="#nested-layout"></a></h2>
+<p>layout.tsx inside a route is specific for that route.</p>
+<h2 id="multiple-root-layout">Multiple root layout.<a aria-hidden="true" class="anchor-heading icon-link" href="#multiple-root-layout"></a></h2>
+<p>If we want let say 2 of our route to have one layout and all the others to have another, we would require multiple root layouts,
+for this, we take help of router groups.</p>
+<p>Eg: we need only footer for login and register route, for customers, we want both header and footer.</p>
+<pre class="language-figma"><code class="language-figma">- app
+  - (auth)
+    - login
+      - page.tsx
+    - register
+      - page.tsx
+    layout.tsx //AuthRootLayout
+  - (marketing)
+    - customers
+      - page.tsx
+    - suppliers
+      - page.tsx
+    - page.tsx //global entry page
+    - layout.tsx //MarketingRootLayout
+</code></pre>
+<h2 id="handling-errors">Handling errors<a aria-hidden="true" class="anchor-heading icon-link" href="#handling-errors"></a></h2>
+<ul>
+<li><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Error Handling</span></div>
+<a href="/Frontend-JsDev-Handbook/notes/byz0xlauc4njcaf9hmt13b3" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><h2 id="handling-errors-in-layouts">Handling errors in layouts<a aria-hidden="true" class="anchor-heading icon-link" href="#handling-errors-in-layouts"></a></h2>
+<ul>
+<li>The error boundary won't catch error thrown in layout.tsx within the same segment(in the same folder) because of the component rendering hierarchy.</li>
+<li>layout sits above the error boundry in the component tree.</li>
+<li>to resolve, move the error boundry at the parent of layout.</li>
+</ul>
+<p>So how do we handle errors that are thrown from root layout? Since it does not have a parent, how do we catch it?</p>
+<p>via <strong>global-error.tsx</strong> that sits in the root directory. </p>
+</div></div><p></p></li>
+</ul>

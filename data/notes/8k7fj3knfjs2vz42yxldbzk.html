@@ -1,0 +1,515 @@
+<h1 id="javascript">JavaScript<a aria-hidden="true" class="anchor-heading icon-link" href="#javascript"></a></h1>
+<h2 id="github-questions">Github questions<a aria-hidden="true" class="anchor-heading icon-link" href="#github-questions"></a></h2>
+<ul>
+<li><a href="https://github.com/sudheerj/javascript-interview-questions">https://github.com/sudheerj/javascript-interview-questions</a></li>
+</ul>
+<h1 id="js">JS<a aria-hidden="true" class="anchor-heading icon-link" href="#js"></a></h1>
+<p>JS is a synchronous, single threaded language.
+Single treaded means runs one command at a time and in a specific order.
+JS is loosely typed language. This means any variable is not strictly bind to a data type.</p>
+<h2 id="execution-context">Execution context<a aria-hidden="true" class="anchor-heading icon-link" href="#execution-context"></a></h2>
+<p>Execution context is simply the environment within which your code is ran.
+It has 2 components</p>
+<ul>
+<li>Memory Component(Variable environment): variable and funcs are stored in key: value pairs.</li>
+<li>Code Component(Thread of execution): place where code is executed one line at a time.</li>
+</ul>
+<h3 id="two-stages-of-execution-context">Two stages of Execution context<a aria-hidden="true" class="anchor-heading icon-link" href="#two-stages-of-execution-context"></a></h3>
+<ul>
+<li><strong>creation</strong>(memory creation) and</li>
+<li><strong>executing</strong>(code execution) phase.</li>
+</ul>
+<h3 id="two-types-of-execution-context">Two types of execution context<a aria-hidden="true" class="anchor-heading icon-link" href="#two-types-of-execution-context"></a></h3>
+<ul>
+<li>Global and Function</li>
+</ul>
+<p>As the JavaScript engine starts to read your code, it creates something called the Global Execution Context.</p>
+<h2 id="lexical-environment">Lexical environment<a aria-hidden="true" class="anchor-heading icon-link" href="#lexical-environment"></a></h2>
+<ul>
+<li>A lexical environment is basically the scope or environment the engine is currently
+reading code in.</li>
+<li>A new lexical environment is created when curly brackets {} are used,
+even nested brackets [object Object] create a new lexical environment.</li>
+<li>The execution context tells the engine which lexical environment it is currently working in and the lexical scope determines the available variables.</li>
+<li>lexical env of a func: local memory of function + refrence to lexical parents's lexical env(closure) + lexical env of parent's parent until global scope.</li>
+</ul>
+<h2 id="scope-chain">Scope chain<a aria-hidden="true" class="anchor-heading icon-link" href="#scope-chain"></a></h2>
+<p>Each environment context that is created has a link outside of its lexical environment
+called the scope chain. The scope chain gives us access to variables in the parent
+environment.</p>
+<h2 id="for-in-vs-for-of">FOR in vs FOR of<a aria-hidden="true" class="anchor-heading icon-link" href="#for-in-vs-for-of"></a></h2>
+<pre class="language-js"><code class="language-js"><span class="token keyword">let</span> list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">in</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "0", "1", "2",</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">of</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "4", "5", "6"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="block">Block<a aria-hidden="true" class="anchor-heading icon-link" href="#block"></a></h2>
+<ul>
+<li>defined by <code>{}</code>. It groups together multiple js statements and use it where js syntax is expecting single statement</li>
+<li>let/const are <code>block scoped</code>.</li>
+<li>a new <code>{}</code> does not create a new scope for <code>var</code>, var is a <code>function</code> scope</li>
+</ul>
+<h2 id="let-and-const">let and const<a aria-hidden="true" class="anchor-heading icon-link" href="#let-and-const"></a></h2>
+<ul>
+<li>are hoiseted, but are in <code>temporal dead zone</code>(the time between a let/const is hoisted and initialized with a value) for the time being.</li>
+<li>accessing a variable in temporal dead zone throws reference error</li>
+<li>cannot redeclare let and const within the same scope unlike <code>var</code>. let will throw syntax error and const will throw Type error, since const is of <code>constant</code> type.</li>
+<li><code>const</code> needs to be declare and initialization at the same time, unlike <code>let</code> which can be initialized later in the code.</li>
+<li>unlinke <code>var</code> let/const are block scoped. Each <code>{}</code> creates a new scope for let/const</li>
+</ul>
+<h2 id="closure">closure<a aria-hidden="true" class="anchor-heading icon-link" href="#closure"></a></h2>
+<p>function along with its lexical scope bundled together forms a closure.
+Uses: currying</p>
+<h2 id="hoisting">Hoisting<a aria-hidden="true" class="anchor-heading icon-link" href="#hoisting"></a></h2>
+<ul>
+<li>Hoisting is the process of puting all variable and function declarations into memory
+during the compile phase.</li>
+<li>var are hoisted(allocated memory) and initialized with a value of <code>undefined</code></li>
+<li>function declarations are fully hoisted eg: function a() {}</li>
+<li>function expression are hoisted as undefined. (eg: var a = function () {})</li>
+<li>let and const are hoisted but are not initialized with any initial value. Using them before initialization throws reference error</li>
+</ul>
+<h3 id="takeaways">Takeaways<a aria-hidden="true" class="anchor-heading icon-link" href="#takeaways"></a></h3>
+<p>Avoid hoisting when possible. It can cause memory leaks and hard to catch
+bugs in your code. Use let and const as your go to variables.</p>
+<h2 id="difference-between-arrow-function-and-normal-function">Difference between arrow function and normal function<a aria-hidden="true" class="anchor-heading icon-link" href="#difference-between-arrow-function-and-normal-function"></a></h2>
+<ul>
+<li>arrow funcs are not just a syntactic sugar to normal functions</li>
+<li>They are a compact alternative to a regular function, but also without its own bindings to <code>this</code>, <code>arguments</code>, <code>super</code>, or <code>new.target</code> keywords.</li>
+<li>Arrow func cannot be used as constructors and are not the best option for methods.</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">var</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// does not create a new scope</span>
+  <span class="token literal-property property">i</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">b</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">i</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">c</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">i</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+obj<span class="token punctuation">.</span><span class="token method function property-access">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// prints undefined, Window {...} (or the global object)</span>
+obj<span class="token punctuation">.</span><span class="token method function property-access">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// prints 10, Object {...}```</span>
+</code></pre>
+<h2 id="call-bind-apply">Call, bind, apply<a aria-hidden="true" class="anchor-heading icon-link" href="#call-bind-apply"></a></h2>
+<h3 id="call">Call<a aria-hidden="true" class="anchor-heading icon-link" href="#call"></a></h3>
+<ul>
+<li>invoke a function with passed references and arguments.</li>
+<li>used function borrowing</li>
+<li>1st param of call is a reference, i.e what should call bind this to? rest are the arguments to the function</li>
+</ul>
+<h3 id="bind">bind<a aria-hidden="true" class="anchor-heading icon-link" href="#bind"></a></h3>
+<p>returns you a copy of method which can be called later.</p>
+<ul>
+<li>function borrowing</li>
+<li>When a function is used as a callback, <code>this</code> is lost. The bind() method solves this problem.
+eg: <a href="https://www.w3schools.com/js/js_function_bind.asp">https://www.w3schools.com/js/js_function_bind.asp</a></li>
+</ul>
+<p>polyfill for bind:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> uname2 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">fname</span><span class="token operator">:</span> <span class="token string">'Jo'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">lname</span><span class="token operator">:</span> <span class="token string">'Joshi'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">fullName</span><span class="token punctuation">(</span><span class="token parameter">city<span class="token punctuation">,</span> state</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">fname</span> <span class="token operator">+</span> <span class="token string">' '</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">lname</span> <span class="token operator">+</span> <span class="token string">' '</span> <span class="token operator">+</span> city <span class="token operator">+</span> <span class="token string">' '</span> <span class="token operator">+</span> state<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token class-name">Function</span><span class="token punctuation">.</span><span class="token property-access">prototype</span><span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">myBind2</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> fun <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> param <span class="token operator">=</span> args<span class="token punctuation">.</span><span class="token method function property-access">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>arg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    fun<span class="token punctuation">.</span><span class="token method function property-access">apply</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token spread operator">...</span>param<span class="token punctuation">,</span> <span class="token spread operator">...</span>arg<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> test <span class="token operator">=</span> fullName<span class="token punctuation">.</span><span class="token method function property-access">myBind2</span><span class="token punctuation">(</span>uname2<span class="token punctuation">,</span> <span class="token string">'hld'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token string">'UK'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="currying">Currying<a aria-hidden="true" class="anchor-heading icon-link" href="#currying"></a></h2>
+<ul>
+<li>by bind method</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">let</span> <span class="token function-variable function">multiply</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>x <span class="token operator">*</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> multiplyBy2 <span class="token operator">=</span> multiply<span class="token punctuation">.</span><span class="token method function property-access">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">multiplyBy2</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>by closures</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">multiply</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">y</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span> x <span class="token operator">*</span> y<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> multiplyBy2 <span class="token operator">=</span> <span class="token function">multiply</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token function">multiplyBy2</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="imp-interview-ques">imp interview ques<a aria-hidden="true" class="anchor-heading icon-link" href="#imp-interview-ques"></a></h3>
+<p><a href="https://javascriptinterviewquestions.com/2020/04/add123-in-javascript-currying-interview.html">https://javascriptinterviewquestions.com/2020/04/add123-in-javascript-currying-interview.html</a></p>
+<h2 id="debounce">Debounce<a aria-hidden="true" class="anchor-heading icon-link" href="#debounce"></a></h2>
+<ul>
+<li>limiting the rate of execution of a particular function</li>
+</ul>
+<h2 id="this">this<a aria-hidden="true" class="anchor-heading icon-link" href="#this"></a></h2>
+<p>Free function invocations in javascript have <code>this</code> bound to the global scope.</p>
+<h2 id="event-propagation">Event Propagation<a aria-hidden="true" class="anchor-heading icon-link" href="#event-propagation"></a></h2>
+<ul>
+<li><a href="https://javascript.info/bubbling-and-capturing">Bubbling and capturing</a></li>
+</ul>
+<p>happens in 3 phases</p>
+<ul>
+<li>Capturing phase: event goes down from root element to the target element</li>
+<li>target phase: event reaches the target elem</li>
+<li>bubbling phase: the event bubbles up from the element.</li>
+</ul>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">body *</span> <span class="token punctuation">{</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token unit">px</span><span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token unit">px</span> solid <span class="token color">blue</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>style</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>form</span><span class="token punctuation">></span></span>
+  FORM
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span><span class="token punctuation">></span></span>
+    DIV
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>P<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>form</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> elem <span class="token keyword">of</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'*'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    elem<span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span>
+      <span class="token string">'click'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Capturing: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>elem<span class="token punctuation">.</span><span class="token property-access">tagName</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token boolean">true</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    elem<span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Bubbling: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>elem<span class="token punctuation">.</span><span class="token property-access">tagName</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>In bubbling, When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.</p>
+<ul>
+<li>To stop bubbling: event.stopPropagation()</li>
+</ul>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>body</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">the bubbling doesn't reach here</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>button</span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript">event<span class="token punctuation">.</span><span class="token method function property-access">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>Click me<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>body</span><span class="token punctuation">></span></span>
+</code></pre>
+<p>NOTE: Almost all events bubble.
+The key word in this phrase is “almost”.</p>
+<p>For instance, a focus event does not bubble. There are other examples too, we’ll meet them. But still it’s an exception, rather than a rule, most events do bubble</p>
+<h2 id="scripts-async-defer">Scripts: async, defer<a aria-hidden="true" class="anchor-heading icon-link" href="#scripts-async-defer"></a></h2>
+<h3 id="problem">Problem<a aria-hidden="true" class="anchor-heading icon-link" href="#problem"></a></h3>
+<p>When the browser loads HTML and comes across a "script" tag, it can’t continue building the DOM. It must execute the script right now. The same happens for external scripts "script src='...': the browser must wait for the script to download, execute the downloaded script, and only then can it process the rest of the page.</p>
+<p>That leads to two important issues:</p>
+<ul>
+<li>Scripts can’t see DOM elements below them, so they can’t add handlers etc.</li>
+<li>If there’s a bulky script at the top of the page, it “blocks the page”. Users can’t see the page content till it downloads and runs:</li>
+</ul>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>...content before script...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://javascript.info/article/script-async-defer/long.js?speed=1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&#x3C;!-- This isn't visible until the script loads --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>...content after script...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+</code></pre>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/2023-04-11-11-43-22.png"></p>
+<h3 id="defer">Defer<a aria-hidden="true" class="anchor-heading icon-link" href="#defer"></a></h3>
+<ul>
+<li>
+<p>The defer attribute tells the browser not to wait for the script. Instead, the browser will continue to process the HTML, build DOM. The script loads “in the background”, which makes it non-blocking and then runs when the DOM is fully built.</p>
+</li>
+<li>
+<p>Scripts with defer always execute when the DOM is ready (but before DOMContentLoaded event). .DOMContentLoaded event handler waits for the deferred script. It only triggers when the script is downloaded and executed.</p>
+</li>
+<li>
+<p>Deferred scripts keep their relative order, just like regular scripts.</p>
+</li>
+<li>
+<p>The defer attribute is only for external scripts.
+The defer attribute is ignored if the script tag has no src.</p>
+</li>
+</ul>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>...content before script...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span>
+  <span class="token attr-name">defer</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://javascript.info/article/script-async-defer/long.js?speed=1<span class="token punctuation">"</span></span>
+<span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span>
+
+<span class="token comment">&#x3C;!-- visible immediately --></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span>...content after script...<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+</code></pre>
+<h3 id="async">Async<a aria-hidden="true" class="anchor-heading icon-link" href="#async"></a></h3>
+<ul>
+<li>The async attribute is only for external scripts
+Just like defer, the async attribute is ignored if the
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>script</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+  <span class="token spread operator">...</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+tag has no src.</li>
+<li>The browser doesn’t block on async scripts (just like defer).</li>
+<li>Other scripts don’t wait for async scripts, and async scripts don’t wait for them, hence does not maintain order of scripts like defer</li>
+<li>DOMContentLoaded and async scripts don’t wait for each other:</li>
+</ul>
+<h2 id="folder-structure">Folder structure<a aria-hidden="true" class="anchor-heading icon-link" href="#folder-structure"></a></h2>
+<ul>
+<li>package.json: app metadata and configuration</li>
+<li>manifest.json: app metadata that makes application progressive web app.
+<ul>
+<li>provides metadata used when your web app is installed on a
+user's mobile device or desktop. See <a href="https://developers.google.com/web/fundamentals/web-app-manifest/">https://developers.google.com/web/fundamentals/web-app-manifest/</a></li>
+</ul>
+</li>
+<li><code>defer</code> in <script></script>
+</li></ul>
+<h2 id="fundamentals">Fundamentals<a aria-hidden="true" class="anchor-heading icon-link" href="#fundamentals"></a></h2>
+<ul>
+<li>browser</li>
+<li>v8 engine</li>
+</ul>
+<h2 id="array-methods">Array Methods<a aria-hidden="true" class="anchor-heading icon-link" href="#array-methods"></a></h2>
+<h3 id="reduce">reduce<a aria-hidden="true" class="anchor-heading icon-link" href="#reduce"></a></h3>
+<p><a href="/Frontend-JsDev-Handbook/notes/06dxxwewwp67sqivoq59mhs#arrayreduce">Reduce pollyfill</a></p>
+<ul>
+<li>This method has the following syntax — reduce(callbackFn, initialValue) where initialValue is an optional initial value used. If this parameter is skipped, it's assumed to be the first value of the array.</li>
+<li>if we are not returning anything from the callback functions here, the function returns undefined implicitly.</li>
+<li>if the initial value is not supplied it defaults to the first item of the array</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 1, 2</span>
+<span class="token comment">// undefined, 3</span>
+
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 0,1</span>
+<span class="token comment">// undefined, 2</span>
+<span class="token comment">// undefined, 3</span>
+</code></pre>
+<h4 id="edge-cases">Edge cases<a aria-hidden="true" class="anchor-heading icon-link" href="#edge-cases"></a></h4>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">getMax</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token method function property-access">max</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// callback is invoked for each element in the array starting at index 0</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span>getMax<span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 100</span>
+<span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span>getMax<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 50</span>
+
+<span class="token comment">// callback is invoked once for element at index 1</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span>getMax<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 100</span>
+
+<span class="token comment">// callback is not invoked</span>
+<span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span>getMax<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 50</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span>getMax<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span>getMax<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TypeError</span>
+</code></pre>
+<pre class="language-js"><code class="language-JS"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+	<span class="token literal-property property">firstname</span><span class="token operator">:</span> <span class="token string">"john"</span><span class="token punctuation">,</span> <span class="token literal-property property">lastName</span><span class="token operator">:</span> <span class="token string">"Doe"</span><span class="token punctuation">,</span> <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">12</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+	<span class="token literal-property property">firstname</span><span class="token operator">:</span> <span class="token string">"Martha"</span><span class="token punctuation">,</span> <span class="token literal-property property">lastName</span><span class="token operator">:</span> <span class="token string">"Stewart"</span><span class="token punctuation">,</span> <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">22</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">{</span>
+	<span class="token literal-property property">firstname</span><span class="token operator">:</span> <span class="token string">"Scar"</span><span class="token punctuation">,</span> <span class="token literal-property property">lastName</span><span class="token operator">:</span> <span class="token string">"Jo"</span><span class="token punctuation">,</span> <span class="token literal-property property">age</span><span class="token operator">:</span> <span class="token number">82</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span>
+
+<span class="token keyword">const</span> data <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">acc<span class="token punctuation">,</span> curr</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+<span class="token keyword control-flow">if</span><span class="token punctuation">(</span>curr<span class="token punctuation">.</span><span class="token property-access">age</span><span class="token operator">&#x3C;</span><span class="token number">30</span><span class="token punctuation">)</span> acc<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>curr<span class="token punctuation">.</span><span class="token property-access">firstname</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">return</span> acc<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="polyfill-for-map">polyfill for map<a aria-hidden="true" class="anchor-heading icon-link" href="#polyfill-for-map"></a></h3>
+<p><a href="/Frontend-JsDev-Handbook/notes/06dxxwewwp67sqivoq59mhs#arraymap">Map pollyfill</a></p>
+<h2 id="promise">Promise<a aria-hidden="true" class="anchor-heading icon-link" href="#promise"></a></h2>
+<ul>
+<li>a JS Object which may produce a value in future either a resolved value or a reason it is not reselved</li>
+<li>can be in one of the three states
+<ul>
+<li>pending</li>
+<li>fullfilled or</li>
+<li>rejected</li>
+</ul>
+</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'done'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">x</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>val <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'even'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword control-flow">else</span> <span class="token punctuation">{</span>
+        <span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">'odd'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="promiseprototypethen">Promise.prototype.then<a aria-hidden="true" class="anchor-heading icon-link" href="#promiseprototypethen"></a></h3>
+<p>For Promise.prototype.then():</p>
+<ul>
+<li>if function is passed as callback, the return value of the function is used as the fulfillment value</li>
+<li>for non-function values, previous fulfillment value is used.</li>
+</ul>
+<p></p><p></p><div class="portal-container">
+<div class="portal-head">
+<div class="portal-backlink">
+<div class="portal-title">From <span class="portal-text-title">Promises Exercise</span></div>
+<a href="/Frontend-JsDev-Handbook/notes/oj1cwazkncn3i7wbs36pcqx" class="portal-arrow">Go to text <span class="right-arrow">→</span></a>
+</div>
+</div>
+<div id="portal-parent-anchor" class="portal-parent" markdown="1">
+<div class="portal-parent-fader-top"></div>
+<div class="portal-parent-fader-bottom"></div><ul>
+<li>
+<p>Promise methods are static methods: Promise.all, Promise.race, Promise.any</p>
+</li>
+<li>
+<p>Promis.race is useful when you want the first async task to complete, but do not care about its eventual state (i.e., it can either succeed or fail).</p>
+</li>
+<li>
+<p>Promise.all returns a single promise with either fulfilled values of all Promises or the rejected promise. It fails fast</p>
+</li>
+<li>
+<p>1</p>
+</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token known-class-name class-name">Promise</span><span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">// fulfilled : 1</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// function is passed, return value is 2 => fulfilled : 2</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment">// non-function is passed, previous fulfillment value 2 is used => fulfilled : 2</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> value <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment">// function is passed, value is 2, return value is 6 => fulfilled: 6</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token known-class-name class-name">Promise</span><span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// Promise object is not function, previous fulfillment value 6 is used => fulfilled : 6</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token property-access">log</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 6 gets logged</span>
+</code></pre>
+<p>Result: 6</p>
+<ul>
+<li>2</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token known-class-name class-name">Promise</span><span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> val <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token known-class-name class-name">Promise</span><span class="token punctuation">.</span><span class="token method function property-access">resolve</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token known-class-name class-name">Promise</span><span class="token punctuation">.</span><span class="token method function property-access">reject</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token keyword control-flow">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token keyword control-flow">finally</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">// finally doesn't receive param from .then chain. always gets undefined as param</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Result
+1
+2
+undefined
+3
+undefined
+4
+undefined
+undefined</p>
+<ul>
+<li>3</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+promise
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>result:
+1 2 3 4 7 5 6 9 8</p></div></div><p></p><p></p>
+<h3 id="promiseall">Promise.all<a aria-hidden="true" class="anchor-heading icon-link" href="#promiseall"></a></h3>
+<ul>
+<li>The Promise.all() method takes an iterable of promises as an input, and returns a single Promise that resolves to an array of the results of the input promises.</li>
+<li>fail-fast behavior</li>
+</ul>
+<h2 id="callback-hell">Callback hell<a aria-hidden="true" class="anchor-heading icon-link" href="#callback-hell"></a></h2>
+<ul>
+<li>Callback hell is a antipattern when there are nested callbacks leading to unlegibale code.
+Can be fixed by:</li>
+<li>async awaits</li>
+<li>writing promises</li>
+</ul>
+<h2 id="ariety">Ariety<a aria-hidden="true" class="anchor-heading icon-link" href="#ariety"></a></h2>
+<p>sum(1)(2)....(5) = //</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> args<span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> a <span class="token operator">+</span> b<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> b <span class="token operator">=</span> args<span class="token punctuation">.</span><span class="token method function property-access">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">a<span class="token punctuation">,</span> b</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> a <span class="token operator">+</span> b<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword control-flow">return</span> <span class="token function">add</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword control-flow">return</span> a<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="polyfill-for-promiseall">Polyfill for Promise.all<a aria-hidden="true" class="anchor-heading icon-link" href="#polyfill-for-promiseall"></a></h2>
+<p><a href="/Frontend-JsDev-Handbook/notes/06dxxwewwp67sqivoq59mhs#promiseall">Promise.all pollyfill</a></p>
+<h2 id="prototypical-ineritence">Prototypical Ineritence<a aria-hidden="true" class="anchor-heading icon-link" href="#prototypical-ineritence"></a></h2>
+<ul>
+<li></li>
+</ul>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/sh9g495g98ov0b63kzffz4w">Arrow Func Exercise</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/xmhzv4k1dezmevk9worxp92">Currying Partials</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/3mh79j7ah9i5duqditiopi8">Handson</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/wk8nw908ich40fry2kk71a0">Parse Int</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/y1ng2qxm7ukl5sce22whs3d">Performance</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/51zb91dvu0ckmvmlplqxqil">Pipe and Compose</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/oj1cwazkncn3i7wbs36pcqx">Promises Exercise</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/f49q2e7ln41rpeqz70st4ow">Security</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/3vzqyyohwbs653l4ua3rmyz">Type Coercion</a></li>
+</ol>
