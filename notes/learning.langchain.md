@@ -288,4 +288,4 @@ Final Output
 - VectorStore-DB: saving vectors into a vector DB ex: chromaDB, FAISS, ASTRADB
 
 ### Data Ingestion:
-Loading data from a specific source.
+![[learning.langchain.document-ingestion]]
