@@ -288,4 +288,7 @@ Final Output
 - VectorStore-DB: saving vectors into a vector DB ex: chromaDB, FAISS, ASTRADB
 
 ### Data Ingestion:
-![[learning.langchain.document-ingestion]]
+[[learning.langchain.document-ingestion]]
+
+### Text splitting
+[[learning.langchain.text-splitting]]
