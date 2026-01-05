@@ -7,7 +7,7 @@ created: 1766573623812
 ---
 
 ## Gen AI evolution 
-![GEN AI](/assets/images/GEN-AI.png)
+![GEN AI](/assets/images/Gen-AI.png)
 ### AI
 - simulation of **Human intelligence** by machines
 - key focus: **decision making, problem solving**, understanding language. Major use case in rule based systems like playing chess or diagnosing simple medical conditions.
