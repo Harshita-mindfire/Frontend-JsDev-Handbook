@@ -74,3 +74,55 @@ text_splitter=CharacterTextSplitter(separator=" ", chunk_size=40, chunk_overlap=
 final_docs=text_splitter.split_documents(docs)
 final_docs
 ```
+
+## HTMLHeaderTextSplitter
+
+HTMLHeaderTextSplitter is not primarily a chunk-size splitter.
+
+Its job is to:
+
+- Parse HTML
+- Group text by semantic structure (headers like <h1>, <h2>)
+- Attach the header hierarchy as metadata
+
+```py
+from langchain_text_splitters import HTMLHeaderTextSplitter
+url = "https://plato.stanford.edu/entries/goedel/"
+
+headers_to_split_on = [
+    ("h1", "Header 1"),
+    ("h2", "Header 2"),
+]
+html_splitter = HTMLHeaderTextSplitter(headers_to_split_on)
+html_header_splits = html_splitter.split_text_from_url(url)
+html_header_splits
+```
+
+
+- Downloads the HTML from the URL
+- Parses the DOM
+- Finds `<h1> / <h2>` tags you specified
+- Collects all text nodes that appear after a header and before the next relevant header
+- Concatenates that text into a single string
+- Stores it as Document.page_content
+
+
+## RecurrsiveJsonSplitter
+
+This json splitter splits json data while allowing control over chunk sizes. It traverses json data depth first and builds smaller json chunks. It attempts to keep nested json objects whole but will split them if needed to keep chunks between a min_chunk_size and the max_chunk_size.
+
+If the value is not a nested json, but rather a very large string the string will not be split. If you need a hard cap on the chunk size consider composing this with a Recursive Text splitter on those chunks. There is an optional pre-processing step to split lists, by first converting them to json (dict) and then splitting them as such.
+
+- How the text is split: json value.
+- How the chunk size is measured: by number of characters.
+
+```py
+import json
+import requests
+from langchain_text_splitters import RecursiveJsonSplitter
+
+json_data=requests.get("https://api.smith.langchain.com/openapi.json").json()
+
+json_text = RecursiveJsonSplitter(max_chunk_size=100)
+json_chunks=json_text.split_json(json_data)
+```
