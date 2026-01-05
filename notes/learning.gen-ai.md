@@ -60,11 +60,11 @@ relies on 4 main components
 
 ## Types of Gen AI models
 
-- **Generative adversarial Networks(GAns)**
+- **Generative adversarial Networks(GANs)**
 - **Variational autoencoders(VAEs)**
 - **Transformer models like GPT**
 
-**Generative adversarial Networks(GAns)**
+**Generative adversarial Networks(GANs)**
 - popular models for image generation
 - consits of 2 neural networks: Generator and Discriminator.
 
