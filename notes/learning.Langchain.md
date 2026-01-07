@@ -6,20 +6,27 @@ updated: 1766727093332
 created: 1766727093332
 ---
 - open source development framework for LLM applications.
+- A framework that helps you build LLM-powered apps by handling prompts, memory, tools, and data so you don’t have to reinvent the wheel.
 - two packages: python and JS(TS)
-- key value adds:
-    - modular components
-    - uses cases: common ways to combine components.
 
-## Common components of Langchain
-- **Models**
-- **Prompts**: how to get models to do the work
-- **Indexes**: ways of ingesting data so that you can combine it with model
-- **Chains**: end to end use cases.
-- **Agents**: a endtime use case which uses the model as reasoning engine.
+With LangChain, you get:
+- **Prompt templates**
+- **Chains** (step-by-step LLM workflows)
+- **Agents** (LLM decides what tool to use)
+- **Memory** (conversation state)
+- **Retrieval** (RAG with vector databases)
+- **Tool calling** (search, DBs, APIs, code)
 
 
-## Memory types
+## Memory
+Memory lets the app remember:
+- Previous messages
+- User preferences
+- Intermediate steps
+
+Very useful for chatbots, assistants, and copilots.
+
+### Memory types
 
 **ConversationBufferMemory**
  
@@ -46,8 +53,6 @@ Stores text (from conversation or elsewhere) in a vector database and retrieves 
 **Entity memories**
  
 Using an LLM, it remembers details about specific entities.
- 
-
 
 You can also use multiple memories at one time.
  
@@ -57,22 +62,19 @@ You can also store the conversation in a conventional database (such as key-valu
 
 
 ## Chains
-
 ### LLM Chain
 An LLM Chain is:
 >A repeatable, parameterized, composable workflow around LLM calls.
+- LLMChain is a primitive / building-block chain.
+- wraps one prompt + one model call
 
-Think of it like a function instead of a one-off script.
 
-Just like:
-You can write raw SQL everywhere
-But ORMs exist for large systems
 ```py
 from langchain.chat_models import ChatOpenAI 
 from langchain.prompts import ChatPromptTemplate 
-from langchain.chains import 
+from langchain.chains import LLMChain
 
-LLMChain llm = ChatOpenAI(temperature=0.9, model=llm_model) 
+llm = ChatOpenAI(temperature=0.9, model=llm_model) 
 
 prompt = ChatPromptTemplate.from_template( "What is the best name to describe \ a company that makes {product}?" ) 
 
@@ -81,86 +83,13 @@ product = "Queen Size Sheet Set"
 chain.run(product) #Royal Beddings or anything the gpt responds with
 ```
 
-#### Key benefits of using an LLM Chain
-
-🔹 **1. Prompt templating & variable injection**
-This becomes powerful when: Prompts are long, Variables are many, Prompts are reused across files.
-
-**🔹 2. Reusability & maintainability** 
-You define the prompt once, Instead of copy-pasting prompts everywhere.
-```py
-chain.run("Queen Size Sheet Set")
-chain.run("Organic Soap")
-chain.run("AI SaaS Platform")
-```
-**🔹 3. Easy model swapping & configuration**
-Change model/temperature without touching your logic.
-```py
-llm = ChatOpenAI(model="gpt-4", temperature=0.2)
-```
-**🔹 4. Multi-step workflows (the real power)**
-Chains become useful when steps depend on each other:
-Example:
-
-Generate product description
-
-Extract keywords from description
-
-Generate brand name from keywords
-
-Validate brand name
-
-This cannot be done with one prompt cleanly.
-
-**🔹 5. Composition(chains calling chains) with tools, memory, retrievers**
-
-Chains can be stacked:
-```py
-User Input
-   ↓
-Summarization Chain
-   ↓
-Translation Chain
-   ↓
-Tone Adjustment Chain
-   ↓
-Final Output
-```
-
-Chains can integrate:
-
-🔍 Vector databases
-
-🧠 Conversation memory
-
-🛠️ Tools & function calling
-
-🔄 Retries & fallback models
-
-📊 Tracing & observability
-
-Example:
-
-```py
-
-User Question
-   ↓
-Retrieve relevant docs
-   ↓
-Insert into prompt
-   ↓
-LLM answers with citations
-```
-This is the backbone of RAG (Retrieval-Augmented Generation).
 
 ### SequentialChain
 
-- another type of chain that combine multiple chains where o/p of one chain is i/p of the next chain.
+- wires multiple chains together where o/p of one chain is i/p of the next chain.
 2 types of sequential chains: 
 - **SimpleSequentialChain**: single i/p and o/p
 - **SequentialChain**: any step of the chain can take multiple i/p and o/p
-
-
 
 **SimpleSequentialChain**
 ```py
@@ -246,32 +175,76 @@ overall_chain(review)
 A Router Chain is a LangChain pattern used when you don’t want one single prompt or chain to handle every input, but instead want the system to decide which chain should run based on the input.
 
 Think of it as an LLM-powered if / else or switch statement.
-
-1️⃣ The core idea (plain English)
-
-Given an input, choose the most appropriate chain to handle it.
-
+**The core idea** : Given an input, choose the most appropriate chain to handle it.
 Example:
-
 If input is a math question → use math chain
-
 If input is code-related → use coding chain
-
 If input is customer support → use support chain
-
 You route the request to the right specialist
 
-```text
+### Key benefits of using Chain
+
+🔹 **1. Prompt templating & variable injection**
+This becomes powerful when: Prompts are long, Variables are many, Prompts are reused across files.
+
+**🔹 2. Reusability & maintainability** 
+You define the prompt once, Instead of copy-pasting prompts everywhere.
+```py
+chain.run("Queen Size Sheet Set")
+chain.run("Organic Soap")
+chain.run("AI SaaS Platform")
+```
+**🔹 3. Easy model swapping & configuration**
+Change model/temperature without touching your logic.
+```py
+llm = ChatOpenAI(model="gpt-4", temperature=0.2)
+```
+**🔹 4. Multi-step workflows (SequentialChain)**
+While an LLMChain represents a single step, real power comes from composing multiple LLMChains using SequentialChain, RouterChain, or Agents.
+
+**🔹 5. Composition(chains calling chains) with tools, memory, retrievers**
+
+Chains can be stacked:
+```py
 User Input
-    ↓
-Router Chain (decides destination)
-    ↓
-Chosen Sub-Chain
-    ↓
+   ↓
+Summarization Chain
+   ↓
+Translation Chain
+   ↓
+Tone Adjustment Chain
+   ↓
 Final Output
 ```
 
-## Common components of RAG(Retrieval Augmented Generation)
+Chains can integrate: 🔍 Vector databases, 🧠 Conversation memory, 🛠️ Tools & function calling, 🔄 Retries & fallback models, 📊 Tracing & observability
+
+Example:
+
+```py
+
+User Question
+   ↓
+Retrieve relevant docs
+   ↓
+Insert into prompt
+   ↓
+LLM answers with citations
+```
+This is the backbone of RAG (Retrieval-Augmented Generation).
+
+## Retrieval (RAG)
+
+LangChain makes it easy to:
+- Load documents (PDFs, Notion, websites)
+- Embed them into vectors
+- Store them in a vector database
+- Retrieve relevant chunks
+- Inject them into the prompt
+
+This pattern is called **Retrieval-Augmented Generation (RAG)**.
+
+### Common components of RAG(Retrieval Augmented Generation)
 
 ```mermaid
   graph TD;
@@ -280,15 +253,32 @@ Final Output
       Text-embedding-->VectorStore-DB;
 ```
 
-- Data-Source: (Load data into langchain/Data ingestion)
+- **Data-Ingestion**: (Load data into langchain/Data ingestion)
 
-- Data-Transformation : (breaking data into text chunks)
+- **Data-Transformation** : (breaking data into text chunks)
 
-- Text-embedding: converting text into vectors using embedding techniques. This is required for different algorithms to run(similarity serach). 
-- VectorStore-DB: saving vectors into a vector DB ex: chromaDB, FAISS, ASTRADB
+- **Embedding**: converting text into vectors using embedding techniques. This is required for different algorithms to run(similarity serach). 
+
+- **VectorStore-DB**: saving vectors into a vector DB ex: chromaDB, FAISS, ASTRADB
+
+The details are present in their invdiviual pages below
 
 ### Data Ingestion:
 [[learning.langchain.document-ingestion]]
 
-### Text splitting
+### Data-Transformation(Text splitting)
 [[learning.langchain.text-splitting]]
+
+### Embeddings
+[[learning.langchain.embeddings]]
+
+
+## Tools
+Tools can be things like:
+- Web search
+- SQL queries
+- Python execution
+- APIs
+- File systems
+
+LangChain gives a standard way to expose these tools to an LLM.
