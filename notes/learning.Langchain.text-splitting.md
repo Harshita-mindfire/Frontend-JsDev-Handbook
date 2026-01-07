@@ -82,7 +82,7 @@ HTMLHeaderTextSplitter is not primarily a chunk-size splitter.
 Its job is to:
 
 - Parse HTML
-- Group text by semantic structure (headers like <h1>, <h2>)
+- Group text by semantic structure `(headers like <h1>, <h2>)`
 - Attach the header hierarchy as metadata
 
 ```py
