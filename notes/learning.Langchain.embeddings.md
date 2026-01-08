@@ -75,6 +75,20 @@ Platform where we can use open source LLM models like Llama 3, gemma etc.
 - can run in local
 https://ollama.com/blog/embedding-models
 
+- Pull in the embedding model you want to use: 
+```txt
+ollama pull mxbai-embed-large
+```
+
+- run the curl command to see if the image is present
+```txt
+curl http://localhost:11434/api/embeddings -d '{
+  "model": "mxbai-embed-large",
+  "prompt": "Represent this sentence for searching relevant passages: The sky is blue because of Rayleigh scattering"
+}'
+```
+- create embeddings
+
 ```py
 from langchain_community.embeddings import OllamaEmbeddings
 embeddings = OllamaEmbeddings(model="mxbai-embed-large")
