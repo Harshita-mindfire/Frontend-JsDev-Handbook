@@ -1,0 +1,212 @@
+<h1 id="route-handlers">Route Handlers<a aria-hidden="true" class="anchor-heading icon-link" href="#route-handlers"></a></h1>
+<ul>
+<li>
+<p>app router also let us create <strong>custom request handlers for your routes</strong>.</p>
+</li>
+<li>
+<p>unlike page routes, which returns HTML content, Route handlers let us build RESTFUL endpoints with complete control over response.</p>
+</li>
+<li>
+<p>Just like Node + express app.</p>
+</li>
+<li>
+<p>good for making external API request</p>
+</li>
+<li>
+<p>runs server side, hence the secret keys are also secured and never reaches browser</p>
+</li>
+<li>
+<p>supports <strong>GET, POST, PUT, PATCH DELETE, HEAD, OPTIONS.</strong></p>
+</li>
+<li>
+<p>returns 405 method not allowed response for unsupported method.</p>
+</li>
+<li>
+<p>we are studing app router here, but if you remember page router, route handlers are equivalent to /api routes.</p>
+</li>
+</ul>
+<h2 id="conventions">Conventions<a aria-hidden="true" class="anchor-heading icon-link" href="#conventions"></a></h2>
+<ul>
+<li>
+<p>create  <code>route.ts</code> file inside app directory.</p>
+</li>
+<li>
+<p><strong>the route.ts file in the same route segment level as page.tsx will result in a conflict and page.tsx will not be served. Instead the route handler handles the request</strong></p>
+</li>
+<li>
+<p>the Handler functions takes 2 parameters</p>
+<ul>
+<li>request object => request: NextRequest </li>
+<li>context object containing route params => {params} : {params: Promise&#x3C;{id: string}>}</li>
+</ul>
+</li>
+</ul>
+<h2 id="dynamic-route-handlers">Dynamic route handlers<a aria-hidden="true" class="anchor-heading icon-link" href="#dynamic-route-handlers"></a></h2>
+<pre class="language-graphql"><code class="language-graphql">
+- <span class="token property">app</span>
+    <span class="token operator">|</span><span class="token property">___comments</span>
+         <span class="token operator">|</span><span class="token property">_____route</span>.<span class="token property">ts</span>
+                 <span class="token operator">|</span><span class="token property">_____</span><span class="token punctuation">[</span><span class="token property">id</span><span class="token punctuation">]</span>
+                        <span class="token operator">|</span><span class="token property">______route</span>.<span class="token property">ts</span>
+</code></pre>
+<h3 id="examples">Examples<a aria-hidden="true" class="anchor-heading icon-link" href="#examples"></a></h3>
+<ul>
+<li><strong>contents of /app/comments/route.ts:</strong></li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token comment">// route handler</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> comments <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"./data"</span><span class="token punctuation">;</span>
+<span class="token comment">// Get method</span>
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">GET</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token maybe-class-name">Response</span><span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span>comments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// post method</span>
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">POST</span><span class="token punctuation">(</span>request<span class="token operator">:</span> <span class="token maybe-class-name">Request</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> content <span class="token operator">=</span> <span class="token keyword control-flow">await</span> request<span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// similar to DB call</span>
+  <span class="token keyword">const</span> newComment <span class="token operator">=</span> <span class="token punctuation">{</span>
+    id<span class="token operator">:</span> comments<span class="token punctuation">.</span><span class="token property-access">length</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    text<span class="token operator">:</span> content<span class="token punctuation">.</span><span class="token property-access">text</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  comments<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>newComment<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token maybe-class-name">Response</span></span><span class="token punctuation">(</span><span class="token known-class-name class-name">JSON</span><span class="token punctuation">.</span><span class="token method function property-access">stringify</span><span class="token punctuation">(</span>newComment<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"Content-Type"</span><span class="token operator">:</span> <span class="token string">"application/json"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    status<span class="token operator">:</span> <span class="token number">201</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><strong>contents of /app/comments/[id]/route.ts</strong></li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">NextRequest</span> <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"next/server"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// dynamic route handle, get comment with a specific id</span>
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">GET</span><span class="token punctuation">(</span>
+  _request<span class="token operator">:</span> <span class="token maybe-class-name">NextRequest</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> params <span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span> params<span class="token operator">:</span> <span class="token known-class-name class-name">Promise</span><span class="token operator">&#x3C;</span><span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token operator">></span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> id <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword control-flow">await</span> params<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> comment <span class="token operator">=</span> comments<span class="token punctuation">.</span><span class="token method function property-access">find</span><span class="token punctuation">(</span><span class="token punctuation">(</span>comment<span class="token punctuation">)</span> <span class="token arrow operator">=></span> comment<span class="token punctuation">.</span><span class="token property-access">id</span> <span class="token operator">===</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token maybe-class-name">Response</span><span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span>comment<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// patch</span>
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">PATCH</span><span class="token punctuation">(</span>
+  request<span class="token operator">:</span> <span class="token maybe-class-name">NextRequest</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> params <span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span> params<span class="token operator">:</span> <span class="token known-class-name class-name">Promise</span><span class="token operator">&#x3C;</span><span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token operator">></span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> body <span class="token operator">=</span> <span class="token keyword control-flow">await</span> request<span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> id <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword control-flow">await</span> params<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> text <span class="token punctuation">}</span> <span class="token operator">=</span> body<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> index <span class="token operator">=</span> comments<span class="token punctuation">.</span><span class="token method function property-access">findIndex</span><span class="token punctuation">(</span><span class="token punctuation">(</span>comment<span class="token punctuation">)</span> <span class="token arrow operator">=></span> comment<span class="token punctuation">.</span><span class="token property-access">id</span> <span class="token operator">===</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  comments<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token property-access">text</span> <span class="token operator">=</span> text<span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token maybe-class-name">Response</span><span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span>comments<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">DELETE</span><span class="token punctuation">(</span>
+  _request<span class="token operator">:</span> <span class="token maybe-class-name">NextRequest</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span> params <span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span> params<span class="token operator">:</span> <span class="token known-class-name class-name">Promise</span><span class="token operator">&#x3C;</span><span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token operator">></span> <span class="token punctuation">}</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> id <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword control-flow">await</span> params<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> index <span class="token operator">=</span> comments<span class="token punctuation">.</span><span class="token method function property-access">findIndex</span><span class="token punctuation">(</span><span class="token punctuation">(</span>comment<span class="token punctuation">)</span> <span class="token arrow operator">=></span> comment<span class="token punctuation">.</span><span class="token property-access">id</span> <span class="token operator">===</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> deletedData <span class="token operator">=</span> comments<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  comments<span class="token punctuation">.</span><span class="token method function property-access">splice</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token maybe-class-name">Response</span><span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span>deletedData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="url-query-params">URL Query Params<a aria-hidden="true" class="anchor-heading icon-link" href="#url-query-params"></a></h2>
+<p>Fetching the params after ?</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">NextRequest</span> <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"next/server"</span><span class="token punctuation">;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> comments <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"./data"</span><span class="token punctuation">;</span>
+
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">GET</span><span class="token punctuation">(</span>request<span class="token operator">:</span> <span class="token maybe-class-name">NextRequest</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> searchParams <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token property-access">nextUrl</span><span class="token punctuation">.</span><span class="token property-access">searchParams</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> query <span class="token operator">=</span> searchParams<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token string">"query"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> filteredComments <span class="token operator">=</span> query
+    <span class="token operator">?</span> comments<span class="token punctuation">.</span><span class="token method function property-access">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span>comment<span class="token punctuation">)</span> <span class="token arrow operator">=></span> comment<span class="token punctuation">.</span><span class="token property-access">text</span><span class="token punctuation">.</span><span class="token method function property-access">includes</span><span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token operator">:</span> comments<span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token maybe-class-name">Response</span><span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span>filteredComments<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="headers">Headers<a aria-hidden="true" class="anchor-heading icon-link" href="#headers"></a></h2>
+<ul>
+<li>
+<p>HTTP headers represents the metadata associated with req and response</p>
+<ul>
+<li>
+<p><strong>Request Headers</strong>: sent by client(like web browser) to server. Sends essential info about request to servers. eg: accept, user-agent, authorization etc.</p>
+</li>
+<li>
+<p><strong>Response Headers</strong>: sent back from server to client.
+provide info about the server and the data being sent in response.
+eg: "Content-Type",</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="examples-1">Examples<a aria-hidden="true" class="anchor-heading icon-link" href="#examples-1"></a></h3>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> headers <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"next/headers"</span>
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">GET</span><span class="token punctuation">(</span>request<span class="token operator">:</span> <span class="token maybe-class-name">NextRequest</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> headerData <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">headers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> token <span class="token operator">=</span> headerData<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token string">"Authorization"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"token"</span><span class="token punctuation">,</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> query <span class="token operator">=</span> searchParams<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token string">"query"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token maybe-class-name">Response</span></span><span class="token punctuation">(</span><span class="token string">"&#x3C;h1> Hi&#x3C;/h1>"</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"Content-Type"</span><span class="token operator">:</span> <span class="token string">"text/html"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="cookies">Cookies<a aria-hidden="true" class="anchor-heading icon-link" href="#cookies"></a></h2>
+<ul>
+<li>small piece of data that server sends to user's web browser.</li>
+<li>browser can store cookies and send it back to server with future request.</li>
+</ul>
+<p>3 main purpose</p>
+<ul>
+<li>managing user session (like user login and shopping cart)</li>
+<li>handling personalizations(such user preferences and themes)</li>
+<li>tracking (like recording and analyzing user behaviour)</li>
+</ul>
+<h3 id="example-setting-and-retrieving-via-headers-and-request">Example: Setting and retrieving via headers and request<a aria-hidden="true" class="anchor-heading icon-link" href="#example-setting-and-retrieving-via-headers-and-request"></a></h3>
+<pre class="language-tsx"><code class="language-tsx"><span class="token comment">//setting a cookie</span>
+<span class="token keyword control-flow">return</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token maybe-class-name">Response</span></span><span class="token punctuation">(</span><span class="token known-class-name class-name">JSON</span><span class="token punctuation">.</span><span class="token method function property-access">stringify</span><span class="token punctuation">(</span>comment<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"Set-Cookie"</span><span class="token operator">:</span> <span class="token string">"theme=dark"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<pre class="language-tsx"><code class="language-tsx"><span class="token comment">//retrieving cookie</span>
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">GET</span><span class="token punctuation">(</span>
+  request<span class="token operator">:</span> <span class="token maybe-class-name">NextRequest</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> cookies <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token property-access">cookies</span><span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token string">"theme"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>cookies<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// { name: 'theme', value: 'dark' }</span>
+</code></pre>
+<h3 id="example-setting-using-cookies-from-nextheaders">Example: setting using cookies from next/headers<a aria-hidden="true" class="anchor-heading icon-link" href="#example-setting-using-cookies-from-nextheaders"></a></h3>
+<pre class="language-tsx"><code class="language-tsx"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> cookies <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"next/headers"</span><span class="token punctuation">;</span>
+
+cookieStore<span class="token punctuation">.</span><span class="token method function property-access">set</span><span class="token punctuation">(</span><span class="token string">"resultsPerPage"</span><span class="token punctuation">,</span> <span class="token string">"20"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>cookieStore<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token string">"resultsPerPage"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="redirect-in-route-handlers">redirect in route handlers<a aria-hidden="true" class="anchor-heading icon-link" href="#redirect-in-route-handlers"></a></h2>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span>redirect<span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"next-navigation"</span>
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token constant">GET</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token function">redirect</span><span class="token punctuation">(</span><span class="token string">'/api/v2/users'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="caching">Caching<a aria-hidden="true" class="anchor-heading icon-link" href="#caching"></a></h2>
+<p>route handlers are not cached by default but you can opt for caching when using <strong>GET</strong> method.</p>
+<ul>
+<li>Caching <strong>only</strong> works with <strong>GET</strong> methods. Other HTTP methods are never cached.</li>
+</ul>
+<h2 id="middleware">middleware<a aria-hidden="true" class="anchor-heading icon-link" href="#middleware"></a></h2>
+<ul>
+<li>intercepts the request response cycle.</li>
+<li>enables redirects, rewrites.</li>
+<li>can be used to manipulate both header and cookies</li>
+<li>written in src folder</li>
+</ul>

@@ -1,0 +1,89 @@
+<h1 id="algo">Algo<a aria-hidden="true" class="anchor-heading icon-link" href="#algo"></a></h1>
+<p>This hierarchy contains my notes for algorithms</p>
+<h2 id="binary-search-tree">Binary Search Tree<a aria-hidden="true" class="anchor-heading icon-link" href="#binary-search-tree"></a></h2>
+<p>Binary Search Tree is a node-based binary tree data structure which has the following properties:</p>
+<ul>
+<li>The left subtree of a node contains only nodes with keys lesser than the node’s key.</li>
+<li>The right subtree of a node contains only nodes with keys greater than the node’s key.</li>
+<li>The left and right subtree each must also be a binary search tree.</li>
+</ul>
+<p>Inorder traversal(Left --> Root --> Right) of BST gives a sorted values.</p>
+<h2 id="avl-tree">AVL Tree<a aria-hidden="true" class="anchor-heading icon-link" href="#avl-tree"></a></h2>
+<p>AVL tree is a self-balancing Binary Search Tree (BST) where the difference between heights of left and right subtrees cannot be more than one for all nodes.</p>
+<h2 id="graph-algos">Graph Algos<a aria-hidden="true" class="anchor-heading icon-link" href="#graph-algos"></a></h2>
+<p><a href="https://www.youtube.com/watch?v=cWNEl4HE2OE">https://www.youtube.com/watch?v=cWNEl4HE2OE</a></p>
+<h3 id="creating-adjacency-list">Creating adjacency list<a aria-hidden="true" class="anchor-heading icon-link" href="#creating-adjacency-list"></a></h3>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> airports <span class="token operator">=</span> <span class="token string">"Del Mum Kol Bng Deh Pnt"</span><span class="token punctuation">.</span><span class="token method function property-access">split</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//console.log(airports);</span>
+<span class="token keyword">const</span> routes <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token string">"Del"</span><span class="token punctuation">,</span> <span class="token string">"Deh"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">"Del"</span><span class="token punctuation">,</span> <span class="token string">"Mum"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">"Del"</span><span class="token punctuation">,</span><span class="token string">"Bng"</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">"Mum"</span><span class="token punctuation">,</span> <span class="token string">"Kol"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">"Deh"</span><span class="token punctuation">,</span> <span class="token string">"Pnt"</span><span class="token punctuation">]</span>
+    <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> adjacencyList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// add key value</span>
+<span class="token keyword">function</span> <span class="token function">addNode</span><span class="token punctuation">(</span><span class="token parameter">airport</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    adjacencyList<span class="token punctuation">.</span><span class="token method function property-access">set</span><span class="token punctuation">(</span>airport<span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+airports<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">airport</span> <span class="token arrow operator">=></span> <span class="token function">addNode</span><span class="token punctuation">(</span>airport<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//console.log(adjacencyList);</span>
+
+<span class="token keyword">function</span> <span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token parameter">src<span class="token punctuation">,</span> dest</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    adjacencyList<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    adjacencyList<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+routes<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">route</span> <span class="token arrow operator">=></span> <span class="token function">addEdge</span><span class="token punctuation">(</span><span class="token spread operator">...</span>route<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">// console.log(adjacencyList);</span>
+</code></pre>
+<h3 id="dfs">DFS<a aria-hidden="true" class="anchor-heading icon-link" href="#dfs"></a></h3>
+<pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">Dfs</span></span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> visited <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    visited<span class="token punctuation">.</span><span class="token method function property-access">add</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> dests <span class="token operator">=</span> adjacencyList<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    dests<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">dest</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+        <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span>
+        <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>dest <span class="token operator">===</span> <span class="token string">"Deh"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"reached"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword control-flow">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">.</span><span class="token method function property-access">has</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function"><span class="token maybe-class-name">Dfs</span></span><span class="token punctuation">(</span>dest<span class="token punctuation">,</span> visited<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token function"><span class="token maybe-class-name">Dfs</span></span><span class="token punctuation">(</span><span class="token string">"Mum"</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="bfs">BFS<a aria-hidden="true" class="anchor-heading icon-link" href="#bfs"></a></h3>
+<pre class="language-js"><code class="language-js"><span class="token comment">// BFS with entry point Mum (also log if reached Bng)</span>
+
+<span class="token keyword">function</span> <span class="token constant">BFS</span><span class="token punctuation">(</span><span class="token parameter">root</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> visited <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> queue <span class="token operator">=</span> <span class="token punctuation">[</span>root<span class="token punctuation">]</span>
+    visited<span class="token punctuation">.</span><span class="token method function property-access">add</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>
+
+    <span class="token keyword control-flow">while</span><span class="token punctuation">(</span>queue<span class="token punctuation">.</span><span class="token property-access">length</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> airport <span class="token operator">=</span> queue<span class="token punctuation">.</span><span class="token method function property-access">shift</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">const</span> dests <span class="token operator">=</span> adjacencyList<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span>airport<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dests<span class="token punctuation">.</span><span class="token method function property-access">forEach</span><span class="token punctuation">(</span><span class="token parameter">dest</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+            <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span>
+            <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>dest <span class="token operator">===</span> <span class="token string">"Bng"</span><span class="token punctuation">)</span> <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"Reached Bng"</span><span class="token punctuation">)</span>
+        <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token operator">!</span>visited<span class="token punctuation">.</span><span class="token method function property-access">has</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            visited<span class="token punctuation">.</span><span class="token method function property-access">add</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span>
+            queue<span class="token punctuation">.</span><span class="token method function property-access">push</span><span class="token punctuation">(</span>dest<span class="token punctuation">)</span> 
+
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+            <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>visited<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+<span class="token constant">BFS</span><span class="token punctuation">(</span><span class="token string">"Mum"</span><span class="token punctuation">)</span>
+</code></pre>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/j9jpiepog4v2wpio08om6ng">Big O Notation</a></li>
+</ol>

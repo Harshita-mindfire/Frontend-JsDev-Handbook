@@ -1,0 +1,108 @@
+<h1 id="hooks">Hooks<a aria-hidden="true" class="anchor-heading icon-link" href="#hooks"></a></h1>
+<h2 id="cheatsheet">Cheatsheet<a aria-hidden="true" class="anchor-heading icon-link" href="#cheatsheet"></a></h2>
+<ul>
+<li><a href="https://react-hooks-cheatsheet.com/">https://react-hooks-cheatsheet.com/</a></li>
+</ul>
+<h2 id="useref">useRef<a aria-hidden="true" class="anchor-heading icon-link" href="#useref"></a></h2>
+<ul>
+<li>returns an object {current: <initialvaluepassedtouseref>}</initialvaluepassedtouseref></li>
+<li>You can store information between re-renders (unlike regular variables, which reset on every render).</li>
+<li>mutating ref.current does not re-render component since it is a plain js object.</li>
+</ul>
+<h2 id="uselayouteffect">useLayoutEffect<a aria-hidden="true" class="anchor-heading icon-link" href="#uselayouteffect"></a></h2>
+<ul>
+<li>
+<p>useLayoutEffect is a version of useEffect that fires before the browser repaints the screen.</p>
+</li>
+<li>
+<p>is synchronous. Hurts performance, prefer useEffect whereever possible</p>
+</li>
+<li>
+<p>After every re-render with changed dependencies, React will first run the cleanup function (if you provided it) with the old values, and then run your setup function with the new values. Before your component is removed from the DOM, React will run your cleanup function.</p>
+</li>
+<li>
+<p><a href="https://blog.logrocket.com/useeffect-vs-uselayouteffect-examples/">Difference between useeffect and useLayoutEffect with examples</a></p>
+</li>
+</ul>
+<h2 id="usestate">useState<a aria-hidden="true" class="anchor-heading icon-link" href="#usestate"></a></h2>
+<ul>
+<li><a href="https://jser.dev/2023-06-19-how-does-usestate-work/">https://jser.dev/2023-06-19-how-does-usestate-work/</a></li>
+</ul>
+<h1 id="all-kinds-of-effects">All kinds of effects<a aria-hidden="true" class="anchor-heading icon-link" href="#all-kinds-of-effects"></a></h1>
+<p>Rule:</p>
+<ul>
+<li>
+<p>Rendering (high to low): main thread -> useInsertionEffect -> useLayoutEffect -> useEffect</p>
+</li>
+<li>
+<p>re- Rendering (high to low): main thread -> useInsertionEffect cleanup, then immediately executed -> useLayoutEffect clean up then immediately executed. -> useEffect ALL cleanup -> useEffect executed one by one by order</p>
+</li>
+<li>
+<p>a child's useEffect is ran first then its parent's: <a href="https://bigfrontend.dev/react-quiz/useeffect-iii">https://bigfrontend.dev/react-quiz/useeffect-iii</a></p>
+</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token comment">// This is a React Quiz from BFE.dev </span>
+
+<span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">React</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> useState<span class="token punctuation">,</span> useEffect<span class="token punctuation">,</span> useLayoutEffect<span class="token punctuation">,</span> useInsertionEffect<span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'react'</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">ReactDOM</span></span> <span class="token keyword module">from</span> <span class="token string">'react-dom'</span>
+
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span> setState<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">setState</span><span class="token punctuation">(</span><span class="token parameter">state</span> <span class="token arrow operator">=></span> state <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+  <span class="token function">useLayoutEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>
+    <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+  <span class="token function">useInsertionEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span>
+    <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword null nil">null</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> root <span class="token operator">=</span> <span class="token maybe-class-name">ReactDOM</span><span class="token punctuation">.</span><span class="token method function property-access">createRoot</span><span class="token punctuation">(</span><span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">'root'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+root<span class="token punctuation">.</span><span class="token method function property-access">render</span><span class="token punctuation">(</span><span class="token operator">&#x3C;</span><span class="token maybe-class-name">App</span><span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">)</span>
+
+</code></pre>
+<blockquote>
+<p>1
+10
+8
+6
+2
+4
+1
+10
+9
+8
+7
+6
+3
+5
+2
+4</p>
+</blockquote>

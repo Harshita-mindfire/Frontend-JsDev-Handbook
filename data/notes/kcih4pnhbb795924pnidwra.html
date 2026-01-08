@@ -1,0 +1,70 @@
+<h1 id="basics">Basics<a aria-hidden="true" class="anchor-heading icon-link" href="#basics"></a></h1>
+<h2 id="basics-1">Basics<a aria-hidden="true" class="anchor-heading icon-link" href="#basics-1"></a></h2>
+<p>Go through this codebase:</p>
+<p><a href="https://github.com/krishnaik06/Complete-Python-Bootcamp/tree/main/1-Python%20Basics">https://github.com/krishnaik06/Complete-Python-Bootcamp/tree/main/1-Python%20Basics</a></p>
+<p><strong>Some Notes</strong>: </p>
+<ul>
+<li><strong>/ is true division</strong>. In Python, / always returns a float, even when the math result is a whole number.</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token number">4</span> <span class="token operator">/</span> <span class="token number">2</span>
+</code></pre>
+<blockquote>
+<p>➡️ 2.0</p>
+</blockquote>
+<p>Why?
+Python 3 defines / as true division.</p>
+<p>Result is always <strong>float</strong>.</p>
+<ul>
+<li><strong>// is floor division</strong></li>
+</ul>
+<p>// returns the quotient rounded down.</p>
+<pre class="language-py"><code class="language-py"><span class="token number">4</span> <span class="token operator">//</span> <span class="token number">2</span>
+</code></pre>
+<blockquote>
+<p>➡️ 2</p>
+</blockquote>
+<p>Why is it an int here?</p>
+<p>Both operands are integers. Result is an integer</p>
+<p>But watch this:</p>
+<pre class="language-py"><code class="language-py"><span class="token number">4.0</span> <span class="token operator">//</span> <span class="token number">2</span>
+</code></pre>
+<blockquote>
+<p>➡️ 2.0</p>
+</blockquote>
+<p>and:</p>
+<pre class="language-py"><code class="language-py"><span class="token number">4</span> <span class="token operator">//</span> <span class="token number">2.0</span>
+</code></pre>
+<blockquote>
+<p>➡️ 2.0</p>
+</blockquote>
+<p>So again:</p>
+<p><strong>If any operand is float → result is float</strong></p>
+<h2 id="input">input<a aria-hidden="true" class="anchor-heading icon-link" href="#input"></a></h2>
+<pre class="language-py"><code class="language-py">age<span class="token operator">=</span><span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"Enter your age:"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>age<span class="token punctuation">,</span><span class="token builtin">type</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="common-errors">common errors<a aria-hidden="true" class="anchor-heading icon-link" href="#common-errors"></a></h2>
+<pre class="language-py"><code class="language-py">result<span class="token operator">=</span><span class="token string">"Hello"</span> <span class="token operator">+</span> <span class="token number">5</span>
+ 
+<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
+TypeError                                 Traceback <span class="token punctuation">(</span>most recent call last<span class="token punctuation">)</span>
+Cell In<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">,</span> line <span class="token number">3</span>
+      <span class="token number">1</span> <span class="token comment">## common errors</span>
+<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span> <span class="token number">3</span> result<span class="token operator">=</span><span class="token string">"Hello"</span> <span class="token operator">+</span> <span class="token number">5</span>
+
+TypeError<span class="token punctuation">:</span> can only concatenate <span class="token builtin">str</span> <span class="token punctuation">(</span><span class="token keyword">not</span> <span class="token string">"int"</span><span class="token punctuation">)</span> to <span class="token builtin">str</span>
+
+</code></pre>
+<pre class="language-py"><code class="language-py">result<span class="token operator">=</span><span class="token string">"Hello"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token comment">#Hello5</span>
+</code></pre>
+<h2 id="string-formating">string formating<a aria-hidden="true" class="anchor-heading icon-link" href="#string-formating"></a></h2>
+<pre class="language-py"><code class="language-py">name <span class="token operator">=</span> <span class="token string">"JO"</span>
+lname<span class="token operator">=</span> <span class="token string">"JO"</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"HI "</span><span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> lname<span class="token punctuation">)</span> <span class="token comment">#HI JO JO</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"HI </span><span class="token interpolation"><span class="token punctuation">{</span>name<span class="token punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token punctuation">{</span>lname<span class="token punctuation">}</span></span><span class="token string">, I hope you are learning."</span></span><span class="token punctuation">)</span> <span class="token comment">#HI JO JO, I hope you are learning.</span>
+
+<span class="token comment">##-2</span>
+sentence <span class="token operator">=</span> <span class="token string">"HI {} {}, I hope you are learning."</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>sentence<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> lname<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#HI JO JO, I hope you are learning.</span>
+</code></pre>

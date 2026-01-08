@@ -1,0 +1,73 @@
+<h1 id="function-first-class-entity">Function First Class Entity<a aria-hidden="true" class="anchor-heading icon-link" href="#function-first-class-entity"></a></h1>
+<p>In programming, when we say something is a "first-class entity" or "first-class citizen," we mean that it can be treated as a regular value and can be used in the same ways that other fundamental types (like numbers, strings, etc.) can be used. This concept is crucial to understanding functional programming and the flexibility it offers.</p>
+<h3 id="characteristics-of-first-class-entities">Characteristics of First-Class Entities<a aria-hidden="true" class="anchor-heading icon-link" href="#characteristics-of-first-class-entities"></a></h3>
+<ol>
+<li>
+<p><strong>Assignability</strong>: A first-class entity can be assigned to a variable.</p>
+</li>
+<li>
+<p><strong>Passability</strong>: A first-class entity can be passed as an argument to a function.</p>
+</li>
+<li>
+<p><strong>Returnability</strong>: A first-class entity can be returned from a function.</p>
+</li>
+<li>
+<p><strong>Storable</strong>: A first-class entity can be stored in data structures (like arrays, objects, etc.).</p>
+</li>
+</ol>
+<h3 id="functions-as-first-class-citizens">Functions as First-Class Citizens<a aria-hidden="true" class="anchor-heading icon-link" href="#functions-as-first-class-citizens"></a></h3>
+<p>When functions are first-class entities, it means you can do the following:</p>
+<ul>
+<li>
+<p><strong>Assign Functions to Variables</strong>: You can have a function assigned to a variable, allowing you to reference and invoke it using that variable.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">sayHello</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"Hello!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Pass Functions as Arguments</strong>: You can pass functions as parameters to other functions, enabling the use of callbacks or events.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">greet</span><span class="token punctuation">(</span><span class="token parameter">callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">greet</span><span class="token punctuation">(</span>sayHello<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "Hello!" is logged to the console</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Return Functions from Other Functions</strong>: Functions can be returned from other functions, facilitating currying or the creation of function factories.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">createGreeter</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Hello, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">!</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> greetJohn <span class="token operator">=</span> <span class="token function">createGreeter</span><span class="token punctuation">(</span><span class="token string">"John"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">greetJohn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "Hello, John!" is logged</span>
+</code></pre>
+</li>
+<li>
+<p><strong>Store Functions</strong>: Functions can be stored within array elements or object properties.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> actions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">greet</span><span class="token operator">:</span> sayHello<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+actions<span class="token punctuation">.</span><span class="token method function property-access">greet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// "Hello!" is logged</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="importance-in-javascript-and-react">Importance in JavaScript and React<a aria-hidden="true" class="anchor-heading icon-link" href="#importance-in-javascript-and-react"></a></h3>
+<ul>
+<li>
+<p><strong>JavaScript</strong>: JavaScript treats functions as first-class citizens, which allows for functional programming approaches, including the use of lambdas, closures, and higher-order functions.</p>
+</li>
+<li>
+<p><strong>React</strong>: In React, functional components, hooks, and higher-order components leverage the idea of functions as first-class entities, making the library modular, reusable, and reflective of functional programming paradigms.</p>
+</li>
+</ul>
+<p>By treating functions as first-class entities, you gain a lot of flexibility and expressive power in your programming toolkit, enabling more abstract, clean, and reusable code structures.</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/Frontend-JsDev-Handbook/notes/xqgcm6m5nb6dc5ybk4aqgyc">Functional Programming</a></li>
+</ul>
