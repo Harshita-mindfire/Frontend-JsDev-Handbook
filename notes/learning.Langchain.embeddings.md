@@ -96,4 +96,20 @@ query_result = embeddings.embed_query(text)
 
 ## HuggingFace
 
+https://huggingface.co/
 
+```py
+from dotenv import load_dotenv, find_dotenv
+import os
+load_dotenv(find_dotenv())
+
+os.environ["HF_token"] = os.getenv("HF_token")
+from langchain_huggingface import HuggingFaceEmbeddings
+embeddings=HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+
+query_result=embeddings.embed_query("This is a test document") #vector embedding for this text
+
+docs_result=embeddings.embed_documents(["This is document 1","This is a test document"]) #vector embeddings for both the list items
+docs_result[1]
+
+```
