@@ -9,10 +9,10 @@ created: 1769753131290
 ## Agents
 
 - Without tools
-![alt text](image.png)
+![alt text](/assets/images/image.png)
 
 - With tools
-![alt text](image-1.png)
+![alt text](/assets/images/image-1.png)
 
 
 ### Creating agents with langchain
@@ -64,3 +64,6 @@ for response in responses:
 for chunk in model.stream("What is our sky blue?") :
     print(chunk.text, end="", flush=True)
 ```
+
+## Middleware
+- [builtin middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/built-in): Summarization middleware, human i the feedback, model call limit etc.
