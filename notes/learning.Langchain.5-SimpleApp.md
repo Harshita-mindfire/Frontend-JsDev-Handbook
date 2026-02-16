@@ -155,3 +155,64 @@ so it replaces this manual writing to one single call
 ```py
 retrieval_chain.invoke({"input": question})
 ```
+
+## Miscellaneous 
+One of the way to write this in LCEL is (you we really need to write in LCEL)
+
+```py
+chain = (
+    {
+        "context": retriever,
+        "question": RunnablePassthrough()
+    }
+    | prompt
+    | llm
+)
+chain.invoke("What is 1+1?")
+```
+Each runnable executes
+
+RunnablePassthrough() → returns the input unchanged
+
+→ "What is 1+1?"
+
+retriever.invoke("What is 1+1?")
+
+→ returns [Document(...), Document(...)]
+
+So the dict becomes:
+```py
+{
+    "context": [Document(...), Document(...)],
+    "question": "What is 1+1?"
+}
+```
+This is different than when you do an object mapping {context: retreiver}, here retreiver is a Vector obj. but in LCEL, it is a runnable.
+    
+**Important: Retriever Is a Runnable**
+In LCEL, a retriever is a Runnable. You’re defining a computation graph, not values. That means it behaves like:
+```
+input → output
+```
+So inside a runnable mapping:
+```py
+chain = {
+   "context": retriever
+} | prompt | llm
+```
+
+Means:
+```
+"context" = retriever.invoke(input)
+```
+
+NOT:
+```py
+"context" = retriever
+```
+This here below means "context" = retriever object. That literally passes the retriever object.
+```py
+chain.invoke({
+    "context": retriever
+})
+```
