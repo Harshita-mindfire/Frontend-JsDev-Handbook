@@ -168,28 +168,43 @@ chain = (
     | prompt
     | llm
 )
-chain.invoke("What is 1+1?")
+chain.invoke("What is langchain?")
 ```
-Each runnable executes
 
-RunnablePassthrough() → returns the input unchanged
+Each runnable executes.
+For input: What is langchain, The first block is this dictionary:
 
-→ "What is 1+1?"
+**Step 1**
+```py
+{
+    "context": retriever,
+    "question": RunnablePassthrough()
+}
+```
+This block runs both values in parallel with the SAME input.
+So Internally this happens:
 
-retriever.invoke("What is 1+1?")
+1A:
+```py
+RunnablePassthrough().invoke("What is LangChain?") #output: What is langchain?
+# RunnablePassthrough() → returns the input unchanged
+```
+1B
+```py
+retriever.invoke("What is langchain?")
+#returns [Document(...), Document(...)]
 
-→ returns [Document(...), Document(...)]
+```
 
-So the dict becomes:
+**Result of Step 1**
 ```py
 {
     "context": [Document(...), Document(...)],
-    "question": "What is 1+1?"
+    "question": "What is langchain?"
 }
 ```
-This is different than when you do an object mapping {context: retreiver}, here retreiver is a Vector obj. but in LCEL, it is a runnable.
     
-**Important: Retriever Is a Runnable**
+**Important: In LCEL Retriever Is a Runnable**
 In LCEL, a retriever is a Runnable. You’re defining a computation graph, not values. That means it behaves like:
 ```
 input → output
@@ -215,4 +230,34 @@ This here below means "context" = retriever object. That literally passes the re
 chain.invoke({
     "context": retriever
 })
+```
+
+**STEP 2 — Prompt Runs**
+The prompt template expects: {question} and {context} so in LCEL chain above  `| prompt`
+is internally 
+```py
+prompt.invoke({
+    "question": "What is LangChain?",
+    "context": [Document(...)]
+})
+```
+Result of Step 2
+```py
+#formatted_prompt
+"Answer the question: What is LangChain?
+Context:
+LangChain is a framework for..."
+```
+
+**STEP 3 — LLM Runs**
+
+Now that formatted prompt is passed to: `| llm`
+
+```
+llm.invoke(formatted_prompt)
+```
+
+Output:
+```
+"LangChain is a framework designed to build applications using LLMs..."
 ```
