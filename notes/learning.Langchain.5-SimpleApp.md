@@ -68,3 +68,90 @@ response=retrieval_chain.invoke({"input":"LangSmith has two usage limits: total 
 
 response['answer']
 ```
+
+## What is the use of create_stuff_documents_chain and create_retrieval_chain. Why do we need them?
+
+Imagine you had just a normal LLM chain:
+```py
+response = llm.invoke("What is LangChain?")
+```
+What happens? The LLM answers from its training data. It does NOT access your documents. It may hallucinate. It cannot see your vector database.
+
+So this is just:
+🧠 LLM only
+No retrieval.
+No grounding.
+
+What if your answer depends on:
+- Private PDFs
+- Company documents
+- Database entries
+The plain chain cannot access those. That’s why RAG exists.
+
+🔹 **Now Let’s See What Each Chain Adds**
+
+We split the problem into two responsibilities:
+- 🔎 Get relevant documents
+- 🧠 Use those documents to answer
+
+Each chain handles one responsibility.
+
+###  1️⃣ create_stuff_documents_chain (aka the document combine chain)
+What it does: It takes
+- A question
+- A list of documents
+
+And:
+
+“Stuffs” all document text into `{context}`
+
+Injects that into your prompt
+
+Calls the LLM
+
+Returns the generated answer
+
+
+```py
+#Conceptually this is what the chain does
+
+def document_chain(question, docs):
+    context = "\n\n".join(doc.page_content for doc in docs)
+    
+    prompt = f"""
+    Answer based only on the context.
+
+    Question:
+    {question}
+
+    Context:
+    {context}
+    """
+    
+    return llm.invoke(prompt)
+
+```
+So this chain replaces your plain LLM chain with:
+LLM + injected document context
+
+### 2️⃣ create_retrieval_chain
+
+It does:
+
+- Take the question
+- Call retriever
+- Get relevant documents
+- Pass them to document_chain
+- Return final answer
+
+Conceptually:
+```py
+def retrieval_chain(question):
+    docs = retriever.get_relevant_documents(question)
+    return document_chain(question, docs)
+```
+
+so it replaces this manual writing to one single call
+```py
+retrieval_chain.invoke({"input": question})
+```
