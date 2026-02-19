@@ -6,6 +6,11 @@ updated: 1768816886326
 created: 1768816886326
 ---
 
+## External project
+- [Youtube video summarizer](https://github.com/Harshita-mindfire/langgraph/tree/main/2-Youtube-video-summarizer)
+
+## Simple app
+
 ```py
 import os
 from dotenv import load_dotenv
