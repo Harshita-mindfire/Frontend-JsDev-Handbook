@@ -1,0 +1,56 @@
+<h1 id="virtual-dom">Virtual Dom<a aria-hidden="true" class="anchor-heading icon-link" href="#virtual-dom"></a></h1>
+<p><strong>Virtual DOM:</strong>
+The Virtual DOM is a concept within React that serves as a lightweight representation of the actual DOM (Document Object Model). It's a JavaScript object that mirrors the structure of the real DOM, containing elements, attributes, and content. The key difference is that the Virtual DOM is not directly tied to the browser's rendering engine, which makes it faster to manipulate and compare.</p>
+<p><strong>Reconciliation Process:</strong>
+When a React component's state or props change, React performs a process called reconciliation to determine the minimum number of changes needed to update the actual DOM. Here's an overview of the steps involved in the reconciliation process:</p>
+<ol>
+<li>
+<p><strong>Render Components</strong>: Whenever state or props change, React re-renders the affected components and creates a new Virtual DOM tree.</p>
+</li>
+<li>
+<p><strong>Diffing</strong>: React then performs a diffing process by comparing the previous Virtual DOM tree with the new one. It identifies the differences between the two trees.</p>
+</li>
+<li>
+<p><strong>Update Strategy</strong>: React calculates the most efficient way to update the real DOM based on the differences identified during the diffing process. It creates a list of changes (referred to as "patches" or "diffs") that need to be applied to the actual DOM.</p>
+</li>
+<li>
+<p><strong>Apply Changes</strong>: Finally, React applies the calculated changes to the real DOM. This involves adding, updating, or removing specific elements as necessary.</p>
+</li>
+</ol>
+<p><strong>Role of Immutability:</strong>
+Immutability is essential in the reconciliation process because it helps React to accurately and efficiently identify changes in the Virtual DOM. When data is immutable, React can confidently compare data by checking if their references have changed. Here's how immutability contributes to this process:</p>
+<ol>
+<li>
+<p><strong>Change Detection</strong>: React can quickly detect changes by comparing references. If an object or array reference remains the same, React knows that the data hasn't changed. This is much faster than comparing every individual property or element.</p>
+</li>
+<li>
+<p><strong>Pure Rendering</strong>: React promotes the concept of "pure" components that only re-render when their props or state change. Immutability enables pure rendering because components can rely on the immutability of their data to determine if they need to update.</p>
+</li>
+</ol>
+<p><strong>Example:</strong>
+Let's consider a simple example of a list of items displayed in a React component. We'll use immutability to update the list.</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">React</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> useState <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">ItemList</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>items<span class="token punctuation">,</span> setItems<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'Item 1'</span><span class="token punctuation">,</span> <span class="token string">'Item 2'</span><span class="token punctuation">,</span> <span class="token string">'Item 3'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> <span class="token function-variable function">addItem</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token comment">// Using immutability to update the list</span>
+    <span class="token keyword">const</span> newItem <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Item </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>items<span class="token punctuation">.</span><span class="token property-access">length</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    <span class="token function">setItems</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token spread operator">...</span>items<span class="token punctuation">,</span> newItem<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Creating a new array</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>button</span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>addItem<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">Add Item</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>button</span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>ul</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">{</span>items<span class="token punctuation">.</span><span class="token method function property-access">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item<span class="token punctuation">,</span> index</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">(</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>li</span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>index<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>item<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>ul</span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In this example, when we add a new item, we're creating a new array using the spread operator. This maintains immutability, allowing React to efficiently detect the change and update the Virtual DOM accordingly.</p>
+<p>By following the principles of immutability, React can optimize the reconciliation process, resulting in improved performance and a more responsive user interface.</p>

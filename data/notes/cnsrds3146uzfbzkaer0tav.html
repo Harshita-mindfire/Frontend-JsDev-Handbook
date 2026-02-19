@@ -1,0 +1,57 @@
+<h1 id="higher-order-components">Higher Order Components<a aria-hidden="true" class="anchor-heading icon-link" href="#higher-order-components"></a></h1>
+<ul>
+<li>A component that returns another component</li>
+</ul>
+<p>Main Goal:</p>
+<ul>
+<li>
+<p>improve existing components w/o modifying code</p>
+</li>
+<li>
+<p>allows us to add extra functionality to an existing component.</p>
+</li>
+<li>
+<p>usually starts with lowercase</p>
+</li>
+</ul>
+<h2 id="examples">Examples<a aria-hidden="true" class="anchor-heading icon-link" href="#examples"></a></h2>
+<ul>
+<li>logs props</li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function">checkProps</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token maybe-class-name">Component</span></span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Component</span></span> <span class="token spread"><span class="token punctuation">{</span><span class="token spread operator">...</span>props<span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// we can now use checkprops HOC in App.jsx or anywhere else like</span>
+<span class="token keyword">const</span> <span class="token maybe-class-name">UserInfoWrapper</span> <span class="token operator">=</span> <span class="token function">checkProps</span><span class="token punctuation">(</span><span class="token maybe-class-name">UserInfo</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">UserInfoWrapper</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>jojo<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span><span class="token plain-text">
+</span></code></pre>
+<ul>
+<li>A HOC that adds user props.</li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> useEffect<span class="token punctuation">,</span> useState <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+<span class="token keyword module">import</span> <span class="token imports">axios</span> <span class="token keyword module">from</span> <span class="token string">"axios"</span><span class="token punctuation">;</span>
+
+<span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function">includeUser</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token maybe-class-name">Component</span><span class="token punctuation">,</span> userId</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">[</span>user<span class="token punctuation">,</span> setUser<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword control-flow">await</span> axios<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">/users/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>userId<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">setUser</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword control-flow">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Component</span></span> <span class="token spread"><span class="token punctuation">{</span><span class="token spread operator">...</span>props<span class="token punctuation">}</span></span> <span class="token attr-name">user</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>user<span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">//can be used as</span>
+<span class="token keyword">const</span> <span class="token maybe-class-name">UserInfoWithUser</span> <span class="token operator">=</span> <span class="token function">includeUser</span><span class="token punctuation">(</span><span class="token maybe-class-name">UserInfo</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token spread operator">...</span>
+<span class="token keyword control-flow">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">UserInfoWithUser</span></span> <span class="token punctuation">/></span></span>
+
+</code></pre>

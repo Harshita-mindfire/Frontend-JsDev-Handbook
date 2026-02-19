@@ -1,0 +1,32 @@
+<h1 id="husky-hook">Husky Hook<a aria-hidden="true" class="anchor-heading icon-link" href="#husky-hook"></a></h1>
+<h2 id="setup-husky-pre-commit-hook">Setup husky pre-commit hook<a aria-hidden="true" class="anchor-heading icon-link" href="#setup-husky-pre-commit-hook"></a></h2>
+<ol>
+<li>npm install husky lint-staged --save-dev</li>
+<li>Next, add a script for it in package.json:
+<pre class="language-json"><code class="language-json"><span class="token property">"lint-staged"</span><span class="token operator">:</span> <span class="token string">"lint-staged --config lint-staged.js"</span><span class="token punctuation">,</span>
+<span class="token property">"husky-install"</span><span class="token operator">:</span> <span class="token string">"husky install"</span>
+</code></pre>
+</li>
+<li>Run: npm run husky-install</li>
+<li>Then create your hook with the following command: <code>npx husky add .husky/pre-commit "npm run lint-staged"</code>
+The following file will be automatically generated in the .husky folder at the root of the project:
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/sh</span>
+<span class="token builtin class-name">.</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> <span class="token string">"<span class="token variable">$0</span>"</span><span class="token variable">)</span></span>/_/husky.sh"</span>
+<span class="token function">npm</span> run lint-staged
+</code></pre>
+</li>
+<li>Add the following configs in package.json
+<pre class="language-json"><code class="language-json"><span class="token property">"husky"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"hooks"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"pre-commit"</span><span class="token operator">:</span> <span class="token string">"lint-staged"</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token property">"lint-staged"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"src/**/*.{js,jsx,ts,tsx,json,css,scss}"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"prettier --write"</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+</li>
+<li>Done!</li>
+</ol>

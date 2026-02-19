@@ -1,0 +1,51 @@
+<h1 id="vite">Vite<a aria-hidden="true" class="anchor-heading icon-link" href="#vite"></a></h1>
+<h2 id="blog-post">Blog post<a aria-hidden="true" class="anchor-heading icon-link" href="#blog-post"></a></h2>
+<ul>
+<li>
+<p><a href="https://www.traversymedia.com/blog/vite-crash-course">Vite Crash Course Blog</a></p>
+</li>
+<li>
+<p>npx create-vite-app my-app --template react-ts</p>
+</li>
+<li>
+<p>dev server</p>
+</li>
+<li>
+<p>when we build, vite uses <code>Rollup</code> (module bundler) to bundle files for production.</p>
+</li>
+<li>
+<p>fast</p>
+</li>
+<li>
+<p>Sass support is built into Vite</p>
+</li>
+</ul>
+<h2 id="start">Start<a aria-hidden="true" class="anchor-heading icon-link" href="#start"></a></h2>
+<p>npm init vite@latest vite-project</p>
+<h2 id="configure-port">Configure port<a aria-hidden="true" class="anchor-heading icon-link" href="#configure-port"></a></h2>
+<p>We can also change some settings, including the port that the development server runs on. By default, it runs on port 5173. I prefer port 3000, so I'm going to change it to that.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token function">defineConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token function">react</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">server</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">port</span><span class="token operator">:</span> <span class="token number">3000</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="env-variables">Env variables<a aria-hidden="true" class="anchor-heading icon-link" href="#env-variables"></a></h2>
+<p>Just like CRA, Vite supports environment variables. We can create a .env file in the root of our project. We can then add environment variables to this file. They must begin with VITE_. Let's create one called VITE_API_KEY and set it to 123456789.</p>
+<pre class="language-.env"><code class="language-.env">VITE_API_KEY=123456789
+</code></pre>
+<p>Now, let's go into the header and try to access this environment variable. We can do this by using the import.meta.env object.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">Header</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token operator">&#x3C;</span>div<span class="token operator">></span><span class="token punctuation">{</span><span class="token keyword module">import</span><span class="token punctuation">.</span><span class="token property-access">meta</span><span class="token punctuation">.</span><span class="token property-access">env</span><span class="token punctuation">.</span><span class="token constant">VITE_API_KEY</span><span class="token punctuation">}</span><span class="token operator">&#x3C;</span><span class="token operator">/</span>div<span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>export default Header;</p>
+<h2 id="vite-vs-traditional-module-bundlers">Vite vs traditional module bundlers<a aria-hidden="true" class="anchor-heading icon-link" href="#vite-vs-traditional-module-bundlers"></a></h2>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/vite-vs-others.png" alt="vite vs other module bundlers"></p>
+<ul>
+<li>in development, it doesnot rebundle everything everytime you make a change. instead, it takes advantage of native ES modules in the browser. In modern browsers you can use the ES modules(import/export syntax)
+It add scripts as </li>
+</ul>
+<pre><code>&#x3C;script type="module" src="main.js">
+</code></pre>

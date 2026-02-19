@@ -1,0 +1,1796 @@
+{
+  "roots": [
+    {
+      "key": "c8csxid3zoghxorepwcrami",
+      "title": "Reading",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "Harshita-notes",
+      "children": [
+        {
+          "key": "xyzzqwerrty",
+          "title": "A man called Ove",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "gfvj2q88ruzvs9lx2l728jv",
+          "title": "Blogs",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "wfpxof1ftwe8tvfd4yc9xmj",
+          "title": "Daisy Jones & the Six",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "ithop4pezep9z8eonurm7m6",
+          "title": "Poem",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "mffn9vpfm1au1w8nf96h7c6",
+          "title": "Ram: scion of ikshvaku",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "m20o6bjhj5ehajr37pfgtfk",
+          "title": "Ravan: Enemy of Aryawarta",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "xnomxmm9tz4dn4r4rqwg6z5",
+          "title": "Sita: warrior of Mithila",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "rpk72eqiykyp7qbtm07toik",
+          "title": "The Lean Startup",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "7nwcffq2pkzuxj9qsjfj0he",
+          "title": "The Seven Husband of Evelyn Hugo",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "8y4j4ewfxis1zzrirka4837",
+          "title": "War of Lanka",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "trkx8xrg7g2fm023ez4ldqj",
+      "title": "Learning",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "Harshita-notes",
+      "children": [
+        {
+          "key": "q1scxvvzza0mkgjbmjre840",
+          "title": "LangGraph",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "oe485i4et1p69145l89f6zi",
+          "title": "Langchain",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "duydba1xzdaypg4p9egmt3g",
+              "title": "Document Ingestion",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "1rujyxrb9vcc5vpxg0s0o8c",
+              "title": "Text splitting from Documents",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "qxj02f4em65xllkz33rnbb2",
+              "title": "embeddings",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "g8ci1ind9asxblmph23fcew",
+              "title": "vector-store",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "0jmd9qrvoy9orbl1n2mzxla",
+              "title": "Simple Gen AI APP Using Langchain",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "nrx71p01v1xopk4xtim8xjb",
+              "title": "LLM-models",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "g9anqrp0zrf7ge81edgx8yo",
+              "title": "Version-1",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "5z2dx7i4dovoucwos2manck",
+          "title": "NFR",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "25h1bmykwh9gyeo80n75gky",
+              "title": "accessibility",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "8065ff8i49o4xwg1za7tgro",
+          "title": "Algo",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "j9jpiepog4v2wpio08om6ng",
+              "title": "Big O Notation",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "z2zkfb3i3wv51j2lx1sxhho",
+          "title": "Auth0",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "0tk9tbvc2uanv87xxn4m8gm",
+          "title": "Bootstrap 5",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "ljq5qx2vmfn6m626ioucbd5",
+          "title": "Chrome Extension",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "mvwmeoqbawxnh49cxomb4kz",
+          "title": "Cook",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "5shqmwqiva0r06oasv480n8",
+          "title": "CSS",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "9hwfp65pm5gvegngk1hf68w",
+              "title": "Position",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "fgpxrabrht1tlu3sfwh2cfx",
+              "title": "Responsive Design",
+              "icon": "plusOutlined",
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "5shqmwqivatr06oasv480ni",
+                  "title": "Flex Box",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "wiaz546utk39nbfg4cfpg6v",
+                  "title": "Grid",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "i0qvfd0bsvswmnet8bx5z4y",
+              "title": "Selectors",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "jnk1rvgqg1x5uvzso9rhvyc",
+          "title": "Database Desig",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "jhh8w9bib471ftwnu7vnxc5",
+          "title": "Docker",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "tm1a0lvg2k2ahhwh8xze2j2",
+          "title": "Docker Compose",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "dvqnb19ytcvbz7r9mw1z2l1",
+          "title": "Dsa",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "yyyjeii77vfw4lvvc9qwvdj",
+              "title": "Leetcode",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "cqa4ysgqx8jgelbxs3fo9ts",
+              "title": "Resource",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "abju70kqigdfwp8qxtih0h2",
+          "title": "Eng",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "cb36bc5ov9tkplhcztvmn48",
+              "title": "Grammer",
+              "icon": "plusOutlined",
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "6ybahqmiv067devbcos5nvh",
+                  "title": "Preposition",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": [
+                    {
+                      "key": "v4ad8r132ptysursrp7cjhz",
+                      "title": "Arrive at or In",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "Harshita-notes",
+                      "children": []
+                    },
+                    {
+                      "key": "3tl5ts2r5je44kzdi565jnj",
+                      "title": "Time at on In",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "Harshita-notes",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "y7x3wvcg0ozwuzgnxfzcgbg",
+              "title": "Vocab",
+              "icon": "plusOutlined",
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "qvw8cjqjtctws3gtjrn9g53",
+                  "title": "Meanings",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "dy5vet30k10a9i3h9tbluuj",
+                  "title": "Word Power Made Easy",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "gv9ad1s3wc299dhuleufjey",
+          "title": "Eslint",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "icnize8f40gpqd9mp3kwk7e",
+          "title": "Express",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "6pwyibv8wg82qexq38t0tbw",
+              "title": "Controller",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "1bvw1btkcxwdx21dkknw5ts",
+              "title": "Error Handling",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "5jsgly6zxbtm0cgw8ljs0re",
+              "title": "Middleware",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "i8pzh29iemraioqlpwcnboq",
+              "title": "Router",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "kapsl94m9szlcqc8b47iz1x",
+          "title": "Gen Ai",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "pprkwc2gae0mom9n4nyqe1u",
+          "title": "GitHub Actions",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "7i80rn51d8qcxunia2u5il6",
+              "title": "Workflow Syntax",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "jsp4otczvnnbnxxslcz4jtx",
+          "title": "HTML",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "y7cste98zdzm9kb1a5mwlc7",
+              "title": "Canvas",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "0nxkat7266fo4bon6kz0pkq",
+          "title": "Husky Hook",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "8k7fj3knfjs2vz42yxldbzk",
+          "title": "JavaScript",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "sh9g495g98ov0b63kzffz4w",
+              "title": "Arrow Func Exercise",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "xmhzv4k1dezmevk9worxp92",
+              "title": "Currying Partials",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "3mh79j7ah9i5duqditiopi8",
+              "title": "Handson",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "06dxxwewwp67sqivoq59mhs",
+                  "title": "Pollyfill",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "wk8nw908ich40fry2kk71a0",
+              "title": "Parse Int",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "y1ng2qxm7ukl5sce22whs3d",
+              "title": "Performance",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "51zb91dvu0ckmvmlplqxqil",
+              "title": "Pipe and Compose",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "oj1cwazkncn3i7wbs36pcqx",
+              "title": "Promises Exercise",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "f49q2e7ln41rpeqz70st4ow",
+              "title": "Security",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "3vzqyyohwbs653l4ua3rmyz",
+              "title": "Type Coercion",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "wrrbkp0gz1cc6032hwyrd9c",
+          "title": "Microservices",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "ohnfdy7pjyhxur8g6kejjcr",
+          "title": "Module Federation",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "y1zawkz5is14bkueanm4tuz",
+          "title": "Nextjs",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "n12dvhh5vui4qo2y2tw8ld0",
+              "title": "Doubts",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "yesj05qpt4higyxwmcii776",
+              "title": "NextJS 12",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "66gcanxafeme14qkyj2maxm",
+              "title": "Optimization",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "kgx3khbrerpazr8go9comf8",
+              "title": "Rendering",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "ubgj4b3onoq9pj080dri1nj",
+                  "title": "React Server Components",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": [
+                    {
+                      "key": "sklzx0bvf0dyg34fzr0t0x1",
+                      "title": "Rendering Lifecycle",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "Harshita-notes",
+                      "children": []
+                    },
+                    {
+                      "key": "u7xur0cxsnbvg51rquey5ew",
+                      "title": "Server and Client Composition Patterns",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "Harshita-notes",
+                      "children": []
+                    },
+                    {
+                      "key": "fq3hkpwfr9vkg8prtpofbrp",
+                      "title": "Server Rendering Strategies",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "Harshita-notes",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "vh28j803j8gmx35nymyloxt",
+              "title": "Routing",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "o6kk58cac0vvnxzxpfuo3gt",
+                  "title": "Link",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "byz0xlauc4njcaf9hmt13b3",
+                  "title": "Error Handling",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "bissfxn4ra3hsnuvit2fzl6",
+                  "title": "Layouts",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "lzyt1r32ijo6huvmpm3femr",
+                  "title": "Loading UI",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "cok7r8be46nqy5mzl65l8l9",
+                  "title": "Metadata",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "uknad7zvwt0vmshlus5jkrm",
+                  "title": "Parallel Routes",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": [
+                    {
+                      "key": "ldoe4gpzz0t3vcch4lrn2bh",
+                      "title": "Intercepted Routes",
+                      "icon": null,
+                      "hasTitleNumberOutlined": false,
+                      "vaultName": "Harshita-notes",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "key": "0bvpfpbl0mfb06jdccaiqao",
+                  "title": "Route Handlers",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "5kglpokc68y14xpva53rmli",
+                  "title": "Templates",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "ze1zcgam9aozgrup2l8kted",
+              "title": "Version 13",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "dnlwkfotxrvgh9gar9jr90b",
+          "title": "Node",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "hfg36vfiasgeg48e0rn0ei3",
+              "title": "Dotenv",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "oeboacy4sa94bb9bmrwzvv3",
+              "title": "HTTP Status Code",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "anc0a2elevx9ye3t7t9kohg",
+              "title": "Os",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "1istl8ksno3yrvxnn438vnn",
+              "title": "Path",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "rrxu5dedjpa2adgu9rtl2i9",
+          "title": "Prisma",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "hmrrqzfeg4w0wgpt2kf3ghc",
+          "title": "Python",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "mfxmo5ig0t37gkdwkm7kw6q",
+              "title": "Advance Types",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "kcih4pnhbb795924pnidwra",
+              "title": "Basics",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "ypftqlt66i3pb6rfn8esolc",
+              "title": "Fast API",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "4mngcr4kosugosoh5edvi6a",
+              "title": "Loops",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "oxiuc7apdhpqqh90etrafog",
+          "title": "rabbitMQ",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "8fp89ktw3fhi2p6bt35b5ju",
+          "title": "React",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "ar4hxrxnalbptp5swus1cyz",
+              "title": "Advance Patterns",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "g3ml7qhsqgbi0itgx8fjp4e",
+              "title": "Dos N Donts",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "9hgq7mhgw8ay47ghwdvppzf",
+              "title": "Errorhandling",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "ni4mv17f04ieqk6sxn02o77",
+              "title": "Fundamentals",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "lr6lnzahqwfbdwlc9x38hlj",
+                  "title": "Function First Class Entity",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "o6nvengftckl6e4kft81zln",
+                  "title": "Virtual Dom",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "ijl35bq8u9tk2vvaszhjjgr",
+              "title": "Global State Management",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "9w4z8axj4a9j88semd4xbs2",
+              "title": "Hooks",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "hlbm08qy2g1yoazu7w4hxmr",
+              "title": "Interview Quiz",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "q56fkiakh4z3zqq3k2s0t3k",
+              "title": "Legacy",
+              "icon": "plusOutlined",
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "6g4oyken27wdzgxfzyxd42t",
+                  "title": "Clone Element",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "6g4m29itar13aghs4ngblwm",
+                  "title": "React Children",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "8ba8zwmayt1v973e00h6h64",
+              "title": "Mui",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "oca8al9dg5b5wstqa8xcz7b",
+              "title": "Performance",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "3uby22vvqaqekxnnpmi3kiw",
+                  "title": "Re Rendering",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "06zdwr6rdqef5dpgpe9rx7o",
+              "title": "Portal",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "ug5b9frm3w0fz4400egy5wi",
+              "title": "React Patterns",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": [
+                {
+                  "key": "dv1l5xhkn1iaeker7ik3ea3",
+                  "title": "Compound",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "ahur9u8a8yj3xkacx0cqjt2",
+                  "title": "Controlled Uncontrolled",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "rasdv9a9uhtdt100mwt80cx",
+                  "title": "Custom Hooks",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "xqgcm6m5nb6dc5ybk4aqgyc",
+                  "title": "Functional Programming",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "cnsrds3146uzfbzkaer0tav",
+                  "title": "Higher Order Components",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "umv1qlgcft10gzj348d0ou0",
+                  "title": "Observer Pattern with events",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                },
+                {
+                  "key": "sojbzhwx1losfnysmamz42a",
+                  "title": "Render Prop",
+                  "icon": null,
+                  "hasTitleNumberOutlined": false,
+                  "vaultName": "Harshita-notes",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "key": "uvb8ww8ir11egzwnqkvqiyx",
+              "title": "Router",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "sm5v6pzpunzqqib51ywg6qp",
+              "title": "Testing",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "k6wrzwjtyopzxbnj2m4is2z",
+          "title": "Redux",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "d9pyzgwyw5glbwl05lihia3",
+              "title": "Misc",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "og4aiuuxxnjh56eqvh6tdvl",
+              "title": "React Redux",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "gterdib2mf9tclbgxb07mjd",
+              "title": "Redux Toolkit",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "s6qvndijnh01d8cuioxy7zw",
+              "title": "Thunk",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "k47pb6wex983xtktbdv5s6t",
+          "title": "Reverse Proxy",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "llb97kaw6bgknue4dd8l2cz",
+              "title": "Traefik",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "f5le3rs98wmsd3hn55xqtdf",
+          "title": "Saas",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "wcnq8v8lx85s853mqbfwoen",
+          "title": "Senior Dev Q&a",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "3djdpe36a1ke5yxrej8upmt",
+          "title": "tRPC",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "w5l9zvdha3es8jaxge5e4lu",
+          "title": "TypeScript",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "qdnhxg5v4oukw5hsc6xc6li",
+              "title": "Advance Types",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "e85c7nd0rt2fnlb7zu3xnz3",
+              "title": "Basic Types",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "2b35ixagticlchpxb121vfm",
+              "title": "Classes",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "gqbkj2606jvpreq2kgwp6g3",
+              "title": "Compiler",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "acgxmxarkrk4damtk0dz3we",
+              "title": "Decorartors",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "g8etjorczrqedoptssxdooy",
+              "title": "Generics",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "nman3njbtx3ty2ghrjyy822",
+              "title": "Interfaces",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "a1g7oejylvpmgq8v43wwlqm",
+              "title": "React",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "3ri92kivgwpbn6pwl24w6pn",
+          "title": "Vanilla JS",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "93ayje8gc8rss7fkdkccs9a",
+          "title": "Vite",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "qni9fshnce32rhoxta4na21",
+          "title": "Web",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "521tdzo7x0zx50aal6fmw1m",
+              "title": "Frontend Web Performance Checklist",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "ps33b8yaiukx17yrllb4is3",
+              "title": "Pwa",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "nutf7tamgwrrmdxogge4gyq",
+              "title": "Security",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "f96o2fb6j6e3xfevwtnes5g",
+              "title": "Service Workers",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "z34vf2zj27tr4j9219ze4c4",
+              "title": "Web Vitals",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "a18q1wy0g9i62deaqmwb0gr",
+              "title": "Web Workers",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "winston",
+          "title": "Winston",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "89wj9htvdw3wp48wr2pbnc1",
+          "title": "Yaml",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        },
+        {
+          "key": "hr3m4rc8hxm5rjbi5kumq5f",
+          "title": "Yarn",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "wcja9b2dozrw97bjfuc1ewj",
+      "title": "Demo",
+      "icon": "plusOutlined",
+      "hasTitleNumberOutlined": false,
+      "vaultName": "Harshita-notes",
+      "children": [
+        {
+          "key": "7vm4wp9j1f5ez4k5do5en8j",
+          "title": "News for You",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "ncrlrx33028xvu3y7op3pdz",
+              "title": "Links",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            },
+            {
+              "key": "my3k9k1s3vjl69my24a7pz1",
+              "title": "Misc",
+              "icon": null,
+              "hasTitleNumberOutlined": false,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ddh1fz3o9jtwlnhx8im7w6n",
+      "title": "Resources",
+      "icon": "plusOutlined",
+      "hasTitleNumberOutlined": false,
+      "vaultName": "Harshita-notes",
+      "children": [
+        {
+          "key": "2fdyyhuwj8l1obbv5yh1zwd",
+          "title": "Links",
+          "icon": null,
+          "hasTitleNumberOutlined": false,
+          "vaultName": "Harshita-notes",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "xjtg1so5cq4qj3qoj1n357g",
+      "title": "Tags",
+      "icon": "numberOutlined",
+      "hasTitleNumberOutlined": false,
+      "vaultName": "Harshita-notes",
+      "children": [
+        {
+          "key": "qvi33345hovfbzw8ht693rk",
+          "title": "JavaScript",
+          "icon": "plusOutlined",
+          "hasTitleNumberOutlined": true,
+          "vaultName": "Harshita-notes",
+          "children": [
+            {
+              "key": "l0lb7pt714nugdlnmoexoy1",
+              "title": "Frontend Web Performance Checklist",
+              "icon": null,
+              "hasTitleNumberOutlined": true,
+              "vaultName": "Harshita-notes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "key": "gnxywb70sldsrsabn47cn3z",
+          "title": "Learn",
+          "icon": null,
+          "hasTitleNumberOutlined": true,
+          "vaultName": "Harshita-notes",
+          "children": []
+        }
+      ]
+    },
+    {
+      "key": "urj8q1uq98o3upmgbt2qxns",
+      "title": "Troubleshoot",
+      "icon": null,
+      "hasTitleNumberOutlined": false,
+      "vaultName": "Harshita-notes",
+      "children": []
+    }
+  ],
+  "child2parent": {
+    "c8csxid3zoghxorepwcrami": null,
+    "xyzzqwerrty": "c8csxid3zoghxorepwcrami",
+    "gfvj2q88ruzvs9lx2l728jv": "c8csxid3zoghxorepwcrami",
+    "wfpxof1ftwe8tvfd4yc9xmj": "c8csxid3zoghxorepwcrami",
+    "ithop4pezep9z8eonurm7m6": "c8csxid3zoghxorepwcrami",
+    "mffn9vpfm1au1w8nf96h7c6": "c8csxid3zoghxorepwcrami",
+    "m20o6bjhj5ehajr37pfgtfk": "c8csxid3zoghxorepwcrami",
+    "xnomxmm9tz4dn4r4rqwg6z5": "c8csxid3zoghxorepwcrami",
+    "rpk72eqiykyp7qbtm07toik": "c8csxid3zoghxorepwcrami",
+    "7nwcffq2pkzuxj9qsjfj0he": "c8csxid3zoghxorepwcrami",
+    "8y4j4ewfxis1zzrirka4837": "c8csxid3zoghxorepwcrami",
+    "trkx8xrg7g2fm023ez4ldqj": null,
+    "q1scxvvzza0mkgjbmjre840": "trkx8xrg7g2fm023ez4ldqj",
+    "oe485i4et1p69145l89f6zi": "trkx8xrg7g2fm023ez4ldqj",
+    "duydba1xzdaypg4p9egmt3g": "oe485i4et1p69145l89f6zi",
+    "1rujyxrb9vcc5vpxg0s0o8c": "oe485i4et1p69145l89f6zi",
+    "qxj02f4em65xllkz33rnbb2": "oe485i4et1p69145l89f6zi",
+    "g8ci1ind9asxblmph23fcew": "oe485i4et1p69145l89f6zi",
+    "0jmd9qrvoy9orbl1n2mzxla": "oe485i4et1p69145l89f6zi",
+    "nrx71p01v1xopk4xtim8xjb": "oe485i4et1p69145l89f6zi",
+    "g9anqrp0zrf7ge81edgx8yo": "oe485i4et1p69145l89f6zi",
+    "5z2dx7i4dovoucwos2manck": "trkx8xrg7g2fm023ez4ldqj",
+    "25h1bmykwh9gyeo80n75gky": "5z2dx7i4dovoucwos2manck",
+    "8065ff8i49o4xwg1za7tgro": "trkx8xrg7g2fm023ez4ldqj",
+    "j9jpiepog4v2wpio08om6ng": "8065ff8i49o4xwg1za7tgro",
+    "z2zkfb3i3wv51j2lx1sxhho": "trkx8xrg7g2fm023ez4ldqj",
+    "0tk9tbvc2uanv87xxn4m8gm": "trkx8xrg7g2fm023ez4ldqj",
+    "ljq5qx2vmfn6m626ioucbd5": "trkx8xrg7g2fm023ez4ldqj",
+    "mvwmeoqbawxnh49cxomb4kz": "trkx8xrg7g2fm023ez4ldqj",
+    "5shqmwqiva0r06oasv480n8": "trkx8xrg7g2fm023ez4ldqj",
+    "9hwfp65pm5gvegngk1hf68w": "5shqmwqiva0r06oasv480n8",
+    "fgpxrabrht1tlu3sfwh2cfx": "5shqmwqiva0r06oasv480n8",
+    "5shqmwqivatr06oasv480ni": "fgpxrabrht1tlu3sfwh2cfx",
+    "wiaz546utk39nbfg4cfpg6v": "fgpxrabrht1tlu3sfwh2cfx",
+    "i0qvfd0bsvswmnet8bx5z4y": "5shqmwqiva0r06oasv480n8",
+    "jnk1rvgqg1x5uvzso9rhvyc": "trkx8xrg7g2fm023ez4ldqj",
+    "jhh8w9bib471ftwnu7vnxc5": "trkx8xrg7g2fm023ez4ldqj",
+    "tm1a0lvg2k2ahhwh8xze2j2": "trkx8xrg7g2fm023ez4ldqj",
+    "dvqnb19ytcvbz7r9mw1z2l1": "trkx8xrg7g2fm023ez4ldqj",
+    "yyyjeii77vfw4lvvc9qwvdj": "dvqnb19ytcvbz7r9mw1z2l1",
+    "cqa4ysgqx8jgelbxs3fo9ts": "dvqnb19ytcvbz7r9mw1z2l1",
+    "abju70kqigdfwp8qxtih0h2": "trkx8xrg7g2fm023ez4ldqj",
+    "cb36bc5ov9tkplhcztvmn48": "abju70kqigdfwp8qxtih0h2",
+    "6ybahqmiv067devbcos5nvh": "cb36bc5ov9tkplhcztvmn48",
+    "v4ad8r132ptysursrp7cjhz": "6ybahqmiv067devbcos5nvh",
+    "3tl5ts2r5je44kzdi565jnj": "6ybahqmiv067devbcos5nvh",
+    "y7x3wvcg0ozwuzgnxfzcgbg": "abju70kqigdfwp8qxtih0h2",
+    "qvw8cjqjtctws3gtjrn9g53": "y7x3wvcg0ozwuzgnxfzcgbg",
+    "dy5vet30k10a9i3h9tbluuj": "y7x3wvcg0ozwuzgnxfzcgbg",
+    "gv9ad1s3wc299dhuleufjey": "trkx8xrg7g2fm023ez4ldqj",
+    "icnize8f40gpqd9mp3kwk7e": "trkx8xrg7g2fm023ez4ldqj",
+    "6pwyibv8wg82qexq38t0tbw": "icnize8f40gpqd9mp3kwk7e",
+    "1bvw1btkcxwdx21dkknw5ts": "icnize8f40gpqd9mp3kwk7e",
+    "5jsgly6zxbtm0cgw8ljs0re": "icnize8f40gpqd9mp3kwk7e",
+    "i8pzh29iemraioqlpwcnboq": "icnize8f40gpqd9mp3kwk7e",
+    "kapsl94m9szlcqc8b47iz1x": "trkx8xrg7g2fm023ez4ldqj",
+    "pprkwc2gae0mom9n4nyqe1u": "trkx8xrg7g2fm023ez4ldqj",
+    "7i80rn51d8qcxunia2u5il6": "pprkwc2gae0mom9n4nyqe1u",
+    "jsp4otczvnnbnxxslcz4jtx": "trkx8xrg7g2fm023ez4ldqj",
+    "y7cste98zdzm9kb1a5mwlc7": "jsp4otczvnnbnxxslcz4jtx",
+    "0nxkat7266fo4bon6kz0pkq": "trkx8xrg7g2fm023ez4ldqj",
+    "8k7fj3knfjs2vz42yxldbzk": "trkx8xrg7g2fm023ez4ldqj",
+    "sh9g495g98ov0b63kzffz4w": "8k7fj3knfjs2vz42yxldbzk",
+    "xmhzv4k1dezmevk9worxp92": "8k7fj3knfjs2vz42yxldbzk",
+    "3mh79j7ah9i5duqditiopi8": "8k7fj3knfjs2vz42yxldbzk",
+    "06dxxwewwp67sqivoq59mhs": "3mh79j7ah9i5duqditiopi8",
+    "wk8nw908ich40fry2kk71a0": "8k7fj3knfjs2vz42yxldbzk",
+    "y1ng2qxm7ukl5sce22whs3d": "8k7fj3knfjs2vz42yxldbzk",
+    "51zb91dvu0ckmvmlplqxqil": "8k7fj3knfjs2vz42yxldbzk",
+    "oj1cwazkncn3i7wbs36pcqx": "8k7fj3knfjs2vz42yxldbzk",
+    "f49q2e7ln41rpeqz70st4ow": "8k7fj3knfjs2vz42yxldbzk",
+    "3vzqyyohwbs653l4ua3rmyz": "8k7fj3knfjs2vz42yxldbzk",
+    "wrrbkp0gz1cc6032hwyrd9c": "trkx8xrg7g2fm023ez4ldqj",
+    "ohnfdy7pjyhxur8g6kejjcr": "trkx8xrg7g2fm023ez4ldqj",
+    "y1zawkz5is14bkueanm4tuz": "trkx8xrg7g2fm023ez4ldqj",
+    "n12dvhh5vui4qo2y2tw8ld0": "y1zawkz5is14bkueanm4tuz",
+    "yesj05qpt4higyxwmcii776": "y1zawkz5is14bkueanm4tuz",
+    "66gcanxafeme14qkyj2maxm": "y1zawkz5is14bkueanm4tuz",
+    "kgx3khbrerpazr8go9comf8": "y1zawkz5is14bkueanm4tuz",
+    "ubgj4b3onoq9pj080dri1nj": "kgx3khbrerpazr8go9comf8",
+    "sklzx0bvf0dyg34fzr0t0x1": "ubgj4b3onoq9pj080dri1nj",
+    "u7xur0cxsnbvg51rquey5ew": "ubgj4b3onoq9pj080dri1nj",
+    "fq3hkpwfr9vkg8prtpofbrp": "ubgj4b3onoq9pj080dri1nj",
+    "vh28j803j8gmx35nymyloxt": "y1zawkz5is14bkueanm4tuz",
+    "o6kk58cac0vvnxzxpfuo3gt": "vh28j803j8gmx35nymyloxt",
+    "byz0xlauc4njcaf9hmt13b3": "vh28j803j8gmx35nymyloxt",
+    "bissfxn4ra3hsnuvit2fzl6": "vh28j803j8gmx35nymyloxt",
+    "lzyt1r32ijo6huvmpm3femr": "vh28j803j8gmx35nymyloxt",
+    "cok7r8be46nqy5mzl65l8l9": "vh28j803j8gmx35nymyloxt",
+    "uknad7zvwt0vmshlus5jkrm": "vh28j803j8gmx35nymyloxt",
+    "ldoe4gpzz0t3vcch4lrn2bh": "uknad7zvwt0vmshlus5jkrm",
+    "0bvpfpbl0mfb06jdccaiqao": "vh28j803j8gmx35nymyloxt",
+    "5kglpokc68y14xpva53rmli": "vh28j803j8gmx35nymyloxt",
+    "ze1zcgam9aozgrup2l8kted": "y1zawkz5is14bkueanm4tuz",
+    "dnlwkfotxrvgh9gar9jr90b": "trkx8xrg7g2fm023ez4ldqj",
+    "hfg36vfiasgeg48e0rn0ei3": "dnlwkfotxrvgh9gar9jr90b",
+    "oeboacy4sa94bb9bmrwzvv3": "dnlwkfotxrvgh9gar9jr90b",
+    "anc0a2elevx9ye3t7t9kohg": "dnlwkfotxrvgh9gar9jr90b",
+    "1istl8ksno3yrvxnn438vnn": "dnlwkfotxrvgh9gar9jr90b",
+    "rrxu5dedjpa2adgu9rtl2i9": "trkx8xrg7g2fm023ez4ldqj",
+    "hmrrqzfeg4w0wgpt2kf3ghc": "trkx8xrg7g2fm023ez4ldqj",
+    "mfxmo5ig0t37gkdwkm7kw6q": "hmrrqzfeg4w0wgpt2kf3ghc",
+    "kcih4pnhbb795924pnidwra": "hmrrqzfeg4w0wgpt2kf3ghc",
+    "ypftqlt66i3pb6rfn8esolc": "hmrrqzfeg4w0wgpt2kf3ghc",
+    "4mngcr4kosugosoh5edvi6a": "hmrrqzfeg4w0wgpt2kf3ghc",
+    "oxiuc7apdhpqqh90etrafog": "trkx8xrg7g2fm023ez4ldqj",
+    "8fp89ktw3fhi2p6bt35b5ju": "trkx8xrg7g2fm023ez4ldqj",
+    "ar4hxrxnalbptp5swus1cyz": "8fp89ktw3fhi2p6bt35b5ju",
+    "g3ml7qhsqgbi0itgx8fjp4e": "8fp89ktw3fhi2p6bt35b5ju",
+    "9hgq7mhgw8ay47ghwdvppzf": "8fp89ktw3fhi2p6bt35b5ju",
+    "ni4mv17f04ieqk6sxn02o77": "8fp89ktw3fhi2p6bt35b5ju",
+    "lr6lnzahqwfbdwlc9x38hlj": "ni4mv17f04ieqk6sxn02o77",
+    "o6nvengftckl6e4kft81zln": "ni4mv17f04ieqk6sxn02o77",
+    "ijl35bq8u9tk2vvaszhjjgr": "8fp89ktw3fhi2p6bt35b5ju",
+    "9w4z8axj4a9j88semd4xbs2": "8fp89ktw3fhi2p6bt35b5ju",
+    "hlbm08qy2g1yoazu7w4hxmr": "8fp89ktw3fhi2p6bt35b5ju",
+    "q56fkiakh4z3zqq3k2s0t3k": "8fp89ktw3fhi2p6bt35b5ju",
+    "6g4oyken27wdzgxfzyxd42t": "q56fkiakh4z3zqq3k2s0t3k",
+    "6g4m29itar13aghs4ngblwm": "q56fkiakh4z3zqq3k2s0t3k",
+    "8ba8zwmayt1v973e00h6h64": "8fp89ktw3fhi2p6bt35b5ju",
+    "oca8al9dg5b5wstqa8xcz7b": "8fp89ktw3fhi2p6bt35b5ju",
+    "3uby22vvqaqekxnnpmi3kiw": "oca8al9dg5b5wstqa8xcz7b",
+    "06zdwr6rdqef5dpgpe9rx7o": "8fp89ktw3fhi2p6bt35b5ju",
+    "ug5b9frm3w0fz4400egy5wi": "8fp89ktw3fhi2p6bt35b5ju",
+    "dv1l5xhkn1iaeker7ik3ea3": "ug5b9frm3w0fz4400egy5wi",
+    "ahur9u8a8yj3xkacx0cqjt2": "ug5b9frm3w0fz4400egy5wi",
+    "rasdv9a9uhtdt100mwt80cx": "ug5b9frm3w0fz4400egy5wi",
+    "xqgcm6m5nb6dc5ybk4aqgyc": "ug5b9frm3w0fz4400egy5wi",
+    "cnsrds3146uzfbzkaer0tav": "ug5b9frm3w0fz4400egy5wi",
+    "umv1qlgcft10gzj348d0ou0": "ug5b9frm3w0fz4400egy5wi",
+    "sojbzhwx1losfnysmamz42a": "ug5b9frm3w0fz4400egy5wi",
+    "uvb8ww8ir11egzwnqkvqiyx": "8fp89ktw3fhi2p6bt35b5ju",
+    "sm5v6pzpunzqqib51ywg6qp": "8fp89ktw3fhi2p6bt35b5ju",
+    "k6wrzwjtyopzxbnj2m4is2z": "trkx8xrg7g2fm023ez4ldqj",
+    "d9pyzgwyw5glbwl05lihia3": "k6wrzwjtyopzxbnj2m4is2z",
+    "og4aiuuxxnjh56eqvh6tdvl": "k6wrzwjtyopzxbnj2m4is2z",
+    "gterdib2mf9tclbgxb07mjd": "k6wrzwjtyopzxbnj2m4is2z",
+    "s6qvndijnh01d8cuioxy7zw": "k6wrzwjtyopzxbnj2m4is2z",
+    "k47pb6wex983xtktbdv5s6t": "trkx8xrg7g2fm023ez4ldqj",
+    "llb97kaw6bgknue4dd8l2cz": "k47pb6wex983xtktbdv5s6t",
+    "f5le3rs98wmsd3hn55xqtdf": "trkx8xrg7g2fm023ez4ldqj",
+    "wcnq8v8lx85s853mqbfwoen": "trkx8xrg7g2fm023ez4ldqj",
+    "3djdpe36a1ke5yxrej8upmt": "trkx8xrg7g2fm023ez4ldqj",
+    "w5l9zvdha3es8jaxge5e4lu": "trkx8xrg7g2fm023ez4ldqj",
+    "qdnhxg5v4oukw5hsc6xc6li": "w5l9zvdha3es8jaxge5e4lu",
+    "e85c7nd0rt2fnlb7zu3xnz3": "w5l9zvdha3es8jaxge5e4lu",
+    "2b35ixagticlchpxb121vfm": "w5l9zvdha3es8jaxge5e4lu",
+    "gqbkj2606jvpreq2kgwp6g3": "w5l9zvdha3es8jaxge5e4lu",
+    "acgxmxarkrk4damtk0dz3we": "w5l9zvdha3es8jaxge5e4lu",
+    "g8etjorczrqedoptssxdooy": "w5l9zvdha3es8jaxge5e4lu",
+    "nman3njbtx3ty2ghrjyy822": "w5l9zvdha3es8jaxge5e4lu",
+    "a1g7oejylvpmgq8v43wwlqm": "w5l9zvdha3es8jaxge5e4lu",
+    "3ri92kivgwpbn6pwl24w6pn": "trkx8xrg7g2fm023ez4ldqj",
+    "93ayje8gc8rss7fkdkccs9a": "trkx8xrg7g2fm023ez4ldqj",
+    "qni9fshnce32rhoxta4na21": "trkx8xrg7g2fm023ez4ldqj",
+    "521tdzo7x0zx50aal6fmw1m": "qni9fshnce32rhoxta4na21",
+    "ps33b8yaiukx17yrllb4is3": "qni9fshnce32rhoxta4na21",
+    "nutf7tamgwrrmdxogge4gyq": "qni9fshnce32rhoxta4na21",
+    "f96o2fb6j6e3xfevwtnes5g": "qni9fshnce32rhoxta4na21",
+    "z34vf2zj27tr4j9219ze4c4": "qni9fshnce32rhoxta4na21",
+    "a18q1wy0g9i62deaqmwb0gr": "qni9fshnce32rhoxta4na21",
+    "winston": "trkx8xrg7g2fm023ez4ldqj",
+    "89wj9htvdw3wp48wr2pbnc1": "trkx8xrg7g2fm023ez4ldqj",
+    "hr3m4rc8hxm5rjbi5kumq5f": "trkx8xrg7g2fm023ez4ldqj",
+    "wcja9b2dozrw97bjfuc1ewj": null,
+    "7vm4wp9j1f5ez4k5do5en8j": "wcja9b2dozrw97bjfuc1ewj",
+    "ncrlrx33028xvu3y7op3pdz": "7vm4wp9j1f5ez4k5do5en8j",
+    "my3k9k1s3vjl69my24a7pz1": "7vm4wp9j1f5ez4k5do5en8j",
+    "ddh1fz3o9jtwlnhx8im7w6n": null,
+    "2fdyyhuwj8l1obbv5yh1zwd": "ddh1fz3o9jtwlnhx8im7w6n",
+    "xjtg1so5cq4qj3qoj1n357g": null,
+    "qvi33345hovfbzw8ht693rk": "xjtg1so5cq4qj3qoj1n357g",
+    "l0lb7pt714nugdlnmoexoy1": "qvi33345hovfbzw8ht693rk",
+    "gnxywb70sldsrsabn47cn3z": "xjtg1so5cq4qj3qoj1n357g",
+    "urj8q1uq98o3upmgbt2qxns": null
+  },
+  "notesLabelById": {
+    "c8csxid3zoghxorepwcrami": "Reading",
+    "xyzzqwerrty": "A man called Ove",
+    "gfvj2q88ruzvs9lx2l728jv": "Blogs",
+    "wfpxof1ftwe8tvfd4yc9xmj": "Daisy Jones & the Six",
+    "ithop4pezep9z8eonurm7m6": "Poem",
+    "mffn9vpfm1au1w8nf96h7c6": "Ram: scion of ikshvaku",
+    "m20o6bjhj5ehajr37pfgtfk": "Ravan: Enemy of Aryawarta",
+    "xnomxmm9tz4dn4r4rqwg6z5": "Sita: warrior of Mithila",
+    "rpk72eqiykyp7qbtm07toik": "The Lean Startup",
+    "7nwcffq2pkzuxj9qsjfj0he": "The Seven Husband of Evelyn Hugo",
+    "8y4j4ewfxis1zzrirka4837": "War of Lanka",
+    "trkx8xrg7g2fm023ez4ldqj": "Learning",
+    "q1scxvvzza0mkgjbmjre840": "LangGraph",
+    "oe485i4et1p69145l89f6zi": "Langchain",
+    "duydba1xzdaypg4p9egmt3g": "Document Ingestion",
+    "1rujyxrb9vcc5vpxg0s0o8c": "Text splitting from Documents",
+    "qxj02f4em65xllkz33rnbb2": "embeddings",
+    "g8ci1ind9asxblmph23fcew": "vector-store",
+    "0jmd9qrvoy9orbl1n2mzxla": "Simple Gen AI APP Using Langchain",
+    "nrx71p01v1xopk4xtim8xjb": "LLM-models",
+    "g9anqrp0zrf7ge81edgx8yo": "Version-1",
+    "5z2dx7i4dovoucwos2manck": "NFR",
+    "25h1bmykwh9gyeo80n75gky": "accessibility",
+    "8065ff8i49o4xwg1za7tgro": "Algo",
+    "j9jpiepog4v2wpio08om6ng": "Big O Notation",
+    "z2zkfb3i3wv51j2lx1sxhho": "Auth0",
+    "0tk9tbvc2uanv87xxn4m8gm": "Bootstrap 5",
+    "ljq5qx2vmfn6m626ioucbd5": "Chrome Extension",
+    "mvwmeoqbawxnh49cxomb4kz": "Cook",
+    "5shqmwqiva0r06oasv480n8": "CSS",
+    "9hwfp65pm5gvegngk1hf68w": "Position",
+    "fgpxrabrht1tlu3sfwh2cfx": "Responsive Design",
+    "5shqmwqivatr06oasv480ni": "Flex Box",
+    "wiaz546utk39nbfg4cfpg6v": "Grid",
+    "i0qvfd0bsvswmnet8bx5z4y": "Selectors",
+    "jnk1rvgqg1x5uvzso9rhvyc": "Database Desig",
+    "jhh8w9bib471ftwnu7vnxc5": "Docker",
+    "tm1a0lvg2k2ahhwh8xze2j2": "Docker Compose",
+    "dvqnb19ytcvbz7r9mw1z2l1": "Dsa",
+    "yyyjeii77vfw4lvvc9qwvdj": "Leetcode",
+    "cqa4ysgqx8jgelbxs3fo9ts": "Resource",
+    "abju70kqigdfwp8qxtih0h2": "Eng",
+    "cb36bc5ov9tkplhcztvmn48": "Grammer",
+    "6ybahqmiv067devbcos5nvh": "Preposition",
+    "v4ad8r132ptysursrp7cjhz": "Arrive at or In",
+    "3tl5ts2r5je44kzdi565jnj": "Time at on In",
+    "y7x3wvcg0ozwuzgnxfzcgbg": "Vocab",
+    "qvw8cjqjtctws3gtjrn9g53": "Meanings",
+    "dy5vet30k10a9i3h9tbluuj": "Word Power Made Easy",
+    "gv9ad1s3wc299dhuleufjey": "Eslint",
+    "icnize8f40gpqd9mp3kwk7e": "Express",
+    "6pwyibv8wg82qexq38t0tbw": "Controller",
+    "1bvw1btkcxwdx21dkknw5ts": "Error Handling",
+    "5jsgly6zxbtm0cgw8ljs0re": "Middleware",
+    "i8pzh29iemraioqlpwcnboq": "Router",
+    "kapsl94m9szlcqc8b47iz1x": "Gen Ai",
+    "pprkwc2gae0mom9n4nyqe1u": "GitHub Actions",
+    "7i80rn51d8qcxunia2u5il6": "Workflow Syntax",
+    "jsp4otczvnnbnxxslcz4jtx": "HTML",
+    "y7cste98zdzm9kb1a5mwlc7": "Canvas",
+    "0nxkat7266fo4bon6kz0pkq": "Husky Hook",
+    "8k7fj3knfjs2vz42yxldbzk": "JavaScript",
+    "sh9g495g98ov0b63kzffz4w": "Arrow Func Exercise",
+    "xmhzv4k1dezmevk9worxp92": "Currying Partials",
+    "3mh79j7ah9i5duqditiopi8": "Handson",
+    "06dxxwewwp67sqivoq59mhs": "Pollyfill",
+    "wk8nw908ich40fry2kk71a0": "Parse Int",
+    "y1ng2qxm7ukl5sce22whs3d": "Performance",
+    "51zb91dvu0ckmvmlplqxqil": "Pipe and Compose",
+    "oj1cwazkncn3i7wbs36pcqx": "Promises Exercise",
+    "f49q2e7ln41rpeqz70st4ow": "Security",
+    "3vzqyyohwbs653l4ua3rmyz": "Type Coercion",
+    "wrrbkp0gz1cc6032hwyrd9c": "Microservices",
+    "ohnfdy7pjyhxur8g6kejjcr": "Module Federation",
+    "y1zawkz5is14bkueanm4tuz": "Nextjs",
+    "n12dvhh5vui4qo2y2tw8ld0": "Doubts",
+    "yesj05qpt4higyxwmcii776": "NextJS 12",
+    "66gcanxafeme14qkyj2maxm": "Optimization",
+    "kgx3khbrerpazr8go9comf8": "Rendering",
+    "ubgj4b3onoq9pj080dri1nj": "React Server Components",
+    "sklzx0bvf0dyg34fzr0t0x1": "Rendering Lifecycle",
+    "u7xur0cxsnbvg51rquey5ew": "Server and Client Composition Patterns",
+    "fq3hkpwfr9vkg8prtpofbrp": "Server Rendering Strategies",
+    "vh28j803j8gmx35nymyloxt": "Routing",
+    "o6kk58cac0vvnxzxpfuo3gt": "Link",
+    "byz0xlauc4njcaf9hmt13b3": "Error Handling",
+    "bissfxn4ra3hsnuvit2fzl6": "Layouts",
+    "lzyt1r32ijo6huvmpm3femr": "Loading UI",
+    "cok7r8be46nqy5mzl65l8l9": "Metadata",
+    "uknad7zvwt0vmshlus5jkrm": "Parallel Routes",
+    "ldoe4gpzz0t3vcch4lrn2bh": "Intercepted Routes",
+    "0bvpfpbl0mfb06jdccaiqao": "Route Handlers",
+    "5kglpokc68y14xpva53rmli": "Templates",
+    "ze1zcgam9aozgrup2l8kted": "Version 13",
+    "dnlwkfotxrvgh9gar9jr90b": "Node",
+    "hfg36vfiasgeg48e0rn0ei3": "Dotenv",
+    "oeboacy4sa94bb9bmrwzvv3": "HTTP Status Code",
+    "anc0a2elevx9ye3t7t9kohg": "Os",
+    "1istl8ksno3yrvxnn438vnn": "Path",
+    "rrxu5dedjpa2adgu9rtl2i9": "Prisma",
+    "hmrrqzfeg4w0wgpt2kf3ghc": "Python",
+    "mfxmo5ig0t37gkdwkm7kw6q": "Advance Types",
+    "kcih4pnhbb795924pnidwra": "Basics",
+    "ypftqlt66i3pb6rfn8esolc": "Fast API",
+    "4mngcr4kosugosoh5edvi6a": "Loops",
+    "oxiuc7apdhpqqh90etrafog": "rabbitMQ",
+    "8fp89ktw3fhi2p6bt35b5ju": "React",
+    "ar4hxrxnalbptp5swus1cyz": "Advance Patterns",
+    "g3ml7qhsqgbi0itgx8fjp4e": "Dos N Donts",
+    "9hgq7mhgw8ay47ghwdvppzf": "Errorhandling",
+    "ni4mv17f04ieqk6sxn02o77": "Fundamentals",
+    "lr6lnzahqwfbdwlc9x38hlj": "Function First Class Entity",
+    "o6nvengftckl6e4kft81zln": "Virtual Dom",
+    "ijl35bq8u9tk2vvaszhjjgr": "Global State Management",
+    "9w4z8axj4a9j88semd4xbs2": "Hooks",
+    "hlbm08qy2g1yoazu7w4hxmr": "Interview Quiz",
+    "q56fkiakh4z3zqq3k2s0t3k": "Legacy",
+    "6g4oyken27wdzgxfzyxd42t": "Clone Element",
+    "6g4m29itar13aghs4ngblwm": "React Children",
+    "8ba8zwmayt1v973e00h6h64": "Mui",
+    "oca8al9dg5b5wstqa8xcz7b": "Performance",
+    "3uby22vvqaqekxnnpmi3kiw": "Re Rendering",
+    "06zdwr6rdqef5dpgpe9rx7o": "Portal",
+    "ug5b9frm3w0fz4400egy5wi": "React Patterns",
+    "dv1l5xhkn1iaeker7ik3ea3": "Compound",
+    "ahur9u8a8yj3xkacx0cqjt2": "Controlled Uncontrolled",
+    "rasdv9a9uhtdt100mwt80cx": "Custom Hooks",
+    "xqgcm6m5nb6dc5ybk4aqgyc": "Functional Programming",
+    "cnsrds3146uzfbzkaer0tav": "Higher Order Components",
+    "umv1qlgcft10gzj348d0ou0": "Observer Pattern with events",
+    "sojbzhwx1losfnysmamz42a": "Render Prop",
+    "uvb8ww8ir11egzwnqkvqiyx": "Router",
+    "sm5v6pzpunzqqib51ywg6qp": "Testing",
+    "k6wrzwjtyopzxbnj2m4is2z": "Redux",
+    "d9pyzgwyw5glbwl05lihia3": "Misc",
+    "og4aiuuxxnjh56eqvh6tdvl": "React Redux",
+    "gterdib2mf9tclbgxb07mjd": "Redux Toolkit",
+    "s6qvndijnh01d8cuioxy7zw": "Thunk",
+    "k47pb6wex983xtktbdv5s6t": "Reverse Proxy",
+    "llb97kaw6bgknue4dd8l2cz": "Traefik",
+    "f5le3rs98wmsd3hn55xqtdf": "Saas",
+    "wcnq8v8lx85s853mqbfwoen": "Senior Dev Q&a",
+    "3djdpe36a1ke5yxrej8upmt": "tRPC",
+    "w5l9zvdha3es8jaxge5e4lu": "TypeScript",
+    "qdnhxg5v4oukw5hsc6xc6li": "Advance Types",
+    "e85c7nd0rt2fnlb7zu3xnz3": "Basic Types",
+    "2b35ixagticlchpxb121vfm": "Classes",
+    "gqbkj2606jvpreq2kgwp6g3": "Compiler",
+    "acgxmxarkrk4damtk0dz3we": "Decorartors",
+    "g8etjorczrqedoptssxdooy": "Generics",
+    "nman3njbtx3ty2ghrjyy822": "Interfaces",
+    "a1g7oejylvpmgq8v43wwlqm": "React",
+    "3ri92kivgwpbn6pwl24w6pn": "Vanilla JS",
+    "93ayje8gc8rss7fkdkccs9a": "Vite",
+    "qni9fshnce32rhoxta4na21": "Web",
+    "521tdzo7x0zx50aal6fmw1m": "Frontend Web Performance Checklist",
+    "ps33b8yaiukx17yrllb4is3": "Pwa",
+    "nutf7tamgwrrmdxogge4gyq": "Security",
+    "f96o2fb6j6e3xfevwtnes5g": "Service Workers",
+    "z34vf2zj27tr4j9219ze4c4": "Web Vitals",
+    "a18q1wy0g9i62deaqmwb0gr": "Web Workers",
+    "winston": "Winston",
+    "89wj9htvdw3wp48wr2pbnc1": "Yaml",
+    "hr3m4rc8hxm5rjbi5kumq5f": "Yarn",
+    "wcja9b2dozrw97bjfuc1ewj": "Demo",
+    "7vm4wp9j1f5ez4k5do5en8j": "News for You",
+    "ncrlrx33028xvu3y7op3pdz": "Links",
+    "my3k9k1s3vjl69my24a7pz1": "Misc",
+    "ddh1fz3o9jtwlnhx8im7w6n": "Resources",
+    "2fdyyhuwj8l1obbv5yh1zwd": "Links",
+    "xjtg1so5cq4qj3qoj1n357g": "Tags",
+    "qvi33345hovfbzw8ht693rk": "JavaScript",
+    "l0lb7pt714nugdlnmoexoy1": "Frontend Web Performance Checklist",
+    "gnxywb70sldsrsabn47cn3z": "Learn",
+    "urj8q1uq98o3upmgbt2qxns": "Troubleshoot"
+  }
+}

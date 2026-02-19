@@ -1,0 +1,60 @@
+<h1 id="frontend-web-performance-checklist">Frontend Web Performance Checklist<a aria-hidden="true" class="anchor-heading icon-link" href="#frontend-web-performance-checklist"></a></h1>
+<h2 id="resources">Resources<a aria-hidden="true" class="anchor-heading icon-link" href="#resources"></a></h2>
+<ul>
+<li><a href="https://dev.to/jacobandrewsky/frontend-web-performance-checklist-2o9j">Frontend Web Performance Checklist</a></li>
+</ul>
+<h2 id="checklist">Checklist<a aria-hidden="true" class="anchor-heading icon-link" href="#checklist"></a></h2>
+<ol>
+<li>
+<p><strong>Eleminate render blocking non-critical scripts</strong>: these resources are blocking the first paint of your page. Consider delivering critical JS/CSS inline and deferring all non-critical JS/styles.</p>
+</li>
+<li>
+<p><strong>Image handling</strong>:</p>
+<ul>
+<li>Serve images that are appropriately-sized to save cellular data and improve load time.</li>
+<li>Give explicit height width to images to reduce Cumulative Layout Shift(CLS).</li>
+<li>Use CSS sprites for small images/icons.</li>
+<li>Minimize the use of external scripts and fonts.</li>
+</ul>
+</li>
+<li>
+<p><strong>Minify/Remove unnecessary CSS and JS</strong>: minify css/js and you can also use Code Splitting which will split code into bundles that can be loaded on demand.</p>
+</li>
+<li>
+<p><strong>Test Cross-Browser Compatibility:</strong>: Ensure your website performs well on various browsers and devices.</p>
+</li>
+<li>
+<p><strong>Optimize Third-Party Scripts</strong>: Evaluate the impact of third-party scripts and consider asynchronous loading.</p>
+</li>
+<li>
+<p><strong>Prioritize Accessibility</strong>: Ensure your website is accessible to all users, including those with disabilities.</p>
+</li>
+<li>
+<p><strong>Ensure text remains visible during webfont load</strong>: Fonts are often large files with slow load times. Some browsers hide text until the font loads, causing a flash of invisible text (FOIT).</p>
+<ul>
+<li>to avoid showing invisible text while custom fonts load is to temporarily show a system font. add `font-display: swap`` in your <a title="Private" href="https://wiki.dendron.so/notes/hfyvYGJZQiUwQaaxQO27q.html" target="_blank" class="private">@font-face (Private)</a> style</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token atrule"><span class="token rule">@font-face</span></span> <span class="token punctuation">{</span>
+  <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">'Pacifico'</span><span class="token punctuation">;</span>
+  <span class="token property">src</span><span class="token punctuation">:</span> <span class="token function">local</span><span class="token punctuation">(</span><span class="token string">'Pacifico Regular'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">local</span><span class="token punctuation">(</span><span class="token string">'Pacifico-Regular'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>https://fonts.gstatic.com/s/pacifico/v12/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2<span class="token punctuation">)</span></span>
+      <span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'woff2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">font-display</span><span class="token punctuation">:</span> swap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>swap tells the browser that text using the font should be displayed immediately using a system font. Once the custom font is ready, it replaces the system font</li>
+</ul>
+</li>
+<li>
+<p><strong>Preload key requests / Preconnect to required origins</strong>: Declare preload links in your HTML to instruct the browser to download key resources as soon as possible</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>preload<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>critical.css<span class="token punctuation">"</span></span> <span class="token attr-name">as</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>style<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>preload<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>critical.js<span class="token punctuation">"</span></span> <span class="token attr-name">as</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>script<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>head</span><span class="token punctuation">></span></span>
+</code></pre>
+</li>
+<li>
+<p><strong>Serve images in next-gen formats</strong>: WebP or Avif provide better compression.</p>
+</li>
+</ol>

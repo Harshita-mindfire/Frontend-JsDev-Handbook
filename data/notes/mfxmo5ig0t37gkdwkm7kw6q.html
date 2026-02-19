@@ -1,0 +1,80 @@
+<h1 id="advance-types">Advance Types<a aria-hidden="true" class="anchor-heading icon-link" href="#advance-types"></a></h1>
+<h2 id="lists">Lists<a aria-hidden="true" class="anchor-heading icon-link" href="#lists"></a></h2>
+<pre class="language-py"><code class="language-py">int_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>int_list<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#4</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>int_list<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">#3</span>
+
+int_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span> <span class="token comment"># append 7 to the last</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>int_list<span class="token punctuation">)</span> <span class="token comment">#[1, 2, 3, 4, 7]</span>
+
+int_list<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment">#pop at index 3</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>int_list<span class="token punctuation">)</span> <span class="token comment">#[1, 2, 3, 7]</span>
+
+int_list<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">#removes the value 2</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>int_list<span class="token punctuation">)</span> <span class="token comment">#[1, 3, 7]</span>
+</code></pre>
+<h2 id="dictionaries">Dictionaries<a aria-hidden="true" class="anchor-heading icon-link" href="#dictionaries"></a></h2>
+<pre class="language-py"><code class="language-py">user_dict <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'username'</span><span class="token punctuation">:</span> <span class="token string">'iamjojo'</span><span class="token punctuation">,</span>
+    <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Jojo'</span><span class="token punctuation">,</span>
+    <span class="token string">'age'</span><span class="token punctuation">:</span> <span class="token number">28</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>user_dict<span class="token punctuation">)</span> <span class="token comment">#{'username': 'iamjojo', 'name': 'Jojo', 'age': 28}</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>user_dict<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">#Jojo</span>
+
+<span class="token keyword">for</span> x <span class="token keyword">in</span> user_dict<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">'''
+username
+name
+age
+'''</span>
+
+<span class="token keyword">for</span> x <span class="token keyword">in</span> user_dict<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>user_dict<span class="token punctuation">[</span>x<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">'''
+iamjojo
+Jojo
+28
+'''</span>
+
+<span class="token keyword">for</span> x<span class="token punctuation">,</span>y <span class="token keyword">in</span> user_dict<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">{</span>x<span class="token punctuation">}</span></span><span class="token string"> : </span><span class="token interpolation"><span class="token punctuation">{</span>y<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">'''
+username : iamjojo
+name : Jojo
+age : 28
+'''</span>
+</code></pre>
+<h3 id="to-make-a-clonenot-sharing-reference">To make a clone(not sharing reference)<a aria-hidden="true" class="anchor-heading icon-link" href="#to-make-a-clonenot-sharing-reference"></a></h3>
+<pre class="language-py"><code class="language-py">user_dict2 <span class="token operator">=</span> user_dict<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+user_dict2<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token string">"age"</span><span class="token punctuation">)</span> <span class="token comment"># pop the supplied key</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>user_dict2<span class="token punctuation">)</span> <span class="token comment">#{'username': 'iamjojo', 'name': 'Jojo'}</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>user_dict<span class="token punctuation">)</span> <span class="token comment">#{'username': 'iamjojo', 'name': 'Jojo', 'age': 28}</span>
+
+</code></pre>
+<h2 id="functions">functions<a aria-hidden="true" class="anchor-heading icon-link" href="#functions"></a></h2>
+<pre class="language-py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">print_myname</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token comment">#Jojo</span>
+
+print_myname<span class="token punctuation">(</span><span class="token string">"Jojo"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> a<span class="token operator">+</span>b
+
+sol <span class="token operator">=</span> add<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>sol<span class="token punctuation">)</span> <span class="token comment">#15</span>
+
+sol2<span class="token operator">=</span>add<span class="token punctuation">(</span>a<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">,</span>b<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment">#different way of passing args</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>sol2<span class="token punctuation">)</span> <span class="token comment">#15</span>
+
+
+<span class="token keyword">def</span> <span class="token function">add10ToTheSum</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">:</span> 
+    <span class="token keyword">return</span> <span class="token number">10</span><span class="token operator">+</span>add<span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>add10ToTheSum<span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">#30</span>
+</code></pre>

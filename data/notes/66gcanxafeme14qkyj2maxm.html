@@ -1,0 +1,20 @@
+<h1 id="optimization">Optimization<a aria-hidden="true" class="anchor-heading icon-link" href="#optimization"></a></h1>
+<h2 id="head-metadata">Head Metadata<a aria-hidden="true" class="anchor-heading icon-link" href="#head-metadata"></a></h2>
+<ul>
+<li>Import Head from next/head and use it for any component;</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">Fragment</span> <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">Head</span></span> <span class="token keyword module">from</span> <span class="token string">'next/head'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">Component1</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&#x3C;</span><span class="token maybe-class-name">Fragment</span><span class="token operator">></span>
+      <span class="token operator">&#x3C;</span><span class="token maybe-class-name">Head</span><span class="token operator">></span>
+        <span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token maybe-class-name">Events</span> <span class="token maybe-class-name">Page</span><span class="token operator">&#x3C;</span><span class="token operator">/</span>title<span class="token operator">></span>
+      <span class="token operator">&#x3C;</span><span class="token operator">/</span><span class="token maybe-class-name">Head</span><span class="token operator">></span>
+      <span class="token operator">&#x3C;</span><span class="token maybe-class-name">SomeComponent</span> <span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&#x3C;</span><span class="token operator">/</span><span class="token maybe-class-name">Fragment</span><span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>note: next.js automatically merges multiple head elements. if there is tag conflict(like two Head have title property), the latter one will be used.</p>

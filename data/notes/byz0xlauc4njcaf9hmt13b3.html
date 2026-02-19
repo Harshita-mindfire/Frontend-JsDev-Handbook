@@ -1,0 +1,58 @@
+<h1 id="error-handling">Error Handling<a aria-hidden="true" class="anchor-heading icon-link" href="#error-handling"></a></h1>
+<ul>
+<li>are <strong>client components</strong></li>
+<li>error.tsx file</li>
+<li>receives error and reset prop.</li>
+<li>error is of type Error and reset is a function that attempts to retry rendering the component.</li>
+<li>enables you to attempt to recover from from an error without requirring a full page review.</li>
+</ul>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/component-hierarchy.png"></p>
+<pre class="language-tsx"><code class="language-tsx"><span class="token string">"use client"</span><span class="token punctuation">;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> useRouter <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"next/navigation"</span><span class="token punctuation">;</span>
+<span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> startTransition <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">ErrorBoundary</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  error<span class="token punctuation">,</span>
+  reset<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  error<span class="token operator">:</span> <span class="token known-class-name class-name">Error</span><span class="token punctuation">;</span>
+  <span class="token function-variable function">reset</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> router <span class="token operator">=</span> <span class="token function">useRouter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">reload</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">startTransition</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      router<span class="token punctuation">.</span><span class="token method function property-access">refresh</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+      Error is: </span><span class="token punctuation">{</span>error<span class="token punctuation">.</span><span class="token property-access">message</span><span class="token punctuation">}</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>button</span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>reload<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">Try again</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>button</span><span class="token punctuation">></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token maybe-class-name">ErrorBoundary</span><span class="token punctuation">;</span>
+
+
+</code></pre>
+<h2 id="handling-errors-in-layouts">Handling errors in layouts<a aria-hidden="true" class="anchor-heading icon-link" href="#handling-errors-in-layouts"></a></h2>
+<ul>
+<li>The error boundary won't catch error thrown in layout.tsx within the same segment(in the same folder) because of the component rendering hierarchy.</li>
+<li>layout sits above the error boundry in the component tree.</li>
+<li>to resolve, move the error boundry at the parent of layout.</li>
+</ul>
+<p>So how do we handle errors that are thrown from root layout? Since it does not have a parent, how do we catch it?</p>
+<p>via <strong>global-error.tsx</strong> that sits in the root directory. </p>
+<h2 id="global-error-boundry">Global error boundry<a aria-hidden="true" class="anchor-heading icon-link" href="#global-error-boundry"></a></h2>
+<ul>
+<li>global-error.tsx
+<strong>NOTE: IT only works in production mode.</strong></li>
+<li>It needs its own html and body tags to be rendered since it replaces our root layout.</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/Frontend-JsDev-Handbook/notes/bissfxn4ra3hsnuvit2fzl6">Layouts</a></li>
+</ul>

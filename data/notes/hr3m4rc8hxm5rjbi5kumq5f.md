@@ -1,0 +1,3 @@
+- version: `yarn -v`
+- upgarde to yarn 3: `yarn set release berry`
+- downgrade back to yarn 1: `yarn set release 1.22.1`

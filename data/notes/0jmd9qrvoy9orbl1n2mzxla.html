@@ -1,0 +1,216 @@
+<h1 id="simple-gen-ai-app-using-langchain">Simple Gen AI APP Using Langchain<a aria-hidden="true" class="anchor-heading icon-link" href="#simple-gen-ai-app-using-langchain"></a></h1>
+<h2 id="external-project">External project<a aria-hidden="true" class="anchor-heading icon-link" href="#external-project"></a></h2>
+<ul>
+<li><a href="https://github.com/Harshita-mindfire/langgraph/tree/main/2-Youtube-video-summarizer">Youtube video summarizer</a></li>
+</ul>
+<h2 id="simple-app">Simple app<a aria-hidden="true" class="anchor-heading icon-link" href="#simple-app"></a></h2>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> os
+<span class="token keyword">from</span> dotenv <span class="token keyword">import</span> load_dotenv
+load_dotenv<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">'OPENAI_API_KEY'</span><span class="token punctuation">]</span><span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"OPENAI_API_KEY"</span><span class="token punctuation">)</span>
+<span class="token comment">## Langsmith Tracking</span>
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"LANGCHAIN_API_KEY"</span><span class="token punctuation">]</span><span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"LANGCHAIN_API_KEY"</span><span class="token punctuation">)</span>
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"LANGCHAIN_TRACING_V2"</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">"true"</span>
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"LANGCHAIN_PROJECT"</span><span class="token punctuation">]</span><span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"LANGCHAIN_PROJECT"</span><span class="token punctuation">)</span>
+
+
+<span class="token comment">## Data Ingestion--From the website we need to scrape the data</span>
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> WebBaseLoader
+
+loader<span class="token operator">=</span>WebBaseLoader<span class="token punctuation">(</span><span class="token string">"https://docs.smith.langchain.com/tutorials/Administrators/manage_spend"</span><span class="token punctuation">)</span>
+docs<span class="token operator">=</span>loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">### Load Data--> Docs-->Divide our Docuemnts into chunks dcouments-->text-->vectors-->Vector Embeddings--->Vector Store DB</span>
+<span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> RecursiveCharacterTextSplitter
+
+text_splitter<span class="token operator">=</span>RecursiveCharacterTextSplitter<span class="token punctuation">(</span>chunk_size<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span>chunk_overlap<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">)</span>
+documents<span class="token operator">=</span>text_splitter<span class="token punctuation">.</span>split_documents<span class="token punctuation">(</span>docs<span class="token punctuation">)</span>
+
+<span class="token comment">## Embed</span>
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> OpenAIEmbeddings
+embeddings<span class="token operator">=</span>OpenAIEmbeddings<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">## Vectore store</span>
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>vectorstores <span class="token keyword">import</span> FAISS
+vectorstoredb<span class="token operator">=</span>FAISS<span class="token punctuation">.</span>from_documents<span class="token punctuation">(</span>documents<span class="token punctuation">,</span>embeddings<span class="token punctuation">)</span>
+
+
+<span class="token comment">## Query vector db</span>
+<span class="token comment">## Query From a vector db</span>
+query<span class="token operator">=</span><span class="token string">"LangSmith has two usage limits: total traces and extended"</span>
+result<span class="token operator">=</span>vectorstoredb<span class="token punctuation">.</span>similarity_search<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+result<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>page_content
+
+<span class="token comment">## creating Retrieval chain using open ai model</span>
+
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> ChatOpenAI
+llm<span class="token operator">=</span>ChatOpenAI<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"gpt-4o"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>chains<span class="token punctuation">.</span>combine_documents <span class="token keyword">import</span> create_stuff_documents_chain
+<span class="token keyword">from</span> langchain_core<span class="token punctuation">.</span>prompts <span class="token keyword">import</span> ChatPromptTemplate 
+
+prompt<span class="token operator">=</span>ChatPromptTemplate<span class="token punctuation">.</span>from_template<span class="token punctuation">(</span> <span class="token triple-quoted-string string">""" Answer the following question based only on the provided context: &#x3C;context> {context} &#x3C;/context> """</span> <span class="token punctuation">)</span> 
+document_chain<span class="token operator">=</span>create_stuff_documents_chain<span class="token punctuation">(</span>llm<span class="token punctuation">,</span>prompt<span class="token punctuation">)</span> 
+
+
+retriever<span class="token operator">=</span>vectorstoredb<span class="token punctuation">.</span>as_retriever<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">### created retriever</span>
+
+<span class="token keyword">from</span> langchain<span class="token punctuation">.</span>chains <span class="token keyword">import</span> create_retrieval_chain
+retrieval_chain<span class="token operator">=</span>create_retrieval_chain<span class="token punctuation">(</span>retriever<span class="token punctuation">,</span>document_chain<span class="token punctuation">)</span><span class="token comment">#uses retriever as context now</span>
+
+<span class="token comment">## Get the response form the LLM</span>
+response<span class="token operator">=</span>retrieval_chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"input"</span><span class="token punctuation">:</span><span class="token string">"LangSmith has two usage limits: total traces and extended"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+response<span class="token punctuation">[</span><span class="token string">'answer'</span><span class="token punctuation">]</span>
+</code></pre>
+<h2 id="what-is-the-use-of-create_stuff_documents_chain-and-create_retrieval_chain-why-do-we-need-them">What is the use of create_stuff_documents_chain and create_retrieval_chain. Why do we need them?<a aria-hidden="true" class="anchor-heading icon-link" href="#what-is-the-use-of-create_stuff_documents_chain-and-create_retrieval_chain-why-do-we-need-them"></a></h2>
+<p>Imagine you had just a normal LLM chain:</p>
+<pre class="language-py"><code class="language-py">response <span class="token operator">=</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"What is LangChain?"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>What happens? The LLM answers from its training data. It does NOT access your documents. It may hallucinate. It cannot see your vector database.</p>
+<p>So this is just:
+🧠 LLM only
+No retrieval.
+No grounding.</p>
+<p>What if your answer depends on:</p>
+<ul>
+<li>Private PDFs</li>
+<li>Company documents</li>
+<li>Database entries
+The plain chain cannot access those. That’s why RAG exists.</li>
+</ul>
+<p>🔹 <strong>Now Let’s See What Each Chain Adds</strong></p>
+<p>We split the problem into two responsibilities:</p>
+<ul>
+<li>🔎 Get relevant documents</li>
+<li>🧠 Use those documents to answer</li>
+</ul>
+<p>Each chain handles one responsibility.</p>
+<h3 id="1️⃣-create_stuff_documents_chain-aka-the-document-combine-chain">1️⃣ create_stuff_documents_chain (aka the document combine chain)<a aria-hidden="true" class="anchor-heading icon-link" href="#1️⃣-create_stuff_documents_chain-aka-the-document-combine-chain"></a></h3>
+<p>What it does: It takes</p>
+<ul>
+<li>A question</li>
+<li>A list of documents</li>
+</ul>
+<p>And:</p>
+<p>“Stuffs” all document text into <code>{context}</code></p>
+<p>Injects that into your prompt</p>
+<p>Calls the LLM</p>
+<p>Returns the generated answer</p>
+<pre class="language-py"><code class="language-py"><span class="token comment">#Conceptually this is what the chain does</span>
+
+<span class="token keyword">def</span> <span class="token function">document_chain</span><span class="token punctuation">(</span>question<span class="token punctuation">,</span> docs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    context <span class="token operator">=</span> <span class="token string">"\n\n"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>doc<span class="token punctuation">.</span>page_content <span class="token keyword">for</span> doc <span class="token keyword">in</span> docs<span class="token punctuation">)</span>
+    
+    prompt <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"""
+    Answer based only on the context.
+
+    Question:
+    </span><span class="token interpolation"><span class="token punctuation">{</span>question<span class="token punctuation">}</span></span><span class="token string">
+
+    Context:
+    </span><span class="token interpolation"><span class="token punctuation">{</span>context<span class="token punctuation">}</span></span><span class="token string">
+    """</span></span>
+    
+    <span class="token keyword">return</span> llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>prompt<span class="token punctuation">)</span>
+
+</code></pre>
+<p>So this chain replaces your plain LLM chain with:
+LLM + injected document context</p>
+<h3 id="2️⃣-create_retrieval_chain">2️⃣ create_retrieval_chain<a aria-hidden="true" class="anchor-heading icon-link" href="#2️⃣-create_retrieval_chain"></a></h3>
+<p>It does:</p>
+<ul>
+<li>Take the question</li>
+<li>Call retriever</li>
+<li>Get relevant documents</li>
+<li>Pass them to document_chain</li>
+<li>Return final answer</li>
+</ul>
+<p>Conceptually:</p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">def</span> <span class="token function">retrieval_chain</span><span class="token punctuation">(</span>question<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    docs <span class="token operator">=</span> retriever<span class="token punctuation">.</span>get_relevant_documents<span class="token punctuation">(</span>question<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> document_chain<span class="token punctuation">(</span>question<span class="token punctuation">,</span> docs<span class="token punctuation">)</span>
+</code></pre>
+<p>so it replaces this manual writing to one single call</p>
+<pre class="language-py"><code class="language-py">retrieval_chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"input"</span><span class="token punctuation">:</span> question<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="miscellaneous">Miscellaneous<a aria-hidden="true" class="anchor-heading icon-link" href="#miscellaneous"></a></h2>
+<p>One of the way to write this in LCEL is (you we really need to write in LCEL)</p>
+<pre class="language-py"><code class="language-py">chain <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"context"</span><span class="token punctuation">:</span> retriever<span class="token punctuation">,</span>
+        <span class="token string">"question"</span><span class="token punctuation">:</span> RunnablePassthrough<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">|</span> prompt
+    <span class="token operator">|</span> llm
+<span class="token punctuation">)</span>
+chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"What is langchain?"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Each runnable executes.
+For input: What is langchain, The first block is this dictionary:</p>
+<p><strong>Step 1</strong></p>
+<pre class="language-py"><code class="language-py"><span class="token punctuation">{</span>
+    <span class="token string">"context"</span><span class="token punctuation">:</span> retriever<span class="token punctuation">,</span>
+    <span class="token string">"question"</span><span class="token punctuation">:</span> RunnablePassthrough<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>This block runs both values in parallel with the SAME input.
+So Internally this happens:</p>
+<p>1A:</p>
+<pre class="language-py"><code class="language-py">RunnablePassthrough<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"What is LangChain?"</span><span class="token punctuation">)</span> <span class="token comment">#output: What is langchain?</span>
+<span class="token comment"># RunnablePassthrough() → returns the input unchanged</span>
+</code></pre>
+<p>1B</p>
+<pre class="language-py"><code class="language-py">retriever<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string">"What is langchain?"</span><span class="token punctuation">)</span>
+<span class="token comment">#returns [Document(...), Document(...)]</span>
+
+</code></pre>
+<p><strong>Result of Step 1</strong></p>
+<pre class="language-py"><code class="language-py"><span class="token punctuation">{</span>
+    <span class="token string">"context"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Document<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Document<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"question"</span><span class="token punctuation">:</span> <span class="token string">"What is langchain?"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Important: In LCEL Retriever Is a Runnable</strong>
+In LCEL, a retriever is a Runnable. You’re defining a computation graph, not values. That means it behaves like:</p>
+<pre><code>input → output
+</code></pre>
+<p>So inside a runnable mapping:</p>
+<pre class="language-py"><code class="language-py">chain <span class="token operator">=</span> <span class="token punctuation">{</span>
+   <span class="token string">"context"</span><span class="token punctuation">:</span> retriever
+<span class="token punctuation">}</span> <span class="token operator">|</span> prompt <span class="token operator">|</span> llm
+</code></pre>
+<p>Means:</p>
+<pre><code>"context" = retriever.invoke(input)
+</code></pre>
+<p>NOT:</p>
+<pre class="language-py"><code class="language-py"><span class="token string">"context"</span> <span class="token operator">=</span> retriever
+</code></pre>
+<p>This here below means "context" = retriever object. That literally passes the retriever object.</p>
+<pre class="language-py"><code class="language-py">chain<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string">"context"</span><span class="token punctuation">:</span> retriever
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>STEP 2 — Prompt Runs</strong>
+The prompt template expects: {question} and {context} so in LCEL chain above  <code>| prompt</code>
+is internally </p>
+<pre class="language-py"><code class="language-py">prompt<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token string">"question"</span><span class="token punctuation">:</span> <span class="token string">"What is LangChain?"</span><span class="token punctuation">,</span>
+    <span class="token string">"context"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Document<span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Result of Step 2</p>
+<pre class="language-py"><code class="language-py"><span class="token comment">#formatted_prompt</span>
+"Answer the question<span class="token punctuation">:</span> What <span class="token keyword">is</span> LangChain?
+Context<span class="token punctuation">:</span>
+LangChain <span class="token keyword">is</span> a framework <span class="token keyword">for</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>"
+</code></pre>
+<p><strong>STEP 3 — LLM Runs</strong></p>
+<p>Now that formatted prompt is passed to: <code>| llm</code></p>
+<pre><code>llm.invoke(formatted_prompt)
+</code></pre>
+<p>Output:</p>
+<pre><code>"LangChain is a framework designed to build applications using LLMs..."
+</code></pre>

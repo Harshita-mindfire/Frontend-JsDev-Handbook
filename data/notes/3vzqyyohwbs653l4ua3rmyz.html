@@ -1,0 +1,131 @@
+<h1 id="type-coercion">Type Coercion<a aria-hidden="true" class="anchor-heading icon-link" href="#type-coercion"></a></h1>
+<h1 id="type-coersion-for-primitive-type">Type coersion for primitive type<a aria-hidden="true" class="anchor-heading icon-link" href="#type-coersion-for-primitive-type"></a></h1>
+<h2 id="to-number">To number<a aria-hidden="true" class="anchor-heading icon-link" href="#to-number"></a></h2>
+<p>Here is how primitive values are converted to numbers:</p>
+<pre><code>Number(null)                   // 0
+Number(undefined)              // NaN
+Number(true)                   // 1
+Number(false)                  // 0
+Number(" 12 ")                 // 12
+Number("-12.34")               // -12.34
+Number("\n")                   // 0
+Number(" 12s ")                // NaN
+Number(123)                    // 123
+Number({})                      //NaN
+</code></pre>
+<ul>
+<li>null and undefined are handled differently: null becomes 0, whereas undefined becomes NaN.</li>
+</ul>
+<h3 id="triggered-via">Triggered via<a aria-hidden="true" class="anchor-heading icon-link" href="#triggered-via"></a></h3>
+<ul>
+<li>comparison operators (>, &#x3C;, &#x3C;=,>=)</li>
+<li>bitwise operators ( | &#x26; ^ ~)</li>
+<li>arithmetic operators (- + * / % ). Note, that binary + does not trigger numeric conversion, when any operand is a string.</li>
+<li>unary + operator</li>
+<li>loose equality operator == (incl. !=).</li>
+<li>Note that == does not trigger numeric conversion when both operands are strings.</li>
+</ul>
+<p>There are two special rules to remember:</p>
+<ol>
+<li>When applying == to null or undefined, numeric conversion does not happen. null equals only to null or undefined, and does not equal to anything else.</li>
+</ol>
+<pre><code>null == 0               // false, null is not converted to 0
+null == null            // true
+undefined == undefined  // true
+null == undefined       // true
+</code></pre>
+<ol start="3">
+<li>NaN does not equal to anything even itself:</li>
+</ol>
+<pre><code>if (value !== value) { console.log("we're dealing with NaN here") }
+</code></pre>
+<h2 id="to-string">To string<a aria-hidden="true" class="anchor-heading icon-link" href="#to-string"></a></h2>
+<p>Implicit coercion is triggered by the binary + operator, when any operand is a string:</p>
+<pre><code>String({})   // '[object Object]'
+</code></pre>
+<h2 id="to-boolean">To Boolean<a aria-hidden="true" class="anchor-heading icon-link" href="#to-boolean"></a></h2>
+<pre><code>Boolean('')           // false
+Boolean(0)            // false
+Boolean(-0)           // false
+Boolean(NaN)          // false
+Boolean(null)         // false
+Boolean(undefined)    // false
+Boolean(false)        // false
+</code></pre>
+<ul>
+<li>Any value that is not in the list is converted to true, including object, function, Array, Date, user-defined type, and so on.
+eg :</li>
+</ul>
+<pre><code>Boolean({})             // true
+Boolean([])             // true
+Boolean(Symbol())       // true
+!!Symbol()              // true
+Boolean(function() {})  // true
+</code></pre>
+<h3 id="triggered-via-1">Triggered via<a aria-hidden="true" class="anchor-heading icon-link" href="#triggered-via-1"></a></h3>
+<p>Implicit conversion happens in logical context, or is triggered by logical operators ( || &#x26;&#x26; !) .</p>
+<h1 id="type-coercion-for-objects">Type coercion for objects<a aria-hidden="true" class="anchor-heading icon-link" href="#type-coercion-for-objects"></a></h1>
+<ul>
+<li>When it comes to objects and engine encounters expression like [1] + [2,3], first it needs to convert an object to a primitive value, which is then converted to the final type. And still there are only three types of conversion: numeric, string and boolean.</li>
+</ul>
+<p>Both numeric and string conversion make use of two methods of the input object: valueOf and toString . Both methods are declared on Object.prototype and thus available for any derived types, such as Date, Array, etc</p>
+<p>Numeric conversion first calls valueOf with a fallback to toString.
+String conversion does the opposite: toString followed by valueOf</p>
+<p>In general the algorithm is as follows:</p>
+<ol>
+<li>
+<p>If input is already a primitive, do nothing and return it.</p>
+</li>
+<li>
+<p>Call input.toString(), if the result is primitive, return it.</p>
+</li>
+<li>
+<p>Call input.valueOf(), if the result is primitive, return it.</p>
+</li>
+<li>
+<p>If neither input.toString() nor input.valueOf() yields primitive, throw TypeError.</p>
+</li>
+</ol>
+<h2 id="example">Example<a aria-hidden="true" class="anchor-heading icon-link" href="#example"></a></h2>
+<pre class="language-js"><code class="language-js"><span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token punctuation">(</span><span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token keyword nil">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token keyword nil">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token keyword nil">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token keyword nil">undefined</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">+</span> <span class="token operator">+</span><span class="token punctuation">(</span><span class="token operator">+</span><span class="token keyword nil">undefined</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Ans:
+3
+3
+3
+'12'
+3
+'12'
+'12'
+2
+2
+'1true'
+'11'
+1
+1
+'1null'
+'10'
+NaN
+NaN
+'1undefined'
+'1NaN'
+'1NaN'</p>

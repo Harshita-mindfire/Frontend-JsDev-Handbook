@@ -1,0 +1,92 @@
+<h1 id="grid">Grid<a aria-hidden="true" class="anchor-heading icon-link" href="#grid"></a></h1>
+<h1 id="cheatsheet">Cheatsheet<a aria-hidden="true" class="anchor-heading icon-link" href="#cheatsheet"></a></h1>
+<ul>
+<li><a href="https://grid.malven.co/">Cheatsheet</a></li>
+<li><a href="https://cssgridgarden.com/">Grid Garden game</a></li>
+</ul>
+<h2 id="grid-1">Grid<a aria-hidden="true" class="anchor-heading icon-link" href="#grid-1"></a></h2>
+<p>Grid also introduces a new unit, the fractional fr. Each fr unit allocates one share of the available space. For example, if two elements are set to 1fr and 3fr respectively, the space is divided into 4 equal shares; the first element occupies 1/4 and the second element 3/4 of any leftover space.</p>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.container</span></span> <span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span> 
+    <span class="token comment">/* 1fr stands for 1 fraction. In the below css, column 3 is twice as column 1 &#x26; 2. */</span>
+    <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token unit">fr</span> <span class="token number">1</span><span class="token unit">fr</span> <span class="token number">2</span><span class="token unit">fr</span><span class="token punctuation">;</span>
+    <span class="token property">gap</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token unit">rem</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>can also use <strong>repeat</strong> for values</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.container</span></span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token unit">fr</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token unit">fr</span> <span class="token number">1</span><span class="token unit">fr</span><span class="token punctuation">;</span> 
+  <span class="token property">gap</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>use <strong>auto</strong> when fraction needs to be adjusted automatically</li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.container</span></span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token comment">/* will automatically adjust the 1st column based on content */</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> auto <span class="token number">1</span><span class="token unit">fr</span> <span class="token number">1</span><span class="token unit">fr</span><span class="token punctuation">;</span>
+  <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token unit">fr</span> <span class="token number">1</span><span class="token unit">fr</span><span class="token punctuation">;</span> 
+  <span class="token property">gap</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Most common pattern</strong></p>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.container</span></span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>auto-fill<span class="token punctuation">,</span> <span class="token function">minmax</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token unit">px</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token unit">fr</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Let's break down the value:</p>
+<ul>
+<li><strong>repeat(auto-fill, ...)</strong>: This part indicates that you want to repeat the following column definition as many times as possible within the available space. The auto-fill keyword means that the grid will automatically create as many columns as it can fit within the container.</li>
+<li><strong>minmax(200px, 1fr)</strong>: This part sets the sizing for each column. It defines a range between a minimum and maximum size for the columns.
+200px is the minimum width that each column should have. Columns will not become narrower than this value.
+1fr represents the flexible part of the column sizing. It tells the grid to distribute any available space evenly among the columns. So, if there's extra space beyond the minimum requirement, it will be distributed equally among the columns.</li>
+</ul>
+<p>The combination of auto-fill and minmax(200px, 1fr) allows the grid to automatically adjust the number of columns based on the available space while ensuring that each column is at least 200px wide. If there's additional space available, the columns will expand equally to fill the remaining space.</p>
+<p><strong>NOTE</strong>: <strong>grid-template</strong> is a shorthand property that combines grid-template-rows and grid-template-columns.</p>
+<p>below eg. will create a grid with two rows that are 50% each, and one column that is 200 pixels wide.</p>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token id">#garden</span></span> <span class="token punctuation">{</span>
+    <span class="token property">grid-template</span><span class="token punctuation">:</span> <span class="token number">50</span><span class="token unit">%</span> <span class="token number">50</span><span class="token unit">%</span> <span class="token operator">/</span> <span class="token number">200</span><span class="token unit">px</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span> 
+</code></pre>
+<h2 id="grid-column-properties">Grid Column Properties<a aria-hidden="true" class="anchor-heading icon-link" href="#grid-column-properties"></a></h2>
+<ul>
+<li><strong>grid-column-start</strong></li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.green</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">/* start the green class item from grid 2 */</span>
+    <span class="token property">grid-column-start</span><span class="token punctuation">:</span> <span class="token number">2</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>
+<p>When <strong>grid-column-start</strong> is used alone, the grid item by default will span exactly one column. However, you can extend the item across multiple columns by adding the <strong>grid-column-end</strong> property.</p>
+</li>
+<li>
+<p><strong>grid-column</strong>:
+grid-column is a shorthand property that can accept both values at once, separated by a slash.</p>
+</li>
+</ul>
+<p>For example, </p>
+<pre class="language-css"><code class="language-css"><span class="token property">grid-column</span><span class="token punctuation">:</span> <span class="token number">2</span> <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">;</span>
+</code></pre>
+<p> will set the grid item to start on the 2nd vertical grid line and end on the 4th grid line.</p>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.green</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">/* span the column across 2 grids for ele with class green */</span>
+    <span class="token property">grid-column</span><span class="token punctuation">:</span> span <span class="token number">2</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li><strong>grid-area</strong></li>
+</ul>
+<p>there's yet another shorthand for that. grid-area accepts four values separated by slashes: grid-row-start, grid-column-start, grid-row-end, followed by grid-column-end.</p>
+<p>One example of this would be </p>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.green</span></span> <span class="token punctuation">{</span>
+    <span class="token property">grid-area</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token operator">/</span> <span class="token number">1</span> <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">/</span> <span class="token number">6</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>

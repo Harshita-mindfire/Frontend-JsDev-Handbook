@@ -1,0 +1,145 @@
+<h1 id="routing">Routing<a aria-hidden="true" class="anchor-heading icon-link" href="#routing"></a></h1>
+<p>Reference repo: <a href="https://github.com/Harshita-mindfire/next-js-learn">https://github.com/Harshita-mindfire/next-js-learn</a></p>
+<ul>
+<li>File system based routing.</li>
+</ul>
+<p><strong>Routing conventions:</strong></p>
+<ol>
+<li>All routes must be inside app folder.</li>
+<li>Each folder represents a segment of URL path.</li>
+<li>Routes files must be named either page.js or page.tsx</li>
+<li>404 routes are handled by default.</li>
+</ol>
+<ul>
+<li>Every page in app router receives route parameters through <a href="/Frontend-JsDev-Handbook/notes/o6kk58cac0vvnxzxpfuo3gt#params">params</a> prop. The type of params is a promise that resolves to an obj containing dynamic segments as key value pairs.</li>
+</ul>
+<p>When these conventions are followed, route file automatically becomes available as a route.</p>
+<ul>
+<li>similarly for nested routes: </li>
+</ul>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/nested-routes.png"></p>
+<h2 id="dynamic-routes">Dynamic routes<a aria-hidden="true" class="anchor-heading icon-link" href="#dynamic-routes"></a></h2>
+<ul>
+<li>folder with name wrapped around with sqaure brackets [ ].</li>
+</ul>
+<pre class="language-figma"><code class="language-figma">- app
+    - products
+        - page.tsx
+        - [productId]
+            - page.tsx
+    - page.tsx
+
+</code></pre>
+<ul>
+<li>to now get the segment from http://localhost:3000/products/1</li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">React</span></span> <span class="token keyword module">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">ProductDetails</span></span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>
+  params<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">params</span><span class="token operator">:</span> <span class="token known-class-name class-name">Promise</span><span class="token operator">&#x3C;</span><span class="token punctuation">{</span> <span class="token literal-property property">productId</span><span class="token operator">:</span> string <span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> productId <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword control-flow">await</span> params<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token property-access">productId</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">Product details: </span><span class="token punctuation">{</span>productId<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>div</span><span class="token punctuation">></span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token maybe-class-name">ProductDetails</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="nested-dynamic-routes">Nested dynamic routes<a aria-hidden="true" class="anchor-heading icon-link" href="#nested-dynamic-routes"></a></h3>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/routes.png"></p>
+<h3 id="catch-all-segments">Catch all segments<a aria-hidden="true" class="anchor-heading icon-link" href="#catch-all-segments"></a></h3>
+<ul>
+<li>Dynamic Segments can be extended to catch-all subsequent segments by adding an ellipsis inside the brackets [...segmentName].</li>
+</ul>
+<pre class="language-figma"><code class="language-figma">- shop
+  - [...slug]
+    - page.tsx
+</code></pre>
+<p>For example, /shop/[...slug].js will match /shop/clothes, but also /shop/clothes/tops, /shop/clothes/tops/t-shirts, and so on.</p>
+<p>Route	Example URL	params</p>
+<ul>
+<li>
+<p>/shop/[...slug].js	/shop/a	{ slug: ['a'] }</p>
+</li>
+<li>
+<p>/shop/[...slug].js	/shop/a/b	{ slug: ['a', 'b'] }</p>
+</li>
+<li>
+<p>/shop/[...slug].js	/shop/a/b/c	{ slug: ['a', 'b', 'c'] }</p>
+</li>
+<li>
+<p>To make the slugs optional, wrap the slug in double square brackets "[[]]"</p>
+</li>
+<li>
+<p><code>/shop/[[...slug]].js</code>	/shop	{ slug: undefined }</p>
+</li>
+</ul>
+<p>For example if you would try to access just the /shop, it would result in 404. To use the same page.tsx inside slug and also to make slugs optional, we can do the following:</p>
+<pre class="language-figma"><code class="language-figma">- shop
+  - [[...slug]]
+    - page.tsx
+</code></pre>
+<h2 id="custom-404">custom 404<a aria-hidden="true" class="anchor-heading icon-link" href="#custom-404"></a></h2>
+<ul>
+<li>not-found.tsx</li>
+</ul>
+<pre class="language-tsx"><code class="language-tsx"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">NotFound</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span><span class="token plain-text"> custom 404 page </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span></span><span class="token punctuation">></span></span><span class="token plain-text">/h1>
+}
+</span></code></pre>
+<p>The file with this route gets called automatically on 404. We can also explicitally call this as a func as well.</p>
+<p><strong>NOTE</strong>: <strong>NotFound component does not accept any props</strong>
+Use <code>usePathname</code> from <code>next/navigation</code> hook to access the url segments.</p>
+<pre class="language-tsx"><code class="language-tsx"><span class="token keyword">const</span> pathname <span class="token operator">=</span> <span class="token function">usePathname</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre>
+<p><strong>NOTE</strong> <em>To use usePathname() hook, the component must be a client component, hence add "use-client" directive at the top of the page.</em></p>
+<p>Let's say we want to call 404 page if the review id is > 100 (eg: /products/1/reviews/1000 )</p>
+<pre class="language-tsx"><code class="language-tsx"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span>notFound <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> "next<span class="token operator">/</span>navigation<span class="token punctuation">;</span>
+
+<span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">ProductReview</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>params<span class="token punctuation">}</span> <span class="token operator">:</span> <span class="token punctuation">{</span>params<span class="token operator">:</span> <span class="token known-class-name class-name">Promise</span><span class="token operator">&#x3C;</span><span class="token punctuation">{</span>productId<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> reviewId<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> reviewId<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword control-flow">await</span> params<span class="token punctuation">;</span>
+  <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token function">parseInt</span><span class="token punctuation">(</span>reviewId<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">notFound</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword control-flow">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span><span class="token plain-text"> Review no </span><span class="token punctuation">{</span>reviewId<span class="token punctuation">}</span><span class="token plain-text"> of </span><span class="token punctuation">{</span>productId<span class="token punctuation">}</span><span class="token plain-text"> </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>h1</span><span class="token punctuation">></span></span>
+<span class="token punctuation">}</span> 
+</code></pre>
+<h2 id="private-folders">Private folders<a aria-hidden="true" class="anchor-heading icon-link" href="#private-folders"></a></h2>
+<ul>
+<li>starts with underscore _</li>
+<li>the folder and its sub folders are excluded from routing.</li>
+</ul>
+<h3 id="uses">uses<a aria-hidden="true" class="anchor-heading icon-link" href="#uses"></a></h3>
+<ul>
+<li>separating UI logic from routing logic</li>
+<li>consistent way to organize internal files.</li>
+</ul>
+<h2 id="route-groups">Route groups<a aria-hidden="true" class="anchor-heading icon-link" href="#route-groups"></a></h2>
+<ul>
+<li>logically organize our routes and project files without impacting the URL structure.</li>
+<li>only way to share layouts between routes without affecting the URL.</li>
+<li>also helps us to apply routes selectively to specific parts of app(multiple root layout)</li>
+</ul>
+<p><em>the folder wrapped in () tells nextjs to use this as an organizational tool only and exclude it from the url. Now the urls inside it are still accessed with http://localhost:3000/register and not /auth/register</em></p>
+<pre class="language-figma"><code class="language-figma">- (auth) 
+  - register
+    - page.tsx
+  - login
+    - page.tsx
+  - forgotpassword
+    - page.tsx
+</code></pre>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/byz0xlauc4njcaf9hmt13b3">Error Handling</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/bissfxn4ra3hsnuvit2fzl6">Layouts</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/o6kk58cac0vvnxzxpfuo3gt">Link</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/lzyt1r32ijo6huvmpm3femr">Loading UI</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/cok7r8be46nqy5mzl65l8l9">Metadata</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/uknad7zvwt0vmshlus5jkrm">Parallel Routes</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/0bvpfpbl0mfb06jdccaiqao">Route Handlers</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/5kglpokc68y14xpva53rmli">Templates</a></li>
+</ol>

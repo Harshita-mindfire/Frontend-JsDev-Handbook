@@ -1,0 +1,2 @@
+- https://javascript.info/currying-partials
+- Question: https://bigfrontend.dev/problem/implement-curry

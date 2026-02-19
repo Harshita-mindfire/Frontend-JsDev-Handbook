@@ -1,0 +1,43 @@
+<h1 id="module-federation">Module Federation<a aria-hidden="true" class="anchor-heading icon-link" href="#module-federation"></a></h1>
+<ul>
+<li>way to run time share code bw applications. This gives ability to do a run time dependency.</li>
+<li>way to manage micro fe.</li>
+</ul>
+<blockquote>
+<p>webpack.config of app 1</p>
+</blockquote>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token maybe-class-name">ModuleFederationPlugin</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"webpack/lib/container/ModuleFederationPlugin"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+  <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"counter"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">"remoteEntry.js"</span><span class="token punctuation">,</span> <span class="token comment">// this file is the manifest of all the modules shared by this app</span>
+    <span class="token literal-property property">remotes</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// the other application will use this property to access the exposed component</span>
+    <span class="token literal-property property">exposes</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"./Counter"</span><span class="token operator">:</span> <span class="token string">"./src/components/Counter"</span><span class="token punctuation">,</span> <span class="token comment">// component that is exposed by one application</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">shared</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token spread operator">...</span>deps<span class="token punctuation">,</span>
+      <span class="token literal-property property">react</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">singleton</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">requiredVersion</span><span class="token operator">:</span> deps<span class="token punctuation">.</span><span class="token property-access">react</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"react-dom"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">singleton</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">requiredVersion</span><span class="token operator">:</span> deps<span class="token punctuation">[</span><span class="token string">"react-dom"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>webpack config of app 2</p>
+</blockquote>
+<pre class="language-js"><code class="language-js"><span class="token spread operator">...</span>
+    <span class="token literal-property property">remotes</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">counter</span><span class="token operator">:</span> <span class="token string">"counter@http://localhost:8081/remoteEntry.js"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</code></pre>
+<h2 id="resource">Resource<a aria-hidden="true" class="anchor-heading icon-link" href="#resource"></a></h2>
+<ul>
+<li><a href="https://github.com/Harshita-mindfire/micro-fe-demo">https://github.com/Harshita-mindfire/micro-fe-demo</a></li>
+</ul>

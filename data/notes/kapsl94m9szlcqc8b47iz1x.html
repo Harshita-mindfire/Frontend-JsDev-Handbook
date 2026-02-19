@@ -1,0 +1,105 @@
+<h1 id="gen-ai">Gen Ai<a aria-hidden="true" class="anchor-heading icon-link" href="#gen-ai"></a></h1>
+<h2 id="gen-ai-evolution">Gen AI evolution<a aria-hidden="true" class="anchor-heading icon-link" href="#gen-ai-evolution"></a></h2>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/Gen-AI.png" alt="GEN AI"></p>
+<h3 id="ai">AI<a aria-hidden="true" class="anchor-heading icon-link" href="#ai"></a></h3>
+<ul>
+<li>
+<p>simulation of <strong>Human intelligence</strong> by machines</p>
+</li>
+<li>
+<p>key focus: <strong>decision making, problem solving</strong>, understanding language. Major use case in rule based systems like playing chess or diagnosing simple medical conditions.</p>
+</li>
+<li>
+<p>AI laid the foundation with <strong>rule based systems</strong>.</p>
+</li>
+</ul>
+<p><strong>Challenge</strong>: This system couldn't learn. Needs to be explicitly programmed for every scenario. Think of it like old machined chess, can only run steps that are already programmed. Can't learn new moves.</p>
+<h3 id="ml">ML<a aria-hidden="true" class="anchor-heading icon-link" href="#ml"></a></h3>
+<ul>
+<li>learn from data. No explicit programming. automatically Identify patterns, make predictions.</li>
+</ul>
+<p>Three major types</p>
+<ul>
+<li><strong>supervised learning</strong>: uses labelled data for training models eg: predicting house prices based on historical data.</li>
+<li><strong>unsupervised learning</strong>: find hidden patterns without labels, eg: grouping customers based on behavior </li>
+<li><strong>reinforcement learning</strong>: involves models learning through trial and error.</li>
+</ul>
+<p>eg: Netflix recommendations</p>
+<ul>
+<li>ML introduced <strong>data driven learning</strong>, allowing models to learn from data.</li>
+</ul>
+<h3 id="deep-learning">Deep learning<a aria-hidden="true" class="anchor-heading icon-link" href="#deep-learning"></a></h3>
+<p>subset of ML</p>
+<ul>
+<li>Neural networks to automatically learn features from raw data, inspired by structure of Human brain.
+eg: Recognizing faces from crowd, understanding spoken language.</li>
+</ul>
+<p>Deep learning architectures:</p>
+<ul>
+<li>
+<p><strong>Convolutional Neural Networks(CNN)</strong>: for image data</p>
+</li>
+<li>
+<p><strong>Recurrent Neural Networks(RNN)</strong>: for sequential data like text</p>
+</li>
+<li>
+<p><strong>Transformers</strong>: revolutionalized Natural Language processing.</p>
+</li>
+<li>
+<p>DL revolutionarized how we <strong>process complex data, introduced Neural networks</strong> and <strong>automatic pattern recognition</strong>.</p>
+</li>
+</ul>
+<h3 id="gen-ai-1">Gen AI<a aria-hidden="true" class="anchor-heading icon-link" href="#gen-ai-1"></a></h3>
+<p>AI models that generate new data, original content that didn't exist before.
+writing, generating image etc.</p>
+<ul>
+<li>
+<p>relies on powerful architectures like: transformers based models like GPTs, GANSs(Generative Adversarial Networks)</p>
+</li>
+<li>
+<p>transforming how machines create, enables m/cs to create original content.</p>
+</li>
+</ul>
+<h4 id="core-idea-behind-gen-ai"><strong>Core idea behind Gen AI</strong><a aria-hidden="true" class="anchor-heading icon-link" href="#core-idea-behind-gen-ai"></a></h4>
+<ul>
+<li>learns the patterns and structures in a dataset, it can generate entirely new data that fits within those learned patterns.
+eg: trained on images of cats, learns the structure of what makes a cat- its shape, features, and textures-and can create a new image of cat.</li>
+</ul>
+<h2 id="how-gen-ai-works">How Gen AI works<a aria-hidden="true" class="anchor-heading icon-link" href="#how-gen-ai-works"></a></h2>
+<p>relies on 4 main components</p>
+<ul>
+<li><strong>Training Data</strong>: serves as a foundation of everything. requires large dataset for training.</li>
+<li><strong>Learning patterns and structures</strong>: learns the underlying principle and patterns. Uses neural networks for pattern recognition.</li>
+<li><strong>Generating new content</strong>- does sampling from learned patterns.</li>
+<li><strong>Fine tumimg the model</strong>- adapting models for specific tasks. Taking a pre trained model and training it further on a smaller more fovused data set.</li>
+<li><strong>Reinforcememt learning with Human feedback(RLHF)</strong> initial training -> Human feedback --> reward modelling(feedback is used to build a reward model, which helps AI to assign scores to its future o/ps) --> reinforcement learning(AI continues to improve by generating better o/ps that align with human preferences)</li>
+</ul>
+<h2 id="types-of-gen-ai-models">Types of Gen AI models<a aria-hidden="true" class="anchor-heading icon-link" href="#types-of-gen-ai-models"></a></h2>
+<ul>
+<li><strong>Generative adversarial Networks(GANs)</strong></li>
+<li><strong>Variational autoencoders(VAEs)</strong></li>
+<li><strong>Transformer models like GPT</strong></li>
+</ul>
+<p><strong>Generative adversarial Networks(GANs)</strong></p>
+<ul>
+<li>popular models for image generation</li>
+<li>consits of 2 neural networks: Generator and Discriminator.</li>
+</ul>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/GANs.png" alt="GANs"></p>
+<ul>
+<li>generator creates new data and discriminator evaluates whether the data is real or fake. Overtime the generator gets better at producing convincing images.
+eg: deepfake videos, realistic images</li>
+</ul>
+<p><strong>Variational autoencoders(VAEs)</strong>
+Reconstructing data and generating new variations of it by learning a latent space representation(<strong>encode</strong> data into a lower dimensional space).</p>
+<p><strong>Transformer based models(GPTs)</strong></p>
+<ul>
+<li>highly effective at generating text because of <strong>self attention mechanism</strong></li>
+<li>self attention mechanism: this mechanism allows the model to weigh the importance of different parts of a sentence or sequence. Helps in understanding context and relationship between words.</li>
+</ul>
+<p>eg: GPT-4</p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/Frontend-JsDev-Handbook/notes/nrx71p01v1xopk4xtim8xjb">LLM-models</a></li>
+</ul>

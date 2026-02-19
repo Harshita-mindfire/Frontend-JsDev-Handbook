@@ -1,0 +1,55 @@
+<h1 id="performance">Performance<a aria-hidden="true" class="anchor-heading icon-link" href="#performance"></a></h1>
+<h2 id="memoization">Memoization<a aria-hidden="true" class="anchor-heading icon-link" href="#memoization"></a></h2>
+<ul>
+<li>Memoization is a way to cache a return value of a function based on its parameters.</li>
+<li>This makes the func that takes a long time to run, much faster after one execution.</li>
+<li>If the parameter changes, it will still have to reevaluate the function.</li>
+</ul>
+<h1 id="rate-limiting">Rate Limiting<a aria-hidden="true" class="anchor-heading icon-link" href="#rate-limiting"></a></h1>
+<h2 id="debouncing">Debouncing<a aria-hidden="true" class="anchor-heading icon-link" href="#debouncing"></a></h2>
+<ul>
+<li>limiting the rate of execution of a particular function</li>
+<li>most suitable for control events like typing or button clicks</li>
+<li>used in search bars etc.</li>
+<li>I have normally used lodash Debouncing</li>
+</ul>
+<h3 id="create-debounce-fun-from-scratch">Create debounce fun from scratch<a aria-hidden="true" class="anchor-heading icon-link" href="#create-debounce-fun-from-scratch"></a></h3>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">handleChange</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">debounce</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> wait</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> timer<span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> context <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span> <span class="token comment">// maintains the context, so that the fn is called within the same lexical environment with same arguments as it was running before wrapping it around a debounce function.</span>
+    <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// clear timer in subsequent keystrokes.</span>
+    timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      fn<span class="token punctuation">.</span><span class="token method function property-access">apply</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> wait<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> optiminzedFn <span class="token operator">=</span> <span class="token function">debounce</span><span class="token punctuation">(</span>handleChange<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="throttling">Throttling<a aria-hidden="true" class="anchor-heading icon-link" href="#throttling"></a></h2>
+<ul>
+<li>also used for rate limiting</li>
+<li>Throttle is most suitable for continuous user events like resizing and scrolling.</li>
+</ul>
+<h3 id="create-throttle-fun-from-scratch">Create throttle fun from scratch<a aria-hidden="true" class="anchor-heading icon-link" href="#create-throttle-fun-from-scratch"></a></h3>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">handleScroll</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"sample method to throttle"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">throttle</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">fn<span class="token punctuation">,</span> wait</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token spread operator">...</span>args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> context <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span> <span class="token comment">// maintains the context, so that the fn is called within the same lexical environment with same arguments as it was running before wrapping it around a throttle function.</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      fn<span class="token punctuation">.</span><span class="token method function property-access">apply</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+      <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+        flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span> wait<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> optiminzedFn <span class="token operator">=</span> <span class="token function">throttle</span><span class="token punctuation">(</span>handleScroll<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>

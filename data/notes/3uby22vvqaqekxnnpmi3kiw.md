@@ -1,0 +1,122 @@
+
+- each re-render begins with a state update in a component. 
+- Re-render cascade down the components(if parent state change, its nested components will re-render)
+- Re-rendering all components unnecessary can cause performance issues.
+
+
+There are several ways to tackle re-rendering based on the code structure. Try to look for Separation of concern(moving state up/creating a separate stateful component) in components before actually utilizing React.memo or usecallback/memo hooks. They are perfectly valid solutions but sometimes unnecessary. For example:
+
+```jsx
+export default function App() {
+      const [visible, setVisible] = useState(false);
+
+  return (
+    <>
+        <Button onClick={() => setVisible(true)}>Show dialog</Button>
+        {visible && <ModalDialog onClose={() => setVisible(false)} />}      
+        <SlowComponent />
+        <BlaBla />
+        <AdditionalComplexThings />
+    </>
+  );
+}
+```
+This can be solved by separation of concern. Just by moving state in a separate stateful component
+```jsx
+export default function App() {
+  return (
+    <>
+      <ToggleButtonWithDialog />
+      <SlowComponent />
+      <BlaBla />
+      <AdditionalComplexThings />
+    </>
+  );
+}
+```
+
+### Drawbacks of custom hooks
+
+- Custom hooks are typically not the answer to addressing re-rendering issues. While they can help organize and tidy up code, they do not prevent re-rendering when the state is updated. In fact, if a custom hook includes additional states used by multiple components, updating a single state will cause all components using that custom hook to re-render.
+
+
+### Passing components as props.
+The components which are passed as props to component A and are rendered in it won't re-render if the A re-renders. 
+Below is an example of passing nodes as props. 
+
+```jsx
+const DynamicScroll = ({ content }: { content: ReactNode }) => {
+  const [position, setPosition] = useState(170);
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const newPosition = calculatePosition(e.currentTarget.scrollTop);
+    setPosition(Math.max(113, newPosition));
+  };
+
+  const blockColor = calculateColor(position);
+
+  return (
+    <ScrollableContainer onScroll={handleScroll}>
+      <DynamicBlock top={position === 113 ? 113 : position} color={blockColor}>
+        🛒
+      </DynamicBlock>
+      {content}
+    </ScrollableContainer>
+  );
+};
+
+...
+//App component
+
+export default function App() {
+  return (
+    <DynamicScroll
+      content={
+        <>
+          <SlowComponent />
+          <BlaBla />
+          <AdditionalComplexThings />
+        </>
+      }
+    />
+  );
+}
+```
+
+Here, update in state of Dynamic scroll will not re-render the 3 components passed as prop to `DynamicScroll`.
+
+- You can also use the children prop. It will also have the same effect.
+
+```jsx
+const DynamicScroll = ({ children }) => {
+ ...
+
+  return (
+    <ScrollableContainer onScroll={handleScroll}>
+      <DynamicBlock top={position === 113 ? 113 : position} color={blockColor}>
+        🛒
+      </DynamicBlock>
+      {content}
+    </ScrollableContainer>
+  );
+};
+
+...
+//App component
+
+export default function App() {
+  return (
+    <DynamicScroll>
+          <SlowComponent />
+          <BlaBla />
+          <AdditionalComplexThings />
+    </DynamicScroll>
+  );
+}
+```
+
+
+- Below is the explanation of why React treats children nodes differently and why they are not re-rendered on state update.
+
+- ![](/assets/images/2025-01-17-18-46-03.png)
+
+- ![](/assets/images/2025-01-17-18-45-16.png)

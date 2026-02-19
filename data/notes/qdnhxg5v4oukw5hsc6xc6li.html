@@ -1,0 +1,53 @@
+<h1 id="advance-types">Advance Types<a aria-hidden="true" class="anchor-heading icon-link" href="#advance-types"></a></h1>
+<h3 id="intersection-types">Intersection types<a aria-hidden="true" class="anchor-heading icon-link" href="#intersection-types"></a></h3>
+<ul>
+<li>For objects, intersection type is combination of both object properties.</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">TypeA</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">TypeB</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">TypeC</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">TypeA</span> <span class="token operator">&#x26;</span> <span class="token maybe-class-name">TypeB</span> <span class="token comment">// will have props of both TypeA and TypeB</span>
+</code></pre>
+<ul>
+<li>for union types, intersection type are the types they have in common.</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Combinable</span></span> <span class="token operator">=</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Numeric</span></span> <span class="token operator">=</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">Universal</span></span> <span class="token operator">=</span> <span class="token maybe-class-name">Combinable</span> <span class="token operator">&#x26;</span> <span class="token maybe-class-name">Numeric</span><span class="token punctuation">;</span> <span class="token comment">// intersection would be number</span>
+</code></pre>
+<h3 id="typeguards">Typeguards<a aria-hidden="true" class="anchor-heading icon-link" href="#typeguards"></a></h3>
+<p>With type guards you avoid runtime errors by checking types before you try to do something with the values.</p>
+<ul>
+<li>instanceOf</li>
+<li>typeOf</li>
+<li>property in object</li>
+</ul>
+<p>Reference: <a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html">https://www.typescriptlang.org/docs/handbook/2/narrowing.html</a></p>
+<ul>
+<li>in case of interfaces, use <a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions">discriminated unions</a>.</li>
+</ul>
+<h3 id="index-properties">index properties<a aria-hidden="true" class="anchor-heading icon-link" href="#index-properties"></a></h3>
+<ul>
+<li>Sometimes you don’t know all the names of a type’s properties ahead of time, but you do know the shape of the values.</li>
+</ul>
+<p>In those cases you can use an index signature to describe the types of possible values, for example:</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">interface</span> <span class="token class-name"><span class="token maybe-class-name">User</span></span> <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span>prop<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p> Read more <a href="https://www.typescriptlang.org/docs/handbook/2/objects.html#index-signatures">here</a></p>
+<h3 id="optional-chaining">optional chaining<a aria-hidden="true" class="anchor-heading icon-link" href="#optional-chaining"></a></h3>
+<p>ts supports the below code instead of using <code>if(user &#x26;&#x26; user.job &#x26;&#x26; user.job.name)</code></p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword control-flow">if</span><span class="token punctuation">(</span>user<span class="token operator">?.</span>job<span class="token operator">?.</span>name<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="nullish-coalescing">nullish coalescing<a aria-hidden="true" class="anchor-heading icon-link" href="#nullish-coalescing"></a></h3>
+<p> if <strong>null or undefined</strong> used default value;
+eg:</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> username <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token property-access">name</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span>
+<span class="token keyword">const</span> value <span class="token operator">=</span> username <span class="token operator">??</span> <span class="token string">'Max'</span><span class="token punctuation">;</span> <span class="token comment">// stores max</span>
+
+
+<span class="token keyword">const</span> lname <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> value2 <span class="token operator">=</span> xyz <span class="token operator">??</span> <span class="token string">'Smith'</span><span class="token punctuation">;</span> <span class="token comment">//stores ''.</span>
+</code></pre>
+<p>if we would have used value2 = xyz || 'Smith', the value2 will be = <code>Smith</code></p>
