@@ -1,0 +1,119 @@
+<h1 id="embeddings">embeddings<a aria-hidden="true" class="anchor-heading icon-link" href="#embeddings"></a></h1>
+<p>Converting text into vectors(numerical form)</p>
+<h2 id="open-ai">OPEN AI<a aria-hidden="true" class="anchor-heading icon-link" href="#open-ai"></a></h2>
+<ul>
+<li>OPENAI embedding documentation: <a href="https://platform.openai.com/docs/guides/embeddings">https://platform.openai.com/docs/guides/embeddings</a></li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> os
+<span class="token keyword">from</span> dotenv <span class="token keyword">import</span> load_dotenv
+load_dotenv<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">#load all the environment variables</span>
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"OPENAI_API_KEY"</span><span class="token punctuation">]</span><span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"OPENAI_API_KEY"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> OpenAIEmbeddings
+embeddings<span class="token operator">=</span>OpenAIEmbeddings<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"text-embedding-3-large"</span><span class="token punctuation">)</span>
+embeddings
+
+text<span class="token operator">=</span><span class="token string">"This is a tutorial on OPENAI embedding"</span>
+query_result<span class="token operator">=</span>embeddings<span class="token punctuation">.</span>embed_query<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+<span class="token builtin">len</span><span class="token punctuation">(</span>query_result<span class="token punctuation">)</span> <span class="token comment">#3072</span>
+
+<span class="token comment"># giving dimension of 1024</span>
+embeddings_1024<span class="token operator">=</span>OpenAIEmbeddings<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"text-embedding-3-large"</span><span class="token punctuation">,</span>dimensions<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">)</span> 
+
+text<span class="token operator">=</span><span class="token string">"This is a tutorial on OPENAI embedding"</span>
+query_result<span class="token operator">=</span>embeddings_1024<span class="token punctuation">.</span>embed_query<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+<span class="token builtin">len</span><span class="token punctuation">(</span>query_result<span class="token punctuation">)</span> <span class="token comment">#query_result is the embedding</span>
+</code></pre>
+<p><strong>Full workflow</strong></p>
+<ul>
+<li>data ingestion</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> TextLoader
+
+loader<span class="token operator">=</span>TextLoader<span class="token punctuation">(</span><span class="token string">'speech.txt'</span><span class="token punctuation">)</span>
+docs<span class="token operator">=</span>loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>data splitting</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> RecursiveCharacterTextSplitter
+
+text_splitter<span class="token operator">=</span>RecursiveCharacterTextSplitter<span class="token punctuation">(</span>chunk_size<span class="token operator">=</span><span class="token number">500</span><span class="token punctuation">,</span>chunk_overlap<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">)</span>
+final_documents<span class="token operator">=</span>text_splitter<span class="token punctuation">.</span>split_documents<span class="token punctuation">(</span>docs<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>Vector Embedding And Vector StoreDB</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>vectorstores <span class="token keyword">import</span> Chroma
+<span class="token keyword">from</span> langchain_openai <span class="token keyword">import</span> OpenAIEmbeddings
+<span class="token comment">#needs open ai api key</span>
+<span class="token comment">#requires chromadb to be added to requiremnet.txt</span>
+
+embeddings<span class="token operator">=</span>OpenAIEmbeddings<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"text-embedding-3-large"</span><span class="token punctuation">,</span>dimensions<span class="token operator">=</span><span class="token number">1024</span><span class="token punctuation">)</span> 
+
+db<span class="token operator">=</span>Chroma<span class="token punctuation">.</span>from_documents<span class="token punctuation">(</span>final_documents<span class="token punctuation">,</span>embeddings<span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>Retrieve the results from query vectorstore db</li>
+</ul>
+<pre class="language-py"><code class="language-py">query<span class="token operator">=</span><span class="token string">"It will be all the easier for us to conduct ourselves as belligerents"</span>
+retrieved_results<span class="token operator">=</span>db<span class="token punctuation">.</span>similarity_search<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>retrieved_results<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="olama">OLAMA<a aria-hidden="true" class="anchor-heading icon-link" href="#olama"></a></h2>
+<p>Platform where we can use open source LLM models like Llama 3, gemma etc.</p>
+<ul>
+<li>
+<p>can run in local
+<a href="https://ollama.com/blog/embedding-models">https://ollama.com/blog/embedding-models</a></p>
+</li>
+<li>
+<p>Pull in the embedding model you want to use: </p>
+</li>
+</ul>
+<pre class="language-txt"><code class="language-txt">ollama pull mxbai-embed-large
+</code></pre>
+<ul>
+<li>run the curl command to see if the image is present</li>
+</ul>
+<pre class="language-txt"><code class="language-txt">curl http://localhost:11434/api/embeddings -d '{
+  "model": "mxbai-embed-large",
+  "prompt": "Represent this sentence for searching relevant passages: The sky is blue because of Rayleigh scattering"
+}'
+</code></pre>
+<ul>
+<li>create embeddings</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>embeddings <span class="token keyword">import</span> OllamaEmbeddings
+embeddings <span class="token operator">=</span> OllamaEmbeddings<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"mxbai-embed-large"</span><span class="token punctuation">)</span>
+
+<span class="token comment">#embed_documents= list of query</span>
+r1<span class="token operator">=</span>embeddings<span class="token punctuation">.</span>embed_documents<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span>
+       <span class="token string">"Alpha is the first letter of Greek alphabet"</span><span class="token punctuation">,</span>
+       <span class="token string">"Beta is the second letter of Greek alphabet"</span><span class="token punctuation">,</span> 
+    <span class="token punctuation">]</span>
+<span class="token punctuation">)</span>
+
+<span class="token comment"># embed_query</span>
+text <span class="token operator">=</span> <span class="token string">"This is a test document."</span>
+query_result <span class="token operator">=</span> embeddings<span class="token punctuation">.</span>embed_query<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+
+<span class="token comment">#query_result and r1 are vectors of 1024 dimension.</span>
+</code></pre>
+<h2 id="huggingface">HuggingFace<a aria-hidden="true" class="anchor-heading icon-link" href="#huggingface"></a></h2>
+<p><a href="https://huggingface.co/">https://huggingface.co/</a></p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> dotenv <span class="token keyword">import</span> load_dotenv<span class="token punctuation">,</span> find_dotenv
+<span class="token keyword">import</span> os
+load_dotenv<span class="token punctuation">(</span>find_dotenv<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"HF_token"</span><span class="token punctuation">]</span> <span class="token operator">=</span> os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"HF_token"</span><span class="token punctuation">)</span>
+<span class="token keyword">from</span> langchain_huggingface <span class="token keyword">import</span> HuggingFaceEmbeddings
+embeddings<span class="token operator">=</span>HuggingFaceEmbeddings<span class="token punctuation">(</span>model_name<span class="token operator">=</span><span class="token string">"all-MiniLM-L6-v2"</span><span class="token punctuation">)</span>
+
+query_result<span class="token operator">=</span>embeddings<span class="token punctuation">.</span>embed_query<span class="token punctuation">(</span><span class="token string">"This is a test document"</span><span class="token punctuation">)</span> <span class="token comment">#vector embedding for this text</span>
+
+docs_result<span class="token operator">=</span>embeddings<span class="token punctuation">.</span>embed_documents<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"This is document 1"</span><span class="token punctuation">,</span><span class="token string">"This is a test document"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">#vector embeddings for both the list items</span>
+docs_result<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+</code></pre>

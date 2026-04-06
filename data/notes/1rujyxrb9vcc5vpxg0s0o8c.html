@@ -1,0 +1,118 @@
+<h1 id="text-splitting-from-documents">Text splitting from Documents<a aria-hidden="true" class="anchor-heading icon-link" href="#text-splitting-from-documents"></a></h1>
+<ul>
+<li>requirements</li>
+</ul>
+<pre class="language-txt"><code class="language-txt">langchain-text-splitters
+</code></pre>
+<h2 id="recursivecharacter-text-splitters-recursivecharactertextsplitter">RecursiveCharacter Text Splitters (RecursiveCharacterTextSplitter)<a aria-hidden="true" class="anchor-heading icon-link" href="#recursivecharacter-text-splitters-recursivecharactertextsplitter"></a></h2>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> TextLoader
+<span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> RecursiveCharacterTextSplitter
+
+loader <span class="token operator">=</span> TextLoader<span class="token punctuation">(</span><span class="token string">"speech.txt"</span><span class="token punctuation">)</span>
+docs <span class="token operator">=</span> loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+text_splitter <span class="token operator">=</span> RecursiveCharacterTextSplitter<span class="token punctuation">(</span>chunk_size<span class="token operator">=</span><span class="token number">35</span><span class="token punctuation">,</span> chunk_overlap<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token comment">#Use split_documents when you already have Document objects.</span>
+<span class="token comment"># type(docs) ==> List[Document], hence used split_documents</span>
+<span class="token comment"># Use create_documents when you have raw text. eg: if type(docs) => List[str]</span>
+final_docs<span class="token operator">=</span>text_splitter<span class="token punctuation">.</span>split_documents<span class="token punctuation">(</span>docs<span class="token punctuation">)</span>
+final_docs
+</code></pre>
+<p>This text splitter is the recommended one for generic text. It is parameterized by a list of characters. It tries to split on them in order until the chunks are small enough. The default list is ["\n\n", "\n", " ", ""]. This has the effect of trying to keep all paragraphs (and then sentences, and then words) together as long as possible, as those would generically seem to be the strongest semantically related pieces of text.</p>
+<ul>
+<li>How the text is split: by list of characters.</li>
+<li>How the chunk size is measured: by number of characters.</li>
+</ul>
+<p><strong>What constraints is it trying to satisfy?</strong></p>
+<p>Primarily:
+-chunk_size – each chunk must be ≤ this size
+-chunk_overlap – overlap between chunks</p>
+<ul>
+<li>Semantic preservation – avoid splitting in the middle of sentences/words if possible</li>
+</ul>
+<p><strong>How the recursion works</strong></p>
+<p>You give the splitter an ordered list of separators, for example:</p>
+<pre class="language-py"><code class="language-py"><span class="token punctuation">[</span><span class="token string">"\n\n"</span><span class="token punctuation">,</span> <span class="token string">"\n"</span><span class="token punctuation">,</span> <span class="token string">" "</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">]</span>
+</code></pre>
+<p>The splitter tries them in order:</p>
+<ol>
+<li>
+<p>Try the first separator (e.g. \n\n)</p>
+<ul>
+<li>
+<p>Does splitting by this produce chunks ≤ chunk_size?</p>
+</li>
+<li>
+<p>If yes → ✅ it works, stop here.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If chunks are still too large → recurse</p>
+<ul>
+<li>Try the next separator (\n)</li>
+</ul>
+</li>
+</ol>
+<p>3.Continue until a separator works</p>
+<ol start="4">
+<li>If nothing works → fall back to <strong>character-level splitting ("")</strong></li>
+</ol>
+<h2 id="character-text-splitters-charactertextsplitter">Character Text Splitters (CharacterTextSplitter)<a aria-hidden="true" class="anchor-heading icon-link" href="#character-text-splitters-charactertextsplitter"></a></h2>
+<p>This is the simplest method. This splits based on a given character sequence, which defaults to "\n\n". Chunk length is measured by number of characters.</p>
+<ol>
+<li>How the text is split: by single character separator.</li>
+<li>How the chunk size is measured: by number of characters.</li>
+</ol>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> TextLoader
+<span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> CharacterTextSplitter
+
+loader <span class="token operator">=</span> TextLoader<span class="token punctuation">(</span><span class="token string">"speech.txt"</span><span class="token punctuation">)</span>
+docs <span class="token operator">=</span> loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">#by default separator=\n\n</span>
+text_splitter<span class="token operator">=</span>CharacterTextSplitter<span class="token punctuation">(</span>separator<span class="token operator">=</span><span class="token string">" "</span><span class="token punctuation">,</span> chunk_size<span class="token operator">=</span><span class="token number">40</span><span class="token punctuation">,</span> chunk_overlap<span class="token operator">=</span><span class="token number">15</span><span class="token punctuation">)</span>
+final_docs<span class="token operator">=</span>text_splitter<span class="token punctuation">.</span>split_documents<span class="token punctuation">(</span>docs<span class="token punctuation">)</span>
+final_docs
+</code></pre>
+<h2 id="htmlheadertextsplitter">HTMLHeaderTextSplitter<a aria-hidden="true" class="anchor-heading icon-link" href="#htmlheadertextsplitter"></a></h2>
+<p>HTMLHeaderTextSplitter is not primarily a chunk-size splitter.</p>
+<p>Its job is to:</p>
+<ul>
+<li>Parse HTML</li>
+<li>Group text by semantic structure <code>(headers like &#x3C;h1>, &#x3C;h2>)</code></li>
+<li>Attach the header hierarchy as metadata</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> HTMLHeaderTextSplitter
+url <span class="token operator">=</span> <span class="token string">"https://plato.stanford.edu/entries/goedel/"</span>
+
+headers_to_split_on <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">(</span><span class="token string">"h1"</span><span class="token punctuation">,</span> <span class="token string">"Header 1"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">"h2"</span><span class="token punctuation">,</span> <span class="token string">"Header 2"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+html_splitter <span class="token operator">=</span> HTMLHeaderTextSplitter<span class="token punctuation">(</span>headers_to_split_on<span class="token punctuation">)</span>
+html_header_splits <span class="token operator">=</span> html_splitter<span class="token punctuation">.</span>split_text_from_url<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+html_header_splits
+</code></pre>
+<ul>
+<li>Downloads the HTML from the URL</li>
+<li>Parses the DOM</li>
+<li>Finds <code>&#x3C;h1> / &#x3C;h2></code> tags you specified</li>
+<li>Collects all text nodes that appear after a header and before the next relevant header</li>
+<li>Concatenates that text into a single string</li>
+<li>Stores it as Document.page_content</li>
+</ul>
+<h2 id="recurrsivejsonsplitter">RecurrsiveJsonSplitter<a aria-hidden="true" class="anchor-heading icon-link" href="#recurrsivejsonsplitter"></a></h2>
+<p>This json splitter splits json data while allowing control over chunk sizes. It traverses json data depth first and builds smaller json chunks. It attempts to keep nested json objects whole but will split them if needed to keep chunks between a min_chunk_size and the max_chunk_size.</p>
+<p>If the value is not a nested json, but rather a very large string the string will not be split. If you need a hard cap on the chunk size consider composing this with a Recursive Text splitter on those chunks. There is an optional pre-processing step to split lists, by first converting them to json (dict) and then splitting them as such.</p>
+<ul>
+<li>How the text is split: json value.</li>
+<li>How the chunk size is measured: by number of characters.</li>
+</ul>
+<pre class="language-py"><code class="language-py"><span class="token keyword">import</span> json
+<span class="token keyword">import</span> requests
+<span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> RecursiveJsonSplitter
+
+json_data<span class="token operator">=</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"https://api.smith.langchain.com/openapi.json"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>json<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+json_text <span class="token operator">=</span> RecursiveJsonSplitter<span class="token punctuation">(</span>max_chunk_size<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+json_chunks<span class="token operator">=</span>json_text<span class="token punctuation">.</span>split_json<span class="token punctuation">(</span>json_data<span class="token punctuation">)</span>
+</code></pre>

@@ -1,0 +1,88 @@
+<h1 id="langgraph">LangGraph<a aria-hidden="true" class="anchor-heading icon-link" href="#langgraph"></a></h1>
+<ul>
+<li>LangGraph is a low-level orchestration framework and runtime for building, managing, and deploying long-running, stateful agents.</li>
+<li>used to design agents that reliably handle complex tasks</li>
+</ul>
+<h2 id="components">Components<a aria-hidden="true" class="anchor-heading icon-link" href="#components"></a></h2>
+<ol>
+<li>State</li>
+<li>Node</li>
+<li>Edges</li>
+<li>StateGraph</li>
+</ol>
+<ul>
+<li>In LangGraph, your State is essentially the Global Props of your graph.</li>
+<li>Every "Node" (function) in your graph is like a component that receives these State "Props."</li>
+<li>Immutability: Just like you wouldn't directly mutate state in a Redux reducer or a React setState, LangGraph nodes receive the current state, and you return a new object (or a patch) that updates it. But we only send the updated property, the lang graph does the shallow mapping.</li>
+</ul>
+<h2 id="simple-app">Simple app<a aria-hidden="true" class="anchor-heading icon-link" href="#simple-app"></a></h2>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/coder_langgraph.png" alt="Simple code review langgraph"></p>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langgraph<span class="token punctuation">.</span>graph <span class="token keyword">import</span> StateGraph<span class="token punctuation">,</span> START
+<span class="token keyword">from</span> langchain_groq  <span class="token keyword">import</span> ChatGroq
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> TypedDict<span class="token punctuation">,</span> List<span class="token punctuation">,</span> Literal
+
+coder_llm <span class="token operator">=</span> ChatGroq<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"llama-3.1-8b-instant"</span><span class="token punctuation">)</span>
+
+<span class="token comment">#1 state(almost similar to interface in .ts)</span>
+<span class="token keyword">class</span> <span class="token class-name">CodeState</span><span class="token punctuation">(</span>TypedDict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    feedback<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span>
+    is_valid<span class="token punctuation">:</span> <span class="token builtin">bool</span>
+    code<span class="token punctuation">:</span> <span class="token builtin">str</span>
+
+<span class="token comment">#2 nodes</span>
+<span class="token keyword">def</span> <span class="token function">coder_node</span><span class="token punctuation">(</span>state<span class="token punctuation">:</span> CodeState<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> state<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"is_valid"</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Rewriting the code for feedback"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"print('Hello World')"</span><span class="token punctuation">,</span> <span class="token string">"is_valid"</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">}</span>
+    <span class="token comment">#First time introducing bug ourselves    </span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"writing code..."</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"print('Hello World"</span><span class="token punctuation">}</span>
+
+<span class="token keyword">def</span> <span class="token function">review_node</span><span class="token punctuation">(</span>state<span class="token punctuation">:</span> CodeState<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Reviewing code..."</span><span class="token punctuation">,</span> state<span class="token punctuation">[</span><span class="token string">"code"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    response <span class="token operator">=</span> coder_llm<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Is this syntax valid? Respond in YES or NO </span><span class="token interpolation"><span class="token punctuation">{</span>state<span class="token punctuation">[</span><span class="token string">'code'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"LLM said"</span><span class="token punctuation">,</span>response<span class="token punctuation">.</span>content<span class="token punctuation">)</span>
+    is_valid <span class="token operator">=</span> <span class="token string">"YES"</span> <span class="token keyword">in</span> response<span class="token punctuation">.</span>content
+    <span class="token keyword">return</span> <span class="token punctuation">{</span><span class="token string">"is_valid"</span><span class="token punctuation">:</span> is_valid<span class="token punctuation">}</span> 
+
+<span class="token comment">#3. conditional edge</span>
+<span class="token keyword">def</span> <span class="token function">check_feedback</span><span class="token punctuation">(</span>state<span class="token punctuation">:</span> CodeState<span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span> Literal<span class="token punctuation">[</span><span class="token string">"code"</span><span class="token punctuation">,</span> <span class="token string">"__end__"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> state<span class="token punctuation">[</span><span class="token string">"is_valid"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Review failed! sending back to coder"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token string">"code"</span>
+    
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Review passed"</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> <span class="token string">"__end__"</span>
+
+
+<span class="token comment">#4. Build graph</span>
+graph <span class="token operator">=</span> StateGraph<span class="token punctuation">(</span>CodeState<span class="token punctuation">)</span>
+graph<span class="token punctuation">.</span>add_node<span class="token punctuation">(</span><span class="token string">"code"</span><span class="token punctuation">,</span> coder_node<span class="token punctuation">)</span>
+graph<span class="token punctuation">.</span>add_node<span class="token punctuation">(</span><span class="token string">"review"</span><span class="token punctuation">,</span> review_node<span class="token punctuation">)</span>
+graph<span class="token punctuation">.</span>add_conditional_edges<span class="token punctuation">(</span><span class="token string">"review"</span><span class="token punctuation">,</span> check_feedback<span class="token punctuation">)</span>
+
+graph<span class="token punctuation">.</span>add_edge<span class="token punctuation">(</span>START<span class="token punctuation">,</span> <span class="token string">"code"</span><span class="token punctuation">)</span>
+graph<span class="token punctuation">.</span>add_edge<span class="token punctuation">(</span><span class="token string">"code"</span><span class="token punctuation">,</span> <span class="token string">"review"</span><span class="token punctuation">)</span>
+builder_graph <span class="token operator">=</span> graph<span class="token punctuation">.</span><span class="token builtin">compile</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+output <span class="token operator">=</span> builder_graph<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">,</span> <span class="token string">"feedback"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"is_valid"</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre>
+<p>After running the output is</p>
+<pre class="language-txt"><code class="language-txt">writing code...
+Reviewing code... print('Hello World
+LLM said NO
+Review failed! sending back to coder
+Rewriting the code for feedback
+Reviewing code... print('Hello World')
+LLM said YES 
+
+print('Hello World')
+Review passed
+</code></pre>
+<p><strong>NOTE</strong>: Notice that nodes only returns {"is_valid": ...}. or {"code": ...} It doesn't have to return the whole state object. LangGraph automatically merges (shallow merge) the return value into the existing state, similar to how setState works in React.</p>
+<h2 id="misc">Misc<a aria-hidden="true" class="anchor-heading icon-link" href="#misc"></a></h2>
+<p><strong>TypedDict</strong> is almost identical to a TypeScript interface. It provides structural typing and IDE autocompletion, but it largely disappears at runtime (Python doesn't "crash" if you break the rules, much like how transpiled JS doesn't care about your TS interfaces).</p>
+<p><strong>Pydantic</strong> is like using a TypeScript Class with a Validation Library (like Zod or io-ts). It checks the data at runtime and throws an error if the types don't match.</p>
+<p>The "<strong>Double Underscore</strong>" Constants: You’ll see <code>__end__</code> or END. These are built-in markers that tell the graph "we are done."</p>
+<p>In LangGraph, <strong>compile</strong>() validates the graph. It checks if you have any "dead ends" (nodes with no edges) or if your conditional logic points to nodes that don't exist. It turns your definition into a Runnable that supports streaming and checkpoints.</p>
