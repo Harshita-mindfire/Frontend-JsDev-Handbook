@@ -122,6 +122,16 @@ function assertDate(value:unknown): asserts value is Date{
     else throw new TypeError('value is not a date')
 }
 
+function assertDate(value: unknown): asserts value is Date {
+    if (!(value instanceof Date)) {
+        throw new TypeError("Not a date");
+    }
+}
+
+function process(value: unknown) {
+    assertDate(value);
+    value.getTime(); // ✅ value is now typed as Date
+}
 
 
 //read-only 
@@ -258,7 +268,30 @@ function makeReadonly<T>(t:T):Readonly<T>{
 example1.x=2
 
 const example2=makeReadonly(example1)
-//example2.x=2
+//example2.x=2 --> not allowed
+
+
+/**
+Readonly<T> and Object.freeze() are both shallow.
+
+const obj = {
+    user: {
+        name: "Alice"
+    }
+};
+
+const frozen = makeReadonly(obj);
+
+frozen.user.name = "Bob"; // ✅ Allowed
+
+user is a readonly property, so you can't assign a new object to it:
+
+frozen.user = {}; // ❌ Error
+
+But the object stored inside user is not frozen or made readonly.
+**/
+
+
 
 //Record
 
