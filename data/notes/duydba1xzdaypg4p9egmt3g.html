@@ -1,0 +1,31 @@
+<h1 id="document-ingestion">Document Ingestion<a aria-hidden="true" class="anchor-heading icon-link" href="#document-ingestion"></a></h1>
+<p>Loading data from a specific source.</p>
+<h2 id="document-loaders">Document Loaders<a aria-hidden="true" class="anchor-heading icon-link" href="#document-loaders"></a></h2>
+<p><a href="https://docs.langchain.com/oss/python/integrations/document_loaders">Official docs</a></p>
+<ul>
+<li>
+<p>all document loaders are in this package: <strong><em>langchain_community.document_loaders</em></strong></p>
+</li>
+<li>
+<p>requirements: based on the document loader type(pdf, arxiv, text etc) the frequirements would change.</p>
+</li>
+</ul>
+<pre class="language-txt"><code class="language-txt">langchain
+ipykernel
+langchain_community
+</code></pre>
+<pre class="language-py"><code class="language-py"><span class="token comment">## Text loader</span>
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> TextLoader
+loader <span class="token operator">=</span> TextLoader<span class="token punctuation">(</span><span class="token string">'speech.txt'</span><span class="token punctuation">)</span>
+text_document<span class="token operator">=</span>loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+text_document
+
+<span class="token comment">## Arxiv Loader(research paper)</span>
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> ArxivLoader
+loader <span class="token operator">=</span> ArxivLoader<span class="token punctuation">(</span>
+    query<span class="token operator">=</span><span class="token string">"1706.03762"</span><span class="token punctuation">,</span>
+    load_max_docs<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+docs <span class="token operator">=</span> loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+docs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+</code></pre>

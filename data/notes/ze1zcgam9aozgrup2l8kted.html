@@ -1,0 +1,44 @@
+<h1 id="version-13">Version 13<a aria-hidden="true" class="anchor-heading icon-link" href="#version-13"></a></h1>
+<p>routes are defined in /app folder</p>
+<h2 id="use-client-directive">use client directive<a aria-hidden="true" class="anchor-heading icon-link" href="#use-client-directive"></a></h2>
+<p>The "use client" directive is a convention to declare a boundary between a Server and Client Component module graph.</p>
+<h2 id="server-and-client-components">Server and Client Components<a aria-hidden="true" class="anchor-heading icon-link" href="#server-and-client-components"></a></h2>
+<ul>
+<li>by default all components are server components.</li>
+<li>Can be differenciated via "use client".</li>
+</ul>
+<h3 id="why-server-components-">Why Server Components ?<a aria-hidden="true" class="anchor-heading icon-link" href="#why-server-components-"></a></h3>
+<ul>
+<li>better leverage server infrastructure.
+eg: you can move data fetching to the server, closer to your database, and keep large dependencies that previously would impact the client JS bundle size on the server, leading to improved performance.</li>
+<li>client-side JavaScript bundle size is reduced.</li>
+</ul>
+<h3 id="advantages-of-server-components">Advantages of server components<a aria-hidden="true" class="anchor-heading icon-link" href="#advantages-of-server-components"></a></h3>
+<ul>
+<li>loads faster</li>
+<li>smaller client bundles</li>
+<li>SEO friendly</li>
+<li>access to resources that client cannot use(DB, file system etc)</li>
+</ul>
+<h3 id="disadvantages">Disadvantages<a aria-hidden="true" class="anchor-heading icon-link" href="#disadvantages"></a></h3>
+<ul>
+<li>not user friendly</li>
+<li>no component state. Can't use the useState hook. Import will give error.</li>
+<li>no lifecycle methods. Can't use useEffect.</li>
+</ul>
+<h3 id="client-components">Client components<a aria-hidden="true" class="anchor-heading icon-link" href="#client-components"></a></h3>
+<p>Now if you want to use useState in one of your component, write "use client" as the first line of your code, and nextjs will regard it as a client component.</p>
+<h2 id="data-fetching-in-v-13">Data Fetching in v-13<a aria-hidden="true" class="anchor-heading icon-link" href="#data-fetching-in-v-13"></a></h2>
+<pre class="language-js"><code class="language-js"><span class="token comment">// This request should be cached until manually invalidated.</span>
+<span class="token comment">// Similar to `getStaticProps`.</span>
+<span class="token comment">// `force-cache` is the default and can be omitted.</span>
+<span class="token function">fetch</span><span class="token punctuation">(</span><span class="token constant">URL</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token literal-property property">cache</span><span class="token operator">:</span> <span class="token string">'force-cache'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+<span class="token comment">// This request should be refetched on every request.</span>
+<span class="token comment">// Similar to `getServerSideProps`.</span>
+<span class="token function">fetch</span><span class="token punctuation">(</span><span class="token constant">URL</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token literal-property property">cache</span><span class="token operator">:</span> <span class="token string">'no-store'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+<span class="token comment">// This request should be cached with a lifetime of 10 seconds.</span>
+<span class="token comment">// Similar to `getStaticProps` with the `revalidate` option.</span>
+<span class="token function">fetch</span><span class="token punctuation">(</span><span class="token constant">URL</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token literal-property property">next</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">revalidate</span><span class="token operator">:</span> <span class="token number">10</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>

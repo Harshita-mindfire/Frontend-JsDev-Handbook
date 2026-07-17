@@ -1,0 +1,27 @@
+<h1 id="misc">Misc<a aria-hidden="true" class="anchor-heading icon-link" href="#misc"></a></h1>
+<h2 id="immer">Immer<a aria-hidden="true" class="anchor-heading icon-link" href="#immer"></a></h2>
+<ul>
+<li>Immer is a package that allows you to work with immutable state in a more convenient way.</li>
+<li>The basic idea is that with Immer you will apply all your changes to a temporary draft, which is a proxy of the currentState. Once all your mutations are completed, Immer will produce the nextState based on the mutations to the draft state. This means that you can interact with your data by simply modifying it while keeping all the benefits of immutable data.</li>
+<li>by default implemented in redux toolkit</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> produce <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"immer"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token property-access">produce</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">reducer</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">state <span class="token operator">=</span> initialState<span class="token punctuation">,</span> action</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span><span class="token property-access">type</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> <span class="token constant">STREET_UPDATED</span><span class="token operator">:</span>
+      <span class="token comment">//   return {</span>
+      <span class="token comment">//     ...state,</span>
+      <span class="token comment">//     address: {</span>
+      <span class="token comment">//       ...state.address,</span>
+      <span class="token comment">//       street: action.payload</span>
+      <span class="token comment">//     }</span>
+      <span class="token comment">//   }</span>
+      <span class="token keyword control-flow">return</span> <span class="token function">produce</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">draft</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+        draft<span class="token punctuation">.</span><span class="token property-access">address</span><span class="token punctuation">.</span><span class="token property-access">street</span> <span class="token operator">=</span> action<span class="token punctuation">.</span><span class="token property-access">payload</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword module">default</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword control-flow">return</span> state<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>

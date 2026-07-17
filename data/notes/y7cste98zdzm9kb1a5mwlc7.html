@@ -1,0 +1,83 @@
+<h1 id="canvas">Canvas<a aria-hidden="true" class="anchor-heading icon-link" href="#canvas"></a></h1>
+<p>The HTML <code>&#x3C;canvas></code> element is used to draw graphics, on the fly, via JavaScript.
+The <code>&#x3C;canvas></code> element is only a container for graphics. You must use JavaScript to actually draw the graphics.</p>
+<pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>canvas</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myCanvas<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>300<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>150<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>canvas</span><span class="token punctuation">></span></span>
+</code></pre>
+<ul>
+<li>The <code>getContext()</code> method returns an object with tools (methods) for drawing.</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> myCanvas <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">getElementById</span><span class="token punctuation">(</span><span class="token string">"myCanvas"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> ctx <span class="token operator">=</span> myCanvas<span class="token punctuation">.</span><span class="token method function property-access">getContext</span><span class="token punctuation">(</span><span class="token string">"2d"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><canvas id="myCanvas" width="300" height="150"></canvas></p>
+<h2 id="draw">Draw<a aria-hidden="true" class="anchor-heading icon-link" href="#draw"></a></h2>
+<h3 id="fill-style">Fill Style<a aria-hidden="true" class="anchor-heading icon-link" href="#fill-style"></a></h3>
+<p>The fillStyle property can be a CSS color, a gradient, or a pattern. The default fillStyle is black.
+The fillRect(x,y,width,height) method draws a rectangle, filled with the fill style, on the canvas:</p>
+<pre class="language-js"><code class="language-js">ctx<span class="token punctuation">.</span><span class="token property-access">fillStyle</span> <span class="token operator">=</span> <span class="token string">"#FF0000"</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>Drwaing a rectangle</li>
+</ul>
+<p>The syntax is context.rect(x, y, width, height)</p>
+<pre class="language-js"><code class="language-js">ctx<span class="token punctuation">.</span><span class="token method function property-access">fillRect</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">150</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>Drawing a line</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token comment">// Define a start Point</span>
+  ctx<span class="token punctuation">.</span><span class="token method function property-access">moveTo</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// Define an end Point</span>
+  ctx<span class="token punctuation">.</span><span class="token method function property-access">lineTo</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// Stroke it (Do the Drawing)</span>
+  ctx<span class="token punctuation">.</span><span class="token method function property-access">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>Drawing a circle</li>
+</ul>
+<p>arc(x,y,r,start,end)</p>
+<pre class="language-js"><code class="language-js"> <span class="token comment">// circle</span>
+      ctx<span class="token punctuation">.</span><span class="token method function property-access">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      ctx<span class="token punctuation">.</span><span class="token method function property-access">arc</span><span class="token punctuation">(</span><span class="token number">150</span><span class="token punctuation">,</span> <span class="token number">75</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token operator">*</span> <span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token constant">PI</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      ctx<span class="token punctuation">.</span><span class="token method function property-access">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="gradient">Gradient<a aria-hidden="true" class="anchor-heading icon-link" href="#gradient"></a></h2>
+<p>There are two different types of gradients:</p>
+<ul>
+<li>
+<p>createLinearGradient(x,y,x1,y1) - creates a linear gradient</p>
+</li>
+<li>
+<p>createRadialGradient(x,y,r,x1,y1,r1) - creates a radial/circular gradient</p>
+</li>
+<li>
+<p>The addColorStop() method specifies the color stops, and its position along the gradient. Gradient positions can be anywhere between 0 to 1.</p>
+</li>
+<li>
+<p>To use the gradient, set the fillStyle or strokeStyle property to the gradient, then draw the shape (rectangle, text, or a line).</p>
+</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token comment">// Create gradient</span>
+<span class="token keyword">const</span> grd <span class="token operator">=</span> ctx<span class="token punctuation">.</span><span class="token method function property-access">createLinearGradient</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+grd<span class="token punctuation">.</span><span class="token method function property-access">addColorStop</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token string">"white"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+grd<span class="token punctuation">.</span><span class="token method function property-access">addColorStop</span><span class="token punctuation">(</span><span class="token number">01</span><span class="token punctuation">,</span><span class="token string">"blue"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Fill with gradient</span>
+ctx<span class="token punctuation">.</span><span class="token property-access">fillStyle</span> <span class="token operator">=</span> grd<span class="token punctuation">;</span>
+ctx<span class="token punctuation">.</span><span class="token method function property-access">fillRect</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">150</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="text">Text<a aria-hidden="true" class="anchor-heading icon-link" href="#text"></a></h2>
+<p>methods:</p>
+<ul>
+<li>font - defines the font properties for the text</li>
+<li>fillText(text,x,y) - draws "filled" text on the canvas</li>
+<li>strokeText(text,x,y) - draws text on the canvas (no fill)</li>
+</ul>
+<pre class="language-js"><code class="language-js">ctx<span class="token punctuation">.</span><span class="token property-access">font</span> <span class="token operator">=</span> <span class="token string">"30px Arial"</span><span class="token punctuation">;</span>
+ctx<span class="token punctuation">.</span><span class="token method function property-access">fillText</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>to align center</p>
+<pre class="language-js"><code class="language-js">ctx<span class="token punctuation">.</span><span class="token property-access">font</span> <span class="token operator">=</span> <span class="token string">"30px Arial"</span><span class="token punctuation">;</span>
+ctx<span class="token punctuation">.</span><span class="token property-access">textAlign</span> <span class="token operator">=</span> <span class="token string">"center"</span><span class="token punctuation">;</span>
+ctx<span class="token punctuation">.</span><span class="token method function property-access">fillText</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">,</span>canvas<span class="token punctuation">.</span><span class="token property-access">width</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span> canvas<span class="token punctuation">.</span><span class="token property-access">height</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>

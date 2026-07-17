@@ -1,0 +1,146 @@
+<h1 id="server-rendering-strategies">Server Rendering Strategies<a aria-hidden="true" class="anchor-heading icon-link" href="#server-rendering-strategies"></a></h1>
+<ul>
+<li>Static rendering</li>
+<li>dynamic rendering</li>
+<li>streaming</li>
+</ul>
+<h1 id="static-rendering">Static rendering<a aria-hidden="true" class="anchor-heading icon-link" href="#static-rendering"></a></h1>
+<p>Static rendering is a server rendering strategy where we generate HTML pages when building our application</p>
+<p>Think of it as preparing all your content in advance - before any user visits your site</p>
+<p>Once built, these pages can be cached by CDNs and served instantly to users</p>
+<p>With this approach, the same pre-rendered page can be shared among different users, giving your app a significant performance boost</p>
+<p><strong>Usage</strong>: blog post, e-commerce product listings, documentation(like the one you are currently reading, it is statically rendered.) </p>
+<h2 id="how-to-statically-render">How to statically render<a aria-hidden="true" class="anchor-heading icon-link" href="#how-to-statically-render"></a></h2>
+<ul>
+<li>default strategy in app router. all routes are automatically prepared at build time without any additional help.</li>
+</ul>
+<h2 id="summary">Summary<a aria-hidden="true" class="anchor-heading icon-link" href="#summary"></a></h2>
+<p>Static rendering is a server rendering strategy where we generate HTML pages when building our application</p>
+<p>Think of it as preparing all your content in advance - before any user visits your site</p>
+<p>Once built, these pages can be cached by CDNs and served instantly to users</p>
+<p>With this approach, the same pre-rendered page can be shared among different users, giving your app a significant performance boost</p>
+<h1 id="dynamic-rendering">Dynamic rendering<a aria-hidden="true" class="anchor-heading icon-link" href="#dynamic-rendering"></a></h1>
+<ul>
+<li>Dynamic rendering is a strategy where the HTML is generated at request time</li>
+<li>Next.js automatically enables it when it encounters dynamic functions like <strong>cookies, headers, connection, draftMode, after or searchParams</strong> prop</li>
+<li>Dynamic rendering is great for personalized content like social media feeds</li>
+<li>You don't have to stress about choosing between static and dynamic rendering</li>
+<li>Next.js automatically selects the optimal rendering strategy for each route based on the features and APIs you're using</li>
+<li>if you want to force a route to be dynamically rendered, you can use the </li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">export</span> <span class="token keyword">const</span> dynamic <span class="token operator">=</span> 'force<span class="token operator">-</span>dynamic" config at the top <span class="token keyword">of</span> your page
+</code></pre>
+<h2 id="generatestaticparams">generateStaticParams<a aria-hidden="true" class="anchor-heading icon-link" href="#generatestaticparams"></a></h2>
+<p>let you to pre-render static routes for dynamic segments. Runs at build time. Hnadles multiple dynamic segments.</p>
+<ul>
+<li>returns an array of objects where the keys are dynamic route parameters. </li>
+<li>givings us a nice performance boost.</li>
+</ul>
+<ul>
+<li>app/products/[id]/page.tsx</li>
+</ul>
+<pre class="language-tsx"><code class="language-tsx"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">ProductPage</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>params<span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span>params<span class="token operator">:</span> <span class="token known-class-name class-name">Promise</span><span class="token operator">&#x3C;</span><span class="token punctuation">{</span>id<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>id<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword control-flow">await</span> params
+    <span class="token keyword control-flow">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span><span class="token plain-text"> Product </span><span class="token punctuation">{</span>id<span class="token punctuation">}</span><span class="token plain-text"> details
+}
+</span></code></pre>
+<p>building this, the product details page is dynamically rendered, since nextjs doesn't know what id value it would need until someone requests a specific url.</p>
+<p><strong>To generate a few pages statically, we can use <code>generateStaticParams</code> function. It helps with frequently accessed pages, they are pre-rendered and ready to be served instantly.</strong> </p>
+<ul>
+<li>app/products/[id]/page.tsx</li>
+</ul>
+<pre class="language-tsx"><code class="language-tsx">
+<span class="token comment">// we are statically passing these 3 params, now these 3 pages will be statically generated.</span>
+
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token function">generateStaticParams</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">return</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>id<span class="token operator">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token operator">:</span> <span class="token string">"2"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token operator">:</span> <span class="token string">"3"</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">ProductPage</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>params<span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span>params<span class="token operator">:</span> <span class="token known-class-name class-name">Promise</span><span class="token operator">&#x3C;</span><span class="token punctuation">{</span>id<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">}</span><span class="token operator">></span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>id<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword control-flow">await</span> params
+    <span class="token keyword control-flow">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>h1</span><span class="token punctuation">></span></span><span class="token plain-text"> Product </span><span class="token punctuation">{</span>id<span class="token punctuation">}</span><span class="token plain-text"> details
+}
+</span></code></pre>
+<ul>
+<li>for routes with multiple dynamic route segments:
+Suppose we have a product catalog with categories and products
+</li>
+</ul>
+<p>/products/[category]/[product]/page.tsx</p>
+<pre class="language-tsx"><code class="language-tsx"><span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">generateStaticParams</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ 
+<span class="token keyword control-flow">return</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> category<span class="token operator">:</span> <span class="token string">"electronics"</span><span class="token punctuation">,</span> product<span class="token operator">:</span> <span class="token string">"smartphone"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    
+    <span class="token punctuation">{</span> category<span class="token operator">:</span> <span class="token string">"electronics"</span><span class="token punctuation">,</span> product<span class="token operator">:</span> <span class="token string">"laptop"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    
+    <span class="token punctuation">{</span> category<span class="token operator">:</span> <span class="token string">"books"</span><span class="token punctuation">,</span> product<span class="token operator">:</span> <span class="token string">"science-fiction"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    
+    <span class="token punctuation">{</span> category<span class="token operator">:</span> <span class="token string">"books"</span><span class="token punctuation">,</span> product<span class="token operator">:</span> <span class="token string">"biography"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="dynamicparams">dynamicParams<a aria-hidden="true" class="anchor-heading icon-link" href="#dynamicparams"></a></h2>
+<h3 id="without-dynamicparams-defined-default-true-or-with-dynamicparams--true">Without dynamicParams defined (default: true) or With dynamicParams = true<a aria-hidden="true" class="anchor-heading icon-link" href="#without-dynamicparams-defined-default-true-or-with-dynamicparams--true"></a></h3>
+<ul>
+<li>
+<p><strong>Behavior</strong>: If you don’t define dynamicParams, Next.js assumes dynamicParams = true.</p>
+</li>
+<li>
+<p><strong>Effect</strong>:
+If a user requests a dynamic route (e.g. /blog/123) that wasn’t returned by generateStaticParams, Next.js will try to dynamically generate the page at runtime.</p>
+</li>
+</ul>
+<p>This is useful if you expect routes outside the pre-generated list to still work.</p>
+<p>✅ Example: // app/blog/[id]/page.tsx</p>
+<pre class="language-tsx"><code class="language-tsx"><span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">generateStaticParams</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token string">"1"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token string">"2"</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// prebuilds /blog/1 and /blog/2</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// dynamicParams not defined → defaults to true</span>
+
+</code></pre>
+<p>Visiting /blog/3 → Page still works (fetched at runtime).</p>
+<h3 id="with-dynamicparams--false">With dynamicParams = false<a aria-hidden="true" class="anchor-heading icon-link" href="#with-dynamicparams--false"></a></h3>
+<ul>
+<li>
+<p><strong>Behavior</strong>: You are telling Next.js that only the params returned from generateStaticParams are valid.</p>
+</li>
+<li>
+<p><strong>Effect</strong>: If a user requests a route not in generateStaticParams, they’ll get a 404 instead of dynamic generation.
+This is useful when your routes are fixed/finite (e.g. product categories, locales).</p>
+</li>
+</ul>
+<p>✅ Example:</p>
+<pre class="language-tsx"><code class="language-tsx"><span class="token comment">// app/blog/[id]/page.tsx</span>
+<span class="token keyword module">export</span> <span class="token keyword">const</span> dynamicParams <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">// 🚫 no runtime params</span>
+<span class="token keyword module">export</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">generateStaticParams</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token string">"1"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> id<span class="token operator">:</span> <span class="token string">"2"</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>Visiting /blog/1 or /blog/2 → Works (prebuilt).</li>
+<li>Visiting /blog/3 → 404 (no fallback)</li>
+</ul>
+<p><strong>🔑 Summary</strong></p>
+<ul>
+<li>
+<p><strong>generateStaticParams + dynamicParams=false</strong> → ✅ only prebuilt routes, ❌ strict 404 for missing ones.</p>
+</li>
+<li>
+<p><strong>generateStaticParams + dynamicParams=true</strong> → ✅ prebuilt routes, but missing ones will render dynamically or statically depending on presence of dynamic functions in the page.</p>
+</li>
+<li>
+<p><strong>No generateStaticParams at all</strong> → (by default is true)</p>
+</li>
+</ul>
+<h1 id="streaming">Streaming<a aria-hidden="true" class="anchor-heading icon-link" href="#streaming"></a></h1>
+<ul>
+<li>Streaming is a strategy that allows for progressive UI rendering from the server</li>
+<li>Work is broken down into smaller chunks and streamed to the client as soon as they're ready</li>
+<li>This means users can see parts of the page right away, without waiting for everything to load</li>
+<li>It's particularly powerful for improving initial page load times and handling Ul elements that depend on slower data fetches, which would normally hold up the entire route</li>
+<li>built in with App router</li>
+<li>use <suspense> from react to achieve this</suspense></li>
+</ul>

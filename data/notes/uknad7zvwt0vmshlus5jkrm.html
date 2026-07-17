@@ -1,0 +1,111 @@
+<h1 id="parallel-routes">Parallel Routes<a aria-hidden="true" class="anchor-heading icon-link" href="#parallel-routes"></a></h1>
+<ul>
+<li>Parallel routes allow you to <strong>render multiple pages in parallel under different named slots</strong> (routes) within a single layout</li>
+<li>They’re used when you want to render multiple views at once that are independent of each other but share layout structure.</li>
+<li>They’re defined in the app/ directory using the <code>@slot</code> naming convention.</li>
+<li><strong>slots are received as props in the layout</strong>.</li>
+<li>the children prop is also a slot by default.</li>
+</ul>
+<pre class="language-graphql"><code class="language-graphql"><span class="token property">app</span>/
+├── <span class="token property">layout</span>.<span class="token property">js</span>
+├── <span class="token directive function">@analytics</span>/
+│   └── <span class="token property">page</span>.<span class="token property">js</span>
+├── <span class="token directive function">@main</span>/
+│   └── <span class="token property">page</span>.<span class="token property">js</span>
+
+</code></pre>
+<h2 id="important-features">Important features<a aria-hidden="true" class="anchor-heading icon-link" href="#important-features"></a></h2>
+<ul>
+<li>
+<p><strong>independent route handling</strong></p>
+<ul>
+<li>
+<p>each slot can have its own loading, error states. This is useful in scenarios where different sections of the page load at varing speed and can have different errors</p>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/parallel-route.png" alt="parallel routing"> </p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>subnavigation in routes</strong>: Each slot can function as mini application, has its own navigation and state management.</p>
+<ul>
+<li>
+<p>users can interact, sort, filter with a slot, navigating through pages without affecting others.</p>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/sub-navigation.png" alt="alt text"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="unmatched-routes">Unmatched routes<a aria-hidden="true" class="anchor-heading icon-link" href="#unmatched-routes"></a></h2>
+<ul>
+<li>
+<p><strong>Navigation through UI</strong>(like clicking links): When traversed by clicking a link, Nextjs keeps showing whatever was there previously in the unmatched routes</p>
+</li>
+<li>
+<p><strong>Page reload</strong>: Next.js looks for a <strong>default.tsx</strong> in each unmatched slot to render. This is a critical file as it serves as a fallback. 404 is received when default.tsx is not found on reload.</p>
+</li>
+</ul>
+<h2 id="conditional-routes">Conditional routes<a aria-hidden="true" class="anchor-heading icon-link" href="#conditional-routes"></a></h2>
+<p>for eg, you want to display dashboard for authenticated users but login page for others. Condn routes helps us to do with while maintaining completly separate code on same URL.</p>
+<p>eg: <a href="https://github.com/gopinav/Next.js-15-Tutorials/blob/main/routing-demo/src/app/complex-dashboard/layout.tsx">https://github.com/gopinav/Next.js-15-Tutorials/blob/main/routing-demo/src/app/complex-dashboard/layout.tsx</a></p>
+<h2 id="usage">Usage<a aria-hidden="true" class="anchor-heading icon-link" href="#usage"></a></h2>
+<p>if you're building:</p>
+<ul>
+<li>Modal-based routing</li>
+<li>Split-view dashboards</li>
+<li>Multi-panel layouts with deep linking</li>
+<li>Nested or partially refreshing UIs</li>
+</ul>
+<p>then parallel routes are a cleaner, more powerful tool for structuring and scaling the app.</p>
+<div class="table-responsive">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th>Normal Component</th><th>Parallel Routes</th></tr></thead><tbody><tr><td>Rendering based on prop changes</td><td>✅</td><td>✅</td></tr><tr><td>Independent navigation</td><td>❌</td><td>✅</td></tr><tr><td>Layout preservation on route change</td><td>❌</td><td>✅</td></tr><tr><td>Native streaming support</td><td>❌</td><td>✅</td></tr><tr><td>Code-splitting per UI section</td><td>🟡 Manual</td><td>✅ Auto</td></tr><tr><td>Ideal for modals, tabs, sidebars</td><td>❌ Workaround</td><td>✅ Cleanly</td></tr></tbody></table></div>
+<h2 id="doubts-clarification">Doubts clarification<a aria-hidden="true" class="anchor-heading icon-link" href="#doubts-clarification"></a></h2>
+<p>🧩 1. Rendering Independence vs. Navigation Independence
+You're right:</p>
+<p>✅ Normal components won’t re-render if props/state don’t change.</p>
+<p>BUT:</p>
+<p>❌ Normal components live in the same route, so any route change will re-trigger the layout and all child components will re-render (or reload data, if they use useEffect, useRouter, or fetch() in getServerSideProps).</p>
+<p>✅ Parallel routes let you navigate just one slot (e.g., side panel or modal) without re-rendering or affecting the rest of the page.</p>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/ldoe4gpzz0t3vcch4lrn2bh">Intercepted Routes</a></li>
+</ol>

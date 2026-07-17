@@ -1,0 +1,57 @@
+<h1 id="docker">Docker<a aria-hidden="true" class="anchor-heading icon-link" href="#docker"></a></h1>
+<p>A platform for building, running and shipping applications.</p>
+<h2 id="container">Container<a aria-hidden="true" class="anchor-heading icon-link" href="#container"></a></h2>
+<p>An isolated environment for running an application.
+This is diiferent from a virtual machine.</p>
+<ul>
+<li>lightweight</li>
+<li>all containers uses the OS(to be specific: kernel*) of the host</li>
+<li>start quickly</li>
+<li>need less hardware resources</li>
+</ul>
+<p>*kernel manages applications and hardware resources</p>
+<h3 id="virtual-machine">Virtual Machine<a aria-hidden="true" class="anchor-heading icon-link" href="#virtual-machine"></a></h3>
+<p>A VM is an abstraction of a machine(physical hardware). We use hypervisor to create and manage VM.</p>
+<ul>
+<li>each VM needs a full blown OS</li>
+<li>resource intensive, takes a portion of the physical hardware resources. For eg: if you have 8GB memory, it is divided among the VM</li>
+</ul>
+<h2 id="volumes">volumes<a aria-hidden="true" class="anchor-heading icon-link" href="#volumes"></a></h2>
+<p>Volumes in Docker are used to persist data generated or used by containers.</p>
+<ul>
+<li>
+<p>When a container is destroyed or recreated, any data stored within the container's filesystem is lost.</p>
+</li>
+<li>
+<p>Volumes provide a way to store and share data between containers or between the host machine and containers, ensuring data persistence even when containers are removed or replaced.</p>
+</li>
+</ul>
+<h2 id="commands">Commands<a aria-hidden="true" class="anchor-heading icon-link" href="#commands"></a></h2>
+<ul>
+<li>docker network ls</li>
+<li>docker network inspect <network-name></network-name></li>
+</ul>
+<pre class="language-bash"><code class="language-bash"><span class="token comment"># run inside constainer terminal to check if able to connect.</span>
+/app  <span class="token function">nc</span> -vz rabbitmq <span class="token number">5672</span>
+
+rabbitmq <span class="token punctuation">(</span><span class="token number">172.24</span>.0.3:5672<span class="token punctuation">)</span> <span class="token function">open</span>
+</code></pre>
+<h2 id="ref">Ref<a aria-hidden="true" class="anchor-heading icon-link" href="#ref"></a></h2>
+<pre class="language-bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># Start the app</span>
+<span class="token function">npm</span> start <span class="token operator">&#x26;</span>
+
+<span class="token comment"># Wait for the app to establish a connection</span>
+<span class="token keyword">until</span> <span class="token function">nc</span> -vz mongo-db <span class="token number">27017</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Waiting for MongoDB to become available..."</span>
+  <span class="token function">sleep</span> <span class="token number">1</span>
+<span class="token keyword">done</span>
+
+<span class="token comment"># Run the seed script</span>
+<span class="token function">npm</span> run seed
+
+<span class="token comment"># Keep the container running</span>
+<span class="token function">tail</span> -f /dev/null
+
+</code></pre>

@@ -1,0 +1,97 @@
+<h1 id="fast-api">Fast API<a aria-hidden="true" class="anchor-heading icon-link" href="#fast-api"></a></h1>
+<h2 id="requirements">Requirements<a aria-hidden="true" class="anchor-heading icon-link" href="#requirements"></a></h2>
+<ul>
+<li>
+<p>python 3.7 > more</p>
+</li>
+<li>
+<p>python web framework for building RESTful APIs</p>
+</li>
+<li>
+<p>handles all business logic for your web page</p>
+</li>
+<li>
+<p>uvicorn is the web server that we use start a FastAPI application. It comes installed with fast api.</p>
+</li>
+</ul>
+<blockquote>
+<p>run fastapi with: <code>uvicorn &#x3C;filename>:&#x3C;appname> --reload</code> for eg: <strong>uvicorn books:app --reload</strong></p>
+</blockquote>
+<h2 id="sample-app">sample app<a aria-hidden="true" class="anchor-heading icon-link" href="#sample-app"></a></h2>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> fastapi <span class="token keyword">import</span> Body<span class="token punctuation">,</span> FastAPI
+
+app <span class="token operator">=</span> FastAPI<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+BOOKS <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'Title One'</span><span class="token punctuation">,</span> <span class="token string">'author'</span><span class="token punctuation">:</span> <span class="token string">'Author One'</span><span class="token punctuation">,</span> <span class="token string">'category'</span><span class="token punctuation">:</span> <span class="token string">'science'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'Title Two'</span><span class="token punctuation">,</span> <span class="token string">'author'</span><span class="token punctuation">:</span> <span class="token string">'Author Two'</span><span class="token punctuation">,</span> <span class="token string">'category'</span><span class="token punctuation">:</span> <span class="token string">'science'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'Title Three'</span><span class="token punctuation">,</span> <span class="token string">'author'</span><span class="token punctuation">:</span> <span class="token string">'Author Three'</span><span class="token punctuation">,</span> <span class="token string">'category'</span><span class="token punctuation">:</span> <span class="token string">'history'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'Title Four'</span><span class="token punctuation">,</span> <span class="token string">'author'</span><span class="token punctuation">:</span> <span class="token string">'Author Four'</span><span class="token punctuation">,</span> <span class="token string">'category'</span><span class="token punctuation">:</span> <span class="token string">'math'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'Title Five'</span><span class="token punctuation">,</span> <span class="token string">'author'</span><span class="token punctuation">:</span> <span class="token string">'Author Five'</span><span class="token punctuation">,</span> <span class="token string">'category'</span><span class="token punctuation">:</span> <span class="token string">'math'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span><span class="token string">'title'</span><span class="token punctuation">:</span> <span class="token string">'Title Six'</span><span class="token punctuation">,</span> <span class="token string">'author'</span><span class="token punctuation">:</span> <span class="token string">'Author Two'</span><span class="token punctuation">,</span> <span class="token string">'category'</span><span class="token punctuation">:</span> <span class="token string">'math'</span><span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>get</span><span class="token punctuation">(</span><span class="token string">"/books"</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">read_all_books</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> BOOKS
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>get</span><span class="token punctuation">(</span><span class="token string">"/books/{book_title}"</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">read_book</span><span class="token punctuation">(</span>book_title<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> book <span class="token keyword">in</span> BOOKS<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> book<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> book_title<span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> book
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>get</span><span class="token punctuation">(</span><span class="token string">"/books/"</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">read_category_by_query</span><span class="token punctuation">(</span>category<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    books_to_return <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> book <span class="token keyword">in</span> BOOKS<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> book<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'category'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> category<span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            books_to_return<span class="token punctuation">.</span>append<span class="token punctuation">(</span>book<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> books_to_return
+
+
+<span class="token comment"># Get all books from a specific author using path or query parameters</span>
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>get</span><span class="token punctuation">(</span><span class="token string">"/books/byauthor/"</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">read_books_by_author_path</span><span class="token punctuation">(</span>author<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    books_to_return <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> book <span class="token keyword">in</span> BOOKS<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> book<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'author'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> author<span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            books_to_return<span class="token punctuation">.</span>append<span class="token punctuation">(</span>book<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> books_to_return
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>get</span><span class="token punctuation">(</span><span class="token string">"/books/{book_author}/"</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">read_author_category_by_query</span><span class="token punctuation">(</span>book_author<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> category<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    books_to_return <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> book <span class="token keyword">in</span> BOOKS<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> book<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'author'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> book_author<span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">and</span> \
+                book<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'category'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> category<span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            books_to_return<span class="token punctuation">.</span>append<span class="token punctuation">(</span>book<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> books_to_return
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>post</span><span class="token punctuation">(</span><span class="token string">"/books/create_book"</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">create_book</span><span class="token punctuation">(</span>new_book<span class="token operator">=</span>Body<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    BOOKS<span class="token punctuation">.</span>append<span class="token punctuation">(</span>new_book<span class="token punctuation">)</span>
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>put</span><span class="token punctuation">(</span><span class="token string">"/books/update_book"</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">update_book</span><span class="token punctuation">(</span>updated_book<span class="token operator">=</span>Body<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>BOOKS<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> BOOKS<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> updated_book<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            BOOKS<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> updated_book
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>delete</span><span class="token punctuation">(</span><span class="token string">"/books/delete_book/{book_title}"</span><span class="token punctuation">)</span>
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">delete_book</span><span class="token punctuation">(</span>book_title<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>BOOKS<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> BOOKS<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> book_title<span class="token punctuation">.</span>casefold<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            BOOKS<span class="token punctuation">.</span>pop<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+
+</code></pre>

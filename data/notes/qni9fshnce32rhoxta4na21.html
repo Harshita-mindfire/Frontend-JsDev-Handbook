@@ -1,0 +1,57 @@
+<h1 id="web">Web<a aria-hidden="true" class="anchor-heading icon-link" href="#web"></a></h1>
+<h2 id="critical-rendering-path">Critical Rendering Path<a aria-hidden="true" class="anchor-heading icon-link" href="#critical-rendering-path"></a></h2>
+<ul>
+<li>sequence of steps the browser goes through to render the page ie. to convert html, css, js to pixels on your screen.</li>
+</ul>
+<div class="mermaid">
+  graph TD;
+    DOM-->CSSOM-->RenderTree--> Layout-->Paint;
+    DOM --> Javascript;
+    Javascript --> DOM
+    Javascript --> CSSOM
+</div>
+<h3 id="dom">DOM<a aria-hidden="true" class="anchor-heading icon-link" href="#dom"></a></h3>
+<ul>
+<li>browser captures all contents of the page in DOM</li>
+<li>full parsed representation of HTML markup.</li>
+<li>browser constructs DOM incrementaly(building the dom as soon as we have the HTMl and not have to wait for entire HTMl page to render)</li>
+<li>creates DOM based on token hierarchy</li>
+</ul>
+<div class="mermaid">
+  graph TD;
+Characters --> Tokens --> Nodes --> DOM
+</div>
+<h3 id="cssom">CSSOM<a aria-hidden="true" class="anchor-heading icon-link" href="#cssom"></a></h3>
+<ul>
+<li>browser captures all the styles of the page in a CSS OM
+converts token to Nodes</li>
+<li>css rules cascade down(children of body note inherit its parent's css)</li>
+<li>can't use partial CSSOM since rules are overwritten</li>
+<li>it is render blocking(browser blocks page rendering until the entire cssom is created)</li>
+<li>more specific rules are expensive.</li>
+</ul>
+<h3 id="render-tree">Render Tree<a aria-hidden="true" class="anchor-heading icon-link" href="#render-tree"></a></h3>
+<ul>
+<li>merge the two DOM and CSSOM in render tree</li>
+<li>only captures visible content.</li>
+</ul>
+<h3 id="layout">Layout<a aria-hidden="true" class="anchor-heading icon-link" href="#layout"></a></h3>
+<p>determines the scrren size and position of each node in the screen.</p>
+<h3 id="paint">Paint<a aria-hidden="true" class="anchor-heading icon-link" href="#paint"></a></h3>
+<p>Paints pixels on the scrren</p>
+<h2 id="optimizing-crp">Optimizing CRP<a aria-hidden="true" class="anchor-heading icon-link" href="#optimizing-crp"></a></h2>
+<ul>
+<li>minimizing the number of critical resources by deferring non-critical ones' download, marking them as async,</li>
+<li>optimizing the number of requests required along with the file size of each request,</li>
+<li>optimizing the order in which critical resources are loaded by prioritizing the downloading of critical assets, thereby shortening the critical path length.</li>
+</ul>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/521tdzo7x0zx50aal6fmw1m">Frontend Web Performance Checklist</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/ps33b8yaiukx17yrllb4is3">Pwa</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/nutf7tamgwrrmdxogge4gyq">Security</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/f96o2fb6j6e3xfevwtnes5g">Service Workers</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/z34vf2zj27tr4j9219ze4c4">Web Vitals</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/a18q1wy0g9i62deaqmwb0gr">Web Workers</a></li>
+</ol>

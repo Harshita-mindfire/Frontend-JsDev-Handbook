@@ -1,0 +1,31 @@
+<h1 id="docker-compose">Docker Compose<a aria-hidden="true" class="anchor-heading icon-link" href="#docker-compose"></a></h1>
+<h2 id="references">References<a aria-hidden="true" class="anchor-heading icon-link" href="#references"></a></h2>
+<ul>
+<li><a href="/Frontend-JsDev-Handbook/notes/89wj9htvdw3wp48wr2pbnc1">Yaml</a></li>
+</ul>
+<h2 id="docker-compose-1">Docker compose<a aria-hidden="true" class="anchor-heading icon-link" href="#docker-compose-1"></a></h2>
+<ul>
+<li>used for composing a multi-container application.</li>
+<li>To start such application run: <code>docker-compose up</code></li>
+<li>to build: <code>docker-compose build</code>, to build without cache: <code>docker-compose build --no-emit</code></li>
+<li>If you make some changes to the project files, run docker-compose build then re-run the docker-compose up command.</li>
+</ul>
+<h2 id="syntax">Syntax<a aria-hidden="true" class="anchor-heading icon-link" href="#syntax"></a></h2>
+<pre class="language-yml"><code class="language-yml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">service_name</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> image_name<span class="token punctuation">:</span>tag <span class="token comment">#image specific service.</span>
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> host_port<span class="token punctuation">:</span>container_port
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> host_path<span class="token punctuation">:</span>container_path
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> KEY=VALUE <span class="token comment">#env ariables</span>
+    <span class="token punctuation">...</span>
+  <span class="token key atrule">service_name2</span><span class="token punctuation">:</span>
+    <span class="token key atrule">build</span><span class="token punctuation">:</span> ./frontend <span class="token comment">#tells docker how to build this service. This links to Dockerfile of this service</span>
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 3000<span class="token punctuation">:</span><span class="token number">3000</span>
+</code></pre>
+<h2 id="database">Database<a aria-hidden="true" class="anchor-heading icon-link" href="#database"></a></h2>
+<p>if you want to run PostgreSQL with Docker, then the localhost alias will not work. In this case, your url will be DATABASE_URL="postgresql://postgres:postgres@postgres:5432/Todo?schema=public", where alias postgres will be the container name that runs a PostgreSQL image within Docker.</p>

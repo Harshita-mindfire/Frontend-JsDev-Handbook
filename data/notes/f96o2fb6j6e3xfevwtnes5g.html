@@ -1,0 +1,22 @@
+<h1 id="service-workers">Service Workers<a aria-hidden="true" class="anchor-heading icon-link" href="#service-workers"></a></h1>
+<ul>
+<li>a JS script that gets registered with the browser.</li>
+<li>stays registered even when offline</li>
+<li>can load content even with no connection.</li>
+<li>service workers are event driven: <strong>install</strong> event, <strong>activate</strong> event, <strong>fetch</strong> event etc.</li>
+</ul>
+<p>Uses cases</p>
+<ul>
+<li>background data sync/preload: lets you defer actions until user has stable connectivity. Also allows services to push periodic updates to the app so that it can update when it is next online.</li>
+</ul>
+<p>eg=> when you hit like on instagram, and the connection is not stable, the event gets synced when we are back with stable connection.</p>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/2023-08-16-16-44-43.png" alt="Service worker lifecycle"></p>
+<h2 id="registration">Registration<a aria-hidden="true" class="anchor-heading icon-link" href="#registration"></a></h2>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/2023-08-16-17-18-27.png"></p>
+<p>Once registered you will find it activated in your application tab of Chrome dev tools.
+<img src="/Frontend-JsDev-Handbook/assets/images/2023-08-16-17-19-17.png"></p>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/Frontend-JsDev-Handbook/notes/ps33b8yaiukx17yrllb4is3">Pwa</a></li>
+</ul>

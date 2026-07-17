@@ -1,0 +1,68 @@
+<h1 id="vanilla-js">Vanilla JS<a aria-hidden="true" class="anchor-heading icon-link" href="#vanilla-js"></a></h1>
+<h2 id="ques">Ques:<a aria-hidden="true" class="anchor-heading icon-link" href="#ques"></a></h2>
+<ul>
+<li>Create a vanilla js application that consumes the <a href="https://fakestoreapi.com/products?sort=asc">https://fakestoreapi.com/products?sort=asc</a> API
+and displays a list of products in ascending order based on id.
+The application should also include a dropdown to allow the user to change the sorting of the products between ascending and descending.
+When the user changes the sorting order, the application should update the query parameter value and fetch the products with the new sorting order.</li>
+</ul>
+<h2 id="ans">Ans<a aria-hidden="true" class="anchor-heading icon-link" href="#ans"></a></h2>
+<ul>
+<li>HTML </li>
+</ul>
+<pre class="language-html"><code class="language-html"> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>select</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>asc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Asc<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>option</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>option</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>desc<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Desc<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>option</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>select</span><span class="token punctuation">></span></span>
+</code></pre>
+<ul>
+<li>JS</li>
+</ul>
+<pre class="language-js"><code class="language-js"> <span class="token keyword">const</span> getProducts <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sortOrder<span class="token operator">=</span><span class="token string">"asc"</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+   <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://fakestoreapi.com/products?sort=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>sortOrder<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">const</span> productList <span class="token operator">=</span> <span class="token keyword control-flow">await</span> response<span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">const</span> body <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">querySelector</span><span class="token punctuation">(</span><span class="token string">"body"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">const</span> test <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">querySelector</span><span class="token punctuation">(</span><span class="token string">".container"</span><span class="token punctuation">)</span>
+   <span class="token keyword control-flow">if</span><span class="token punctuation">(</span>test<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     body<span class="token punctuation">.</span><span class="token method function property-access">removeChild</span><span class="token punctuation">(</span>test<span class="token punctuation">)</span>
+   <span class="token punctuation">}</span>
+   <span class="token keyword">const</span> container <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">"container"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   container<span class="token punctuation">.</span><span class="token property-access">classList</span><span class="token punctuation">.</span><span class="token method function property-access">add</span><span class="token punctuation">(</span><span class="token string">"container"</span><span class="token punctuation">)</span>
+   productList<span class="token punctuation">.</span><span class="token method function property-access">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>id<span class="token punctuation">,</span> title<span class="token punctuation">,</span> image<span class="token punctuation">}</span></span> <span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+     <span class="token keyword">const</span> parent <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     parent<span class="token punctuation">.</span><span class="token property-access">classList</span><span class="token punctuation">.</span><span class="token method function property-access">add</span><span class="token punctuation">(</span><span class="token string">"parent"</span><span class="token punctuation">)</span>
+     <span class="token keyword">const</span> card <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">const</span> imageCard <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">"img"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     imageCard<span class="token punctuation">.</span><span class="token method function property-access">setAttribute</span><span class="token punctuation">(</span><span class="token string">"src"</span><span class="token punctuation">,</span> image<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     imageCard<span class="token punctuation">.</span><span class="token property-access">style</span><span class="token punctuation">.</span><span class="token property-access">width</span> <span class="token operator">=</span> <span class="token string">"50px"</span><span class="token punctuation">;</span>
+     imageCard<span class="token punctuation">.</span><span class="token property-access">style</span><span class="token punctuation">.</span><span class="token property-access">height</span> <span class="token operator">=</span> <span class="token string">"60px"</span><span class="token punctuation">;</span>
+     card<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>imageCard<span class="token punctuation">)</span>
+     <span class="token keyword">const</span> titleSpan <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">createElement</span><span class="token punctuation">(</span><span class="token string">"div"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     titleSpan<span class="token punctuation">.</span><span class="token property-access">innerHTML</span> <span class="token operator">=</span> title<span class="token punctuation">;</span>
+     parent<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>card<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     parent<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>titleSpan<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     container<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>parent<span class="token punctuation">)</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span>
+   body<span class="token punctuation">.</span><span class="token method function property-access">appendChild</span><span class="token punctuation">(</span>container<span class="token punctuation">)</span>
+
+ <span class="token punctuation">}</span>
+ <span class="token function">getProducts</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+   <span class="token keyword">const</span> select <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">querySelector</span><span class="token punctuation">(</span><span class="token string">"select"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  select<span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span><span class="token string">"change"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">getProducts</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>CSS </li>
+</ul>
+<pre class="language-css"><code class="language-css"><span class="token selector"><span class="token class">.container</span></span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token class">.parent</span></span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token unit">rem</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>

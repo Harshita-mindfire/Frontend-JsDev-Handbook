@@ -1,0 +1,19 @@
+<h1 id="custom-hooks">Custom Hooks<a aria-hidden="true" class="anchor-heading icon-link" href="#custom-hooks"></a></h1>
+<ul>
+<li>hooks that we create by combining the exuting hooks by React.</li>
+<li>we encapsulate common logic into a hook that can be used by other components. Allowing us to share complex behavior among multiple components.</li>
+<li>must begin with <code>use</code></li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function">useCurrentUser</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>user<span class="token punctuation">,</span> setUser<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token keyword null nil">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword control-flow">await</span> axios<span class="token punctuation">.</span><span class="token method function property-access">get</span><span class="token punctuation">(</span><span class="token string">"/current-user"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">setUser</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword control-flow">return</span> user<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>

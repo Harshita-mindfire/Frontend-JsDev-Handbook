@@ -1,0 +1,75 @@
+<h1 id="dos-n-donts">Dos N Donts<a aria-hidden="true" class="anchor-heading icon-link" href="#dos-n-donts"></a></h1>
+<h2 id="reference">Reference<a aria-hidden="true" class="anchor-heading icon-link" href="#reference"></a></h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=4FhJkX18fS8">https://www.youtube.com/watch?v=4FhJkX18fS8</a></li>
+</ul>
+<h2 id="dos-n-donts-1">Do's n dont's<a aria-hidden="true" class="anchor-heading icon-link" href="#dos-n-donts-1"></a></h2>
+<ol>
+<li>
+<p>use functional components</p>
+<ul>
+<li>much better state management</li>
+<li>easy to build components with functional</li>
+<li>hooks are like an ecosystem now.</li>
+<li>there's so much we can do with hooks that wouldn't be possible if we used class based.</li>
+</ul>
+</li>
+<li>
+<p>Do use Typescript</p>
+<ul>
+<li>Component.propTypes in React only run at build time, to check types at compile time, use ts. </li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> <span class="token maybe-class-name">MyList</span><span class="token operator">:</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token constant">FC</span><span class="token operator">&#x3C;</span><span class="token punctuation">{</span>
+    list<span class="token operator">:</span> <span class="token maybe-class-name">Person</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token function-variable function">onClick</span><span class="token operator">:</span> <span class="token punctuation">(</span>person<span class="token operator">:</span> <span class="token maybe-class-name">Person</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token keyword">void</span>
+<span class="token punctuation">}</span><span class="token operator">></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>list<span class="token punctuation">,</span> onClick<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">(</span><span class="token spread operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p>Don't worry about react re-rendering (too much).</p>
+<ul>
+<li>don't try to over optimize before it is actually needed.</li>
+</ul>
+</li>
+<li>
+<p>Manage the useEffect or any dependency array.</p>
+<ul>
+<li>Rule 1: Add anything you READ FROM to the array</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">something/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>id<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token spread operator">...</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>id<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<p>Rule 2: Check ehat you WRITE TO in the dependency array.</p>
+<pre class="language-js"><code class="language-js"> <span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+     <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token operator">!</span>user<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">something/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>id<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">then</span><span class="token punctuation">(</span><span class="token parameter">data</span> <span class="token arrow operator">=></span> <span class="token function">setUser</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>id<span class="token punctuation">,</span> user<span class="token punctuation">,</span> setUser<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+</li>
+<li>
+<p>Rule 3: Don't disable lint rules.</p>
+</li>
+<li>
+<p>React doesn't do deep comparision for arrays, objects and functions. It does a referential comparision for them. Make sure the refernce doesnot change if the data does not change(by using useMemo). </p>
+</li>
+</ul>
+</li>
+<li>
+<p>Don't ignore useCallback and useMemo.
+They can be used to maintain referential identity of non-primitive types.</p>
+<pre><code>We can use useMemo for majorly 2 reasons:
+1. when you are computing an array or an object because those 2 are maintained by reference and you might want to maintain referential identity.
+2. you are doing a task that is expensive.
+</code></pre>
+</li>
+<li>
+<p>Learn to make custom hooks</p>
+</li>
+<li>
+<p>use a query library. eg: react query, swr</p>
+</li>
+</ol>

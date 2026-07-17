@@ -1,0 +1,27 @@
+<h1 id="eslint">Eslint<a aria-hidden="true" class="anchor-heading icon-link" href="#eslint"></a></h1>
+<h2 id="configure-eslint-in-project">configure eslint in project<a aria-hidden="true" class="anchor-heading icon-link" href="#configure-eslint-in-project"></a></h2>
+<ul>
+<li>npm i -D eslint</li>
+<li>npx eslint --init and then answer the questions</li>
+<li>add scripts in your package json:</li>
+</ul>
+<pre class="language-json"><code class="language-json"><span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">"lint"</span><span class="token operator">:</span> <span class="token string">"eslint ."</span><span class="token punctuation">,</span>
+  <span class="token property">"lint:fix"</span><span class="token operator">:</span> <span class="token string">"eslint . --fix"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>
+<p>npm run lint</p>
+</li>
+<li>
+<p>to ignore any folder from checking lints add the folder/file in <code> "ignorePatterns"</code> in .eslintrc.
+eg: </p>
+</li>
+</ul>
+<pre class="language-json"><code class="language-json"> <span class="token property">"ignorePatterns"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"dist/"</span><span class="token punctuation">]</span> <span class="token comment">//ignores entire files inside dist folder</span>
+</code></pre>
+<h2 id="trouble-shooting">Trouble shooting:<a aria-hidden="true" class="anchor-heading icon-link" href="#trouble-shooting"></a></h2>
+<ul>
+<li>for react prop types error, add rule : "react/prop-types": "off" in eslintrc</li>
+</ul>

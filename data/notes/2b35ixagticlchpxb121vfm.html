@@ -1,0 +1,170 @@
+<h1 id="classes">Classes<a aria-hidden="true" class="anchor-heading icon-link" href="#classes"></a></h1>
+<h2 id="access-modifiers">Access modifiers<a aria-hidden="true" class="anchor-heading icon-link" href="#access-modifiers"></a></h2>
+<ul>
+<li>
+<p><strong>private</strong>: accessible only within the class. They are not even inherited.</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Department</span></span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> employees<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+</li>
+<li>
+<p><strong>public</strong>: default modifier. accessible outside the class.</p>
+</li>
+<li>
+<p><strong>protected</strong>: accessible to class and its children(i.e can be inherited).</p>
+</li>
+<li>
+<p><strong>readonly</strong>: This prevents assignments to the field outside of the constructor.</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Greeter</span></span> <span class="token punctuation">{</span>
+<span class="token keyword">readonly</span> name<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"world"</span><span class="token punctuation">;</span>
+
+<span class="token function">constructor</span><span class="token punctuation">(</span>otherName<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>otherName <span class="token operator">!==</span> <span class="token keyword nil">undefined</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">name</span> <span class="token operator">=</span> otherName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">err</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">name</span> <span class="token operator">=</span> <span class="token string">"not ok"</span><span class="token punctuation">;</span> <span class="token comment">//Cannot assign to 'name' because it is a read-only property.</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> g <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token maybe-class-name">Greeter</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+g<span class="token punctuation">.</span><span class="token property-access">name</span> <span class="token operator">=</span> <span class="token string">"also not ok"</span><span class="token punctuation">;</span> <span class="token comment">//Cannot assign to 'name' because it is a read-only property.</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="shorthand-notation">Shorthand notation<a aria-hidden="true" class="anchor-heading icon-link" href="#shorthand-notation"></a></h2>
+<p>When we want to initialize the member variables in constructor, <strong>instead of</strong></p>
+<pre class="language-ts"><code class="language-ts">   <span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Product</span></span> <span class="token punctuation">{</span>
+    title<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    price<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> isListed<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+    
+    <span class="token function">constructor</span><span class="token punctuation">(</span>name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> pr<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">title</span> <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">price</span> <span class="token operator">=</span> pr<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">isListed</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>we can do</strong></p>
+<pre class="language-ts"><code class="language-ts">      <span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Product</span></span> <span class="token punctuation">{</span>
+        <span class="token keyword">private</span> isListed<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+        <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">public</span> title<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token keyword">public</span> price<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">isListed</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="inheritance">Inheritance<a aria-hidden="true" class="anchor-heading icon-link" href="#inheritance"></a></h2>
+<ul>
+<li>
+<p>utilizing base class methods and properties. They are automatically passed on to the child class via inheritance.</p>
+</li>
+<li>
+<p>can inherit one class ata time.</p>
+</li>
+<li>
+<p>use <code>extends</code> to inherit.</p>
+</li>
+<li>
+<p>eg:</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">ITDept</span></span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token maybe-class-name">Dept</span></span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+</li>
+</ul>
+<h3 id="overriding-methods">overriding methods<a aria-hidden="true" class="anchor-heading icon-link" href="#overriding-methods"></a></h3>
+<ul>
+<li>TS allows to override methods of base class in child class.</li>
+<li>It calls the child method when invoked from child reference.</li>
+</ul>
+<h3 id="super-keyword">super keyword<a aria-hidden="true" class="anchor-heading icon-link" href="#super-keyword"></a></h3>
+<ul>
+<li>calls the constructor of the base class.</li>
+<li>if you have a base class, you’ll need to call super(); in your child constructor body before using any <code>this.</code> members:</li>
+</ul>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Base</span></span> <span class="token punctuation">{</span>
+  k <span class="token operator">=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Derived</span></span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token maybe-class-name">Base</span></span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Prints a wrong value in ES5; throws exception in ES6</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">k</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token string">'super'</span> must be called before accessing <span class="token string">'this'</span> <span class="token keyword">in</span> the constructor <span class="token keyword">of</span> a derived <span class="token keyword">class</span><span class="token punctuation">.</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="getters-and-setters">Getters and Setters<a aria-hidden="true" class="anchor-heading icon-link" href="#getters-and-setters"></a></h2>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Dept</span></span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> id<span class="token operator">:</span><span class="token builtin">string</span><span class="token punctuation">;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token keyword">private</span> name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">get</span> <span class="token function"><span class="token maybe-class-name">DeptId</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword control-flow">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">id</span><span class="token punctuation">)</span>
+        <span class="token keyword control-flow">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">id</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">set</span> <span class="token function"><span class="token maybe-class-name">DeptId</span></span><span class="token punctuation">(</span>value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token property-access">id</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p><code>DeptId</code> is a getter that is publicly accessible. Now we can get the value of dept by creating reference of Dept.</p>
+<pre class="language-ts"><code class="language-ts"><span class="token comment">// Note how getters/setters are accessed without ()</span>
+
+<span class="token keyword">const</span> <span class="token constant">IT</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token maybe-class-name">Dept</span></span><span class="token punctuation">(</span><span class="token string">'IT'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token constant">IT</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">DeptId</span></span><span class="token punctuation">)</span> <span class="token comment">// getting value</span>
+<span class="token constant">IT</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">DeptId</span></span> <span class="token operator">=</span> <span class="token string">'1234'</span> <span class="token comment">// setting value</span>
+</code></pre>
+<h2 id="static-methods">Static Methods<a aria-hidden="true" class="anchor-heading icon-link" href="#static-methods"></a></h2>
+<ul>
+<li>Classes may have static members. These members aren’t associated with a particular instance of the class. They can be accessed through the class constructor object itself:</li>
+<li>often used for utility functions that you want to group into a class or for global constants.</li>
+<li>the static methods are decoupled from instances and <strong>cannot</strong> be referenced with <code>this</code>.</li>
+<li>Static members are also inherited.</li>
+</ul>
+<p>eg: <code>Math.pi</code>, <code>Math.pow()</code></p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Test</span></span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> year <span class="token operator">=</span> <span class="token number">2024</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token function">testFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword control-flow">return</span> <span class="token string">"xyz"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// above func can be used as: </span>
+<span class="token keyword">const</span> a <span class="token operator">=</span> <span class="token maybe-class-name">Test</span><span class="token punctuation">.</span><span class="token method function property-access">testFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token maybe-class-name">Test</span><span class="token punctuation">.</span><span class="token property-access">year</span><span class="token punctuation">)</span> <span class="token comment">//2024</span>
+</code></pre>
+<h2 id="abstract-classes">Abstract Classes<a aria-hidden="true" class="anchor-heading icon-link" href="#abstract-classes"></a></h2>
+<ul>
+<li>A class that can't be instantiated but has to be extended.</li>
+<li>An abstract class typically includes one or more abstract methods or property declarations. </li>
+<li>The class which extends the abstract class must define all the abstract methods. </li>
+<li>We <strong>cannot</strong> create an instance of an abstract class.</li>
+</ul>
+<h2 id="private-constructors-and-singletons">Private Constructors and Singletons<a aria-hidden="true" class="anchor-heading icon-link" href="#private-constructors-and-singletons"></a></h2>
+<p>The singleton pattern is a creational pattern that allows you to make sure that only one instance of a class is created. .</p>
+<pre class="language-ts"><code class="language-ts">    <span class="token keyword">class</span> <span class="token class-name"><span class="token maybe-class-name">Singleton</span></span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> instance<span class="token operator">:</span> <span class="token maybe-class-name">Singleton</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// do something construct...</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">static</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token maybe-class-name">Singleton</span><span class="token punctuation">.</span><span class="token property-access">instance</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token maybe-class-name">Singleton</span><span class="token punctuation">.</span><span class="token property-access">instance</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token maybe-class-name">Singleton</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// ... any one time initialization goes here ...</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword control-flow">return</span> <span class="token maybe-class-name">Singleton</span><span class="token punctuation">.</span><span class="token property-access">instance</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">someMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> something <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name"><span class="token maybe-class-name">Singleton</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Error: constructor of 'Singleton' is private.</span>
+
+<span class="token keyword">let</span> instance <span class="token operator">=</span> <span class="token maybe-class-name">Singleton</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// do something with the instance...</span>
+</code></pre>
+<ul>
+<li><a href="https://github.com/mindfiredigital/canvas-editor/commit/b09d98dea3a38caba041bab35736bfd2712c068c#diff-ce60497e4a1a947c474a38c5959a2d9499b9531666b1df509ac4305518a93095R11">Canvas editor singleton example</a></li>
+</ul>

@@ -1,0 +1,157 @@
+<h1 id="fundamentals">Fundamentals<a aria-hidden="true" class="anchor-heading icon-link" href="#fundamentals"></a></h1>
+<h2 id="react">React<a aria-hidden="true" class="anchor-heading icon-link" href="#react"></a></h2>
+<p>A JS library for building User interfaces.</p>
+<ul>
+<li>uses Virtual DOM</li>
+<li>unindirectional data flow</li>
+<li>reusable UI components</li>
+</ul>
+<h2 id="component">component<a aria-hidden="true" class="anchor-heading icon-link" href="#component"></a></h2>
+<p>a fuction that returns markup</p>
+<h2 id="functional-components-over-class">Functional components over Class<a aria-hidden="true" class="anchor-heading icon-link" href="#functional-components-over-class"></a></h2>
+<ul>
+<li>use functional comp over class, after 16.8 hooks can be used as lifecycle events.</li>
+<li>use class component when you want a react functionality that is not available for functions yet, eg: error boundries</li>
+<li>Only class components can be error boundaries. To make class component an error boundary we define a new lifecycle method called componentDidCatch(error, info).</li>
+</ul>
+<p>ReactDOM.render function: takes 2 i/p</p>
+<ul>
+<li>App</li>
+<li>document.getElementById("root")</li>
+</ul>
+<h2 id="jsx">JSX<a aria-hidden="true" class="anchor-heading icon-link" href="#jsx"></a></h2>
+<p>you can use the conditional ? operator. it works inside JSX:</p>
+<pre class="language-js"><code class="language-js"><span class="token operator">&#x3C;</span>div<span class="token operator">></span><span class="token punctuation">{</span>isLoggedIn <span class="token operator">?</span> <span class="token operator">&#x3C;</span><span class="token maybe-class-name">AdminPanel</span> <span class="token operator">/</span><span class="token operator">></span> <span class="token operator">:</span> <span class="token operator">&#x3C;</span><span class="token maybe-class-name">LoginForm</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">}</span><span class="token operator">&#x3C;</span><span class="token operator">/</span>div<span class="token operator">></span>
+</code></pre>
+<p>When you don’t need the else branch, you can also use a shorter logical &#x26;&#x26; syntax:</p>
+<pre class="language-js"><code class="language-js"><span class="token operator">&#x3C;</span>div<span class="token operator">></span><span class="token punctuation">{</span>isLoggedIn <span class="token operator">&#x26;&#x26;</span> <span class="token operator">&#x3C;</span><span class="token maybe-class-name">AdminPanel</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">}</span><span class="token operator">&#x3C;</span><span class="token operator">/</span>div<span class="token operator">></span>
+</code></pre>
+<h2 id="pure-components">Pure components<a aria-hidden="true" class="anchor-heading icon-link" href="#pure-components"></a></h2>
+<p>Some JavaScript functions are pure. A pure function:</p>
+<ul>
+<li>Minds its own business. It does not change any objects or variables that existed before it was called.</li>
+<li>Same inputs, same output. Given the same inputs, a pure function should always return the same result.</li>
+</ul>
+<h2 id="react-state-vs-props">React State vs Props<a aria-hidden="true" class="anchor-heading icon-link" href="#react-state-vs-props"></a></h2>
+<ul>
+<li>State of a component is an object that holds some information that may change over the lifetime of the component.</li>
+<li>props are inputs to a component, They are data passed down from a parent component to a child component.</li>
+</ul>
+<p>Both props and state are plain JavaScript objects. While both of them hold information that influences the output of render, they are different in their functionality with respect to component. Props get passed to the component similar to function parameters whereas state is managed within the component similar to variables declared within a function.</p>
+<h2 id="controlled-and-uncontrolled-components">controlled and uncontrolled components<a aria-hidden="true" class="anchor-heading icon-link" href="#controlled-and-uncontrolled-components"></a></h2>
+<p>In Controlled components the form data is handled by react(eg: state) and with uncontrolled comp. form data is handled by DOM itself.</p>
+<h3 id="controlled-components">Controlled Components<a aria-hidden="true" class="anchor-heading icon-link" href="#controlled-components"></a></h3>
+<p>In React, controlled and uncontrolled components are two different approaches to managing the state of a form component.</p>
+<p>A controlled component is a component that takes its current value through props and notifies changes through callbacks, like onChange. When a user enters data into a form element, the component's state is updated and the UI is re-rendered with the new values. In other words, the state of the component is controlled by React.</p>
+<p>Here's an example of a controlled component for an input field:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">React</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> useState <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">InputField</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>value<span class="token punctuation">,</span> setValue<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">handleChange</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setValue</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword control-flow">return</span> <span class="token operator">&#x3C;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> value<span class="token operator">=</span><span class="token punctuation">{</span>value<span class="token punctuation">}</span> onChange<span class="token operator">=</span><span class="token punctuation">{</span>handleChange<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In this example, the value of the input field is controlled by the value state variable. The handleChange function updates the value state when the input field changes, and the new value is passed down to the input element as a prop.</p>
+<h3 id="uncontrolled-component">Uncontrolled component<a aria-hidden="true" class="anchor-heading icon-link" href="#uncontrolled-component"></a></h3>
+<p>an uncontrolled component is a component that manages its own state internally. In an uncontrolled component, the form data is handled by the DOM itself, instead of being managed by React.</p>
+<p>Here's an example of an uncontrolled component for an input field:</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token imports"><span class="token maybe-class-name">React</span></span> <span class="token keyword module">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">InputField</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">handleSubmit</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">"Input value:"</span><span class="token punctuation">,</span> event<span class="token punctuation">.</span><span class="token property-access">target</span><span class="token punctuation">.</span><span class="token property-access">elements</span><span class="token punctuation">.</span><span class="token property-access">inputField</span><span class="token punctuation">.</span><span class="token property-access">value</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    event<span class="token punctuation">.</span><span class="token method function property-access">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&#x3C;</span>form onSubmit<span class="token operator">=</span><span class="token punctuation">{</span>handleSubmit<span class="token punctuation">}</span><span class="token operator">></span>
+      <span class="token operator">&#x3C;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> name<span class="token operator">=</span><span class="token string">"inputField"</span> <span class="token operator">/</span><span class="token operator">></span>
+      <span class="token operator">&#x3C;</span>button type<span class="token operator">=</span><span class="token string">"submit"</span><span class="token operator">></span><span class="token maybe-class-name">Submit</span><span class="token operator">&#x3C;</span><span class="token operator">/</span>button<span class="token operator">></span>
+    <span class="token operator">&#x3C;</span><span class="token operator">/</span>form<span class="token operator">></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In this example, the form data is handled by the DOM. When the user submits the form, the handleSubmit function accesses the value of the input field directly from the DOM using event.target.elements.inputField.value.</p>
+<h2 id="lifecycle-phases">Lifecycle phases<a aria-hidden="true" class="anchor-heading icon-link" href="#lifecycle-phases"></a></h2>
+<ul>
+<li>Mounting</li>
+<li>updating</li>
+<li>unmounting</li>
+</ul>
+<h3 id="detail">Detail<a aria-hidden="true" class="anchor-heading icon-link" href="#detail"></a></h3>
+<ul>
+<li>
+<p><strong>Mounting</strong>: The component is ready to mount in the browser DOM. This phase covers initialization from
+<code>constructor(), getDerivedStateFromProps(), render(), and componentDidMount()</code> lifecycle methods.</p>
+</li>
+<li>
+<p><strong>Updating</strong>: In this phase, the component gets updated in two ways, <strong>sending the new props</strong> and <strong>updating the state</strong> either from setState() or forceUpdate(). This phase covers <code>getDerivedStateFromProps(), shouldComponentUpdate(), render(), getSnapshotBeforeUpdate() and componentDidUpdate()</code> lifecycle methods.</p>
+</li>
+<li>
+<p><strong>Unmounting</strong>: In this last phase, the component is not needed and gets unmounted from the browser DOM. This phase includes <code>componentWillUnmount()</code> lifecycle method.</p>
+</li>
+</ul>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/2023-04-14-19-35-20.png" alt="Lifecycle of component"></p>
+<h2 id="context">Context<a aria-hidden="true" class="anchor-heading icon-link" href="#context"></a></h2>
+<p>Context provides a way to pass data through the component tree without having to pass props down manually at every level.</p>
+<p>For example, authenticated users, locale preferences, UI themes need to be accessed in the application by many components.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token maybe-class-name">Provider</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Consumer</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token method function property-access">createContext</span><span class="token punctuation">(</span>defaultValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>To pass context:
+<ul>
+<li>Create and export it with export const MyContext = createContext(defaultValue).</li>
+<li>Pass it to the useContext(MyContext) Hook to read it in any child component, no matter how deep.</li>
+<li>Wrap children into &#x3C;MyContext.Provider value={...}> to provide it from a parent.</li>
+</ul>
+</li>
+</ul>
+<h2 id="flushsync">flushSync<a aria-hidden="true" class="anchor-heading icon-link" href="#flushsync"></a></h2>
+<p>Call flushSync to force React to flush any pending work and update the DOM synchronously.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> flushSync <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'react-dom'</span><span class="token punctuation">;</span>
+
+<span class="token function">flushSync</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token function">setSomething</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Example</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span> setState<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">onClick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'handler'</span><span class="token punctuation">)</span>
+    <span class="token function">flushSync</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+      <span class="token function">setState</span><span class="token punctuation">(</span><span class="token parameter">state</span> <span class="token arrow operator">=></span> state <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'handler '</span> <span class="token operator">+</span> state<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span><span class="token string">'render '</span> <span class="token operator">+</span> state<span class="token punctuation">)</span>
+  <span class="token keyword control-flow">return</span> <span class="token operator">&#x3C;</span>div<span class="token operator">></span>
+    <span class="token operator">&#x3C;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>onClick<span class="token punctuation">}</span><span class="token operator">></span>click me<span class="token operator">&#x3C;</span><span class="token operator">/</span>button<span class="token operator">></span>
+  <span class="token operator">&#x3C;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token punctuation">}</span>
+
+userEvent<span class="token punctuation">.</span><span class="token method function property-access">click</span><span class="token punctuation">(</span>screen<span class="token punctuation">.</span><span class="token method function property-access">getByText</span><span class="token punctuation">(</span><span class="token string">'click me'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token doc-comment comment">/**
+ * Output
+ * "render 0"
+ * "handler"
+ * "render 1"
+ * "handler 0"
+ * **/</span>
+</code></pre>
+<h2 id="todo">TODO<a aria-hidden="true" class="anchor-heading icon-link" href="#todo"></a></h2>
+<ul>
+<li>React.StrictMode <a class="color-tag" style="--tag-color: #fbeeac;" href="/Frontend-JsDev-Handbook/notes/gnxywb70sldsrsabn47cn3z">#learn</a></li>
+</ul>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/lr6lnzahqwfbdwlc9x38hlj">Function First Class Entity</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/o6nvengftckl6e4kft81zln">Virtual Dom</a></li>
+</ol>

@@ -1,0 +1,69 @@
+<h1 id="react-patterns">React Patterns<a aria-hidden="true" class="anchor-heading icon-link" href="#react-patterns"></a></h1>
+<h2 id="layout-components">Layout components<a aria-hidden="true" class="anchor-heading icon-link" href="#layout-components"></a></h2>
+<ul>
+<li>design pattern used to structure the layout of a React application</li>
+<li>focus on organizing other components within a web page. like split screen, lists, modal</li>
+<li>promotes code reusability, separation of concerns, and a clean, organized codebase.</li>
+</ul>
+<h3 id="key-concepts">key concepts<a aria-hidden="true" class="anchor-heading icon-link" href="#key-concepts"></a></h3>
+<p>the core components of our page should be unaffected by its placement.</p>
+<ul>
+<li>reusability</li>
+<li>separation of concerns: separating layout logic from business logic, you can focus on the specific responsibilities of each component. </li>
+</ul>
+<h3 id="example">example<a aria-hidden="true" class="anchor-heading icon-link" href="#example"></a></h3>
+<ul>
+<li>
+<p>for split screen type of layouts we should try to keep the stylings in the parent components and not the individual left and right.</p>
+</li>
+<li>
+<p>for lists: example of reusability </p>
+</li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx">
+<span class="token comment">//RegularList.jsx</span>
+<span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">RegularList</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> items<span class="token punctuation">,</span> sourceName<span class="token punctuation">,</span> <span class="token maybe-class-name">ItemComponent</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token punctuation">{</span>items<span class="token punctuation">.</span><span class="token method function property-access">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item<span class="token punctuation">,</span> i</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">ItemComponent</span></span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>i<span class="token punctuation">}</span></span> <span class="token spread"><span class="token punctuation">{</span><span class="token spread operator">...</span><span class="token punctuation">{</span> <span class="token punctuation">[</span>sourceName<span class="token punctuation">]</span><span class="token operator">:</span> item <span class="token punctuation">}</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
+      <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">//SmallAuthorListItem.jsx</span>
+
+<span class="token keyword module">export</span> <span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">SmallAuthorListItem</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>author<span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span>name<span class="token punctuation">,</span> age<span class="token punctuation">}</span> <span class="token operator">=</span> author<span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span><span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>p</span><span class="token punctuation">></span></span><span class="token plain-text"> Name: </span><span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token plain-text">, Age: </span><span class="token punctuation">{</span>age<span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span>p</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// App.jsx</span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">RegularList</span></span>
+        <span class="token attr-name">items</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>authors<span class="token punctuation">}</span></span>
+        <span class="token attr-name">sourceName</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">"author"</span><span class="token punctuation">}</span></span>
+        <span class="token attr-name">ItemComponent</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token maybe-class-name">SmallAuthorListItem</span><span class="token punctuation">}</span></span>
+      <span class="token punctuation">/></span></span>
+
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">RegularList</span></span>
+        <span class="token attr-name">items</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>books<span class="token punctuation">}</span></span>
+        <span class="token attr-name">sourceName</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">"book"</span><span class="token punctuation">}</span></span>
+        <span class="token attr-name">ItemComponent</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token maybe-class-name">SmallAuthorListItem</span><span class="token punctuation">}</span></span>
+      <span class="token punctuation">/></span></span>
+
+</code></pre>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/Frontend-JsDev-Handbook/notes/dv1l5xhkn1iaeker7ik3ea3">Compound</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/ahur9u8a8yj3xkacx0cqjt2">Controlled Uncontrolled</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/rasdv9a9uhtdt100mwt80cx">Custom Hooks</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/xqgcm6m5nb6dc5ybk4aqgyc">Functional Programming</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/cnsrds3146uzfbzkaer0tav">Higher Order Components</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/umv1qlgcft10gzj348d0ou0">Observer Pattern with events</a></li>
+<li><a href="/Frontend-JsDev-Handbook/notes/sojbzhwx1losfnysmamz42a">Render Prop</a></li>
+</ol>

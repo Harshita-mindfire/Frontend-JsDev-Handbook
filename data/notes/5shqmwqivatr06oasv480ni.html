@@ -1,0 +1,79 @@
+<h1 id="flex-box">Flex Box<a aria-hidden="true" class="anchor-heading icon-link" href="#flex-box"></a></h1>
+<h1 id="flexbox">Flexbox<a aria-hidden="true" class="anchor-heading icon-link" href="#flexbox"></a></h1>
+<pre class="language-css"><code class="language-css">  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+</code></pre>
+<h2 id="properties">Properties<a aria-hidden="true" class="anchor-heading icon-link" href="#properties"></a></h2>
+<h3 id="justify-content">justify-content<a aria-hidden="true" class="anchor-heading icon-link" href="#justify-content"></a></h3>
+<p>aligns items horizontally.</p>
+<p>Accepted values: </p>
+<ul>
+<li>flex-start: Items align to the left side of the container.</li>
+<li>flex-end: Items align to the right side of the container.</li>
+<li>center: Items align at the center of the container.</li>
+<li>space-between: Items display with equal spacing between them.</li>
+<li>space-around: Items display with equal spacing around them.</li>
+</ul>
+<h3 id="align-items">align-items<a aria-hidden="true" class="anchor-heading icon-link" href="#align-items"></a></h3>
+<p>aligns items vertically.</p>
+<p>Accepted values: </p>
+<ul>
+<li>flex-start: Items align to the top of the container.</li>
+<li>flex-end: Items align to the bottom of the container.</li>
+<li>center: Items align at the vertical center of the container.</li>
+<li>baseline: Items display at the baseline of the container.</li>
+<li>stretch: Items are stretched to fit the container.</li>
+</ul>
+<h3 id="align-content">align-content<a aria-hidden="true" class="anchor-heading icon-link" href="#align-content"></a></h3>
+<p> set how multiple lines are spaced apart from each other.</p>
+<ul>
+<li>flex-start: Lines are packed at the top of the container.</li>
+<li>flex-end: Lines are packed at the bottom of the container.</li>
+<li>center: Lines are packed at the vertical center of the container.</li>
+<li>space-between: Lines display with equal spacing between them.</li>
+<li>space-around: Lines display with equal spacing around them.</li>
+<li>stretch: Lines are stretched to fit the container.</li>
+</ul>
+<p><strong>This can be confusing, but align-content determines the spacing between lines, while align-items determines how the items as a whole are aligned within the container. When there is only one line, align-content has no effect.</strong></p>
+<h3 id="flex-direction">flex-direction<a aria-hidden="true" class="anchor-heading icon-link" href="#flex-direction"></a></h3>
+<p>property defines the direction items are placed in the container.</p>
+<p>Accepted values:</p>
+<ul>
+<li>row: Items are placed the same as the text direction.</li>
+<li>row-reverse: Items are placed opposite to the text direction.</li>
+<li>column: Items are placed top to bottom.</li>
+<li>column-reverse: Items are placed bottom to top.</li>
+</ul>
+<ul>
+<li><strong>Notice that when you set the flex-direction to a reversed row or column, start and end are also reversed.</strong></li>
+</ul>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/2022-04-04-17-37-37.png"></p>
+<ul>
+<li><strong>Notice that when the flex direction is a column, justify-content changes to the vertical and align-items to the horizontal.</strong></li>
+</ul>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/2022-04-04-19-26-13.png"></p>
+<h3 id="flex-wrap">flex-wrap<a aria-hidden="true" class="anchor-heading icon-link" href="#flex-wrap"></a></h3>
+<p>wraps the items of flexbox</p>
+<p>Accepts the following values:</p>
+<ul>
+<li>nowrap: Every item is fit to a single line.</li>
+<li>wrap: Items wrap around to additional lines.</li>
+<li>wrap-reverse: Items wrap around to additional lines in reverse.</li>
+</ul>
+<h3 id="flex-flow">flex-flow<a aria-hidden="true" class="anchor-heading icon-link" href="#flex-flow"></a></h3>
+<p>The two properties <em>flex-direction</em> and <em>flex-wrap</em> are used so often together that the shorthand property <strong>flex-flow</strong> was created to combine them. This shorthand property accepts the value of the two properties separated by a space.</p>
+<p>For example, you can use flex-flow: row wrap to set rows and wrap them.</p>
+<h3 id="align-self">align-self<a aria-hidden="true" class="anchor-heading icon-link" href="#align-self"></a></h3>
+<p>Another property you can apply to individual items is align-self. This property accepts the same values as align-items and its value for the specific item.</p>
+<h3 id="order">order<a aria-hidden="true" class="anchor-heading icon-link" href="#order"></a></h3>
+<p>Sometimes reversing the row or column order of a container is not enough. In these cases, we can apply the order property to individual items. By default, items have a value of 0, but we can use this property to also set it to a positive or negative integer value (-2, -1, 0, 1, 2).</p>
+<h2 id="todo">TODO<a aria-hidden="true" class="anchor-heading icon-link" href="#todo"></a></h2>
+<p>Animation CSS <a class="color-tag" style="--tag-color: #fbeeac;" href="/Frontend-JsDev-Handbook/notes/gnxywb70sldsrsabn47cn3z">#learn</a></p>
+<pre class="language-css"><code class="language-css"><span class="token atrule"><span class="token rule">@keyframes</span> App-logo-spin</span> <span class="token punctuation">{</span>
+  <span class="token selector">from</span> <span class="token punctuation">{</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token unit">deg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token selector">to</span> <span class="token punctuation">{</span>
+    <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">rotate</span><span class="token punctuation">(</span><span class="token number">360</span><span class="token unit">deg</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>

@@ -1,0 +1,63 @@
+<h1 id="compiler">Compiler<a aria-hidden="true" class="anchor-heading icon-link" href="#compiler"></a></h1>
+<h2 id="compiling-single-file">Compiling single file<a aria-hidden="true" class="anchor-heading icon-link" href="#compiling-single-file"></a></h2>
+<pre class="language-bash"><code class="language-bash">    tsc app.ts
+</code></pre>
+<ul>
+<li>watch mode: <code>-w</code> or <code>--watch</code></li>
+</ul>
+<pre class="language-bash"><code class="language-bash">    tsc app.ts -w
+</code></pre>
+<h2 id="compiling-multiple-files--entire-project">Compiling multiple files / entire project<a aria-hidden="true" class="anchor-heading icon-link" href="#compiling-multiple-files--entire-project"></a></h2>
+<ol>
+<li><strong>tsc --init</strong> : Run this cmd from root dir. This command creates a tsconfig.json file. It has bunch of configurations for entire project.</li>
+<li>Now running <strong>tsc</strong> or <strong>tsc -w</strong> will compile and watch all the <code>.ts</code> files in project.</li>
+</ol>
+<h3 id="configuration">Configuration<a aria-hidden="true" class="anchor-heading icon-link" href="#configuration"></a></h3>
+<p>The tsconfig.json has several options to configure how ts comoiler should behave for a project. Some of them are:</p>
+<ul>
+<li>
+<p><strong>include</strong>: Specifies an array of filenames or patterns to include in the program. These filenames are resolved relative to the directory containing the tsconfig.json file. If we have both include and exclude, exclude will filter out the files from include. so compiled files will be include - exclude.</p>
+</li>
+<li>
+<p><strong>exclude</strong>:  Specifies an array of filenames or patterns that should be skipped when resolving include. It is not a mechanism that prevents a file from being included in the codebase - it simply changes what the include setting finds. Can also add regex. eg:</p>
+<pre class="language-json"><code class="language-json">    <span class="token property">"exclude"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"node_modules"</span><span class="token punctuation">]</span> <span class="token comment">// this is the default behaviour.</span>
+</code></pre>
+</li>
+<li>
+<p><strong>files</strong>: Specifies an allowlist of files to include in the program. An error occurs if any of the files can’t be found.</p>
+</li>
+<li>
+<p><strong>target</strong>: Set the JavaScript language version for emitted JavaScript and include compatible library declarations. eg: </p>
+</li>
+</ul>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><span class="token property">"target"</span><span class="token operator">:</span> <span class="token string">"es6"</span> <span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>
+<p><strong>sourceMap</strong>: simplifies debugging. When set this option <strong>true</strong>, it creates .map files which are understood by modern browsers. This allows us to see .ts files in the browser's source tab. Now you can add breakpoints in ts files instead of compiled js in browser.</p>
+</li>
+<li>
+<p><strong>outDir</strong>: folder to store o/p files. Generally ./dist</p>
+</li>
+<li>
+<p><strong>rootDir</strong>: specify root directory of input files. </p>
+</li>
+<li>
+<p><strong>removeComments</strong>: when set to true, won't emit comments to output files.</p>
+</li>
+<li>
+<p><strong>noEmitOnError</strong>: (default: false), when set to true, do not generate output file if input file has compilation error.</p>
+</li>
+</ul>
+<h2 id="reference">Reference<a aria-hidden="true" class="anchor-heading icon-link" href="#reference"></a></h2>
+<ul>
+<li>
+<p>tsconfig Docs: <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">https://www.typescriptlang.org/docs/handbook/tsconfig-json.html</a></p>
+</li>
+<li>
+<p>Compiler Config Docs: <a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html">https://www.typescriptlang.org/docs/handbook/compiler-options.html</a></p>
+</li>
+<li>
+<p>VS Code TS Debugging: <a href="https://code.visualstudio.com/docs/typescript/typescript-debugging">https://code.visualstudio.com/docs/typescript/typescript-debugging</a></p>
+</li>
+</ul>

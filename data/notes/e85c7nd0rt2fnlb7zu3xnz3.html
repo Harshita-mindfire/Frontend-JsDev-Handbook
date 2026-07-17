@@ -1,0 +1,147 @@
+<h1 id="basic-types">Basic Types<a aria-hidden="true" class="anchor-heading icon-link" href="#basic-types"></a></h1>
+<p>Typescript's type system helps us during development.
+The key difference b/w JS and TS type system is JS uses dynamic types(resolves during runtime) and TS uses static types(set during development)</p>
+<h2 id="core-types">Core Types<a aria-hidden="true" class="anchor-heading icon-link" href="#core-types"></a></h2>
+<ul>
+<li>
+<p><strong>number</strong>: All numbers, no differentiation b/w integers and floats.</p>
+</li>
+<li>
+<p><strong>string</strong></p>
+</li>
+<li>
+<p><strong>boolean</strong></p>
+</li>
+<li>
+<p><strong>object</strong></p>
+</li>
+<li>
+<p><strong>array</strong></p>
+</li>
+<li>
+<p><strong>tuple</strong>: (added by TS) fix length array.
+eg: In below example, role is tuple. It is a fixed length(2) array with first index value as number and second has string. <code>person.role[1] = 10; person.role = [1, "abcd", "def"]</code> will result in compile time errors. </p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token literal-property property">person</span><span class="token operator">:</span>
+<span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> string<span class="token punctuation">;</span>
+    <span class="token literal-property property">role</span><span class="token operator">:</span> <span class="token punctuation">[</span>number<span class="token punctuation">,</span> string<span class="token punctuation">]</span> <span class="token comment">// tuple</span>
+<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"John"</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">role</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"author"</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>  <strong>Note</strong> : <code>person.role.push("heeloo")</code> will not result in a compile time error. This is an exception. TS cannot catch this error.</p>
+</li>
+<li>
+<p><strong>enum</strong>: Automatically enumerated global constant identifiers. </p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">enum</span> <span class="token maybe-class-name">Role</span> <span class="token punctuation">{</span><span class="token constant">ADMIN</span><span class="token punctuation">,</span> <span class="token constant">READ_ONLY</span><span class="token punctuation">,</span> <span class="token constant">AUTHOR</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>  by default here Role.ADMIN will have value 0, READ_ONLY: 1 and AUTHOR 2. We can change this by</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">enum</span> <span class="token maybe-class-name">Role</span> <span class="token punctuation">{</span>
+    <span class="token constant">ADMIN</span> <span class="token operator">=</span> <span class="token string">"ADMINISTRATOR"</span><span class="token punctuation">,</span> 
+    <span class="token constant">READ_ONLY</span> <span class="token operator">=</span><span class="token string">" Read only users"</span><span class="token punctuation">,</span> 
+    <span class="token constant">AUTHOR</span> <span class="token operator">=</span> <span class="token string">"Author"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>any</strong></p>
+</li>
+</ul>
+<p><strong>Note</strong>: The core primitive types in TypeScript are all lowercase!</p>
+<h2 id="other-types">Other Types<a aria-hidden="true" class="anchor-heading icon-link" href="#other-types"></a></h2>
+<ul>
+<li>
+<p><strong>union</strong>: </p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> x<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</code></pre>
+</li>
+<li>
+<p><strong>literal types</strong>: </p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> result<span class="token operator">:</span> <span class="token string">'value1'</span> <span class="token operator">|</span> <span class="token string">'value2'</span><span class="token punctuation">;</span> <span class="token comment">// now result cannot be assigned any value other than value1 or value 2. </span>
+result <span class="token operator">=</span> <span class="token string">"ok"</span><span class="token punctuation">;</span> <span class="token comment">// results in compile time error</span>
+</code></pre>
+</li>
+<li>
+<p><strong>unknown</strong>: we don't know yet what's the type. It is similar to any but more restrictive.</p>
+</li>
+<li>
+<p><strong>never</strong>: never returns anything. eg: error functions</p>
+</li>
+<li>
+<p><strong>symbol</strong>:
+There is a primitive in JavaScript used to create a globally unique reference via the function Symbol():</p>
+</li>
+</ul>
+<pre class="language-ts"><code class="language-ts">    <span class="token keyword">const</span> firstName <span class="token operator">=</span> <span class="token known-class-name class-name">Symbol</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> secondName <span class="token operator">=</span> <span class="token known-class-name class-name">Symbol</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword control-flow">if</span> <span class="token punctuation">(</span>firstName <span class="token operator">===</span> secondName<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">//This comparison appears to be unintentional because the types 'typeof firstName' and 'typeof secondName' have no overlap.</span>
+    <span class="token comment">// Can't ever happen</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="type-aliases">Type Aliases<a aria-hidden="true" class="anchor-heading icon-link" href="#type-aliases"></a></h2>
+<p>Type aliases can be used to "create" your own types. </p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">NumStringType</span></span> <span class="token operator">=</span> <span class="token builtin">number</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">CustomLiteralType</span></span> <span class="token operator">=</span> <span class="token string">"value1"</span> <span class="token operator">|</span> <span class="token string">"value2"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// now these can be used as below:</span>
+
+<span class="token keyword">let</span> variable1<span class="token operator">:</span> <span class="token maybe-class-name">NumStringType</span><span class="token punctuation">;</span>
+</code></pre>
+<p>You're not limited to storing union types though - you can also provide an alias to a (possibly complex) object type.</p>
+<p>For example:</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token maybe-class-name">User</span></span> <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> age<span class="token operator">:</span> <span class="token builtin">number</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> u1<span class="token operator">:</span> <span class="token maybe-class-name">User</span> <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'Max'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">30</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">// this works!</span>
+</code></pre>
+<p>This allows you to avoid unnecessary repetition and manage types centrally.</p>
+<h2 id="function-return-types--void">Function return types &#x26; void<a aria-hidden="true" class="anchor-heading icon-link" href="#function-return-types--void"></a></h2>
+<p>return type in func is specified after ":"</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> sum <span class="token operator">=</span> a<span class="token operator">+</span>b<span class="token punctuation">;</span>
+    <span class="token keyword control-flow">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Result is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>sum<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>The function that does not have a return statement is of return type void.</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token comment">// this is internally :void</span>
+<span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span>
+
+</code></pre>
+<p>The function that has a return statement but returns nothing, is of return type undefined</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">add</span><span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token comment">// this is internally : undefined . You can also use : void here if required. won't throw any error.</span>
+<span class="token punctuation">{</span>
+    <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>a<span class="token operator">+</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token keyword control-flow">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+<h2 id="functions-as-type">Functions as type<a aria-hidden="true" class="anchor-heading icon-link" href="#functions-as-type"></a></h2>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">let</span> <span class="token function-variable function">combinedResult</span> <span class="token operator">:</span> <span class="token punctuation">(</span>a<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> b<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="function-type--callbacks">Function Type &#x26;&#x26; Callbacks<a aria-hidden="true" class="anchor-heading icon-link" href="#function-type--callbacks"></a></h2>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">addAndHandle</span><span class="token punctuation">(</span>n1<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> n2<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span> <span class="token function-variable function">cb</span><span class="token operator">:</span> <span class="token punctuation">(</span>num<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> n1 <span class="token operator">+</span> n2<span class="token punctuation">;</span>
+  <span class="token function">cb</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">addAndHandle</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><strong>NOTE: </strong> callback functions can return something, even if the argument on which they're passed does NOT expect a returned value.</p>
+<p>for example: the below code will compile just fine. even though the return type of cb is void and we are returning boolean.</p>
+<pre class="language-ts"><code class="language-ts"><span class="token keyword">function</span> <span class="token function">sendRequest</span><span class="token punctuation">(</span>data<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token function-variable function">cb</span><span class="token operator">:</span> <span class="token punctuation">(</span>response<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ... sending a request with "data"</span>
+  <span class="token keyword control-flow">return</span> <span class="token function">cb</span><span class="token punctuation">(</span><span class="token punctuation">{</span>data<span class="token operator">:</span> <span class="token string">'Hi there!'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token function">sendRequest</span><span class="token punctuation">(</span><span class="token string">'Send this!'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span> 
+  <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="further-references">Further references<a aria-hidden="true" class="anchor-heading icon-link" href="#further-references"></a></h2>
+<ul>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">https://www.typescriptlang.org/docs/handbook/2/everyday-types.html</a></li>
+</ul>

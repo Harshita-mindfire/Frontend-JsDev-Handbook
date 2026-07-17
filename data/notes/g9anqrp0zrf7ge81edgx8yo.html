@@ -1,0 +1,58 @@
+<h1 id="version-1">Version-1<a aria-hidden="true" class="anchor-heading icon-link" href="#version-1"></a></h1>
+<h2 id="agents">Agents<a aria-hidden="true" class="anchor-heading icon-link" href="#agents"></a></h2>
+<ul>
+<li>
+<p>Without tools
+<img src="/Frontend-JsDev-Handbook/assets/images/image.png" alt="alt text"></p>
+</li>
+<li>
+<p>With tools
+<img src="/Frontend-JsDev-Handbook/assets/images/image-1.png" alt="alt text"></p>
+</li>
+</ul>
+<h3 id="creating-agents-with-langchain">Creating agents with langchain<a aria-hidden="true" class="anchor-heading icon-link" href="#creating-agents-with-langchain"></a></h3>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>agents <span class="token keyword">import</span> create_agent
+model<span class="token operator">=</span>ChatGroq<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"llama-3.1-8b-instant"</span><span class="token punctuation">,</span>groq_api_key<span class="token operator">=</span>groq_api_key<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">get_weather</span><span class="token punctuation">(</span>city<span class="token punctuation">:</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token operator">></span><span class="token builtin">str</span><span class="token punctuation">:</span>
+    <span class="token string">"This tool returns the weather of a given city"</span>
+    <span class="token keyword">return</span> <span class="token string-interpolation"><span class="token string">f"The weather of </span><span class="token interpolation"><span class="token punctuation">{</span>city<span class="token punctuation">}</span></span><span class="token string"> is sunny"</span></span>
+
+agent<span class="token operator">=</span> create_agent<span class="token punctuation">(</span>model<span class="token operator">=</span>model<span class="token punctuation">,</span>
+                    tools<span class="token operator">=</span><span class="token punctuation">[</span>get_weather<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    system_prompt<span class="token operator">=</span><span class="token string">"You are a helpful assistant"</span>
+                    <span class="token punctuation">)</span>
+response<span class="token operator">=</span>agent<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">"messages"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"role"</span><span class="token punctuation">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token string">"content"</span><span class="token punctuation">:</span> <span class="token string">"What is the weather in Delhi"</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+response
+</code></pre>
+<h2 id="integrating-llm-models">Integrating LLM models<a aria-hidden="true" class="anchor-heading icon-link" href="#integrating-llm-models"></a></h2>
+<ol>
+<li>using provider specifc langchain library</li>
+</ol>
+<pre class="language-py"><code class="language-py">model<span class="token operator">=</span>ChatGroq<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"llama-3.1-8b-instant"</span><span class="token punctuation">,</span>groq_api_key<span class="token operator">=</span>groq_api_key<span class="token punctuation">)</span>
+</code></pre>
+<ol start="2">
+<li>using <code>init_chat_model</code> from langchain.chat_model</li>
+</ol>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain<span class="token punctuation">.</span>chat_models <span class="token keyword">import</span> init_chat_model
+os<span class="token punctuation">.</span>environ<span class="token punctuation">[</span><span class="token string">"GROQ_API_KEY"</span><span class="token punctuation">]</span><span class="token operator">=</span>os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"GROQ_API_KEY"</span><span class="token punctuation">)</span>
+
+model <span class="token operator">=</span> init_chat_model<span class="token punctuation">(</span><span class="token string">"groq:llama-3.1-8b-instant"</span><span class="token punctuation">)</span>
+model
+</code></pre>
+<h2 id="batching">Batching<a aria-hidden="true" class="anchor-heading icon-link" href="#batching"></a></h2>
+<pre class="language-py"><code class="language-py">messages <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"What was the main theme of Metamorphosis nover"</span><span class="token punctuation">,</span> <span class="token string">"Who is considered the father of economics and why"</span><span class="token punctuation">,</span> <span class="token string">"What is Big bang theory"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+responses <span class="token operator">=</span> model<span class="token punctuation">.</span>batch<span class="token punctuation">(</span>messages<span class="token punctuation">)</span>
+<span class="token keyword">for</span> response <span class="token keyword">in</span> responses<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+
+</code></pre>
+<h2 id="streaming">Streaming<a aria-hidden="true" class="anchor-heading icon-link" href="#streaming"></a></h2>
+<pre class="language-py"><code class="language-py"><span class="token keyword">for</span> chunk <span class="token keyword">in</span> model<span class="token punctuation">.</span>stream<span class="token punctuation">(</span><span class="token string">"What is our sky blue?"</span><span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>chunk<span class="token punctuation">.</span>text<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">,</span> flush<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="middleware">Middleware<a aria-hidden="true" class="anchor-heading icon-link" href="#middleware"></a></h2>
+<ul>
+<li><a href="https://docs.langchain.com/oss/javascript/langchain/middleware/built-in">builtin middleware</a>: Summarization middleware, human i the feedback, model call limit etc.</li>
+</ul>

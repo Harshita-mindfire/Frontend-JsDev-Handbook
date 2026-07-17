@@ -1,0 +1,50 @@
+<h1 id="intercepted-routes">Intercepted Routes<a aria-hidden="true" class="anchor-heading icon-link" href="#intercepted-routes"></a></h1>
+<ul>
+<li>advanced routing mechanism that allows you to load a route from another part of application within current layout.</li>
+<li>particularly useful when you want to display new content while keeping ypur user in same context.</li>
+<li>let you show alternate UI by preserving context but defaults to the standard UI on direct page loads.</li>
+<li><strong>intercepting routes are created in source folder</strong></li>
+<li>these routes <strong>require a specific prefix</strong> based on below conventions.</li>
+</ul>
+<h2 id="conventions">Conventions<a aria-hidden="true" class="anchor-heading icon-link" href="#conventions"></a></h2>
+<ul>
+<li>use (.) to match segments at same level</li>
+<li>use (..) to match one level above 
+<blockquote>
+<p>similar to how we relative import files ./file.tsx for same level, ../file.tsx on level above</p>
+</blockquote>
+</li>
+<li>use (..)(..) to match 2 level above</li>
+<li>use (...) to match segments from root app directory.</li>
+</ul>
+<pre class="language-graphql"><code class="language-graphql">
+<span class="token property">app</span>/
+├── <span class="token property">layout</span>.<span class="token property">js</span>
+├── <span class="token property">folder1</span>
+│   └── <span class="token property">page</span>.<span class="token property">js</span>
+<span class="token operator">|</span>   <span class="token operator">|</span>
+<span class="token operator">|</span>   └── <span class="token punctuation">(</span>..<span class="token punctuation">)</span><span class="token property">f3</span> // <span class="token property">intercepting</span> <span class="token property">route</span> <span class="token property">for</span> <span class="token property">f3</span>
+<span class="token operator">|</span>   <span class="token operator">|</span>      └── <span class="token property">page</span>.<span class="token property">js</span> 
+<span class="token operator">|</span>   <span class="token operator">|</span>
+<span class="token operator">|</span>   └── <span class="token punctuation">(</span>.<span class="token punctuation">)</span><span class="token property">f2</span> // <span class="token property">dest</span>. <span class="token property-query">route</span><span class="token punctuation">(</span><span class="token property">f2</span><span class="token punctuation">)</span> <span class="token property">is</span> <span class="token property">present</span> <span class="token property">at</span> <span class="token property">same</span> <span class="token property">level</span> <span class="token property">with</span> <span class="token property">intercepting</span> <span class="token property">here</span>
+<span class="token operator">|</span>   <span class="token operator">|</span>      └── <span class="token property">page</span>.<span class="token property">js</span> // <span class="token property">intercepted</span> <span class="token constant">UI</span>
+<span class="token operator">|</span>   <span class="token operator">|</span>
+<span class="token operator">|</span>   └── <span class="token property">f2</span>
+<span class="token operator">|</span>       └── <span class="token property">page</span>.<span class="token property">js</span> // <span class="token property">Original</span> <span class="token property">f2</span> <span class="token constant">UI</span>
+<span class="token operator">|</span>       <span class="token operator">|</span>
+<span class="token operator">|</span>       └── <span class="token punctuation">(</span>..<span class="token punctuation">)</span><span class="token punctuation">(</span>..<span class="token punctuation">)</span><span class="token property">f4</span> // <span class="token property">intercepting</span> <span class="token property">f4</span> <span class="token property">present</span> <span class="token property">at</span> <span class="token number">2</span> <span class="token property">level</span> <span class="token property">above</span>.
+<span class="token operator">|</span>
+├── <span class="token property">f3</span> // <span class="token property">original</span> <span class="token property">f3</span> <span class="token constant">UI</span>
+│   └── <span class="token property">page</span>.<span class="token property">js</span>
+<span class="token operator">|</span>
+├── <span class="token property">f4</span> // <span class="token property">original</span> <span class="token property">f4</span> <span class="token constant">UI</span>
+│   └── <span class="token property">page</span>.<span class="token property">js</span>
+
+</code></pre>
+<p>From this above structure the intercepted UI is displayed if we try to load UI of f2 or f3 from f1
+eg:</p>
+<pre class="language-tsx"><code class="language-tsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Link</span></span> <span class="token attr-name">href</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">"/f1/f2"</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">F2 </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Link</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Link</span></span> <span class="token attr-name">href</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token string">"/f3"</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">F3 </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Link</span></span><span class="token punctuation">></span></span>
+</code></pre>
+<p>example:
+<img src="/Frontend-JsDev-Handbook/assets/images/intercepting-routes.png" alt="intercepting routes"></p>

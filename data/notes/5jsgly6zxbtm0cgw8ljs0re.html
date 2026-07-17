@@ -1,0 +1,11 @@
+<h1 id="middleware">Middleware<a aria-hidden="true" class="anchor-heading icon-link" href="#middleware"></a></h1>
+<ul>
+<li>middleware is a func that can intercept the request response cycle.</li>
+<li>has access to req and response objects</li>
+<li>take 3 params, req, res, next</li>
+</ul>
+<h2 id="existing-examples">Existing examples<a aria-hidden="true" class="anchor-heading icon-link" href="#existing-examples"></a></h2>
+<ul>
+<li>morgan: third party dev logging middleware</li>
+<li><code>app.use(express.json())</code>: in order to use req.body you need express's built-in body parser middleware. If we don't use this, fetching <code>req.body</code> for a route gives undefined.</li>
+</ul>

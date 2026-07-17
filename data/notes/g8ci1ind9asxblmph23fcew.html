@@ -1,0 +1,86 @@
+<h1 id="vector-store">vector-store<a aria-hidden="true" class="anchor-heading icon-link" href="#vector-store"></a></h1>
+<h2 id="faiss">FAISS<a aria-hidden="true" class="anchor-heading icon-link" href="#faiss"></a></h2>
+<pre class="language-py"><code class="language-py"><span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> TextLoader
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>embeddings <span class="token keyword">import</span> OllamaEmbeddings
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>vectorstores <span class="token keyword">import</span> FAISS
+<span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> CharacterTextSplitter
+
+<span class="token comment">## loading text</span>
+loader<span class="token operator">=</span>TextLoader<span class="token punctuation">(</span><span class="token string">"speech.txt"</span><span class="token punctuation">)</span>
+documents<span class="token operator">=</span>loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">## trnsforming into chunks</span>
+text_splitter <span class="token operator">=</span> CharacterTextSplitter<span class="token punctuation">(</span>chunk_size<span class="token operator">=</span><span class="token number">1000</span><span class="token punctuation">,</span>chunk_overlap<span class="token operator">=</span><span class="token number">30</span><span class="token punctuation">)</span>
+docs<span class="token operator">=</span> text_splitter<span class="token punctuation">.</span>split_documents<span class="token punctuation">(</span>documents<span class="token punctuation">)</span>
+
+<span class="token comment">## creating embeddings</span>
+embeddings <span class="token operator">=</span> OllamaEmbeddings<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"mxbai-embed-large"</span><span class="token punctuation">)</span>
+<span class="token comment">## storing embeddings into DB</span>
+db <span class="token operator">=</span> FAISS<span class="token punctuation">.</span>from_documents<span class="token punctuation">(</span>docs<span class="token punctuation">,</span> embeddings<span class="token punctuation">)</span>
+
+<span class="token comment">## querying the DB</span>
+query<span class="token operator">=</span><span class="token string">"How does the speaker describe the desired outcome of the war?"</span>
+ans<span class="token operator">=</span>db<span class="token punctuation">.</span>similarity_search<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+ans<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>page_content
+<span class="token comment"># consoles somethig like: 'It will be all the easier for us to conduct ourselves as belligerents in a high spirit of right and fairness because we act without animus, not in enmity toward a people or with the desire to bring any injury or disadvantage upon them, but only in armed opposition to an irresponsible government which has thrown aside all considerations of humanity and of right and is running amuck.'</span>
+
+query_vector<span class="token operator">=</span>embeddings<span class="token punctuation">.</span>embed_query<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+db<span class="token punctuation">.</span>similarity_search_by_vector<span class="token punctuation">(</span>query_vector<span class="token punctuation">)</span>
+
+
+<span class="token comment">### Retriever</span>
+<span class="token comment"># acts as an interface for vector DB. Used with langchain.</span>
+retriever<span class="token operator">=</span>db<span class="token punctuation">.</span>as_retriever<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># converting vector db into a retriever. This now can be used by any LLM model in langchain to query our vector DB</span>
+docs<span class="token operator">=</span>retriever<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+docs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>page_content
+
+<span class="token comment">## save db </span>
+db<span class="token punctuation">.</span>save_local<span class="token punctuation">(</span><span class="token string">"faiss_index"</span><span class="token punctuation">)</span> <span class="token comment">#saves into a .pkl file</span>
+
+<span class="token comment">## Load db</span>
+new_db <span class="token operator">=</span> FAISS<span class="token punctuation">.</span>load_local<span class="token punctuation">(</span><span class="token string">"faiss_index"</span><span class="token punctuation">,</span> embeddings<span class="token punctuation">,</span> allow_dangerous_deserialization<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+docs<span class="token operator">=</span>new_db<span class="token punctuation">.</span>similarity_search<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="chroma">Chroma<a aria-hidden="true" class="anchor-heading icon-link" href="#chroma"></a></h2>
+<p>Chroma is a AI-native open-source vector database focused on developer productivity and happiness. Chroma is licensed under Apache 2.0.</p>
+<p><a href="https://python.langchain.com/v0.2/docs/integrations/vectorstores/">https://python.langchain.com/v0.2/docs/integrations/vectorstores/</a></p>
+<pre class="language-py"><code class="language-py">
+<span class="token comment">## building a sample vectordb</span>
+<span class="token keyword">from</span> langchain_chroma <span class="token keyword">import</span> Chroma
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>document_loaders <span class="token keyword">import</span> TextLoader
+<span class="token keyword">from</span> langchain_community<span class="token punctuation">.</span>embeddings <span class="token keyword">import</span> OllamaEmbeddings
+<span class="token keyword">from</span> langchain_text_splitters <span class="token keyword">import</span> RecursiveCharacterTextSplitter
+
+loader <span class="token operator">=</span> TextLoader<span class="token punctuation">(</span><span class="token string">"speech.txt"</span><span class="token punctuation">)</span>
+data <span class="token operator">=</span> loader<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Split</span>
+text_splitter <span class="token operator">=</span> RecursiveCharacterTextSplitter<span class="token punctuation">(</span>chunk_size<span class="token operator">=</span><span class="token number">500</span><span class="token punctuation">,</span> chunk_overlap<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>
+splits <span class="token operator">=</span> text_splitter<span class="token punctuation">.</span>split_documents<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+<span class="token comment">#embed</span>
+embedding<span class="token operator">=</span>OllamaEmbeddings<span class="token punctuation">(</span>model<span class="token operator">=</span><span class="token string">"mxbai-embed-large"</span><span class="token punctuation">)</span>
+vectordb<span class="token operator">=</span>Chroma<span class="token punctuation">.</span>from_documents<span class="token punctuation">(</span>documents<span class="token operator">=</span>splits<span class="token punctuation">,</span>embedding<span class="token operator">=</span>embedding<span class="token punctuation">)</span>
+
+<span class="token comment">## query it</span>
+query <span class="token operator">=</span> <span class="token string">"What does the speaker believe is the main reason the United States should enter the war?"</span>
+docs <span class="token operator">=</span> vectordb<span class="token punctuation">.</span>similarity_search<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+docs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>page_content
+
+<span class="token comment">## Saving to the disk</span>
+vectordb<span class="token operator">=</span>Chroma<span class="token punctuation">.</span>from_documents<span class="token punctuation">(</span>documents<span class="token operator">=</span>splits<span class="token punctuation">,</span>embedding<span class="token operator">=</span>embedding<span class="token punctuation">,</span>persist_directory<span class="token operator">=</span><span class="token string">"./chroma_db"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># load from disk</span>
+db2 <span class="token operator">=</span> Chroma<span class="token punctuation">(</span>persist_directory<span class="token operator">=</span><span class="token string">"./chroma_db"</span><span class="token punctuation">,</span> embedding_function<span class="token operator">=</span>embedding<span class="token punctuation">)</span>
+docs<span class="token operator">=</span>db2<span class="token punctuation">.</span>similarity_search<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>docs<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>page_content<span class="token punctuation">)</span>
+
+<span class="token comment">## similarity Search With Score</span>
+docs <span class="token operator">=</span> vectordb<span class="token punctuation">.</span>similarity_search_with_score<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+docs
+
+<span class="token comment">### Retriever option</span>
+retriever<span class="token operator">=</span>vectordb<span class="token punctuation">.</span>as_retriever<span class="token punctuation">(</span><span class="token punctuation">)</span>
+retriever<span class="token punctuation">.</span>invoke<span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>page_content
+
+</code></pre>

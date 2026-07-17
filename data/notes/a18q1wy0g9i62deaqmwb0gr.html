@@ -1,0 +1,29 @@
+<h1 id="web-workers">Web Workers<a aria-hidden="true" class="anchor-heading icon-link" href="#web-workers"></a></h1>
+<ul>
+<li>a javascript process that runs in the bg of a web page</li>
+<li>by default js is single threaded called (main thread). It is responsible for executing entire js of a web page</li>
+<li>web worker is separate js thread that allows to run multiple js threads that runs in parallel.</li>
+<li>it offload main thread from running heavy computational(CPU intensive) work.</li>
+<li>it cannot do DOM manipulation</li>
+</ul>
+<h3 id="implementation">Implementation<a aria-hidden="true" class="anchor-heading icon-link" href="#implementation"></a></h3>
+<ol>
+<li>create a worker script(worker.js)</li>
+<li>Create instance of Worker in main thread.</li>
+</ol>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> worker <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span><span class="token punctuation">(</span>'worker<span class="token punctuation">.</span><span class="token property-access">js</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> btn <span class="token operator">=</span> <span class="token dom variable">document</span><span class="token punctuation">.</span><span class="token method function property-access">querySelector</span><span class="token punctuation">(</span><span class="token string">'#btn'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+btn<span class="token punctuation">.</span><span class="token method function property-access">addEventListener</span><span class="token punctuation">(</span><span class="token string">'click'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+    worker<span class="token punctuation">.</span><span class="token method function property-access">postMessage</span><span class="token punctuation">(</span><span class="token string">'CALCULATE'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+worker<span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">onmessage</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">message</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+<span class="token function">alert</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token property-access">data</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>in worker.js</p>
+<pre class="language-js"><code class="language-js">self<span class="token punctuation">.</span><span class="token method-variable function-variable method function property-access">onmessage</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">message</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword control-flow">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&#x3C;</span> <span class="token number">1000000000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> sum <span class="token operator">=</span> sum <span class="token operator">+</span> i<span class="token punctuation">;</span>
+  self<span class="token punctuation">.</span><span class="token method function property-access">postMessage</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>

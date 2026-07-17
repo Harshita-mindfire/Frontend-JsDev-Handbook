@@ -1,0 +1,16 @@
+<h1 id="big-o-notation">Big O Notation<a aria-hidden="true" class="anchor-heading icon-link" href="#big-o-notation"></a></h1>
+<ul>
+<li>Numeric representation of performance of a code.</li>
+<li>helps us to generalise a code so that we can compare between 2 approaches and conclude which one is the best fit.(bad analogy but just like ritcher scale is for earthquake)</li>
+</ul>
+<h2 id="example">Example<a aria-hidden="true" class="anchor-heading icon-link" href="#example"></a></h2>
+<h3 id="sum-of-a-numbers-till-n">Sum of a numbers till n<a aria-hidden="true" class="anchor-heading icon-link" href="#sum-of-a-numbers-till-n"></a></h3>
+<p>Approach 1: O(n)</p>
+<pre class="language-js"><code class="language-js">total <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword control-flow">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&#x3C;=</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token operator">></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+ total <span class="token operator">+=</span>n<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Better approach: O(1)</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> total <span class="token operator">=</span> n <span class="token operator">*</span> <span class="token punctuation">(</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
+</code></pre>

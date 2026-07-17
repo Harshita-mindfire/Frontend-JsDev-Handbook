@@ -1,0 +1,117 @@
+<h1 id="re-rendering">Re Rendering<a aria-hidden="true" class="anchor-heading icon-link" href="#re-rendering"></a></h1>
+<ul>
+<li>each re-render begins with a state update in a component. </li>
+<li>Re-render cascade down the components(if parent state change, its nested components will re-render)</li>
+<li>Re-rendering all components unnecessary can cause performance issues.</li>
+</ul>
+<p>There are several ways to tackle re-rendering based on the code structure. Try to look for Separation of concern(moving state up/creating a separate stateful component) in components before actually utilizing React.memo or usecallback/memo hooks. They are perfectly valid solutions but sometimes unnecessary. For example:</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> <span class="token punctuation">[</span>visible<span class="token punctuation">,</span> setVisible<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">Button</span></span> <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">Show dialog</span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">Button</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">{</span>visible <span class="token operator">&#x26;&#x26;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">ModalDialog</span></span> <span class="token attr-name">onClose</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span><span class="token punctuation">}</span><span class="token plain-text">      
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">SlowComponent</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">BlaBla</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">AdditionalComplexThings</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>This can be solved by separation of concern. Just by moving state in a separate stateful component</p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">ToggleButtonWithDialog</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">SlowComponent</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">BlaBla</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">AdditionalComplexThings</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="drawbacks-of-custom-hooks">Drawbacks of custom hooks<a aria-hidden="true" class="anchor-heading icon-link" href="#drawbacks-of-custom-hooks"></a></h3>
+<ul>
+<li>Custom hooks are typically not the answer to addressing re-rendering issues. While they can help organize and tidy up code, they do not prevent re-rendering when the state is updated. In fact, if a custom hook includes additional states used by multiple components, updating a single state will cause all components using that custom hook to re-render.</li>
+</ul>
+<h3 id="passing-components-as-props">Passing components as props.<a aria-hidden="true" class="anchor-heading icon-link" href="#passing-components-as-props"></a></h3>
+<p>The components which are passed as props to component A and are rendered in it won't re-render if the A re-renders.
+Below is an example of passing nodes as props. </p>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">DynamicScroll</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> content <span class="token punctuation">}</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">content</span><span class="token operator">:</span> <span class="token maybe-class-name">ReactNode</span> <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>position<span class="token punctuation">,</span> setPosition<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">170</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> handleScroll <span class="token operator">=</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> <span class="token maybe-class-name">React</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">UIEvent</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">HTMLDivElement</span></span><span class="token punctuation">></span></span><span class="token plain-text">) => </span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> newPosition <span class="token operator">=</span> <span class="token function">calculatePosition</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token property-access">currentTarget</span><span class="token punctuation">.</span><span class="token property-access">scrollTop</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setPosition</span><span class="token punctuation">(</span><span class="token known-class-name class-name">Math</span><span class="token punctuation">.</span><span class="token method function property-access">max</span><span class="token punctuation">(</span><span class="token number">113</span><span class="token punctuation">,</span> newPosition<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token plain-text">;
+
+  const blockColor = calculateColor(position);
+
+  return (
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">ScrollableContainer</span></span> <span class="token attr-name">onScroll</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleScroll<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">DynamicBlock</span></span> <span class="token attr-name">top</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>position <span class="token operator">===</span> <span class="token number">113</span> <span class="token operator">?</span> <span class="token number">113</span> <span class="token operator">:</span> position<span class="token punctuation">}</span></span> <span class="token attr-name">color</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>blockColor<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        🛒
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">DynamicBlock</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token punctuation">{</span>content<span class="token punctuation">}</span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">ScrollableContainer</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+  );
+};
+
+...
+//App component
+
+export default function App() </span><span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">DynamicScroll</span></span>
+      <span class="token attr-name">content</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">SlowComponent</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">BlaBla</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">AdditionalComplexThings</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span></span><span class="token punctuation">></span></span>
+      <span class="token punctuation">}</span></span>
+    <span class="token punctuation">/></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token plain-text">
+</span></code></pre>
+<p>Here, update in state of Dynamic scroll will not re-render the 3 components passed as prop to <code>DynamicScroll</code>.</p>
+<ul>
+<li>You can also use the children prop. It will also have the same effect.</li>
+</ul>
+<pre class="language-jsx"><code class="language-jsx"><span class="token keyword">const</span> <span class="token function-variable function"><span class="token maybe-class-name">DynamicScroll</span></span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> children <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token arrow operator">=></span> <span class="token punctuation">{</span>
+ <span class="token spread operator">...</span>
+
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">ScrollableContainer</span></span> <span class="token attr-name">onScroll</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>handleScroll<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">DynamicBlock</span></span> <span class="token attr-name">top</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>position <span class="token operator">===</span> <span class="token number">113</span> <span class="token operator">?</span> <span class="token number">113</span> <span class="token operator">:</span> position<span class="token punctuation">}</span></span> <span class="token attr-name">color</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span>blockColor<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        🛒
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">DynamicBlock</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token punctuation">{</span>content<span class="token punctuation">}</span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">ScrollableContainer</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token spread operator">...</span>
+<span class="token comment">//App component</span>
+
+<span class="token keyword module">export</span> <span class="token keyword module">default</span> <span class="token keyword">function</span> <span class="token function"><span class="token maybe-class-name">App</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword control-flow">return</span> <span class="token punctuation">(</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">DynamicScroll</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">SlowComponent</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">BlaBla</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span><span class="token class-name">AdditionalComplexThings</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;/</span><span class="token class-name">DynamicScroll</span></span><span class="token punctuation">></span></span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>
+<p>Below is the explanation of why React treats children nodes differently and why they are not re-rendered on state update.</p>
+</li>
+<li>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/2025-01-17-18-46-03.png"></p>
+</li>
+<li>
+<p><img src="/Frontend-JsDev-Handbook/assets/images/2025-01-17-18-45-16.png"></p>
+</li>
+</ul>

@@ -1,0 +1,26 @@
+<h1 id="trpc">tRPC<a aria-hidden="true" class="anchor-heading icon-link" href="#trpc"></a></h1>
+<ul>
+<li>a library that allows you to write fully typesave API without any schema or code generation.</li>
+</ul>
+<h3 id="when-a-good-choice">When a good choice<a aria-hidden="true" class="anchor-heading icon-link" href="#when-a-good-choice"></a></h3>
+<ul>
+<li>when typescript in both fe and be</li>
+<li>for fast pace project</li>
+</ul>
+<h3 id="when-a-bad-choice">when a bad choice<a aria-hidden="true" class="anchor-heading icon-link" href="#when-a-bad-choice"></a></h3>
+<ul>
+<li>your teams already working on graphQL
+if backend and fe uses different languages or teams are different</li>
+</ul>
+<h2 id="rpc">RPC<a aria-hidden="true" class="anchor-heading icon-link" href="#rpc"></a></h2>
+<ul>
+<li>RPC is short for "Remote Procedure Call".</li>
+<li>It is a way of calling functions on one computer (the server) from another computer (the client). With traditional HTTP/REST APIs, you call a URL and get a response. With RPC, you call a function and get a response.</li>
+</ul>
+<pre class="language-js"><code class="language-js"><span class="token comment">// HTTP/REST</span>
+<span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword control-flow">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'/api/users/1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword control-flow">await</span> res<span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// RPC</span>
+<span class="token keyword">const</span> user <span class="token operator">=</span> <span class="token keyword control-flow">await</span> api<span class="token punctuation">.</span><span class="token property-access">users</span><span class="token punctuation">.</span><span class="token method function property-access">getById</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
