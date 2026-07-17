@@ -11,6 +11,8 @@ created: 1684218812743
 
 > webpack.config of app 1
 
+![alt text](/assets/images/module-fed.png)
+
 ```js
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 plugins: [
