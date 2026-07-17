@@ -11,8 +11,6 @@ created: 1684218812743
 
 > webpack.config of app 1
 
-![alt text](/assets/images/module-fed.png)
-
 ```js
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 plugins: [
@@ -46,6 +44,11 @@ plugins: [
         counter: "counter@http://localhost:8081/remoteEntry.js"
       },
 ```
+
+## More info
+
+![alt text](/assets/images/module-fed.png)
+![alt text](/assets/images/module-fed-remote.png)
 
 ## Resource
 
